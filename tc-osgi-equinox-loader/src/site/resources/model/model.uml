@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_nibOkCYcEeOP-6_G_Hv7Cw" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_EWMU4CYdEeOP-6_G_Hv7Cw" name="Equinox Starter">
+    <ownedAttribute xmi:id="_dbzucCYdEeOP-6_G_Hv7Cw" name="equinoxConfiguration" type="_a_4ekCYdEeOP-6_G_Hv7Cw" aggregation="shared" association="_db2xwCYdEeOP-6_G_Hv7Cw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dbzucSYdEeOP-6_G_Hv7Cw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dbzuciYdEeOP-6_G_Hv7Cw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_a_4ekCYdEeOP-6_G_Hv7Cw" name="EquinoxConfiguration"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_db2xwCYdEeOP-6_G_Hv7Cw" name="" memberEnd="_db2xwSYdEeOP-6_G_Hv7Cw _dbzucCYdEeOP-6_G_Hv7Cw">
+    <ownedEnd xmi:id="_db2xwSYdEeOP-6_G_Hv7Cw" name="equinox Starter" type="_EWMU4CYdEeOP-6_G_Hv7Cw" association="_db2xwCYdEeOP-6_G_Hv7Cw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_db2xwiYdEeOP-6_G_Hv7Cw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_db2xwyYdEeOP-6_G_Hv7Cw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xlMekCYdEeOP-6_G_Hv7Cw" name="AbstractBundleContextCmd">
+    <generalization xmi:id="_XKhhICYeEeOP-6_G_Hv7Cw" general="_T-fqACYeEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_z4vOgCYdEeOP-6_G_Hv7Cw" name="UninstallBundleCmd">
+    <generalization xmi:id="_0y2tYCYdEeOP-6_G_Hv7Cw" general="_xlMekCYdEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3bJlUCYdEeOP-6_G_Hv7Cw" name="FilterValidBundleCmd">
+    <generalization xmi:id="__lZp8CYdEeOP-6_G_Hv7Cw" general="_xlMekCYdEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5bz1gCYdEeOP-6_G_Hv7Cw" name="InstallBundleCmd">
+    <generalization xmi:id="_-MiZkCYdEeOP-6_G_Hv7Cw" general="_xlMekCYdEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_8EfvACYdEeOP-6_G_Hv7Cw" name="LoadDefaultBundleCmd">
+    <generalization xmi:id="_APGHMCYeEeOP-6_G_Hv7Cw" general="_xlMekCYdEeOP-6_G_Hv7Cw"/>
+    <ownedAttribute xmi:id="_fQMLQCYfEeOP-6_G_Hv7Cw" name="installBundleCmd" type="_5bz1gCYdEeOP-6_G_Hv7Cw" aggregation="shared" association="_fQTgACYfEeOP-6_G_Hv7Cw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fQMLQSYfEeOP-6_G_Hv7Cw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fQMLQiYfEeOP-6_G_Hv7Cw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_T-fqACYeEeOP-6_G_Hv7Cw" name="AbstractEquinoxCmd"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bvN0UCYeEeOP-6_G_Hv7Cw" name="CheckBundleDirectoryConfigCmd">
+    <generalization xmi:id="_c8jxMCYeEeOP-6_G_Hv7Cw" general="_T-fqACYeEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_mE2ycCYeEeOP-6_G_Hv7Cw" name="ImportBundleCmd">
+    <generalization xmi:id="_0D0AoCYeEeOP-6_G_Hv7Cw" general="_T-fqACYeEeOP-6_G_Hv7Cw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_fQTgACYfEeOP-6_G_Hv7Cw" name="" memberEnd="_fQTgASYfEeOP-6_G_Hv7Cw _fQMLQCYfEeOP-6_G_Hv7Cw">
+    <ownedEnd xmi:id="_fQTgASYfEeOP-6_G_Hv7Cw" name="loadDefaultBundleCmd" type="_8EfvACYdEeOP-6_G_Hv7Cw" association="_fQTgACYfEeOP-6_G_Hv7Cw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fQTgAiYfEeOP-6_G_Hv7Cw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fQTgAyYfEeOP-6_G_Hv7Cw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

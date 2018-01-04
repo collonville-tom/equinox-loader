@@ -1,0 +1,32 @@
+#! /bin/bash
+
+echo "Ajout de l'utilisateur equinox-loader"
+adduser --system equinox-loader --no-create-home --disabled-login
+addgroup --system equinox-loader
+
+echo "Changement des droits sur le repertoire /opt/equinox-loader"
+chown -R equinox-loader:equinox-loader /opt/equinox-loader
+
+chmod go-rwx /opt/equinox-loader -R
+chmod u+rwx /opt/equinox-loader -R
+chmod go+rx /opt/equinox-loader -R
+
+
+echo "creation repertoire /var/log/equinox-loader"
+mkdir -p /var/log/equinox-loader
+
+echo "Changement des droits sur le repertoire /var/log/equinox-loader"
+chown -R equinox-loader:equinox-loader /var/log/equinox-loader
+chmod ugo+rwx /var/log/equinox-loader -R
+
+chown -R equinox-loader:equinox-loader /var/run/equinox-loader
+chmod ugo+rwx /var/run/equinox-loader -R
+
+
+echo "Enregistrement du service equinox-loader"
+chown -R root:root /etc/init.d/equinox-loader
+chmod ugo+rwx /etc/init.d/equinox-loader
+  
+update-rc.d equinox-loader defaults
+
+

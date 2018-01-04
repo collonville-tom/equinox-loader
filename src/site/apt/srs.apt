@@ -1,0 +1,15 @@
+Transitionnal structure Software Requirements Specification
+
+* System a transition
+
+** @req SRS_TS_010
+
+  Le but de ce projet est de fournir un ensemble de composant pour construire des systemes a transition
+  
+        * @version 0.0.2
+
+** @req SRS_TS_020
+
+  Le but de ce projet est de fournir un ensemble de composant pour manipuler des systemes a transition
+  
+        * @version 0.0.2

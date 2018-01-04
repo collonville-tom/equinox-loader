@@ -1,0 +1,7 @@
+Introduction
+
+  Le projet utils a pour but de fournir un ensemble de fonctionnalités simplifiées communes a l'ensemble des projets du groupe org.tc. TC-OSGI definit un composant java 7 osgi regroupant un ensemble de classes java utilitaire pour aider au developpement d'applications.
+
+  Le composant implemente des pattern de conception, des outils de log, de outils de gestion de fichiers de ressources. Il est le pivot des applications equinox loader en fournissant un point d'entrée sur le contexte de chargement des bundles. 
+
+  Les elements de ce composant se doivent d'etre utiles mais pas indispensable bien que certains patterns sur l'organisation d'un nouveau projet doit etre retrouvé. Ces elements seront detaillé dans une note plus globale d'aide au developpement.

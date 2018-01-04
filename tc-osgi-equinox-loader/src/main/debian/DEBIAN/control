@@ -1,0 +1,10 @@
+Package: ${project.artifactId}
+Version: ${versiontimestamp}
+Section: base
+Priority: optional
+Architecture: all
+Optionnal: openjdk-7-jre | sun-java7-jre | openjdk-6-jre | sun-java6-jre 
+Depends: tc-osgi-bundle-utils-${utils.version}, tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}
+Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
+Homepage: <http://collonville.thomas.free.fr>
+Description: Conteneur applicatif osgi

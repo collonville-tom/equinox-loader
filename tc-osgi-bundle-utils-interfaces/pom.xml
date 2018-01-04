@@ -1,0 +1,205 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.tc.osgi.bundle.utils</groupId>
+	<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
+	<packaging>bundle</packaging>
+	<name>${project.artifactId}-${project.version}</name>
+	<description>Un bundle pour exposer des composants et utilitaires</description>
+	<version>${build}${snapshot}</version>
+
+	<properties>
+		<build>0.1.0</build>
+		<snapshot>-SNAPSHOT</snapshot>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.osgi</groupId> -->
+		<!-- <artifactId>org.osgi.core</artifactId> -->
+		<!-- <version>6.0.0</version> -->
+		<!-- <scope>compile</scope> -->
+		<!-- </dependency> -->
+		
+		<!--
+		- Equinox. It is the modular Java runtime at the heart of the Eclipse IDE,
+		- Knopflerfish, Is an open source implementation of the OSGi R3 and OSGi R4 specifications. 
+		- Apache Felix. Is the open source OSGi container from the Apache Software Foundation.
+		-->
+	<!--sinon on peut essayer avec felix qui implemtente mais marche pas-->
+	
+<!-- 	<dependency> -->
+<!--         <groupId>org.apache.felix</groupId> -->
+<!--         <artifactId>org.apache.felix.framework</artifactId> -->
+<!--         <version>5.6.4</version> -->
+<!--     </dependency> -->
+
+        
+		
+		<!-- VALID -->
+        <dependency>
+             <groupId>org.eclipse.tycho</groupId>
+             <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.11.2.v20161107-1947</version>
+            <scope>compile</scope>
+        </dependency>
+	</dependencies>
+
+	<parent>
+		<groupId>org.tc.parent</groupId>
+    	<artifactId>tc-osgi-parent</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
+	</parent>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>./</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>./ ./${project.artifactId}-${project.version}/</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Vendor>TC</Bundle-Vendor>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<!-- Packaging debian -->
+					<execution>
+						<id>assembly-debian</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-debian.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>assembly-targz</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-targz.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- Donne les droit et création du .deb -->
+				<!-- Finir le package debian pour le composant utils -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>packaging-debian</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<!-- ***************************************************************************** -->
+								<!-- !! on supprimer le deb deja existant si deja present (generer 
+									par jdeb probablement) !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg line='-c "rm ${project.build.directory}/*.deb"' />
+								</exec>
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
+								</exec>
+								<!-- ***************************************************************************** -->
+								<!-- !! On crée les .DEB !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
+								</exec>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jdeb</goal>
+						</goals>
+						<configuration>
+							<deb>${project.build.directory}/${project.artifactId}-${build}_${versiontimestamp}_all.deb</deb>
+							<verbose>true</verbose>
+							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
+							<dataSet>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/opt</prefix>
+									</mapper>
+								</data>
+							</dataSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

@@ -1,0 +1,5 @@
+#! /bin/bash
+
+# Suppression des repertoires de travail par defaut
+rm -fR /opt/equinox-loader/bundles/configuration/org.eclipse.osgi
+rm -fR /var/run/equinox-loader/bundles/configuration/org.eclipse.osgi

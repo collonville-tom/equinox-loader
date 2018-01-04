@@ -1,0 +1,12 @@
+/.settings
+/pom.xml~
+/.project
+/.classpath
+/target
+/bundles
+/target
+/bin
+/target/
+/target/
+/org.eclipse.osgi/
+*.log

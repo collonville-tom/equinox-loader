@@ -1,0 +1,31 @@
+Transitionnal structure Software Design Description
+
+* System a transition
+
+** @req SDD_TS_010
+
+  Le project propose un composant de niveau M3 pour proposer les concepts associés aux system a transition
+  
+        * @version 0.0.2
+        
+        * @track SRS_TS_010
+
+** @req SDD_TS_020
+
+  Le project propose deux composants pour implementer des FSM et des Structure de Kripke
+  
+        * @version 0.0.2
+        
+        * @track SRS_TS_010
+
+        * @depend SDD_TS_010
+
+** @req SDD_TS_030
+
+  Le projet propose deux composants utilitaire pour manipuler les systemes a transition
+  
+        * @version 0.0.2
+        
+        * @track SRS_TS_020
+        
+        * @depend SDD_TS_020

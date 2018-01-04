@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>assembly</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			
+			<unpack>true</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>true</useProjectArtifact>
+			<outputDirectory>/</outputDirectory>
+			<unpackOptions>
+				<includes>
+					<include>**/*.class</include>
+					<include>**/*.properties</include>
+				</includes>
+                <excludes>
+                    <exclude>**/*.sh</exclude>
+                    <exclude>**/*.bat</exclude>
+                </excludes>
+            </unpackOptions>
+            <includes>
+            	<include>${project.groupId}:${project.artifactId}:jar</include>
+            </includes>
+		</dependencySet>
+	</dependencySets>
+</assembly>

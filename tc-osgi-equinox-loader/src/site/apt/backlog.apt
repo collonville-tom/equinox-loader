@@ -1,0 +1,27 @@
+Backlog
+
+* attentes
+
+		* Mettre a jour documentation SRS
+		
+		* Mettre a jour documentation SDD
+		
+		* Mettre a jour documentation STP
+		
+		* Mettre a jour documentation index
+		
+		* permettre un deploiement dynamique de nouveau bundle ou de bundle dans des versions differentes definir les limites
+		
+		* rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
+		
+		* permettre plusieur connexion rmi en meme temps de differents bundle utils de versions differentes
+		
+		* mettre dans une liste externe les exclusions du chargement dans AbstractBundleContextCmd
+		
+* acceptes
+
+* refuses
+
+* historique
+		
+		

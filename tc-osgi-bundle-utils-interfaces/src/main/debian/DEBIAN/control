@@ -1,0 +1,8 @@
+Package: ${project.artifactId}-${build}
+Version: ${versiontimestamp}
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
+Homepage: <http://collonville.thomas.free.fr>
+Description: Bundle interface outils generique osgi

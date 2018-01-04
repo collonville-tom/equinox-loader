@@ -1,0 +1,143 @@
+Utils Software Requirements Specification
+
+* Collection
+
+** @req SRS_BUNDLE_UTILS_010
+
+  Le bundle utils fourni les primitives d'utilisation de base des collections collect, detect, select, reject, array2List
+  
+        * @version 0.2.7
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_015
+
+  Le bundle utils fourni une solutions permettant la creation d'association.
+  
+        * @version 0.0.2
+        
+        * @track SRS_TC_040
+
+* Ressources
+  
+** @req SRS_BUNDLE_UTILS_020
+
+  Le bundle utils fourni un gestionnaire d'acces a des ressources contenu dans des fichiers de propriétés
+  
+        * @version 0.0.3
+        
+        * @track SRS_TC_040
+  
+* Logging
+
+** @req SRS_BUNDLE_UTILS_030
+
+  Le bundle utils fourni des primitives pour logger les methodes et classes spécifiquement
+  
+        * @version 0.0.1
+        
+        * @track SRS_TC_040
+
+* Serialisation
+
+** @req SRS_BUNDLE_UTILS_040
+
+  Le bundle utils fourni des primitives de serialisation et de deserialisation xml
+  
+        * @version 0.0.2
+        
+        * @track SRS_TC_040
+
+* Pattern
+
+** @req SRS_BUNDLE_UTILS_050
+
+  Le bundle utils fourni des structures de base pour implementer le patterns visiteur, draftman et observateur 
+
+        * @version 0.0.2
+        
+        * @track SRS_TC_040
+  
+** @req SRS_BUNDLE_UTILS_060
+
+  Le bundle utils fourni un pattern command avec repository  
+
+        * @version 0.0.4
+        
+        * @track SRS_TC_040
+
+** @req SRS_BUNDLE_UTILS_070
+
+  Le bundle utils fourni des outils generique telque des transformations de list en string ou inversement
+
+        * @version 0.0.4
+        
+        * @track SRS_TC_040
+        
+* Services
+        
+** @req SRS_BUNDLE_UTILS_080
+
+  Le composant fourni en service OSGI les capacités de log
+  
+        * @version 0.0.6
+        
+        * @track SRS_TC_040
+        
+        * @depend SRS_BUNDLE_UTILS_030
+        
+** @req SRS_BUNDLE_UTILS_090
+
+  Le composant fourni en service OSGI les capacités de gerer des fichiers de configuration
+  
+        * @version 0.0.5
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_100
+
+  Le composant fourni en service OSGI des outils de manipulation des listes et de pair
+  
+        * @version 0.0.8
+        
+        * @track SRS_TC_040    	
+        
+** @req SRS_BUNDLE_UTILS_110
+
+  Le composant fourni en service OSGI un outil permettant le lancement d'un bundle installé
+  
+        * @version 0.1.0
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_120
+
+  Le composant fourni en service RMI un outil permettant le lancement d'un bundle installé
+  
+        * @version 0.2.0
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_130
+
+  Le composant fourni en service OSGI pour arreter un bundle
+  
+        * @version 0.2.1
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_140
+
+  Le composant gerer une redirection de flux vers une format chaine de caractere
+  
+        * @version 0.2.2
+        
+        * @track SRS_TC_040
+        
+** @req SRS_BUNDLE_UTILS_150
+
+  Le composant definit un server par defaut d'oject pour RPC et RMI
+  
+        * @version 0.2.2
+        
+        * @track SRS_TC_040

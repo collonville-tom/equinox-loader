@@ -1,0 +1,204 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>tc-osgi-equinox-loader</artifactId>
+	<groupId>org.tc.osgi</groupId>
+	<name>${project.artifactId}-${project.version}</name>
+	<version>${build}${snapshot}</version>
+	<description>Un bundle pour charger d'autre bundle</description>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.tc.parent</groupId>
+    	<artifactId>tc-osgi-parent</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<build>0.2.0</build>
+		<utils.version>0.3.0</utils.version>
+		<utils.interfaces.version>0.1.0</utils.interfaces.version>
+		<snapshot>-SNAPSHOT</snapshot>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils</artifactId>
+			<version>${utils.version}${snapshot}</version>
+			<type>bundle</type>
+			<classifier>assembly</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
+			<version>${utils.interfaces.version}${snapshot}</version>
+			<type>bundle</type>
+			<classifier>assembly</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils</artifactId>
+			<version>${utils.version}${snapshot}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
+			<version>${utils.interfaces.version}${snapshot}</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<!-- Permet de constuire le METAINF -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<addClasspath>true</addClasspath>
+									<classpathPrefix>./</classpathPrefix>
+									<mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass>
+								</manifest>
+								<manifestEntries>
+									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+								</manifestEntries>
+							</archive>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<!-- Packaging debian -->
+					<execution>
+						<id>assembly-debian</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-debian.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+					<execution>
+						<id>assembly-targz</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/assembly-targz.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- Donne les droit et création du .deb -->
+				<!-- Finir le package debian pour le composant utils -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>packaging-debian</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<!-- ***************************************************************************** -->
+								<!-- !! on supprimer le deb deja existant si deja present (generer 
+									par jdeb probablement) !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg line='-c "rm ${project.build.directory}/*.deb"' />
+								</exec>
+								<!-- ***************************************************************************** -->
+								<!-- !! on met les bon droit sur les fichier de control !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
+								</exec>
+								<!-- ***************************************************************************** -->
+								<!-- !! On crée les .DEB !! -->
+								<exec dir="." executable="bash" osfamily="unix">
+									<arg
+										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
+								</exec>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jdeb</goal>
+						</goals>
+						<configuration>
+							<deb>${project.build.directory}/${project.artifactId}_${versiontimestamp}_all.deb</deb>
+							<verbose>true</verbose>
+							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
+							<dataSet>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/etc</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/etc</prefix>
+									</mapper>
+								</data>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/opt</prefix>
+									</mapper>
+								</data>
+								<data>
+									<src>${project.build.directory}/${project.artifactId}-${project.version}/var</src>
+									<type>directory</type>
+									<mapper>
+										<type>perm</type>
+										<prefix>/var</prefix>
+									</mapper>
+								</data>
+							</dataSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+</project>

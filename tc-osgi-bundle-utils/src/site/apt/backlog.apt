@@ -1,0 +1,26 @@
+Backlog
+
+* attentes
+
+		* Mettre a jour documentation SRS
+		
+		* Mettre a jour documentation SDD
+		
+		* Mettre a jour documentation STP
+		
+		* Mettre a jour documentation index
+		
+		* si l'on fourni pour un meme service plusieur implmeentation avec differentes version implementé qu'est ce qui se passe?  
+		
+		* faire des annotations pour simplifier la construction du package module dedié osgi
+		
+		* rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
+		
+		* voir si les tracker ne peuvenet pas etre supprimer ainsi que les proxy associé au profit du tracker generique
+		
+* acceptes
+
+* refuses
+
+* historique
+

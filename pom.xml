@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>tc-equinox-loader-module</artifactId>
+  <groupId>org.tc.module</groupId>
+  <name>${project.artifactId}-${project.version}</name>
+  <packaging>pom</packaging>
+  <version>0.1.0-SNAPSHOT</version>
+  <description>Projet module du repo equinox loader</description>
+  
+  <parent>
+        <groupId>org.tc.parent</groupId>
+        <artifactId>tc-parent</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
+        <relativePath>tc-parent</relativePath>
+  </parent>
+
+  
+
+  <modules>
+  	<module>tc-osgi-bundle-utils</module>
+  	<module>tc-osgi-bundle-utils-interfaces</module>
+    <module>tc-osgi-equinox-loader</module>
+  </modules>
+  
+ 
+
+  
+</project>

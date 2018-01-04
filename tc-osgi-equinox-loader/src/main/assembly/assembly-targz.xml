@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+		<id>bundle</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<dependencySets>
+<!-- 	Inclusion interfaces classifier et librairies-->
+		<dependencySet>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<outputDirectory>/opt/equinox-loader</outputDirectory>
+			<includes>
+				<include>*:${project.artifactId}:*:assembly:*</include>
+			</includes>
+		</dependencySet>
+        <!--  dependance direct de equinox-loader -->
+		<dependencySet>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
+			<includes>
+				<include>nothing</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+		
+	
+	<fileSets>
+        <fileSet>
+            <directory>src/main/debian/etc/init.d</directory>
+            <outputDirectory>/etc/init.d</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <filtered>true</filtered>
+            <includes>
+                <include>equinox-loader</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/debian/opt/equinox-loader</directory>
+            <outputDirectory>/opt/equinox-loader</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <filtered>true</filtered>
+            <includes>
+                <include>equinox-loader.sh</include>
+                <include>equinox-loader.bat</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/debian/opt/equinox-loader/bundles/configuration</directory>
+            <outputDirectory>/opt/equinox-loader/bundles/configuration</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <filtered>true</filtered>
+            <includes>
+                <include>dev.properties</include>
+                <include>conf.ini</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/debian/opt/equinox-loader/bundles/conflic</directory>
+            <outputDirectory>/opt/equinox-loader/bundles/conflic</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/debian/var/run/equinox-loader/bundles/configuration</directory>
+            <outputDirectory>/var/run/equinox-loader/bundles/configuration</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+            <filtered>true</filtered>
+            <includes>
+                <include>dev.properties</include>
+                <include>conf.ini</include>
+            </includes>
+        </fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/opt/equinox-loader</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>equinox-loader.xml</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
