@@ -115,44 +115,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<!-- Donne les droit et création du .deb -->
-				<!-- Finir le package debian pour le composant utils -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>packaging-debian</id>
-						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<!-- ***************************************************************************** -->
-								<!-- !! on supprimer le deb deja existant si deja present (generer 
-									par jdeb probablement) !! -->
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg line='-c "rm ${project.build.directory}/*.deb"' />
-								</exec>
-								<!-- ***************************************************************************** -->
-								<!-- !! on met les bon droit sur les fichier de control !! -->
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "chmod 755 ${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN/*"' />
-								</exec>
-								<!-- ***************************************************************************** -->
-								<!-- !! On crée les .DEB !! -->
-								<exec dir="." executable="bash" osfamily="unix">
-									<arg
-										line='-c "dpkg-deb --build ${project.build.directory}/${project.artifactId}-${project.version} ./target"' />
-								</exec>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<artifactId>jdeb</artifactId>
 				<groupId>org.vafer</groupId>
 				<version>1.5</version>
