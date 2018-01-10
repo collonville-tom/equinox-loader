@@ -27,14 +27,12 @@
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
 			<version>${utils.version}${snapshot}</version>
-			<type>bundle</type>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
 			<version>${utils.interfaces.version}${snapshot}</version>
-			<type>bundle</type>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
