@@ -17,6 +17,12 @@ Backlog
 		* permettre plusieur connexion rmi en meme temps de differents bundle utils de versions differentes
 		
 		* mettre dans une liste externe les exclusions du chargement dans AbstractBundleContextCmd
+
+        * si changement de framework osgi, prevoir changement de nom pour equinox loader
+
+        * pour le composant eclipse au lieu de vouloir l'integrer dans equinox loader, il vaut peut etre mieux prevoir des passerelles et garder le composant independant
+        
+        * la remarque precedente permet de considerer equinox comme abandonnable au profil d'une version osgi plus recente puisque les ihm integré a eclipse se feront par connecteur WS ou autre
 		
 * acceptes
 
