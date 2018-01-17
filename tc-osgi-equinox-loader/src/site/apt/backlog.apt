@@ -2,32 +2,30 @@ Backlog
 
 * attentes
 
-		* Mettre a jour documentation SRS
+		* [DOC]  Mettre a jour documentation SDD
 		
-		* Mettre a jour documentation SDD
+		* [DOC]  Mettre a jour documentation STP
 		
-		* Mettre a jour documentation STP
+		* [REF] permettre un deploiement dynamique de nouveau bundle ou de bundle dans des versions differentes definir les limites
 		
-		* Mettre a jour documentation index
+		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
 		
-		* permettre un deploiement dynamique de nouveau bundle ou de bundle dans des versions differentes definir les limites
+		* [DEV] permettre plusieur connexion rmi en meme temps de differents bundle utils de versions differentes
 		
-		* rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
-		
-		* permettre plusieur connexion rmi en meme temps de differents bundle utils de versions differentes
-		
-		* mettre dans une liste externe les exclusions du chargement dans AbstractBundleContextCmd
+		* [DEV] mettre dans une liste externe les exclusions du chargement dans AbstractBundleContextCmd
 
-        * si changement de framework osgi, prevoir changement de nom pour equinox loader
-
-        * pour le composant eclipse au lieu de vouloir l'integrer dans equinox loader, il vaut peut etre mieux prevoir des passerelles et garder le composant independant
+        * [REF] pour le composant eclipse au lieu de vouloir l'integrer dans equinox loader, il vaut peut etre mieux prevoir des passerelles et garder le composant independant
         
-        * la remarque precedente permet de considerer equinox comme abandonnable au profil d'une version osgi plus recente puisque les ihm integré a eclipse se feront par connecteur WS ou autre
+        * [REF] la remarque precedente permet de considerer equinox comme abandonnable au profil d'une version osgi plus recente puisque les ihm integré a eclipse se feront par connecteur WS ou autre
 		
-* acceptes
+* faits
+
+		* 0.2.0 [DOC]  Mettre a jour documentation index
+		
+		* 0.2.0 [DOC] Mettre a jour documentation SRS
 
 * refuses
 
-* historique
+
 		
 		

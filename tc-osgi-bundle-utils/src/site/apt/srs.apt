@@ -6,17 +6,17 @@ Utils Software Requirements Specification
 
   Le bundle utils fourni les primitives d'utilisation de base des collections collect, detect, select, reject, array2List
   
-        * @version 0.2.7
+        * @version 0.3.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_010
         
 ** @req SRS_BUNDLE_UTILS_015
 
   Le bundle utils fourni une solutions permettant la creation d'association.
   
-        * @version 0.0.2
+        * @version 0.3.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_015
 
 * Ressources
   
@@ -24,9 +24,9 @@ Utils Software Requirements Specification
 
   Le bundle utils fourni un gestionnaire d'acces a des ressources contenu dans des fichiers de propriétés
   
-        * @version 0.0.3
+        * @version 0.3.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_020
   
 * Logging
 
@@ -34,9 +34,9 @@ Utils Software Requirements Specification
 
   Le bundle utils fourni des primitives pour logger les methodes et classes spécifiquement
   
-        * @version 0.0.1
+        * @version 0.3.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_030
 
 * Serialisation
 
@@ -46,7 +46,7 @@ Utils Software Requirements Specification
   
         * @version 0.0.2
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_040
 
 * Pattern
 
@@ -56,7 +56,7 @@ Utils Software Requirements Specification
 
         * @version 0.0.2
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_050
   
 ** @req SRS_BUNDLE_UTILS_060
 
@@ -64,7 +64,7 @@ Utils Software Requirements Specification
 
         * @version 0.0.4
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_060
 
 ** @req SRS_BUNDLE_UTILS_070
 
@@ -72,7 +72,7 @@ Utils Software Requirements Specification
 
         * @version 0.0.4
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_120
         
 * Services
         
@@ -82,9 +82,7 @@ Utils Software Requirements Specification
   
         * @version 0.0.6
         
-        * @track SRS_TC_040
-        
-        * @depend SRS_BUNDLE_UTILS_030
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_080
         
 ** @req SRS_BUNDLE_UTILS_090
 
@@ -92,7 +90,7 @@ Utils Software Requirements Specification
   
         * @version 0.0.5
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010
         
 ** @req SRS_BUNDLE_UTILS_100
 
@@ -100,7 +98,7 @@ Utils Software Requirements Specification
   
         * @version 0.0.8
         
-        * @track SRS_TC_040    	
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010    	
         
 ** @req SRS_BUNDLE_UTILS_110
 
@@ -108,7 +106,7 @@ Utils Software Requirements Specification
   
         * @version 0.1.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_070
         
 ** @req SRS_BUNDLE_UTILS_120
 
@@ -116,7 +114,7 @@ Utils Software Requirements Specification
   
         * @version 0.2.0
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_140
         
 ** @req SRS_BUNDLE_UTILS_130
 
@@ -124,7 +122,7 @@ Utils Software Requirements Specification
   
         * @version 0.2.1
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_070
         
 ** @req SRS_BUNDLE_UTILS_140
 
@@ -132,7 +130,7 @@ Utils Software Requirements Specification
   
         * @version 0.2.2
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_120
         
 ** @req SRS_BUNDLE_UTILS_150
 
@@ -140,4 +138,4 @@ Utils Software Requirements Specification
   
         * @version 0.2.2
         
-        * @track SRS_TC_040
+        * @track SRS_TC_OSGI_PARENT_PROJECT_UTILS_010, SRS_BUNDLE_UTILS_INTERFACE_140, SRS_BUNDLE_UTILS_INTERFACE_130

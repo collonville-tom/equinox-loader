@@ -1,3 +1,17 @@
 Introduction 
 
-  Equinox loader a pour but de faciliter dans un environnement simple l'utilisation et la definition de bundle osgi sans surcharge de memoire avec des composants minimalistes
+  Equinox loader a pour but de faciliter dans un environnement simple l'utilisation et la definition de bundle osgi sans utilisation exagerée de la memoire et ce avec des composants minimalistes
+  
+  Equinox loader a pour objectif d'etre un server OSGI
+  
+		* a faible coup memoire
+  
+		* decentralisé
+  
+		* reconfigurable
+  
+		* communicant
+  
+		* modulaire
+  
+		* reactif

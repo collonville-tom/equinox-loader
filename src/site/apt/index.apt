@@ -1,6 +1,10 @@
 Introduction
 
-  Repository contenant les projets du conteneur d'application OSGI
+  Repository contenant les projets du conteneur d'application OSGI minimaliste. 
+  
+  Pour utiliser une console, installez le bundle tc-osgi-bundle-console-wrapper
+  
+  Pour beneficier du chargement dynamique de SpringDM, installez le bundle tc-osgi-bundle-spring-wrapper
 
   
 

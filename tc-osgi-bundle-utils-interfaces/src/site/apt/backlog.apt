@@ -1,28 +1,26 @@
 Backlog
 
 * attentes
+		
+		* [TEST] si l'on fourni pour un meme service plusieurs implementation avec differentes version implementé qu'est ce qui se passe?  
+		
+		* [DEV] faire des annotations pour simplifier la construction du package module dedié osgi
+		
+		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
+		
+		* [DEV] revoir pattern command et son application
+		
+* faits
 
-		* Mettre a jour documentation SRS
-		
-		* Mettre a jour documentation SDD
-		
-		* Mettre a jour documentation STP
-		
-		* Mettre a jour documentation index
-		
-		* si l'on fourni pour un meme service plusieur implmeentation avec differentes version implementé qu'est ce qui se passe?  
-		
-		* faire des annotations pour simplifier la construction du package module dedié osgi
-		
-		* rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
-		
-		* revoir pattern command et son application
-		
-		* extraire dans un bundle wrapper les commande et shell pour equinox
-		
-* acceptes
+		* 0.1.0 [DOC] Mettre a jour documentation index
 
+		* 0.1.0 [DOC] Mettre a jour documentation SDD
+
+		* 0.1.0 [DOC] Mettre a jour documentation SRS
+
+		* 0.1.0 [DEV] mettre dans un bundle wrapper les commandes shell pour equinox -> voir le projet tc-osgi-bundle-console-wrapper
+		
 * refuses
 
-* historique
+		* 0.1.0 [DOC] Mettre a jour documentation STP -> non car sur les interfaces on est sur une definition de signature
 

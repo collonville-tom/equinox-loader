@@ -8,7 +8,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.1
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
 
 ** @req SRS_EQUINOX_LOADER_020
 
@@ -16,7 +16,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.4
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
   
 ** @req SRS_EQUINOX_LOADER_030
 
@@ -24,7 +24,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.2
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_040
 
@@ -32,7 +32,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.3
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_050
 
@@ -40,7 +40,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.5
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_060
 
@@ -48,7 +48,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.3
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_070
 
@@ -56,7 +56,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.x
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_080
 
@@ -64,7 +64,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.x
 
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
 
 ** @req SRS_EQUINOX_LOADER_110
 
@@ -72,7 +72,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.0.x 
         
-        * @track SRS_TC_050   
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010   
         
 ** @req SRS_EQUINOX_LOADER_120
 
@@ -80,7 +80,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.1.3 
         
-        * @track SRS_TC_050  
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010  
         
 ** @req SRS_EQUINOX_LOADER_130
 
@@ -88,7 +88,7 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.1.4 
         
-        * @track SRS_TC_050
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010
         
 ** @req SRS_EQUINOX_LOADER_140
 
@@ -96,4 +96,12 @@ Equinox-Loader Software Requirements Specification
   
         * @version 0.1.4 
         
-        * @track SRS_TC_050 
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010 
+        
+** @req SRS_EQUINOX_LOADER_150
+
+  Equinox loader est capable de lancer au demarrage les bundles permettant de beneficier d'une console
+  
+        * @version 0.1.0 
+        
+        * @track SRS_TC_OSGI_PARENT_EQUINOX_010  

@@ -1,63 +1,67 @@
-Utils Software Design Description
+UTILS_INTERFACE Software Design Description
 
 * Package
 
 [model/NewModel Package Containment.png] Packages
 
+* Bundle
+
+** @req SDD_BUNDLE_UTILS_INTERFACE_MODULE_010
+
+  Le bundle UTILS_INTERFACE definit les classes TcOsgiProxy et TcOsgiServiceTracker pour simplifier la definition de module OSGI. 
+  
+  Le bundle definit egalement de facon abtraire l'activator AbstractTcOsgiActivator simplifiant l'initialisation des activateurs dans les bundles.
+  
+        * @version 0.2.8
+        
+        * @track SRS_BUNDLE_UTILS_INTERFACE_MODULE_010
+
 * Collection
 
-** @req SDD_BUNDLE_UTILS_010
+** @req SDD_BUNDLE_UTILS_INTERFACE_010
 
-  Le bundle defini une classe Collections generique implementant les methodes statique select, detect, reject et collect utilisant les interfaces IPredicate et ITransformer. 
+  Le bundle defini les interfaces les interfaces IPredicate et ITransformer. 
   
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_010
+        * @track SRS_BUNDLE_UTILS_INTERFACE_010
 
 =====================
 
 [model/collection.png] Package Collection
         
-** @req SDD_BUNDLE_UTILS_015
+** @req SDD_BUNDLE_UTILS_INTERFACE_015
 
   Le bundle defini une classe Pair generique. 
   
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_015
+        * @track SRS_BUNDLE_UTILS_INTERFACE_015
 
 * Ressources
   
-** @req SDD_BUNDLE_UTILS_020
+** @req SDD_BUNDLE_UTILS_INTERFACE_020
 
-  Le bundle utils fourni une classe de type singleton PropertyFile chargeant par defaut le fichier ressources utils.properties pour les données statiques et d'internationalisation 
+  Le bundle UTILS_INTERFACE definit l'inteface IXmlProperty et la classe abstraite AbstractPropertyFile pour gerer les fichier de proprietés (*.properties et *.xml)
   
         * @version 0.1.0
         
-        * @track SRS_BUNDLE_UTILS_020
+        * @track SRS_BUNDLE_UTILS_INTERFACE_020
         
         
-** @req SDD_BUNDLE_UTILS_025
-
-  Le bundle utils fourni une classe de type singleton XMLPropertyFile chargeant par defaut le fichier ressources xml (defini statiquement) mais etant capable de gerer des fichiers de ressources spécifiques au projet utilisant le singleton 
-  
-        * @version 0.1.0
-        
-        * @track SRS_BUNDLE_UTILS_020
-
 =====================
 
 [model/Conf Class Diagram.png] Package Configuration
 
 * Logging
 
-** @req SDD_BUNDLE_UTILS_030
+** @req SDD_BUNDLE_UTILS_INTERFACE_030
 
-    Le bundle utils fourni une classe singleton LoggerGestionnary permettant l'appel dynamique d'un logger et sa gestion dans une table d'association.
+    Le bundle UTILS_INTERFACE fourni l'interface ILoggerGestionnary permettant la definition d'un logger.
   
         * @version 0.0.2
   
-        * @track SRS_BUNDLE_UTILS_030, SRS_BUNDLE_UTILS_080
+        * @track SRS_BUNDLE_UTILS_INTERFACE_030, SRS_BUNDLE_UTILS_INTERFACE_080
   
 =====================
         
@@ -65,13 +69,13 @@ Utils Software Design Description
 
 * Serialisation
 
-** @req SDD_BUNDLE_UTILS_040
+** @req SDD_BUNDLE_UTILS_INTERFACE_040
 
-  Le bundle utils fourni la classe SerialTool facilitant la serialisation et la deserialistion d'object dans un fichier xml en utilisant XMLEncoder et XMLDecoder.
+  Le bundle UTILS_INTERFACE fourni l'interface ISerialTool facilitant la definition d'outils de serialisation et de deserialistion d'object .
   
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_040
+        * @track SRS_BUNDLE_UTILS_INTERFACE_040
 
 =====================
         
@@ -79,120 +83,121 @@ Utils Software Design Description
 
 * Pattern
 
-** @req SDD_BUNDLE_UTILS_050
+** @req SDD_BUNDLE_UTILS_INTERFACE_050
 
-  Le bundle implemente le pattern visitor au travers de la classe AbstractVisitor, IVisitable   
+  Le bundle definit les interfaces standard des patterns visitor au travers de IVisitor et IVisitable   
 
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_050
+        * @track SRS_BUNDLE_UTILS_INTERFACE_050
  
 =====================
         
 [model/visiteur.jpg] Package Visiteur
         
-** @req SDD_BUNDLE_UTILS_060
+** @req SDD_BUNDLE_UTILS_INTERFACE_060
 
-  Le bundle implemente le pattern draftman derivé du pattern visitor au travers de la classe AbstractDraftman derivant la classe AbstractVisitor    
+  Le bundle implemente le pattern draftman derivé du pattern visitor au travers de la classe AbstractDraftman implementant IVisitor    
 
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_050
-        
-        * @depend SDD_BUNDLE_UTILS_050
+        * @track SRS_BUNDLE_UTILS_INTERFACE_050, SDD_BUNDLE_UTILS_INTERFACE_050
  
 =====================
         
 [model/draftman.jpg] Package draftman
         
-** @req SDD_BUNDLE_UTILS_070
+** @req SDD_BUNDLE_UTILS_INTERFACE_070
 
   Le bundle implemente le pattern observateur au travers de la classe AbstractSubject implementation de l'interface ISuject et relation avec les interfaces IObserver et IObserverEvent.   
 
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_050
+        * @track SRS_BUNDLE_UTILS_INTERFACE_050
  
 =====================
         
 [model/observateur.jpg] Package observateur
         
-** @req SDD_BUNDLE_UTILS_080
+** @req SDD_BUNDLE_UTILS_INTERFACE_080
 
-  Le bundle implemente le pattern commande au travers de l'interface ICommand element stoké dans un DefaultRepository associé a une commande de base permettant l'execution des commandes (ExecutonInstructon)
+  Le bundle implemente le pattern commande au travers de l'interface ICommand element stoké dans un ICommandRepository associé a une commande de base permettant l'execution des commandes (voir l'implementation dans utils)
 
         * @version 0.0.4
         
-        * @track SRS_BUNDLE_UTILS_060
+        * @track SRS_BUNDLE_UTILS_INTERFACE_060
  
 =====================
         
 [model/commande.jpg] Package commande
 
-** @req SDD_BUNDLE_UTILS_090
+* Remote
 
-  Le bundle utils fourni une classe statique fournissant des outils generiques de base tel que: liste2String
+** @req SDD_BUNDLE_UTILS_INTERFACE_090
 
-        * @version 0.0.4
+  Le composant definit l'interface IRPCServer pour fournir les primitivse de construction d'un server RPC
+  
+        * @version 0.3.0
         
-        * @track SRS_BUNDLE_UTILS_070
-        
-** @req SDD_BUNDLE_UTILS_100
+        * @track SRS_BUNDLE_UTILS_INTERFACE_130 
 
-  Le bundle utils fourni un composant module pour exposer les services osgi
+** @req SDD_BUNDLE_UTILS_INTERFACE_100
 
-        * @version 0.0.8
+  Le composant definit l'interface IEquinoxLoaderBundleContext pour fournir les primitives d'un objet RMI portant le bundlecontext courant
+  
+        * @version 0.3.0
         
-        * @track SRS_BUNDLE_UTILS_080, SRS_BUNDLE_UTILS_090, SRS_BUNDLE_UTILS_100, SRS_BUNDLE_UTILS_110, SRS_BUNDLE_UTILS_130
+        * @track SRS_BUNDLE_UTILS_INTERFACE_140 
+                
 
 =====================
         
-[model/utilsService.png] Services Utils
+[model/UTILS_INTERFACEService.png] Services 
         
-** @req SDD_BUNDLE_UTILS_120
+** @req SDD_BUNDLE_UTILS_INTERFACE_110
 
-  Le composant fourni en service OSGI une instance de la classe BundleStarter capable de lancer un bundle installé dans equinox-loader
+  Le composant definit le service OSGI IBundleUtilsService pour manipuler des bundles 
   
         * @version 0.1.0
         
-        * @track SRS_BUNDLE_UTILS_110 
+        * @track SRS_BUNDLE_UTILS_INTERFACE_070
         
-** @req SDD_BUNDLE_UTILS_125
+** @req SDD_BUNDLE_UTILS_INTERFACE_120
 
-  Le composant fourni en service RMI une instance de la classe BundleStarter capable de lancer un bundle installé dans equinox-loader
+  Le composant definit en service OSGI ILoggerUtilsService pour manipuler des log
   
-        * @version 0.1.1
+        * @version 0.0.6
         
-        * @track SRS_BUNDLE_UTILS_120 
+        * @track SRS_BUNDLE_UTILS_INTERFACE_080
+        
+** @req SDD_BUNDLE_UTILS_INTERFACE_130
 
-** @req SDD_BUNDLE_UTILS_130
-
-  Le composant fourni en service OSGI une instance de la classe BundleContext recuperé via rmi dans equinox-loader
+  Le composant definit en service OSGI des capacités de gerer des fichiers de configuration via l'interface IPropertyUtilsService
   
-        * @version 0.2.0
+        * @version 0.0.5
         
-        * @track SRS_BUNDLE_UTILS_120
+        * @track SRS_BUNDLE_UTILS_INTERFACE_090
         
-** @req SDD_BUNDLE_UTILS_140
+** @req SDD_BUNDLE_UTILS_INTERFACE_140
 
-  Le composant fourni en service OSGI une instance de la classe BundleKiller capable de terminet un bundle installé dans equinox-loader
+  Le bundle UTILS_INTERFACE definit la signature d'un service permettant l'utilisation de primitive de base sur les collections via l'interface ICollectionUtilsService
   
-        * @version 0.2.1
+        * @version 0.0.8
         
-        * @track SRS_BUNDLE_UTILS_130 
+        * @track SRS_BUNDLE_UTILS_INTERFACE_100    	
         
-** @req SDD_BUNDLE_UTILS_150
+** @req SDD_BUNDLE_UTILS_INTERFACE_150
 
-  Le composant decline la classe StringBufferOutputStream comme OutputStream pour Bufferiser dans un StringBuffer un flux de sortie
+  Le composant definit en service OSGI un outil permettant l'execution de commande issu du pattern commande via l'interface ICommandRunnerUtilsService
+  
+        * @version 0.1.0
+        
+        * @track SRS_BUNDLE_UTILS_INTERFACE_110
+        
+** @req SDD_BUNDLE_UTILS_INTERFACE_160
+
+  Le composant definit une signature pour la redirection de flux vers une format chaine de caractere via l'interface IUtilsService
   
         * @version 0.2.2
         
-        * @track SRS_BUNDLE_UTILS_140
-        
-** @req SDD_BUNDLE_UTILS_160
-
-  Le composant definit la classe abstraite AbstractRPCServer pour fournir les primitive de construction d'un server RPC
-  
-        * @version 0.2.2
-        
-        * @track SRS_BUNDLE_UTILS_150
+        * @track SRS_BUNDLE_UTILS_INTERFACE_120

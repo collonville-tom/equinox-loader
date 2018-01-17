@@ -16,11 +16,11 @@ Equinox-Loader Software Design Description
 
 ** @req SDD_EQUINOX_LOADER_020
 
-  EquinoxStarter permet l'utilisation de la console osgi Equinox 
+  EquinoxStarter permet l'utilisation de la console osgi Equinox, celle ci est optionnel et depend du wrapper console 
   
         * @version 0.0.2
         
-        * @track SRS_EQUINOX_LOADER_020
+        * @track SRS_EQUINOX_LOADER_020, SRS_BUNDLE_CONSOLE_010
   
 ** @req SDD_EQUINOX_LOADER_030
 

@@ -97,9 +97,7 @@ Utils Software Design Description
 
         * @version 0.0.2
         
-        * @track SRS_BUNDLE_UTILS_050
-        
-        * @depend SDD_BUNDLE_UTILS_050
+        * @track SRS_BUNDLE_UTILS_050, SDD_BUNDLE_UTILS_050
  
 =====================
         

@@ -5,3 +5,5 @@ Introduction
   Le composant implemente des pattern de conception, des outils de log, de outils de gestion de fichiers de ressources. Il est le pivot des applications equinox loader en fournissant un point d'entrée sur le contexte de chargement des bundles. 
 
   Les elements de ce composant se doivent d'etre utiles mais pas indispensable bien que certains patterns sur l'organisation d'un nouveau projet doit etre retrouvé. Ces elements seront detaillé dans une note plus globale d'aide au developpement.
+  
+  Le composant utils est l'implementation des services du bundle utils-interfaces et en definit tous les services
