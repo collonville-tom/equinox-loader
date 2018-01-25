@@ -9,3 +9,5 @@ srs.apt~
 /target/
 /target/
 /target
+/.gradle/
+/build/
