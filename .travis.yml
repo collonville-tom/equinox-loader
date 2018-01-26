@@ -1,8 +1,9 @@
 sudo: false
 language: java
-install: true
 
-build:
-  provider: script
-  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn install deploy -X"
-  skip_cleanup: true
+before_install : true
+install : true
+before_script : true
+
+script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn install deploy -X"
+  
