@@ -1,9 +1,23 @@
 sudo: false
 language: java
+jdk: oraclejdk8
+
+addons:
+  sonarcloud:
+    organization: "collonville-tom-github"
+    token:
+      secure: "748b7fca9a6fbfe5072f997a232f5c4e0ca0e6ca"
 
 before_install : true
 install : true
 before_script : true
 
-script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn install deploy"
-  
+script: 
+  - cp .travis.settings.xml $HOME/.m2/settings.xml 
+  - mvn install deploy
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
