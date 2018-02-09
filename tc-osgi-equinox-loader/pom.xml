@@ -10,7 +10,7 @@
 
 	<parent>
 		<groupId>org.tc.parent</groupId>
-    	<artifactId>tc-osgi-parent</artifactId>
+		<artifactId>tc-osgi-parent</artifactId>
 		<version>0.7.0-SNAPSHOT</version>
 	</parent>
 
@@ -47,6 +47,14 @@
 			<version>${utils.interfaces.version}${snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+		</dependency>
 	</dependencies>
 
 
@@ -55,6 +63,7 @@
 		<plugins>
 			<!-- Permet de constuire le METAINF -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
@@ -64,13 +73,16 @@
 						</goals>
 						<configuration>
 							<archive>
+								<manifestFile></manifestFile>
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
 									<mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass>
 								</manifest>
 								<manifestEntries>
-									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+									<Class-Path>./ ./bundles/
+										./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar
+										./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
 								</manifestEntries>
 							</archive>
 							<descriptors>
@@ -81,41 +93,8 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<!-- Packaging debian -->
-					<execution>
-						<id>assembly-debian</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>src/main/assembly/assembly-debian.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-					<execution>
-						<id>assembly-targz</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>src/main/assembly/assembly-targz.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>jdeb</artifactId>
 				<groupId>org.vafer</groupId>
-				<version>1.5</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
