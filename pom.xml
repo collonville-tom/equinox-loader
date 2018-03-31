@@ -7,11 +7,11 @@
   <version>0.1.0</version>
   <description>Projet module du repo equinox loader</description>
   
-  <parent>
+  <!--<parent>
     <groupId>org.tc.parent</groupId>
     <artifactId>tc-parent</artifactId>
     <version>0.7.0</version>
-  </parent>
+  </parent>-->
 
   
 
