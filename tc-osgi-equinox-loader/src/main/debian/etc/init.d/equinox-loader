@@ -24,7 +24,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Equinox loader services"
 NAME="equinox-loader"
-DAEMON="/opt/equinox-loader/equinox-loader.sh --jmx --debug --console"
+DAEMON="/opt/equinox-loader/equinox-loader.sh --jmx --debug"
 DAEMON_ARGS="" # a definir une fois equinox-loader.sh reecrit 
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

@@ -13,11 +13,12 @@ buildHelp()
 {
 	echo "aide:
 		--user permet de specifier un autre utilisateur
-		--debug active le debug osgi
+		--debug active le debug osgi 
 		--console active la console
 		--jmx active le connecteur jmx
     --xm permet de modifier les parametres java
 	"
+  exit O
 }
 
 
@@ -49,8 +50,9 @@ cleanConfDir()
 INSTALL_DIR="/opt/equinox-loader"
 USER_PARAM="equinox-loader"
 CONFIG_DIR="$INSTALL_DIR/bundles/configuration"
-OPT_ARGS=""
+CONSOLE_ARGS="&"
 JMX_PORT=9010
+DEBUG=""
 JMX=""
 XM="-Xmx512m -XX:MaxPermSize=64m"
 
@@ -58,8 +60,8 @@ while [ -n "$1" ]
 do
   case $1 in
     --user)    USER_PARAM="$2";shift;;
-    --debug)   OPT_ARGS="$OPT_ARGS -debug";shift;;
-	  --console) OPT_ARGS="$OPT_ARGS -console";shift;;
+    --debug)   DEBUG="-debug";shift;;
+	  --console) CONSOLE_ARGS="-console #$CONSOLE_ARGS";shift;;
     --jmx)     JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=$JMX_PORT -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -DJEMonitor=true";shift;;
     --xm)	     XM="$2";shift;;
     -h)        HELP="true";buildHelp;;
@@ -83,7 +85,7 @@ fi
 ### Options -os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog
 # -os win32 -ws win32 -arch x86_64 -nl fr_FR -consoleLog
 
-EQUINOX_OPTS="-configuration $CONFIG_DIR $OPT_ARGS"
+EQUINOX_OPTS="-configuration $CONFIG_DIR $DEBUG $CONSOLE_ARGS"
 JAVA_OPTS="$XM $JMX"
 
 #Commande line
