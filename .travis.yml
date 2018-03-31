@@ -19,5 +19,5 @@ script:
 
 cache:
   directories:
-    - '$HOME/.m2/repository'
+    - '/home/travis/.m2/repository'
     - '$HOME/.sonar/cache'
