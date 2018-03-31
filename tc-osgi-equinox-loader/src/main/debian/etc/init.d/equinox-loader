@@ -18,18 +18,14 @@
 # Do NOT "set -e"
 
 # Vairables pour lancer java et equinox loader
-JAVA_HOME="/home/thomas/Works/jdk1.7.0_60"
-INSTALL_DIR="/opt/equinox-loader"
-CONFIG_DIR="/var/run/equinox-loader/bundles/configuration"
-EQUINOX_OPTS="-configuration $CONFIG_DIR"
-JAVA_OPTS="-server -Xmx512m -XX:MaxPermSize=64m"
+
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Equinox loader services"
 NAME="equinox-loader"
-DAEMON="$JAVA_HOME/bin/java"
-DAEMON_ARGS="$JAVA_OPTS -jar /opt/equinox-loader/${project.artifactId}-${project.version}-assembly.jar $EQUINOX_OPTS"
+DAEMON="/opt/equinox-loader/equinox-loader.sh --jmx --debug --console"
+DAEMON_ARGS="" # a definir une fois equinox-loader.sh reecrit 
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 

@@ -2,9 +2,17 @@ Backlog
 
 * attentes
 
-		* [DOC]  Mettre a jour documentation SDD
+		* [DEV] reecrire le script de demarrage en mettant un mode debug (prevoir des parametre ca sera plus simple) en plus du choix d'un user, regarder si d'autre parametre ne sont pas a definir
+	
+		* [DEV] Verifier que le service debian lance correctement equinox avec les bons droits et que les logs sont les bons
+
+		* [DEV] Verifier que le scripts de demarrage (coté debian prendre en compte le demarrag pas de mode cygwine) gere a la fois un demarrage stand alone et un demarrage de type service
 		
-		* [DOC]  Mettre a jour documentation STP
+		* [DEV] Verifier que le fichier .bat fasse le taff coté windows (et app de combinaison tar.gz)
+
+		* [DOC] Mettre a jour documentation SDD
+		
+		* [DOC] Mettre a jour documentation STP
 		
 		* [REF] permettre un deploiement dynamique de nouveau bundle ou de bundle dans des versions differentes definir les limites
 		
