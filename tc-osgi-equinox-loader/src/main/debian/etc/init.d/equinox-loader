@@ -94,8 +94,7 @@ do_stop()
 	# [ "$?" = 2 ] && return 2
 	# Many daemons don't delete their pidfiles when they exit.
 	echo "Stopping Equinox"
-	set -x
-	ps -aef | grep -m 1 "equinox+" | cut -f 2 -d' ' > /tmp/equinox-loader.pid
+	ps -aef | grep "equinox+" | cut -f 2 -d' ' > /tmp/equinox-loader.pid
     sudo kill -9 $(cat /tmp/equinox-loader.pid)
 	return 0
 }

@@ -10,7 +10,7 @@ Backlog
 		
 		* [DEV] on est en java 8 donc le package collection a t il encore du sens?
 		
-		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox -> elucider ce que j'ai voulu dire
+		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox -> elucider ce que j'ai voulu dire, a priori l'idée est de savoir s'il est possible de faire vivre equinox loader avec une version de utils mais que pour d'autre raison on veut aussi en faire vivre une autre
 		
 		* [DEV] revoir pattern command et son application -> pourquoi?
 		

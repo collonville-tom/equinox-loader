@@ -1,12 +1,6 @@
 Backlog
 
 * attentes
-
-		* [DEV] reecrire le script de demarrage en mettant un mode debug (prevoir des parametre ca sera plus simple) en plus du choix d'un user, regarder si d'autre parametre ne sont pas a definir
-
-		* [DEV] Verifier que le service debian lance correctement equinox avec les bons droits et que les logs sont les bons
-
-		* [DEV] Verifier que le scripts de demarrage (coté debian prendre en compte le demarrag pas de mode cygwine) gere a la fois un demarrage stand alone et un demarrage de type service
 		
 		* [DEV] Verifier que le fichier .bat fasse le taff coté windows (et app de combinaison tar.gz)
 
@@ -31,6 +25,12 @@ Backlog
 		* 0.2.0 [DOC]  Mettre a jour documentation index
 		
 		* 0.2.0 [DOC] Mettre a jour documentation SRS
+		
+		* 0.2.0 [DEV] reecrire le script de demarrage en mettant un mode debug (prevoir des parametre ca sera plus simple) en plus du choix d'un user, regarder si d'autre parametre ne sont pas a definir
+
+		* 0.2.0 [DEV] Verifier que le service debian lance correctement equinox avec les bons droits et que les logs sont les bons
+
+		* 0.2.0 [DEV] Verifier que le scripts de demarrage (coté debian prendre en compte le demarrag pas de mode cygwine) gere a la fois un demarrage stand alone et un demarrage de type service
 		
 * refuses
 
