@@ -36,14 +36,6 @@
 		</server>
 	</servers>
 
-	<mirrors>
-		<mirror>
-			<id>artifactory</id>
-			<name>Mirror Central</name>
-			<url>http://82.238.55.33/artifactory/cots</url>
-			<mirrorOf>central</mirrorOf>
-		</mirror>
-	</mirrors>
 
 	<profiles>
 
