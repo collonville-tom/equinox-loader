@@ -29,4 +29,5 @@ chmod ugo+rwx /etc/init.d/equinox-loader
   
 update-rc.d equinox-loader defaults
 
+service equinox-loader restart
 
