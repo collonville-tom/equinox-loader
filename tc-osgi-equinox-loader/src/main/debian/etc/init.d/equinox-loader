@@ -24,10 +24,16 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Equinox loader services"
 NAME="equinox-loader"
-DAEMON="/opt/equinox-loader/equinox-loader.sh --jmx --debug"
-DAEMON_ARGS="" # a definir une fois equinox-loader.sh reecrit 
+INSTALL_DIR="/opt/equinox-loader"
+CONFIG_DIR="$INSTALL_DIR/bundles/configuration"
+EQUINOX_OPTS="-configuration $CONFIG_DIR -debug"
+#DAEMON="$JAVA_HOME/bin/java"
+#DAEMON_ARGS="-Xmx512m -XX:MaxPermSize=64m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -DJEMonitor=true -jar tc-osgi-equinox-loader-0.2.0-SNAPSHOT-assembly.jar $EQUINOX_OPTS" 
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
+
+
+SERVICE_LOG=/var/log/equinox-loader.service.log
 
 # Exit if the package is not installed
 #[ -x "$DAEMON" ] || exit 0
@@ -41,7 +47,9 @@ SCRIPTNAME=/etc/init.d/$NAME
 # Define LSB log_* functions.
 # Depend on lsb-base (>= 3.2-14) to ensure that this file is present
 # and status_of_proc is working.
-source /lib/lsb/init-functions
+#echo "Before lsb Load" >> $SERVICE_LOG
+#source /lib/lsb/init-functions || true
+#echo "After lsb Load" >> $SERVICE_LOG
 
 #
 # Function that starts the daemon/service
@@ -52,9 +60,12 @@ do_start()
 	#   0 if daemon has been started
 	#   1 if daemon was already running
 	#   2 if daemon could not be started
-	cd $INSTALL_DIR
-	start-stop-daemon --background --make-pidfile -u $NAME --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null || return 1
-	start-stop-daemon --background --make-pidfile -u $NAME --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS || return 2
+	echo "Running Equinox-Loader" >> $SERVICE_LOG
+	#start-stop-daemon --background --make-pidfile -u $NAME --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null || return 1
+	#echo "start-stop-daemon --background --make-pidfile -u $NAME --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS" >> $SERVICE_LOG
+	#start-stop-daemon --background --make-pidfile -u $NAME --start --quiet --pidfile $PIDFILE --exec $DAEMON -- $DAEMON_ARGS >> $SERVICE_LOG
+    $($INSTALL_DIR/equinox-loader.sh --jmx --debug  >> $SERVICE_LOG) &
+    
 	# Add code here, if necessary, that waits for the process to be ready
 	# to handle requests from services started subsequently which depend
 	# on this one.  As a last resort, sleep for some time.
@@ -82,8 +93,10 @@ do_stop()
 	# start-stop-daemon -u $NAME --stop --quiet --oknodo --retry=0/30/KILL/5 --exec $DAEMON
 	# [ "$?" = 2 ] && return 2
 	# Many daemons don't delete their pidfiles when they exit.
-	cat $PIDFILE | xargs sudo kill -1
-	rm -fR $CONFIG_DIR/org.eclipse.osgi
+	echo "Stopping Equinox"
+	set -x
+	ps -aef | grep -m 1 "equinox+" | cut -f 2 -d' ' > /tmp/equinox-loader.pid
+    sudo kill -9 $(cat /tmp/equinox-loader.pid)
 	return 0
 }
 
@@ -102,20 +115,21 @@ do_reload() {
 
 case "$1" in
   start)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+    echo "Start Equinox Loader" >> $SERVICE_LOG
+	#[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
 	do_start
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
+	#case "$?" in
+	#	0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+	#	2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+	#esac
 	;;
   stop)
-	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+	#[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
 	do_stop
-	case "$?" in
-		0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
-		2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
-	esac
+	#case "$?" in
+	#	0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+	#	2) [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+	#esac
 	;;
   status)
 	status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
@@ -134,20 +148,20 @@ case "$1" in
 	# If the "reload" option is implemented then remove the
 	# 'force-reload' alias
 	#
-	log_daemon_msg "Restarting $DESC" "$NAME"
+	#log_daemon_msg "Restarting $DESC" "$NAME"
 	do_stop
 	case "$?" in
 	  0|1)
 		do_start
-		case "$?" in
-			0) log_end_msg 0 ;;
-			1) log_end_msg 1 ;; # Old process is still running
-			*) log_end_msg 1 ;; # Failed to start
-		esac
+	#	case "$?" in
+	#		0) log_end_msg 0 ;;
+	#		1) log_end_msg 1 ;; # Old process is still running
+	#		*) log_end_msg 1 ;; # Failed to start
+	#	esac
 		;;
 	  *)
 		# Failed to stop
-		log_end_msg 1
+	#	log_end_msg 1
 		;;
 	esac
 	;;
