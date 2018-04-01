@@ -21,7 +21,7 @@
     <module>tc-osgi-equinox-loader</module>
   </modules>
   
- <repositories>
+ <!--<repositories>
     <repository>
         <id>internal-repo</id>
         <name>internal repository</name>
@@ -34,7 +34,7 @@
             <enabled>true</enabled>
         </snapshots>
     </repository>
-</repositories>
+</repositories>-->
 
   
 </project>
