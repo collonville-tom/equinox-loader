@@ -53,48 +53,26 @@
 			<repositories>
 				<repository>
 					<snapshots>
-						<enabled>false</enabled>
+						<enabled>true</enabled>
 					</snapshots>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
 					<id>artifactory</id>
-					<name>libs-release</name>
-					<url>http://82.238.55.33/artifactory/cots</url>
-				</repository>
-				<repository>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<id>artifactory</id>
-					<name>libs-snapshot</name>
+					<name>cots</name>
 					<url>http://82.238.55.33/artifactory/cots</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
 				<pluginRepository>
 					<snapshots>
-						<enabled>false</enabled>
+						<enabled>true</enabled>
 					</snapshots>
 					<releases>
 						<enabled>true</enabled>
 					</releases>
 					<id>artifactory</id>
 					<name>plugins-release</name>
-					<url>http://82.238.55.33/artifactory/cots</url>
-				</pluginRepository>
-				<pluginRepository>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-					<id>artifactory</id>
-					<name>plugins-snapshot</name>
 					<url>http://82.238.55.33/artifactory/cots</url>
 				</pluginRepository>
 			</pluginRepositories>
