@@ -68,7 +68,6 @@ do
     --help)    HELP="true";buildHelp;;
     *)        ;;
   esac
-  shift
 done
 
 
@@ -98,23 +97,4 @@ cleanConfDir "$USER_PARAM"
 
 cd $HERE
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+exit 0

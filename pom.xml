@@ -21,20 +21,5 @@
     <module>tc-osgi-equinox-loader</module>
   </modules>
   
- <!--<repositories>
-    <repository>
-        <id>internal-repo</id>
-        <name>internal repository</name>
-        <url>http://82.238.55.33/artifactory/cots</url>
-        <layout>default</layout>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>-->
-
   
 </project>

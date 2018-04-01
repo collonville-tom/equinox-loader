@@ -6,9 +6,13 @@ Backlog
 		
 		* [DEV] faire des annotations pour simplifier la construction du package module dedié osgi
 		
-		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox
+		* [DEV] faire des annotations pour simplifier la construction des fichiers de conf
 		
-		* [DEV] revoir pattern command et son application
+		* [DEV] on est en java 8 donc le package collection a t il encore du sens?
+		
+		* [DEV] rendre dynamique la connexion RMI avec equinox loader a faire en meme temps que celui equinox -> elucider ce que j'ai voulu dire
+		
+		* [DEV] revoir pattern command et son application -> pourquoi?
 		
 * faits
 
