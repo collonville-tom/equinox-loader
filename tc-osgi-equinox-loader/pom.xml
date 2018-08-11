@@ -18,7 +18,7 @@
 		<build>0.2.0</build>
 		<utils.version>0.3.0</utils.version>
 		<utils.interfaces.version>0.1.0</utils.interfaces.version>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 	</properties>
 
 
