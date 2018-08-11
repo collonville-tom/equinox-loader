@@ -1,0 +1,25 @@
+-classpath
+'/media/thomas/Data/Works/jenkins-2-89-2/workspace/tc-equinox-loader-doc/tc-osgi-bundle-utils-interfaces/target/classes:/home/thomas/Works/m2Repo/org/eclipse/tycho/org.eclipse.osgi/3.11.2.v20161107-1947/org.eclipse.osgi-3.11.2.v20161107-1947.jar:/home/thomas/Works/m2Repo/log4j/log4j/1.2.17/log4j-1.2.17.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/media/thomas/Data/Works/jenkins-2-89-2/workspace/tc-equinox-loader-doc/tc-osgi-bundle-utils-interfaces/src/main/java'
+-Xdoclint:none
+-author
+-bottom
+'Copyright &#169; 2018 org.tc. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/media/thomas/Data/Works/jenkins-2-89-2/workspace/tc-equinox-loader-doc/tc-osgi-bundle-utils-interfaces/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'tc-osgi-bundle-utils-interfaces-0.1.0-SNAPSHOT 0.1.0-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/7/docs/api' '/media/thomas/Data/Works/jenkins-2-89-2/workspace/tc-equinox-loader-doc/tc-osgi-bundle-utils-interfaces/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'tc-osgi-bundle-utils-interfaces-0.1.0-SNAPSHOT 0.1.0-SNAPSHOT API'

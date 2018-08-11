@@ -1,0 +1,12 @@
+org.tc.osgi.bundle.utils.conf.gen
+org.tc.osgi.bundle.utils.conf.jaxb
+org.tc.osgi.bundle.utils.conf
+org.tc.osgi.bundle.utils.context
+org.tc.osgi.bundle.utils.logger
+org.tc.osgi.bundle.utils.module.activator
+org.tc.osgi.bundle.utils.module.service.impl
+org.tc.osgi.bundle.utils.module.utils
+org.tc.osgi.bundle.utils.pattern.command
+org.tc.osgi.bundle.utils.rmi.client
+org.tc.osgi.bundle.utils.rmi.server
+org.tc.osgi.bundle.utils.serial

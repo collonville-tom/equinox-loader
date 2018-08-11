@@ -1,0 +1,14 @@
+org.tc.osgi.bundle.utils.collection
+org.tc.osgi.bundle.utils.collection.element
+org.tc.osgi.bundle.utils.conf.jaxb
+org.tc.osgi.bundle.utils.conf
+org.tc.osgi.bundle.utils.context
+org.tc.osgi.bundle.utils.io
+org.tc.osgi.bundle.utils.logger
+org.tc.osgi.bundle.utils.pattern.command
+org.tc.osgi.bundle.utils.pattern.draftman
+org.tc.osgi.bundle.utils.pattern.observer
+org.tc.osgi.bundle.utils.rmi.client
+org.tc.osgi.bundle.utils.rmi
+org.tc.osgi.bundle.utils.serial
+org.tc.osgi.bundle.utils.tools

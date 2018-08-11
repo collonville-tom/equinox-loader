@@ -1,0 +1,4 @@
+org.tc.osgi.bundle.utils.interf.collection.element
+org.tc.osgi.bundle.utils.interf.io
+org.tc.osgi.bundle.utils.interf.pattern.draftman
+org.tc.osgi.bundle.utils.interf.pattern.observer
