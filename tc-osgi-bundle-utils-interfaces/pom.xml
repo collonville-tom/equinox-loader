@@ -10,7 +10,7 @@
 
 	<properties>
 		<build>0.1.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 	</properties>
 
 	<dependencies>
