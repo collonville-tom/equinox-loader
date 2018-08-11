@@ -10,7 +10,7 @@
 
 	<properties>
 		<build>0.3.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 		<utils.interfaces.version>0.1.0</utils.interfaces.version>
 	</properties>
 
