@@ -1,6 +1,6 @@
 # tc-equinox-loader
 
-Projet d'un container OSGI leger
+Projet d'un container OSGI leger, l'installation minimal du container requiere les trois composants suivant. Il est preconisé d'installer egalement au moins le composant tc-osgi-bundle-console-wrapper (depot tc-osgi-wrapper) pour beneficier d'une console avec l'option de demarrage --console
 
 Doc maven du container OSGI
 https://collonville-tom.github.io/tc-equinox-loader/staging/tc-equinox-loader-module/
