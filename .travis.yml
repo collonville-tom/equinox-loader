@@ -14,7 +14,7 @@ before_script : true
 
 script: 
   - cp .travis.settings.xml $HOME/.m2/settings.xml 
-  - mvn install deploy
+  - mvn install
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 
 cache:

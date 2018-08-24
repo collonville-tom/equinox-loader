@@ -45,10 +45,61 @@
 				<JAVA_1_8_HOME>${JAVA_HOME}</JAVA_1_8_HOME>
 			</properties>
 		</profile>
+
+
+		<profile>
+			<id>external</id>
+			<repositories>
+            	<repository>
+              	  <id>central</id>
+              	  <name>central</name>
+               	 <url>http://repo1.maven.org/maven2</url>
+           		 </repository>
+            	<repository>
+              	  <id>mvnrepository</id>
+              	  <name>mvnrepository</name>
+               	 <url>http://www.mvnrepository.com</url>
+           		 </repository>
+       		 </repositories>
+		</profile>
+
+
+		<!--quand on a besoin d'une release, normalement tout le temps sauf pour les composant interne au build-->
+		<profile>
+			<id>release</id>
+			<repositories>
+				<repository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<id>dependencies</id>
+					<name>release</name>
+					<url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<id>dependencies</id>
+					<name>plugins-release</name>
+					<url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+
+		<!--pour la livraison --> 
 		<profile>
 			<id>artifactory</id>
 			<properties>
-				<arti-url>http://82.238.55.33</arti-url>
+				<arti-url>http://localhost</arti-url>
 			</properties>
 			<repositories>
 				<repository>
@@ -60,7 +111,7 @@
 					</releases>
 					<id>artifactory</id>
 					<name>cots</name>
-					<url>http://82.238.55.33/artifactory/cots</url>
+					<url>http://localhost/artifactory/cots</url>
 				</repository>
 			</repositories>
 			<pluginRepositories>
@@ -73,7 +124,7 @@
 					</releases>
 					<id>artifactory</id>
 					<name>plugins-release</name>
-					<url>http://82.238.55.33/artifactory/cots</url>
+					<url>http://localhost/artifactory/cots</url>
 				</pluginRepository>
 			</pluginRepositories>
 		</profile>
@@ -83,7 +134,9 @@
 
 
 	<activeProfiles>
-		<activeProfile>artifactory</activeProfile>
+		<activeProfile>external</activeProfile>
+		<activeProfile>release</activeProfile>
+		<activeProfile>dependancies</activeProfile>
 		<activeProfile>compiler</activeProfile>
 	</activeProfiles>
 </settings>
