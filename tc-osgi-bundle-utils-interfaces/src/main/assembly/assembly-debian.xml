@@ -7,7 +7,7 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 
 	<dependencySets>
-<!-- 	Inclusion interfaces classifier et librairies-->
+		<!-- Inclusion interfaces classifier et librairies -->
 		<dependencySet>
 			<unpack>false</unpack>
 			<scope>runtime</scope>
@@ -18,13 +18,13 @@
 				<include>*log4j*</include>
 				<include>*:assembly</include>
 				<include>org.eclipse:osgi*</include>
-                <include>org.eclipse.tycho:org.eclipse.osgi*</include>
-                <include>org.apache.felix:org.apache.felix.framework*</include>
+				<include>org.eclipse.tycho:org.eclipse.osgi*</include>
+				<include>org.apache.felix:org.apache.felix.framework*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>
-		
-	
+
+
 	<fileSets>
 		<fileSet>
 			<directory>src/main/debian/DEBIAN</directory>

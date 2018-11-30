@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tc.osgi.bundle.utils</groupId>
@@ -9,9 +10,9 @@
 	<version>${build}${snapshot}</version>
 
 	<properties>
-		<build>0.3.0</build>
-		<snapshot></snapshot>
-		<utils.interfaces.version>0.1.0</utils.interfaces.version>
+		<build>0.3.1</build>
+		<snapshot>-SNAPSHOT</snapshot>
+		<utils.interfaces.version>0.1.1</utils.interfaces.version>
 	</properties>
 
 	<dependencies>
@@ -36,13 +37,26 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.7.0</version>
+		<version>0.7.1-SNAPSHOT</version>
 	</parent>
 
 
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<images>
+						<image>
+							<build>
+								<from>tc-osgi-bundle-utils-interfaces:${utils.interfaces.version}${snapshot}</from>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>

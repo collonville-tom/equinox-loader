@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>tc-osgi-equinox-loader</artifactId>
@@ -11,14 +12,14 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.7.0</version>
+		<version>0.7.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
-		<build>0.2.0</build>
-		<utils.version>0.3.0</utils.version>
-		<utils.interfaces.version>0.1.0</utils.interfaces.version>
-		<snapshot></snapshot>
+		<build>0.2.1</build>
+		<utils.version>0.3.1</utils.version>
+		<utils.interfaces.version>0.1.1</utils.interfaces.version>
+		<snapshot>-SNAPSHOT</snapshot>
 	</properties>
 
 
@@ -61,6 +62,24 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<images>
+						<image>
+							<build>
+								<from>tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
+								<cmd>
+									<shell>sudo chmod +x /opt/equinox-loader/postinst</shell>
+									<shell>sudo /opt/equinox-loader/postinst</shell>
+									<shell>sh -u equinox-loader /opt/equinox-loader/equinox-loader.sh</shell>
+								</cmd>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
 			<!-- Permet de constuire le METAINF -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -79,7 +98,9 @@
 									<classpathPrefix>./</classpathPrefix>
 								</manifest>
 								<manifestEntries>
-									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+									<Class-Path>./ ./bundles/
+										./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar
+										./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
 									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 								</manifestEntries>
 							</archive>
