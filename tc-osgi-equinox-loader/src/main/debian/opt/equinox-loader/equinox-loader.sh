@@ -1,4 +1,4 @@
-#/bin/bash
+#/bin/sh
 # This srcipt must be used to launch equinox-loader application on stand alone service with yours rights
 # Don't modify it be copy them if the configuration must be modify.
 # Probably you must launch this script with the following cmd-line=

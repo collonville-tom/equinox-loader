@@ -71,10 +71,22 @@
 							<build>
 								<from>tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
 								<cmd>
-									<shell>sudo chmod +x /opt/equinox-loader/postinst</shell>
-									<shell>sudo /opt/equinox-loader/postinst</shell>
-									<shell>sh -u equinox-loader /opt/equinox-loader/equinox-loader.sh</shell>
+									<shell>mkdir -p /var/log/equinox-loader</shell>
+									<shell>mkdir -p /var/equinox-loader/bundles/configuration</shell>
+									<shell>cd /opt/equinox-loader</shell>
 								</cmd>
+								<exec>
+									<arg>java -Xmn128m -Xss128m -Xmx512m -XX:MaxMetaspaceSize=64m</arg>
+									<arg>-verbose:gc</arg>
+									<arg>-Dcom.sun.management.jmxremote</arg>
+									<arg>-Dcom.sun.management.jmxremote.port=7001</arg>
+									<arg>-Dcom.sun.management.jmxremote.local.only=false</arg>
+									<arg>-Dcom.sun.management.jmxremote.authenticate=false</arg>
+									<arg>-Dcom.sun.management.jmxremote.ssl=false -DJEMonitor=true</arg>
+									<arg>-jar ${project.artifactId}-${project.version}-assembly.jar</arg>
+									<arg>-configuration /var/equinox-loader/bundles/configuration</arg>
+									<arg>-debug -console</arg>
+								</exec>
 							</build>
 						</image>
 					</images>
@@ -98,9 +110,7 @@
 									<classpathPrefix>./</classpathPrefix>
 								</manifest>
 								<manifestEntries>
-									<Class-Path>./ ./bundles/
-										./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar
-										./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
 									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 								</manifestEntries>
 							</archive>
