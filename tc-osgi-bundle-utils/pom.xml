@@ -51,7 +51,7 @@
 					<images>
 						<image>
 							<build>
-								<from>tc-osgi-bundle-utils-interfaces:${utils.interfaces.version}${snapshot}</from>
+								<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${utils.interfaces.version}${snapshot}</from>
 							</build>
 						</image>
 					</images>

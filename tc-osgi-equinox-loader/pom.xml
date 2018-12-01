@@ -69,7 +69,7 @@
 					<images>
 						<image>
 							<build>
-								<from>tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
+								<from>${docker.login}/tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
 								<cmd>
 									<shell>mkdir -p /var/log/equinox-loader</shell>
 									<shell>mkdir -p /var/equinox-loader/bundles/configuration</shell>
