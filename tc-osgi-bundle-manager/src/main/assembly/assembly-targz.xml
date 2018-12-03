@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>bundle</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<dependencySets>
+<!-- 	Inclusion interfaces classifier et librairies-->
+		<dependencySet>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
+			<includes>
+				<include>*:${project.artifactId}:*:assembly</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+		
+	
+	<fileSets>
+		<fileSet>
+			<directory>src/main/debian/DEBIAN</directory>
+			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>control</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>manager.xml</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
+
+

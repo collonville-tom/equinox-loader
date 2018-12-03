@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.tc.osgi.bundle.manager</groupId>
+	<artifactId>tc-osgi-bundle-manager</artifactId>
+	<packaging>bundle</packaging>
+	<name>${project.artifactId}-${project.version}</name>
+	<description>Un bundle pour exposer des composants et utilitaires</description>
+	<version>${build}${snapshot}</version>
+
+	<properties>
+		<build>0.1.0</build>
+		<snapshot>-SNAPSHOT</snapshot>
+		<utils.interfaces.version>0.1.1</utils.interfaces.version>
+		<equinox-loader.version>0.2.1</equinox-loader.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
+			<version>${utils.interfaces.version}${snapshot}</version>
+			<classifier>assembly</classifier>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.tc.osgi</groupId>
+			<artifactId>tc-osgi-equinox-loader</artifactId>
+			<version>${equinox-loader.version}${snapshot}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+		</dependency>
+	</dependencies>
+
+
+	<parent>
+		<groupId>org.tc.parent</groupId>
+		<artifactId>tc-osgi-parent</artifactId>
+		<version>0.7.1-SNAPSHOT</version>
+	</parent>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<images>
+						<image>
+							<build>
+								<from>${docker.login}/tc-osgi-equinox-loader:${equinox-loader.version}${snapshot}</from>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Activator>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</Bundle-Activator>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>jdeb</artifactId>
+				<groupId>org.vafer</groupId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

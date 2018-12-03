@@ -1,0 +1,13 @@
+/.settings
+/pom.xml~
+/.project
+/.classpath
+/target
+srs.apt~
+/bundles
+/bin
+/target/
+/target/
+/target
+/.gradle/
+/build/

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+ 
+  <body>
+	<menu ref="parent" />
+	<menu ref="modules" />
+	<menu name="Specifications">
+      <item name="SRS" href="srs.html"/>
+      <item name="SDD" href="sdd.html"/>
+      <item name="STP" href="stp.html"/>
+    </menu>
+    <menu ref="reports" />
+     
+
+  </body>
+</project>

@@ -1,0 +1,9 @@
+Package: ${project.artifactId}-${build}
+Version: ${versiontimestamp}
+Section: base
+Priority: optional
+Architecture: all
+Depends: tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}
+Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
+Homepage: <http://collonville.thomas.free.fr>
+Description: Bundle outils generique osgi
