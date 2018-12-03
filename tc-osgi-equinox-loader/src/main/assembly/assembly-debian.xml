@@ -58,6 +58,7 @@
             <filtered>true</filtered>
             <includes>
                 <include>equinox-loader.sh</include>
+                <include>docker.sh</include>
                 <include>equinox-loader.bat</include>
             </includes>
         </fileSet>

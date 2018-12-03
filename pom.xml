@@ -18,6 +18,7 @@
   <modules>
   	<module>tc-osgi-bundle-utils</module>
   	<module>tc-osgi-bundle-utils-interfaces</module>
+  	<module>tc-osgi-bundle-manager</module>
     <module>tc-osgi-equinox-loader</module>
   </modules>
   

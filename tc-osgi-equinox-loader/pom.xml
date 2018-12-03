@@ -70,23 +70,7 @@
 						<image>
 							<build>
 								<from>${docker.login}/tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
-								<cmd>
-									<shell>mkdir -p /var/log/equinox-loader</shell>
-									<shell>mkdir -p /var/equinox-loader/bundles/configuration</shell>
-									<shell>cd /opt/equinox-loader</shell>
-								</cmd>
-								<exec>
-									<arg>java -Xmn128m -Xss128m -Xmx512m -XX:MaxMetaspaceSize=64m</arg>
-									<arg>-verbose:gc</arg>
-									<arg>-Dcom.sun.management.jmxremote</arg>
-									<arg>-Dcom.sun.management.jmxremote.port=7001</arg>
-									<arg>-Dcom.sun.management.jmxremote.local.only=false</arg>
-									<arg>-Dcom.sun.management.jmxremote.authenticate=false</arg>
-									<arg>-Dcom.sun.management.jmxremote.ssl=false -DJEMonitor=true</arg>
-									<arg>-jar ${project.artifactId}-${project.version}-assembly.jar</arg>
-									<arg>-configuration /var/equinox-loader/bundles/configuration</arg>
-									<arg>-debug -console</arg>
-								</exec>
+								<cmd>/opt/equinox-loader/docker.sh</cmd>
 							</build>
 						</image>
 					</images>
