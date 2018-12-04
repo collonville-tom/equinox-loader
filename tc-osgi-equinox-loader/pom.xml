@@ -76,6 +76,23 @@
 					</images>
 				</configuration>
 			</plugin>
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.3.1</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>./</classpathPrefix>
+							</manifest>
+							<manifestEntries>
+								<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+								<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
+							</manifestEntries>
+						</archive>
+					</configuration>
+			</plugin>
 			<!-- Permet de constuire le METAINF -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -88,14 +105,15 @@
 						</goals>
 						<configuration>
 							<archive>
+								<manifestFile></manifestFile>
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
-									<mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass>
+<!-- 									<mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
 									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
-<!-- 									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class> -->
+									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 								</manifestEntries>
 							</archive>
 							<descriptors>
