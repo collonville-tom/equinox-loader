@@ -18,17 +18,14 @@ import org.tc.osgi.equinox.loader.starter.EquinoxStarter;
  */
 public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
 
-    private String consoleDependencyBundleName;
-    /**
-     * String springDependencyBundleName.
-     */
-    private String springDependencyBundleName;
 
     /**
      * String utilsDependencyBundleName.
      */
     private String utilsDependencyBundleName;
 
+    private String managerDependencyBundleName;
+    
     /**
      * StartDefaultBundleCmd constructor.
      * @param context BundleContext
@@ -49,47 +46,17 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         } catch (TcOsgiException | EquinoxConfigException e) {
             throw new EquinoxCmdException(e.getMessage(), e);
         }
+        
         try {
-            new BundleStarter().processOnBundle(this.context, this.getConsoleDependencyBundleName());
+            new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName());
 
         } catch (TcOsgiException | EquinoxConfigException e) {
             LoggerGestionnary.getInstance(EquinoxStarter.class).error(
-                "Lancement auto du bundle echoué :" + this.consoleDependencyBundleName + " ce dernier est peut etre simplement absent, equinox ne fournira pas de mode console", e);
-        }
-
-        try {
-            new BundleStarter().processOnBundle(this.context, this.getSpringDependencyBundleName());
-
-        } catch (TcOsgiException | EquinoxConfigException e) {
-            LoggerGestionnary.getInstance(EquinoxStarter.class).error(
-                "Lancement auto du bundle echoué :" + this.springDependencyBundleName
-                + " ce dernier est peut etre simplement absent, equinox n'acceptera que des bundle standard (n'utilisant pas spring DM)");
+                "Lancement auto du bundle echoué :" + this.managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
         }
 
     }
 
-    public String getConsoleDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.consoleDependencyBundleName == null) {
-            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "consoleDependencyBundleName");
-        }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.consoleDependencyBundleName);
-        return this.consoleDependencyBundleName;
-    }
-
-    /**
-     * getSpringDependencyBundleName.
-     * @return String
-     * @throws FieldTrackingAssignementException
-     * @throws EquinoxCmdException
-     * @throws EquinoxConfigException
-     */
-    public String getSpringDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.springDependencyBundleName == null) {
-            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "springDependencyBundleName");
-        }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.springDependencyBundleName);
-        return this.springDependencyBundleName;
-    }
 
     /**
      * getUtilsDependencyBundleName.
@@ -104,6 +71,14 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         }
         LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.utilsDependencyBundleName);
         return this.utilsDependencyBundleName;
+    }
+    
+    public String getManagerDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
+        if (this.managerDependencyBundleName == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "managerDependencyBundleName");
+        }
+        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.managerDependencyBundleName);
+        return this.managerDependencyBundleName;
     }
 
 }

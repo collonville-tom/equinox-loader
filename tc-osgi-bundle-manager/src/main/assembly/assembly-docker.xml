@@ -6,8 +6,8 @@
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 
-<dependencySets>
-<!-- 	Inclusion interfaces classifier et librairies-->
+	<dependencySets>
+		<!-- Inclusion interfaces classifier et librairies -->
 		<dependencySet>
 			<unpack>false</unpack>
 			<scope>runtime</scope>
@@ -19,9 +19,10 @@
 			</includes>
 		</dependencySet>
 	</dependencySets>
-		
-	
+
+
 	<fileSets>
+
 		<fileSet>
 			<directory>src/main/debian/DEBIAN</directory>
 			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
@@ -39,6 +40,13 @@
 			<includes>
 				<include>manager.xml</include>
 			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>.</directory>
+			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
+			<excludes>
+				<exclude>*/**</exclude>
+			</excludes>
 		</fileSet>
 	</fileSets>
 </assembly>

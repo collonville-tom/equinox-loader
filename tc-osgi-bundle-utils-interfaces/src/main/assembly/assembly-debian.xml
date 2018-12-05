@@ -36,6 +36,15 @@
 			</includes>
 		</fileSet>
 		<fileSet>
+			<directory>src/main/debian/DEBIAN</directory>
+			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>control</include>
+			</includes>
+		</fileSet>
+		<fileSet>
 			<directory>src/main/resources</directory>
 			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
 			<useDefaultExcludes>true</useDefaultExcludes>

@@ -23,7 +23,12 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
     /**
      * String UTILS_FILE.
      */
-    private final static String UTILS_FILE = "utils";
+    private final static String UTILS_FILE = "manager";
+    
+    
+    private String staticRepositoryUrl;
+    private String staticRepositoryName;
+    private String workDirectory;
 
     /**
      * getInstance.
@@ -86,7 +91,29 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         }
         return jaxbContext;
     }
-
+    public String getStaticRepositoryUrl() {
+        if (staticRepositoryUrl == null) {
+        	staticRepositoryUrl = getResourceBundle().getString(getBundleRacine() + "static.repository.url");
+        }
+        return staticRepositoryUrl;
+    }
+    
+    public String getStaticRepositoryFile() {
+        if (staticRepositoryName == null) {
+        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static_repository.file");
+        }
+        return staticRepositoryName;
+    }
+    
+    public String getWorkDirectory() {
+        if (workDirectory == null) {
+        	workDirectory = getResourceBundle().getString(getBundleRacine() + "work_directory");
+        }
+        return workDirectory;
+    }
+    
+    
+    
     /**
      * getLog4jFile.
      * @return String

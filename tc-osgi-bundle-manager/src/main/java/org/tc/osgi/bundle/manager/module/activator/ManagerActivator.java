@@ -1,11 +1,7 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-
 import org.osgi.framework.BundleContext;
+import org.tc.osgi.bundle.manager.core.ManagerRegistry;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
 import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
@@ -28,6 +24,8 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
 	private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
 
+	private ManagerRegistry registry=new ManagerRegistry();
+	
 	@Override
 	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
 		throw new TcOsgiException("checkInitBundleUtilsService not implemented");
@@ -76,7 +74,15 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
+		//main ici on decrit ce que l'on va vouloir faire avec le manager 
+		// on veut pouvoir demander l'ajout d'un bundle et de ses dependances depuis un repo distant statique et lancer ses elements
+		// on veut pouvoir demander l'ajout d'un bundle et de ses dependances depuis un repo distant dynamique (autre application equinox) et lancer ses elements
+		// avoir un referentiel statique et dynamique cnfiguration via un add
+		// avoir un repo local
+		registry.initStaticRepository();
+		LoggerServiceProxy.getInstance().getLogger(ManagerActivator.class).debug(registry.toString());
 
+		
 	}
 
 	@Override
