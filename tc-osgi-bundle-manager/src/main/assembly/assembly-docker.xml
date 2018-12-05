@@ -16,6 +16,13 @@
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
 				<include>*:${project.artifactId}:*:assembly</include>
+				<include>*jersey*</include>
+				<include>*hk2*</include>
+				<include>*java*</include>
+				<include>*aopalliance*</include>
+				<include>osgi*</include>
+				<include>*validation*</include>
+				<include>*grizzly*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>

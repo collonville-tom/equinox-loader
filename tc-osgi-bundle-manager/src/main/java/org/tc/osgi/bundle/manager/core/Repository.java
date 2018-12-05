@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.tc.osgi.bundle.manager.core.tools.Downloader;
-import org.tc.osgi.bundle.manager.core.tools.RepoParser;
 import org.tc.osgi.bundle.manager.exception.ManagerException;
+import org.tc.osgi.bundle.manager.tools.Downloader;
+import org.tc.osgi.bundle.manager.tools.RepoParser;
 import org.tc.osgi.bundle.utils.interf.collection.element.Pair;
+import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 public class Repository {
 
@@ -38,17 +39,14 @@ public class Repository {
 			bundles=parseur.parseRepoList(file);
 
 		} catch (ManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+			LoggerGestionnary.getInstance(Repository.class).error("Fetching repository "+this.name+" in error");
+		}	
 	}
 	
 	public String toString()
 	{
 		StringBuilder b=new StringBuilder("[");
-		b.append(name).append(",").append("url").append("]");
+		b.append(name).append(",").append("url").append("]\n");
 		for(TarGzBundle bundle:bundles)
 		{
 			b.append(bundle.toString()).append("\n");

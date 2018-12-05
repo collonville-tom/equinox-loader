@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.tools;
+package org.tc.osgi.bundle.manager.tools;
 
 import java.io.IOException;
 import java.io.InputStream;

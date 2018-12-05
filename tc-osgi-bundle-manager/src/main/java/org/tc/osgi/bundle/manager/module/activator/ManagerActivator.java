@@ -1,5 +1,13 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
+import java.io.IOException;
+import java.net.URI;
+
+import javax.ws.rs.core.UriBuilder;
+
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.core.ManagerRegistry;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
@@ -81,7 +89,26 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 		// avoir un repo local
 		registry.initStaticRepository();
 		LoggerServiceProxy.getInstance().getLogger(ManagerActivator.class).debug(registry.toString());
+		
+		URI BASE_URI=UriBuilder.fromUri("http://localhost/rest/").port(9991).build();
+		ResourceConfig rc = new ResourceConfig();
+        rc.packages("org.tc.osgi.bundle.manager.rest");
+				
+				
+		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
+        try {
+			server.start();
+			System.out.println(String.format("Jersey app started with WADL available at "
+	                + "%sapplication.wadl\nHit enter to stop it...",
+	                BASE_URI, BASE_URI));
+	        System.in.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+        
+        server.shutdownNow();
 		
 	}
 

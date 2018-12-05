@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.tools.Downloader;
+import org.tc.osgi.bundle.manager.tools.Downloader;
 
 public class ManagerRegistry {
 
