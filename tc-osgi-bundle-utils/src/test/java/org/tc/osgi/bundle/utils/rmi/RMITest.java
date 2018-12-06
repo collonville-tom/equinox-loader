@@ -94,20 +94,20 @@ public class RMITest extends AbstractRMIServer implements Serializable {
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiAddr()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getAddr()
      */
     @Override
-    public String getRmiAddr() throws FieldTrackingAssignementException {
+    public String getAddr() throws FieldTrackingAssignementException {
         return "localhost";
     }
 
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiPort()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getPort()
      */
     @Override
-    public String getRmiPort() throws FieldTrackingAssignementException {
+    public String getPort() throws FieldTrackingAssignementException {
         return "12345";
     }
 
@@ -119,14 +119,14 @@ public class RMITest extends AbstractRMIServer implements Serializable {
 
         try {
             final RMITest testRmi = new RMITest();
-            testRmi.createRegistry(getRmiPort());
+            testRmi.createRegistry(getPort());
             final MyBidon b = new MyBidon();
             b.setValue(24);
 
             testRmi.addObject(Bidon.class.getSimpleName(), b);
 
             final StringBuilder buff = new StringBuilder("rmi://");
-            buff.append(InetAddress.getByName(testRmi.getRmiAddr()).getHostAddress()).append(":").append(testRmi.getRmiPort()).append("/").append(Bidon.class.getSimpleName());
+            buff.append(InetAddress.getByName(testRmi.getAddr()).getHostAddress()).append(":").append(testRmi.getPort()).append("/").append(Bidon.class.getSimpleName());
             System.out.println(buff.toString());
             final Remote rem = Naming.lookup(buff.toString());
             if (rem instanceof Bidon) {

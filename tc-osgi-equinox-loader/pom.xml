@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>tc-osgi-equinox-loader</artifactId>
 	<groupId>org.tc.osgi</groupId>
@@ -77,21 +75,21 @@
 				</configuration>
 			</plugin>
 			<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.3.1</version>
-					<configuration>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-								<classpathPrefix>./</classpathPrefix>
-							</manifest>
-							<manifestEntries>
-								<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
-								<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
-							</manifestEntries>
-						</archive>
-					</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>./</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
+						</manifestEntries>
+					</archive>
+				</configuration>
 			</plugin>
 			<!-- Permet de constuire le METAINF -->
 			<plugin>
@@ -109,7 +107,7 @@
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
-<!-- 									<mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
+									<!-- <mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
 									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>

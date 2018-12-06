@@ -31,13 +31,13 @@ public interface IRPCServer {
 	 * @return String
 	 * @throws FieldTrackingAssignementException
 	 */
-	public String getRmiAddr() throws FieldTrackingAssignementException;
+	public String getAddr() throws FieldTrackingAssignementException;
 
 	/**
 	 * getRmiPort.
 	 * @return String
 	 * @throws FieldTrackingAssignementException
 	 */
-	public String getRmiPort() throws FieldTrackingAssignementException;
+	public String getPort() throws FieldTrackingAssignementException;
 
 }

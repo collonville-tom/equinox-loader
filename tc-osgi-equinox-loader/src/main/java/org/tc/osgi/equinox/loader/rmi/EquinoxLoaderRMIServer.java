@@ -52,16 +52,16 @@ public class EquinoxLoaderRMIServer extends AbstractRMIServer {
      */
     private EquinoxLoaderRMIServer() throws RemoteException, FieldTrackingAssignementException {
         super();
-        createRegistry(getRmiPort());
+        createRegistry(getPort());
     }
 
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiAddr()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getAddr()
      */
     @Override
-    public String getRmiAddr() throws FieldTrackingAssignementException {
+    public String getAddr() throws FieldTrackingAssignementException {
         if (rmiAddr == null) {
             try {
                 XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "rmiAddr");
@@ -78,10 +78,10 @@ public class EquinoxLoaderRMIServer extends AbstractRMIServer {
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiPort()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getPort()
      */
     @Override
-    public String getRmiPort() throws FieldTrackingAssignementException {
+    public String getPort() throws FieldTrackingAssignementException {
         if (rmiPort == null) {
             try {
                 XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "rmiPort");

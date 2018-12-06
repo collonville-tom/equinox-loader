@@ -37,7 +37,7 @@ public abstract class AbstractRMIServer implements IRPCServer {
 	@Override
 	public void addObject(final String signature, final Object obj) throws RemoteException, MalformedURLException, UnknownHostException,
 		FieldTrackingAssignementException {
-		final StringBuilder url = new StringBuilder("rmi://").append(InetAddress.getByName(getRmiAddr()).getHostAddress());
+		final StringBuilder url = new StringBuilder("rmi://").append(InetAddress.getByName(getAddr()).getHostAddress());
 		url.append("/").append(signature);
 		LoggerGestionnary.getInstance(AbstractRMIServer.class).debug("Enregistrement de l'objet accessible a l'url : " + url);
 		if (obj instanceof Remote) {

@@ -42,7 +42,7 @@ public class BundleStarter implements IBundleCommand {
 		try {
 			this.startBundle(context, bundleName);
 		} catch (BundleException e) {
-			throw new TcOsgiException("Errer lors du lancement du bundle " + bundleName, e);
+			throw new TcOsgiException("Erreur lors du lancement du bundle " + bundleName, e);
 		}
 	}
 }

@@ -42,20 +42,20 @@ public class EquinoxLoaderRMIClientTest extends AbstractRMIServer implements Ser
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiAddr()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getAddr()
      */
     @Override
-    public String getRmiAddr() throws FieldTrackingAssignementException {
+    public String getAddr() throws FieldTrackingAssignementException {
         return "localhost";
     }
 
     /**
      * @return String
      * @throws FieldTrackingAssignementException
-     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getRmiPort()
+     * @see org.tc.osgi.bundle.utils.rpc.IRPCServer#getPort()
      */
     @Override
-    public String getRmiPort() throws FieldTrackingAssignementException {
+    public String getPort() throws FieldTrackingAssignementException {
         return "24689";
     }
 
@@ -64,7 +64,7 @@ public class EquinoxLoaderRMIClientTest extends AbstractRMIServer implements Ser
         try {
 
             final EquinoxLoaderRMIClientTest testRmi = new EquinoxLoaderRMIClientTest();
-            testRmi.createRegistry(getRmiPort());
+            testRmi.createRegistry(getPort());
             final IEquinoxLoaderBundleContext context = new IEquinoxLoaderBundleContext() {
                 private static final long serialVersionUID = -6970760284963376123L;
 
