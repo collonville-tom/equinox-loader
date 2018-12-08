@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ConfigurationLibrary xmlns="http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema">
 	<configFiles>
-		<defaultValue>8081</defaultValue>
+		<defaultValue>4567</defaultValue>
 		<valueType>java.lang.String</valueType>
-		<fieldName>port</fieldName>
-		<className>org.tc.osgi.bundle.manager.rest.RestManager</className>
-	</configFiles>
-	<configFiles>
-		<defaultValue>localhost</defaultValue>
-		<valueType>java.lang.String</valueType>
-		<fieldName>addr</fieldName>
-		<className>org.tc.osgi.bundle.manager.rest.RestManager</className>
-	</configFiles>
-	<configFiles>
-		<defaultValue>spark-core</defaultValue>
-		<valueType>java.lang.String</valueType>
-		<fieldName>sparkDependencyBundleName</fieldName>
+		<fieldName>restPort</fieldName>
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
 	</configFiles>
 </ConfigurationLibrary>

@@ -18,7 +18,7 @@ import org.tc.osgi.equinox.loader.starter.EquinoxStarter;
  */
 public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
 
-
+	private String consoleDependencyBundleName;
     /**
      * String utilsDependencyBundleName.
      */
@@ -46,7 +46,13 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         } catch (TcOsgiException | EquinoxConfigException e) {
             throw new EquinoxCmdException(e.getMessage(), e);
         }
-        
+        try {
+            new BundleStarter().processOnBundle(this.context, this.getConsoleDependencyBundleName());
+
+        } catch (TcOsgiException | EquinoxConfigException e) {
+            LoggerGestionnary.getInstance(EquinoxStarter.class).error(
+                "Lancement auto du bundle echoué :" + this.consoleDependencyBundleName + " ce dernier est peut etre simplement absent, equinox ne fournira pas de mode console", e);
+        }
         try {
             new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName());
 
@@ -57,7 +63,13 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
 
     }
 
-
+    public String getConsoleDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
+        if (this.consoleDependencyBundleName == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "consoleDependencyBundleName");
+        }
+        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.consoleDependencyBundleName);
+        return this.consoleDependencyBundleName;
+    }
     /**
      * getUtilsDependencyBundleName.
      * @return String

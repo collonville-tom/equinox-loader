@@ -34,7 +34,7 @@ public class BundleKiller implements IBundleCommand {
 		try {
 			this.stopBundle(context, bundleName);
 		} catch (BundleException e) {
-			throw new TcOsgiException("Errer lors de l'arret du bundle " + bundleName, e);
+			throw new TcOsgiException("Erreur lors de l'arret du bundle " + bundleName, e);
 		}
 	}
 }

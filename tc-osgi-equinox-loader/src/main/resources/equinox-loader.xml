@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ConfigurationLibrary
-	xmlns="http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema">
+<ConfigurationLibrary xmlns="http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema">
 	<configFiles>
 		<defaultValue>/opt/equinox-loader/bundles</defaultValue>
 		<valueType>java.lang.String</valueType>
@@ -19,22 +18,28 @@
 		<fieldName>mode</fieldName>
 		<className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
 	</configFiles>
-    <configFiles>
-        <defaultValue>-debug</defaultValue>
-        <valueType>java.lang.String</valueType>
-        <fieldName>debugLevel</fieldName>
-        <className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
-    </configFiles>
-    <configFiles>
-        <defaultValue>/opt/equinox-loader/bundles/configuration</defaultValue>
-        <valueType>java.lang.String</valueType>
-        <fieldName>configuration</fieldName>
-        <className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
-    </configFiles>
+	<configFiles>
+		<defaultValue>-debug</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>debugLevel</fieldName>
+		<className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>/opt/equinox-loader/bundles/configuration</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>configuration</fieldName>
+		<className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
+	</configFiles>
 	<configFiles>
 		<defaultValue>tc-osgi-bundle-manager</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>managerDependencyBundleName</fieldName>
+		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>tc-osgi-bundle-console-wrapper</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>consoleDependencyBundleName</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
 	<configFiles>
@@ -43,12 +48,12 @@
 		<fieldName>utilsDependencyBundleName</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
-    <configFiles>
-        <defaultValue>tc-osgi-bundle-utils</defaultValue>
-        <valueType>java.lang.String</valueType>
-        <fieldName>utilsDependencyBundleName</fieldName>
-        <className>org.tc.osgi.equinox.loader.cmd.context.FilterValidBundleCmd</className>
-    </configFiles>
+	<configFiles>
+		<defaultValue>tc-osgi-bundle-utils</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>utilsDependencyBundleName</fieldName>
+		<className>org.tc.osgi.equinox.loader.cmd.context.FilterValidBundleCmd</className>
+	</configFiles>
 	<configFiles>
 		<defaultValue>14689</defaultValue>
 		<valueType>java.lang.String</valueType>

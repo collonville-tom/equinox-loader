@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core;
+package org.tc.osgi.bundle.manager.core.bundle;
 
 public class TarGzBundle {
 

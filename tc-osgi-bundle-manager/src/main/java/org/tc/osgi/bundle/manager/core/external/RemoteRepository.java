@@ -1,23 +1,25 @@
-package org.tc.osgi.bundle.manager.core;
+package org.tc.osgi.bundle.manager.core.external;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.tc.osgi.bundle.manager.core.AbstractRepository;
+import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.ManagerException;
 import org.tc.osgi.bundle.manager.tools.Downloader;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
 import org.tc.osgi.bundle.utils.interf.collection.element.Pair;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
-public class Repository {
+public class RemoteRepository extends AbstractRepository {
 
 	private String name;
 	private String url;
 	private List<TarGzBundle> bundles;
 	
-	public Repository(String name,String url)
+	public RemoteRepository(String name,String url)
 	{
 		this.name=name;
 		this.url=url;
@@ -39,7 +41,7 @@ public class Repository {
 			bundles=parseur.parseRepoList(file);
 
 		} catch (ManagerException e) {
-			LoggerGestionnary.getInstance(Repository.class).error("Fetching repository "+this.name+" in error");
+			LoggerGestionnary.getInstance(RemoteRepository.class).error("Fetching repository "+this.name+" in error");
 		}	
 	}
 	

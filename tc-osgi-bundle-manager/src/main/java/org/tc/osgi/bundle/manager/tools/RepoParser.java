@@ -9,8 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
-import org.tc.osgi.bundle.manager.core.TarGzBundle;
+import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
 
 

@@ -1,0 +1,56 @@
+package org.tc.osgi.bundle.manager.rest;
+
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
+
+import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
+import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
+import org.tc.osgi.bundle.manager.exception.ManagerException;
+import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
+import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+
+import spark.Spark;
+
+public class SparkRestManager{
+
+	//main ici on decrit ce que l'on va vouloir faire avec le manager 
+	// on veut pouvoir demander l'ajout d'un bundle et de ses dependances depuis un repo distant statique et lancer ses elements
+	// on veut pouvoir demander l'ajout d'un bundle et de ses dependances depuis un repo distant dynamique (autre application equinox) et lancer ses elements
+	// avoir un referentiel statique et dynamique cnfiguration via un add
+	// avoir un repo local
+	
+	//http://sparkjava.com/documentation#embedded-web-server
+	
+	private RepositoryRegistry repoRegistry=new RepositoryRegistry();
+	private EquinoxRegistry equinoxRegistry=new EquinoxRegistry();
+	
+	public SparkRestManager() throws ManagerException 
+	{
+		LoggerServiceProxy.getInstance().getLogger(SparkRestManager.class).debug("running spark http server on default port 4567");		
+		initRestCmd();
+	}
+	
+	public SparkRestManager(int port) throws ManagerException 
+	{
+		LoggerServiceProxy.getInstance().getLogger(SparkRestManager.class).debug("running spark http server on port "+ port);
+		Spark.port(port);
+		initRestCmd();
+	}
+	
+	
+	private void initRestCmd()
+	{
+		this.equinoxRegistry.buildRegistryCmd();
+		this.repoRegistry.buildRegistryCmd();
+		
+		
+	}
+	
+	
+	
+	
+	
+  
+}

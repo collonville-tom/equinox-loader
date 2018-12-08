@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tc.osgi.bundle.manager.core.TarGzBundle;
+import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
 
