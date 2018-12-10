@@ -4,7 +4,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 /**

@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.utils.interf.module.exception;
+package org.tc.osgi.bundle.utils.interf.exception;
 
 /**
  * UtilsException.java.

@@ -4,7 +4,7 @@ import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.context.BundleStarter;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
@@ -43,20 +43,20 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         try {
             new BundleStarter().processOnBundle(this.context, this.getUtilsDependencyBundleName());
 
-        } catch (TcOsgiException | EquinoxConfigException e) {
+        } catch (TcOsgiException e) {
             throw new EquinoxCmdException(e.getMessage(), e);
         }
         try {
             new BundleStarter().processOnBundle(this.context, this.getConsoleDependencyBundleName());
 
-        } catch (TcOsgiException | EquinoxConfigException e) {
+        } catch (TcOsgiException e) {
             LoggerGestionnary.getInstance(EquinoxStarter.class).error(
                 "Lancement auto du bundle echoué :" + this.consoleDependencyBundleName + " ce dernier est peut etre simplement absent, equinox ne fournira pas de mode console", e);
         }
         try {
             new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName());
 
-        } catch (TcOsgiException | EquinoxConfigException e) {
+        } catch (TcOsgiException e) {
             LoggerGestionnary.getInstance(EquinoxStarter.class).error(
                 "Lancement auto du bundle echoué :" + this.managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
         }

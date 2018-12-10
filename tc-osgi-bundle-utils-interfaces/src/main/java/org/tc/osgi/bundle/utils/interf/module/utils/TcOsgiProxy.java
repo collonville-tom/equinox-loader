@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.InvalidSyntaxException;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 public class TcOsgiProxy<T> implements InvocationHandler {
 

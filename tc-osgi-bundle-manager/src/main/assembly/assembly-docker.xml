@@ -17,7 +17,7 @@
 			<includes>
 				<include>*:${project.artifactId}:*:assembly</include>
 				<include>*slf4j*</include>
-
+				<include>*jackson*</include>
 				<include>*spark*</include>
 				<include>*jetty*</include>
 				<include>*java*</include>

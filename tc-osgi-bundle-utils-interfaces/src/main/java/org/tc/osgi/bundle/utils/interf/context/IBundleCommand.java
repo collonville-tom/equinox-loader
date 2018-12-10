@@ -1,7 +1,7 @@
 package org.tc.osgi.bundle.utils.interf.context;
 
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 public interface IBundleCommand {
 

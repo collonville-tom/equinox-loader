@@ -2,6 +2,7 @@
  */
 package org.tc.osgi.bundle.utils.interf.module.exception;
 
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 /**
  * ServiceNotLoadException.java.

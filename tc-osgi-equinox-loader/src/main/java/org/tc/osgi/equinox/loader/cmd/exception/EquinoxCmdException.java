@@ -1,12 +1,14 @@
 package org.tc.osgi.equinox.loader.cmd.exception;
 
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
+
 /**
  * EquinoxCmdException.java.
  *
  * @author Collonville Thomas
  * @version 0.0.3
  */
-public class EquinoxCmdException extends Exception {
+public class EquinoxCmdException extends TcOsgiException {
 
     /**
      * long serialVersionUID.

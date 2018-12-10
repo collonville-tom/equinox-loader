@@ -18,6 +18,7 @@
 		<utils.version>0.3.1</utils.version>
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
 		<snapshot>-SNAPSHOT</snapshot>
+		<docker.latest>latest</docker.latest>
 	</properties>
 
 
@@ -67,7 +68,7 @@
 					<images>
 						<image>
 							<build>
-								<from>${docker.login}/tc-osgi-bundle-utils:${utils.version}${snapshot}</from>
+								<from>${docker.login}/tc-osgi-bundle-utils:${docker.latest}</from>
 								<cmd>/opt/equinox-loader/docker.sh</cmd>
 							</build>
 						</image>

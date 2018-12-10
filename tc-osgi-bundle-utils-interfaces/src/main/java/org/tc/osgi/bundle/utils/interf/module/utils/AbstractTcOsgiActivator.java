@@ -2,7 +2,7 @@ package org.tc.osgi.bundle.utils.interf.module.utils;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
 
 public abstract class AbstractTcOsgiActivator implements BundleActivator {

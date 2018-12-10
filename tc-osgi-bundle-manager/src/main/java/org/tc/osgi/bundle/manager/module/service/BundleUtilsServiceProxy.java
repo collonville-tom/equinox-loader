@@ -16,6 +16,7 @@ import org.tc.osgi.bundle.utils.context.BundleKiller;
 import org.tc.osgi.bundle.utils.context.BundleStarter;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
@@ -60,11 +61,12 @@ public class BundleUtilsServiceProxy implements IBundleUtilsService {
 
 	}
 	
-	
+	public void setService(final IBundleUtilsService service) {
+		this.service = service;
+	}
 	
 	@Override
-	public BundleContext getBundleContext() throws FieldTrackingAssignementException, MalformedURLException,
-			RemoteException, NotBoundException, NumberFormatException, UnknownHostException {
+	public BundleContext getBundleContext() throws TcOsgiException {
 		return this.service.getBundleContext();
 	}
 

@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.ICollectionUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.ICommandRunnerUtilsService;
@@ -42,6 +42,7 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 
 	/**
 	 * getVersion.
+	 * 
 	 * @return String
 	 * @throws FieldTrackingAssignementException
 	 */
@@ -55,20 +56,26 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 	@Override
 	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
 		this.getIBundleUtilsService().setProxy(new BundleUtilsServiceImpl());
-		this.getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class, this.getIBundleUtilsService().getInstance(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class,
+				this.getIBundleUtilsService().getInstance(), context, this);
 	}
 
 	/**
 	 * activeUtilsService.
+	 * 
 	 * @param context BundleContext
 	 */
 	protected void initServices(final BundleContext context) {
-		this.getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class, new LoggerUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class, new CollectionUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class, new PropertyUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class, CommandRunnerUtilsServiceImpl.getInstance(), context,
-			this);
+		this.getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class,
+				new LoggerUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(),
+				context, this);
+		this.getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class,
+				new CollectionUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class,
+				new PropertyUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class,
+				CommandRunnerUtilsServiceImpl.getInstance(), context, this);
 
 	}
 
@@ -102,7 +109,8 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
+		LoggerGestionnary.getInstance(UtilsActivator.class)
+				.debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
 		LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionDynamic:" + this.getVersion());
 
 	}
@@ -111,23 +119,9 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 	protected void afterStart(BundleContext context) throws TcOsgiException {
 		LoggerGestionnary.getInstance(UtilsActivator.class).debug("UtilsService start");
 
-		try {
-			LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI");
-			EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext();
-			LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI OK");
-		} catch (final FieldTrackingAssignementException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		} catch (final MalformedURLException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		} catch (final RemoteException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		} catch (final NotBoundException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		} catch (final NumberFormatException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		} catch (final UnknownHostException e) {
-			LoggerGestionnary.getInstance(UtilsActivator.class).error(e);
-		}
+		LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI");
+		EquinoxLoaderRMIClient.getInstance().getIEquinoxLoaderBundleContext();
+		LoggerGestionnary.getInstance(UtilsActivator.class).debug("Test conso objet RMI OK");
 
 	}
 

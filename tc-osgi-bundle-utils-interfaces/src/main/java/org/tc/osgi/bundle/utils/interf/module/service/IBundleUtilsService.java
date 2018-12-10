@@ -9,6 +9,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 /**
  * UtilsService.java.
@@ -28,9 +29,9 @@ public interface IBundleUtilsService {
 	 * @throws NotBoundException
 	 * @throws NumberFormatException
 	 * @throws UnknownHostException
+	 * @throws TcOsgiException 
 	 */
-	public BundleContext getBundleContext() throws FieldTrackingAssignementException, MalformedURLException, RemoteException, NotBoundException,
-		NumberFormatException, UnknownHostException;
+	public BundleContext getBundleContext() throws TcOsgiException;
 
 	/**
 	 * getBundleKiller.

@@ -13,6 +13,7 @@
 		<build>0.3.1</build>
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
+		<docker.latest>latest</docker.latest>
 	</properties>
 
 	<dependencies>
@@ -51,7 +52,7 @@
 					<images>
 						<image>
 							<build>
-								<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${utils.interfaces.version}${snapshot}</from>
+								<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${docker.latest}</from>
 							</build>
 						</image>
 					</images>

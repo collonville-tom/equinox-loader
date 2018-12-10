@@ -13,6 +13,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
 
@@ -92,8 +93,8 @@ public class EquinoxLoaderRMIClientTest extends AbstractRMIServer implements Ser
             Assert.fail(e.getMessage());
         } catch (final MalformedURLException e) {
             Assert.fail(e.getMessage());
-        } catch (final NotBoundException e) {
-            Assert.fail(e.getMessage());
-        }
+        } catch (TcOsgiException e) {
+        	Assert.fail(e.getMessage());
+		} 
     }
 }

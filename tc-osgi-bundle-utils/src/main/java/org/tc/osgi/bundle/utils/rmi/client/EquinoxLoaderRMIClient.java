@@ -11,11 +11,13 @@ import java.rmi.RemoteException;
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 /**
  * RMIClient.java.
+ * 
  * @author collonville thomas
  * @version 0.2.0
  * @track SDD_BUNDLE_UTILS_130
@@ -29,14 +31,14 @@ public class EquinoxLoaderRMIClient {
 
 	/**
 	 * getInstance.
+	 * 
 	 * @return EquinoxLoaderRMIClient
 	 * @throws RemoteException
 	 * @throws FieldTrackingAssignementException
 	 * @throws NumberFormatException
 	 * @throws UnknownHostException
 	 */
-	public synchronized static EquinoxLoaderRMIClient getInstance() throws RemoteException, FieldTrackingAssignementException, NumberFormatException,
-		UnknownHostException {
+	public synchronized static EquinoxLoaderRMIClient getInstance() {
 		if (EquinoxLoaderRMIClient.instance == null) {
 			EquinoxLoaderRMIClient.instance = new EquinoxLoaderRMIClient();
 		}
@@ -60,41 +62,50 @@ public class EquinoxLoaderRMIClient {
 
 	/**
 	 * EquinoxLoaderRMIClient constructor.
+	 * 
 	 * @throws RemoteException
 	 * @throws FieldTrackingAssignementException
 	 * @throws NumberFormatException
 	 * @throws UnknownHostException
 	 */
-	private EquinoxLoaderRMIClient() throws RemoteException, FieldTrackingAssignementException, NumberFormatException, UnknownHostException {
+	private EquinoxLoaderRMIClient() {
 	}
 
 	/**
 	 * getIEquinoxLoaderBundleContext.
+	 * 
 	 * @return IEquinoxLoaderBundleContext
+	 * @throws TcOsgiException 
 	 * @throws FieldTrackingAssignementException
 	 * @throws MalformedURLException
 	 * @throws RemoteException
 	 * @throws NotBoundException
 	 * @throws UnknownHostException
 	 */
-	public IEquinoxLoaderBundleContext getIEquinoxLoaderBundleContext() throws FieldTrackingAssignementException, MalformedURLException, RemoteException,
-		NotBoundException, UnknownHostException {
-		if (iContext == null) {
-			final StringBuilder buff = new StringBuilder("rmi://");
-			buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort()).append("/").append(
-				IEquinoxLoaderBundleContext.class.getSimpleName());
-			final Remote rem = Naming.lookup(buff.toString());
-			if (rem instanceof IEquinoxLoaderBundleContext) {
-				LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(
-					"Chargement via rmi de l'objet " + IEquinoxLoaderBundleContext.class.getSimpleName());
-				iContext = (IEquinoxLoaderBundleContext) rem;
+	public IEquinoxLoaderBundleContext getIEquinoxLoaderBundleContext() throws TcOsgiException {
+		try {
+			if (iContext == null) {
+				final StringBuilder buff = new StringBuilder("rmi://");
+
+				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort())
+						.append("/").append(IEquinoxLoaderBundleContext.class.getSimpleName());
+
+				final Remote rem = Naming.lookup(buff.toString());
+				if (rem instanceof IEquinoxLoaderBundleContext) {
+					LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(
+							"Chargement via rmi de l'objet " + IEquinoxLoaderBundleContext.class.getSimpleName());
+					iContext = (IEquinoxLoaderBundleContext) rem;
+				}
 			}
-		}
-		return iContext;
+			return iContext;
+		} catch (UnknownHostException |FieldTrackingAssignementException|MalformedURLException|RemoteException|NotBoundException e) {
+			throw new TcOsgiException("Erreur de recuperation du bundleContext",e);
+		} 
 	}
 
 	/**
 	 * getRmiAddr.
+	 * 
 	 * @return String
 	 * @throws FieldTrackingAssignementException
 	 */
@@ -102,12 +113,14 @@ public class EquinoxLoaderRMIClient {
 		if (rmiAddr == null) {
 			XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "rmiAddr");
 		}
-		LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug("Recuperation adresse ecoute RMI :" + rmiAddr);
+		LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class)
+				.debug("Recuperation adresse ecoute RMI :" + rmiAddr);
 		return rmiAddr;
 	}
 
 	/**
 	 * getRmiPort.
+	 * 
 	 * @return String
 	 * @throws FieldTrackingAssignementException
 	 */

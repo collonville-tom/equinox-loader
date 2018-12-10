@@ -1,6 +1,6 @@
 package org.tc.osgi.bundle.manager.exception;
 
-import org.tc.osgi.bundle.utils.interf.module.exception.TcOsgiException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 public class ManagerException extends TcOsgiException {
 

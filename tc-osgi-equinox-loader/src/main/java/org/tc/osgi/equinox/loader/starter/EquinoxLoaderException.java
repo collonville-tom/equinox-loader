@@ -2,13 +2,15 @@
  */
 package org.tc.osgi.equinox.loader.starter;
 
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
+
 /**
  * EquinoxLoaderException.java.
  *
  * @author thomas collonvillé
  * @version 0.0.2
  */
-public class EquinoxLoaderException extends Exception {
+public class EquinoxLoaderException extends TcOsgiException {
 
     /**
      * long serialVersionUID.
