@@ -12,8 +12,10 @@ import java.util.Vector;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import org.tc.osgi.bundle.utils.context.BundleInstaller;
 import org.tc.osgi.bundle.utils.context.BundleKiller;
 import org.tc.osgi.bundle.utils.context.BundleStarter;
+import org.tc.osgi.bundle.utils.context.BundleUninstaller;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
@@ -97,5 +99,15 @@ public class BundleUtilsServiceImpl implements IBundleUtilsService {
 		registry.get(activator.hashCode() + _class.hashCode()).unregister();
 		registry.remove(activator.hashCode() + _class.hashCode());
 
+	}
+
+	@Override
+	public IBundleCommand getBundleUninstaller() {
+		return new BundleUninstaller();
+	}
+
+	@Override
+	public IBundleCommand getBundleInstaller() {
+		return new BundleInstaller();
 	}
 }

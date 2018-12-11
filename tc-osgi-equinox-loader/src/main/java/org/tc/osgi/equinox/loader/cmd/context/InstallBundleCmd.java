@@ -7,7 +7,10 @@ import java.util.List;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.tc.osgi.bundle.utils.context.BundleInstaller;
+import org.tc.osgi.bundle.utils.context.utils.BundleFilterUtils;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
@@ -46,21 +49,18 @@ public class InstallBundleCmd extends AbstractBundleContextCmd {
         try {
             final List<File> files = new ArrayList<File>();
             files.add(new File(bundlePath));
-            final Collection<File> file = filterFile2Install(files, context.getBundles());
+            BundleFilterUtils filter=new BundleFilterUtils();
+            final Collection<File> file = filter.filterFile2Install(files, context.getBundles());
             for (final File f : file) {
-                if (isJar(f)) {
+                if (filter.isJar(f)) {
                     final String path = EquinoxPropertyFile.getInstance().getBundleLocalBase() + f.getAbsolutePath();
                     LoggerGestionnary.getInstance(this.getClass()).debug("install:" + path);
-                    context.installBundle(path);
+                    new BundleInstaller().processOnBundle(context, path);
                 }
             }
-        } catch (final BundleException e) {
-            throw new EquinoxCmdException("Erreur install", e);
-        } catch (final FieldTrackingAssignementException e) {
-            throw new EquinoxCmdException("Erreur install", e);
-        } catch (final EquinoxConfigException e) {
-            throw new EquinoxCmdException("Erreur install", e);
-        }
+        } catch (TcOsgiException e) {
+        	LoggerGestionnary.getInstance(InstallBundleCmd.class).warn("Un bundle a rencontré une erreur lors de son installation",e);
+		}
 
     }
 }

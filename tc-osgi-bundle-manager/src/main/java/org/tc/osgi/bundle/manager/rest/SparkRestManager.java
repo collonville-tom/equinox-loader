@@ -1,15 +1,12 @@
 package org.tc.osgi.bundle.manager.rest;
 
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.RemoteException;
 
+
+import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
 import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
 import org.tc.osgi.bundle.manager.exception.ManagerException;
-import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
-import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
 import spark.Spark;
 
@@ -24,17 +21,19 @@ public class SparkRestManager{
 	//http://sparkjava.com/documentation#embedded-web-server
 	
 	private RepositoryRegistry repoRegistry=new RepositoryRegistry();
-	private EquinoxRegistry equinoxRegistry=new EquinoxRegistry();
+	private EquinoxRegistry equinoxRegistry;
 	
-	public SparkRestManager() throws ManagerException 
+	public SparkRestManager(BundleContext context) throws ManagerException 
 	{
-		LoggerServiceProxy.getInstance().getLogger(SparkRestManager.class).debug("running spark http server on default port 4567");		
+		LoggerServiceProxy.getInstance().getLogger(SparkRestManager.class).debug("running spark http server on default port 4567");
+		this.equinoxRegistry=new EquinoxRegistry(context);
 		initRestCmd();
 	}
 	
-	public SparkRestManager(int port) throws ManagerException 
+	public SparkRestManager(int port,BundleContext context) throws ManagerException 
 	{
 		LoggerServiceProxy.getInstance().getLogger(SparkRestManager.class).debug("running spark http server on port "+ port);
+		this.equinoxRegistry=new EquinoxRegistry(context);
 		Spark.port(port);
 		initRestCmd();
 	}

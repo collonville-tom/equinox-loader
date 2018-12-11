@@ -7,15 +7,19 @@ import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.AbstractRegistry;
 import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
-import org.tc.osgi.bundle.manager.tools.Downloader;
+import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import spark.Response;
 import spark.Spark;
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
 public class RepositoryRegistry extends AbstractRegistry{
 
-	
 	private List<RemoteRepository> repositories=new ArrayList<>(); 
 	
 	public RepositoryRegistry()
@@ -40,21 +44,21 @@ public class RepositoryRegistry extends AbstractRegistry{
 
 	@Override
 	public void buildRegistryCmd() {
-		Spark.get("/fetchRepositories", (request, response) -> this.fetchRepositories());
+		Spark.get("/fetchRepositories", (request, response) -> this.fetchRepositories(response));
 		
 	}
 
-	public String fetchRepositories()
+	public String fetchRepositories(Response response)
 	{
-		StringBuilder b=new StringBuilder();
+		response.type("application/json");
+		LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).debug("Fetching remote repository");
 		for(RemoteRepository r: repositories)
 		{
-			LoggerServiceProxy.getInstance().getLogger(ManagerActivator.class).debug(r.toString());
 			r.fetch();
-			b.append(r.toString());
+			LoggerServiceProxy.getInstance().getLogger(ManagerActivator.class).debug(r.toString());
 		}
-		// ici il faudrai faire un moyen de consolider les informations sous la forme xml ou json ou html
-		return b.toString();
+
+		return new JsonSerialiser().toJson(repositories);
 	}
 
 }

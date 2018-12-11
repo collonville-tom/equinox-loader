@@ -97,7 +97,7 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
-		sparkRestManager=new SparkRestManager(Integer.parseInt(this.getRestPort()));
+		this.sparkRestManager=new SparkRestManager(Integer.parseInt(this.getRestPort()),context);
 		
 	}
 

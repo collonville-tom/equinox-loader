@@ -38,6 +38,10 @@ public interface IBundleUtilsService {
 	 * @return BundleKiller
 	 */
 	public IBundleCommand getBundleKiller();
+	
+	public IBundleCommand getBundleUninstaller();
+	
+	public IBundleCommand getBundleInstaller();
 
 	/**
 	 * getBundleStarter.

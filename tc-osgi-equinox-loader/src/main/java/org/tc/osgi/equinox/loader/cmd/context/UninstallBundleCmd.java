@@ -3,8 +3,11 @@ package org.tc.osgi.equinox.loader.cmd.context;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.tc.osgi.bundle.utils.context.BundleUninstaller;
+import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
+import org.tc.osgi.equinox.loader.starter.EquinoxStarter;
 
 /**
  * UninstallBundleCmd.java.
@@ -39,15 +42,10 @@ public class UninstallBundleCmd extends AbstractBundleContextCmd {
     @Override
     public void execute() throws EquinoxCmdException {
         try {
-            final Bundle[] bundles = context.getBundles();
-            for (final Bundle bundle : bundles) {
-                if (bundle.getSymbolicName().startsWith(this.bundle)) {
-                    LoggerGestionnary.getInstance(UninstallBundleCmd.class).debug("Uninstall bundle:" + bundle.getSymbolicName());
-                    bundle.uninstall();
-                }
-            }
-        } catch (final BundleException e) {
-            throw new EquinoxCmdException("Uninstall error", e);
+            new BundleUninstaller().processOnBundle(this.context,this.bundle);
+        } catch (final TcOsgiException e) {
+        	LoggerGestionnary.getInstance(UninstallBundleCmd.class).error(
+                    "Desinstallation du bundle echoué :" + this.bundle , e);
         }
 
     }

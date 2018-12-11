@@ -4,7 +4,14 @@ public class TarGzBundle {
 
 	private String name;
 	private String version;
+	private String url;
 
+	public TarGzBundle(String name, String version, String url) {
+		this.name = name;
+		this.url = url;
+		this.version = version;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -27,14 +34,6 @@ public class TarGzBundle {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	private String url;
-
-	public TarGzBundle(String name, String version, String url) {
-		this.name = name;
-		this.url = url;
-		this.version = version;
 	}
 
 	public String toString() {

@@ -117,6 +117,8 @@ public final class EquinoxStarter {
      * @return BundleContext
      */
     public BundleContext getContext() {
+    	if(this.context==null)
+    		LoggerGestionnary.getInstance(EquinoxStarter.class).warn("BundleContext is null maybe provoque major error");
         return this.context;
     }
 
@@ -185,8 +187,9 @@ public final class EquinoxStarter {
             if (!EclipseStarter.isRunning()) {
                 EclipseStarter.startup(_args, new Thread("EQUINOX-THREAD"));
                 if (this.context == null) {
-                    LoggerGestionnary.getInstance(EquinoxStarter.class).error("Le context bundle n'a pas ete correctement construit");
+                    LoggerGestionnary.getInstance(EquinoxStarter.class).warn("Le context bundle n'a pas ete correctement construit");
                 }
+                LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Construction du context bundle a partir du system bundle context");
                 this.context = EclipseStarter.getSystemBundleContext();
             }
         } catch (final Exception e) {

@@ -50,14 +50,14 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
             new BundleStarter().processOnBundle(this.context, this.getConsoleDependencyBundleName());
 
         } catch (TcOsgiException e) {
-            LoggerGestionnary.getInstance(EquinoxStarter.class).error(
+            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
                 "Lancement auto du bundle echoué :" + this.consoleDependencyBundleName + " ce dernier est peut etre simplement absent, equinox ne fournira pas de mode console", e);
         }
         try {
             new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName());
 
         } catch (TcOsgiException e) {
-            LoggerGestionnary.getInstance(EquinoxStarter.class).error(
+            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
                 "Lancement auto du bundle echoué :" + this.managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
         }
 

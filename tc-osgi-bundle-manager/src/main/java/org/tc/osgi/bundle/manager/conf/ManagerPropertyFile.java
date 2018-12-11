@@ -100,7 +100,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
     
     public String getStaticRepositoryFile() {
         if (staticRepositoryName == null) {
-        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static_repository.file");
+        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static.repository.file");
         }
         return staticRepositoryName;
     }

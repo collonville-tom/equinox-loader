@@ -96,5 +96,14 @@ public class BundleUtilsServiceProxy implements IBundleUtilsService {
 		this.service.unregister(_class, activator);
 	}
 
+	public IBundleCommand getBundleUninstaller() {
+		return this.service.getBundleUninstaller();
+	}
+
+	@Override
+	public IBundleCommand getBundleInstaller() {
+		return this.service.getBundleInstaller();
+	}
+
 	
 }

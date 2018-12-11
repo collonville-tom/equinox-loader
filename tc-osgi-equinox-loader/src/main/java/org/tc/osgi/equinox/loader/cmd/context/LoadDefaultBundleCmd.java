@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.osgi.framework.BundleContext;
+import org.tc.osgi.bundle.utils.context.utils.BundleFilterUtils;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
@@ -57,14 +58,15 @@ public class LoadDefaultBundleCmd extends AbstractBundleContextCmd {
         final File bundleDirectory = new File(EquinoxPropertyFile.getInstance().getBundleDirectory());
         final File conflicBundleDirectory = new File(EquinoxPropertyFile.getInstance().getBundleDirectory() + "/conflic");
         final List<File> listofFiles = new ArrayList<File>();
+        BundleFilterUtils filter=new BundleFilterUtils();
         for (final File f : bundleDirectory.listFiles()) {
-            if (this.isJar(f)) {
+            if (filter.isJar(f)) {
                 listofFiles.add(f);
             }
         }
         if (conflicBundleDirectory.exists()) {
             for (final File f : conflicBundleDirectory.listFiles()) {
-                if (this.isJar(f)) {
+                if (filter.isJar(f)) {
                     listofFiles.add(f);
                 }
             }
@@ -72,7 +74,7 @@ public class LoadDefaultBundleCmd extends AbstractBundleContextCmd {
         if (this.context != null) {
             LoggerGestionnary.getInstance(LoadDefaultBundleCmd.class).error("Le context bundle n'a pas ete correctement construit");
 
-            final Collection<File> files = this.filterFile2Install(listofFiles, this.context.getBundles());
+            final Collection<File> files = filter.filterFile2Install(listofFiles, this.context.getBundles());
             for (final File f : files) {
                 new InstallBundleCmd(this.context, f.getAbsolutePath()).execute();
             }
