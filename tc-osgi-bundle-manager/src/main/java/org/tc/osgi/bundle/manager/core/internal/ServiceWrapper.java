@@ -1,7 +1,9 @@
 package org.tc.osgi.bundle.manager.core.internal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
@@ -9,24 +11,31 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 public class ServiceWrapper {
 
-	private List<BundleWrapper> bWrapper=new ArrayList<>();
-	private List<String> serviceProperties=new ArrayList<>();
+	private Map<String,Object> serviceProperties = new HashMap<>();
+	private List<BundleWrapper> bWrapper = new ArrayList<>();
 	
+	
+
 	public ServiceWrapper(ServiceReference<?> service) {
-		
-		for(String s:service.getPropertyKeys())
-		{
-			LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des propriété du service "+s);
-			this.serviceProperties.add(s);
+
+		String[] ss = service.getPropertyKeys();
+		if (ss != null) {
+			for (String s : ss) {
+				LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des propriété du service " + s);
+				this.serviceProperties.put(s,service.getProperty(s));
+			}
 		}
-		for(Bundle b:service.getUsingBundles())
-		{
-			LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des bundles associés au service: "+b.getSymbolicName());
-			bWrapper.add(new BundleWrapper(b));
+		Bundle[] bs = service.getUsingBundles();
+		if (bs != null) {
+			for (Bundle b : bs) {
+				LoggerGestionnary.getInstance(ServiceWrapper.class)
+						.debug("analyse des bundles associés au service: " + b.getSymbolicName());
+				bWrapper.add(new BundleWrapper(b));
+			}
 		}
-				
+
 	}
-	
+
 	public List<BundleWrapper> getbWrapper() {
 		return bWrapper;
 	}
@@ -35,12 +44,14 @@ public class ServiceWrapper {
 		this.bWrapper = bWrapper;
 	}
 
-	public List<String> getServiceProperties() {
+	public Map<String, Object> getServiceProperties() {
 		return serviceProperties;
 	}
 
-	public void setServiceProperties(List<String> serviceProperties) {
+	public void setServiceProperties(Map<String, Object> serviceProperties) {
 		this.serviceProperties = serviceProperties;
 	}
+
+
 
 }
