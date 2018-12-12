@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ConfigurationLibrary xmlns="http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema">
 	<configFiles>
-		<defaultValue>4567</defaultValue>
+		<defaultValue>${manager.rest.port}</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>restPort</fieldName>
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>

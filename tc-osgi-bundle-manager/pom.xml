@@ -13,6 +13,7 @@
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
 		<equinox-loader.version>0.2.1</equinox-loader.version>
 		<docker.latest>latest</docker.latest>
+		<manager.rest.port>4567</manager.rest.port>
 	</properties>
 
 	<dependencies>
@@ -77,6 +78,9 @@
 						<image>
 							<build>
 								<from>${docker.login}/tc-osgi-equinox-loader:${docker.latest}</from>
+								<ports>
+									<port>${manager.rest.port}</port>
+								</ports>
 							</build>
 						</image>
 					</images>

@@ -6,8 +6,8 @@
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 
-<dependencySets>
-<!-- 	Inclusion interfaces classifier et librairies-->
+	<dependencySets>
+		<!-- Inclusion interfaces classifier et librairies -->
 		<dependencySet>
 			<unpack>false</unpack>
 			<scope>runtime</scope>
@@ -21,8 +21,8 @@
 			</includes>
 		</dependencySet>
 	</dependencySets>
-		
-	
+
+
 	<fileSets>
 		<fileSet>
 			<directory>src/main/debian/DEBIAN</directory>
@@ -41,6 +41,13 @@
 			<includes>
 				<include>log4j.xml</include>
 				<include>utils.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>target/</directory>
+			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
+			<includes>
+				<include>*.tar.gz</include>
 			</includes>
 		</fileSet>
 	</fileSets>

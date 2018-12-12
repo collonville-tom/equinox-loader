@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.AbstractRegistry;
+import org.tc.osgi.bundle.manager.core.internal.LocalRepository;
 import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
@@ -21,6 +22,7 @@ import spark.Spark;
 public class RepositoryRegistry extends AbstractRegistry{
 
 	private List<RemoteRepository> repositories=new ArrayList<>(); 
+	private LocalRepository localRepository=new LocalRepository();
 	
 	public RepositoryRegistry()
 	{
@@ -45,7 +47,13 @@ public class RepositoryRegistry extends AbstractRegistry{
 	@Override
 	public void buildRegistryCmd() {
 		Spark.get("/fetchRepositories", (request, response) -> this.fetchRepositories(response));
+		Spark.get("/pullRepositories/:tarname", (request, response) -> this.pullRepositories(response,request.params(":tarname")));
 		
+	}
+
+	private Object pullRepositories(Response response, String tarname) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public String fetchRepositories(Response response)

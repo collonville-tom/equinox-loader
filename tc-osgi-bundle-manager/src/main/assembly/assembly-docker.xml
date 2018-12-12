@@ -48,11 +48,11 @@
 			</includes>
 		</fileSet>
 		<fileSet>
-			<directory>.</directory>
+			<directory>target/</directory>
 			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
-			<excludes>
-				<exclude>*/**</exclude>
-			</excludes>
+			<includes>
+				<include>*.tar.gz</include>
+			</includes>
 		</fileSet>
 	</fileSets>
 </assembly>

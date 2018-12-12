@@ -52,6 +52,13 @@
 				<include>utils.xml</include>
 			</includes>
 		</fileSet>
+		<fileSet>
+			<directory>target/</directory>
+			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
+			<includes>
+				<include>*.tar.gz</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 </assembly>
 

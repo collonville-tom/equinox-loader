@@ -46,13 +46,6 @@
 				<include>manager.xml</include>
 			</includes>
 		</fileSet>
-		<fileSet>
-			<directory>.</directory>
-			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
-			<excludes>
-				<exclude>*/**</exclude>
-			</excludes>
-		</fileSet>
 	</fileSets>
 </assembly>
 
