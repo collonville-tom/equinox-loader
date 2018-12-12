@@ -48,9 +48,15 @@ public class RepositoryRegistry extends AbstractRegistry{
 	public void buildRegistryCmd() {
 		Spark.get("/fetchRepositories", (request, response) -> this.fetchRepositories(response));
 		Spark.get("/pullRepositories/:tarname", (request, response) -> this.pullRepositories(response,request.params(":tarname")));
-		Spark.get("/fetchLocal", (request, response) -> this.fetchLocal(response));
+		Spark.get("/fetchLocal", (request, response) -> this.fetchLocal(response));// dois constuire le fichier lst permettant a d'auutre application de reucperer des tar
 		Spark.get("/deploy/:tarname", (request, response) -> this.deployTar(response,request.params(":tarname")));
+		Spark.get("/pullTar/:tarname", (request, response) -> this.pullTar(response,request.params(":tarname")));// permet a un autre de recuperer le tar
 		
+	}
+
+	private Object pullTar(Response response, String params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private Object deployTar(Response response, String params) {
