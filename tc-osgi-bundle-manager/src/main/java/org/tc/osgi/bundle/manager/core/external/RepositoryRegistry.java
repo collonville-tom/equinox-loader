@@ -48,7 +48,19 @@ public class RepositoryRegistry extends AbstractRegistry{
 	public void buildRegistryCmd() {
 		Spark.get("/fetchRepositories", (request, response) -> this.fetchRepositories(response));
 		Spark.get("/pullRepositories/:tarname", (request, response) -> this.pullRepositories(response,request.params(":tarname")));
+		Spark.get("/fetchLocal", (request, response) -> this.fetchLocal(response));
+		Spark.get("/deploy/:tarname", (request, response) -> this.deployTar(response,request.params(":tarname")));
 		
+	}
+
+	private Object deployTar(Response response, String params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Object fetchLocal(Response response) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private Object pullRepositories(Response response, String tarname) {
@@ -65,7 +77,6 @@ public class RepositoryRegistry extends AbstractRegistry{
 			r.fetch();
 			LoggerServiceProxy.getInstance().getLogger(ManagerActivator.class).debug(r.toString());
 		}
-
 		return new JsonSerialiser().toJson(repositories);
 	}
 
