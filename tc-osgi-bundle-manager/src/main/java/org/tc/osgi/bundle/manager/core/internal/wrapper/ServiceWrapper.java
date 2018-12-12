@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal;
+package org.tc.osgi.bundle.manager.core.internal.wrapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,15 +21,14 @@ public class ServiceWrapper {
 		String[] ss = service.getPropertyKeys();
 		if (ss != null) {
 			for (String s : ss) {
-				LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des propriété du service " + s);
+				//LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des propriété du service " + s);
 				this.serviceProperties.put(s,service.getProperty(s));
 			}
 		}
 		Bundle[] bs = service.getUsingBundles();
 		if (bs != null) {
 			for (Bundle b : bs) {
-				LoggerGestionnary.getInstance(ServiceWrapper.class)
-						.debug("analyse des bundles associés au service: " + b.getSymbolicName());
+				//LoggerGestionnary.getInstance(ServiceWrapper.class).debug("analyse des bundles associés au service: " + b.getSymbolicName());
 				bWrapper.add(new BundleWrapper(b));
 			}
 		}

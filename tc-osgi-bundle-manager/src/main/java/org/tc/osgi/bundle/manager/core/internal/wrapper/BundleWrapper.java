@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal;
+package org.tc.osgi.bundle.manager.core.internal.wrapper;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Version;

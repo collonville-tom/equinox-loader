@@ -29,6 +29,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
     private String staticRepositoryUrl;
     private String staticRepositoryName;
     private String workDirectory;
+    private String bundlesDirectory;
 
     /**
      * getInstance.
@@ -112,7 +113,12 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         return workDirectory;
     }
     
-    
+    public String getBundlesDirectory() {
+        if (bundlesDirectory == null) {
+        	bundlesDirectory = getResourceBundle().getString(getBundleRacine() + "bundles_directory");
+        }
+        return bundlesDirectory;
+    }
     
     /**
      * getLog4jFile.
