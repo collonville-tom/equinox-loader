@@ -26,6 +26,14 @@ import spark.Spark;
  * @author Collonville Thomas
  * @version 0.0.2
  * @track SDD_BUNDLE_UTILS_100
+ * 
+ * http://localhost:4567/bundles/short
+ * http://localhost:4567/fetchRemoteRepo
+ * http://localhost:4567/updateLocal
+ * http://localhost:4567/pullOnRemoteRepo/tc-osgi-bundle-berkeley-db-wrapper/5.0.73
+ * 
+ * 
+ * 
  */
 public class ManagerActivator extends AbstractTcOsgiActivator {
 
