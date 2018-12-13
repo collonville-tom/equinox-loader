@@ -5,7 +5,7 @@
 	<packaging>bundle</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<description>Un bundle pour exposer des composants et utilitaires</description>
-	<version>${build}${snapshot}</version>
+
 
 	<properties>
 		<build>0.1.0</build>
@@ -15,6 +15,8 @@
 		<docker.latest>latest</docker.latest>
 		<manager.rest.port>4567</manager.rest.port>
 	</properties>
+
+	<version>${build}${snapshot}</version>
 
 	<dependencies>
 		<dependency>
