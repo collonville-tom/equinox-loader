@@ -61,20 +61,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<configuration>
-					<images>
-						<image>
-							<build>
-								<from>${docker.login}/tc-osgi-bundle-utils:${docker.latest}</from>
-								<cmd>/opt/equinox-loader/docker.sh</cmd>
-							</build>
-						</image>
-					</images>
-				</configuration>
-			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -167,7 +154,29 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>DOCKER</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<configuration>
+							<images>
+								<image>
+									<build>
+										<from>${docker.login}/tc-osgi-bundle-utils:${docker.latest}</from>
+										<cmd>/opt/equinox-loader/docker.sh</cmd>
+									</build>
+								</image>
+							</images>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 
 </project>

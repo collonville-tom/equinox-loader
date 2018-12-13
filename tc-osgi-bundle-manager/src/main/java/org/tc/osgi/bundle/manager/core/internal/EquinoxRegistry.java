@@ -16,6 +16,7 @@ import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleControlWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleHeaderWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapper;
+import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapperShortDescription;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.ServiceWrapper;
 import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistry;
 import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
@@ -41,7 +42,8 @@ public class EquinoxRegistry extends AbstractRegistry {
 	@Override
 	public void buildRegistryCmd() {
 		Spark.get("/bundles", (request, response) -> this.bundleList(response));// liste les bundles et leur etat (comme
-																				// a la console)
+																				// a la console
+		Spark.get("/bundles/short", (request, response) -> this.bundleShortList(response));// liste les bundles et leur etat en simplifié
 		Spark.get("/services", (request, response) -> this.bundleServices(response));// liste des services
 		
 		Spark.get("/bundle/:bundleName/:version", (request, response) -> this.bundleInfo(response,request.params(":bundleName"),request.params(":version")));// info
@@ -66,6 +68,16 @@ public class EquinoxRegistry extends AbstractRegistry {
 
 	
 	
+	private Object bundleShortList(Response response) {
+		response.type("application/json");
+		LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).debug("Retreive bundle list");
+		List<BundleWrapperShortDescription> wrappers = new ArrayList<>();
+		for (Bundle b : this.context.getBundles()) {
+			wrappers.add(new BundleWrapperShortDescription(b));
+		}
+		return new JsonSerialiser().toJson(wrappers);
+	}
+
 	private Object bundleDependencies(Response response, String bundleName, String version) {
 		response.type("application/json");
 		String bundleControlFile=ManagerPropertyFile.getInstance().getBundlesDirectory()+"/"+bundleName+"-"+version+"/control";

@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tc.osgi.bundle.utils</groupId>
 	<artifactId>tc-osgi-bundle-utils</artifactId>
@@ -46,19 +44,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<configuration>
-					<images>
-						<image>
-							<build>
-								<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${docker.latest}</from>
-							</build>
-						</image>
-					</images>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
@@ -86,6 +71,26 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
+	<profiles>
+		<profile>
+			<id>DOCKER</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<configuration>
+							<images>
+								<image>
+									<build>
+										<from>${docker.login}/tc-osgi-bundle-utils-interfaces:${docker.latest}</from>
+									</build>
+								</image>
+							</images>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

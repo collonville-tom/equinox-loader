@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tc.osgi.bundle.utils</groupId>
 	<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
@@ -38,10 +36,7 @@
 		<!-- <scope>compile</scope> -->
 		<!-- </dependency> -->
 
-		<!-- - Equinox. It is the modular Java runtime at the heart of the Eclipse 
-			IDE, - Knopflerfish, Is an open source implementation of the OSGi R3 and 
-			OSGi R4 specifications. - Apache Felix. Is the open source OSGi container 
-			from the Apache Software Foundation. -->
+		<!-- - Equinox. It is the modular Java runtime at the heart of the Eclipse IDE, - Knopflerfish, Is an open source implementation of the OSGi R3 and OSGi R4 specifications. - Apache Felix. Is the open source OSGi container from the Apache Software Foundation. -->
 		<!--sinon on peut essayer avec felix qui implemtente mais marche pas -->
 
 		<!-- <dependency> -->
@@ -92,21 +87,30 @@
 				<artifactId>jdeb</artifactId>
 				<groupId>org.vafer</groupId>
 			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<configuration>
-					<images>
-						<image>
-							<build>
-								<from>openjdk:8-jre-alpine</from>
-							</build>
-						</image>
-					</images>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>DOCKER</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<configuration>
+							<images>
+								<image>
+									<build>
+										<from>openjdk:8-jre-alpine</from>
+									</build>
+								</image>
+							</images>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

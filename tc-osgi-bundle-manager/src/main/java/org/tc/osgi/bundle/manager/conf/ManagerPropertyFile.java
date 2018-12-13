@@ -94,14 +94,14 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
     }
     public String getStaticRepositoryUrl() {
         if (staticRepositoryUrl == null) {
-        	staticRepositoryUrl = getResourceBundle().getString(getBundleRacine() + "static.repository.url");
+        	staticRepositoryUrl = getResourceBundle().getString(getBundleRacine() + "static_repository_url");
         }
         return staticRepositoryUrl;
     }
     
     public String getStaticRepositoryFile() {
         if (staticRepositoryName == null) {
-        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static.repository.file");
+        	staticRepositoryName = getResourceBundle().getString(getBundleRacine() + "static_repository_file");
         }
         return staticRepositoryName;
     }

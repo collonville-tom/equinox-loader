@@ -11,12 +11,16 @@ import java.util.stream.Collectors;
 
 import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
+import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 
 
 
 public class RepoParser {
 	
 	private Pattern bundlePattern=Pattern.compile(".*/(.*)-(.*).tar.gz");
+	private Pattern snapshotBundlePattern=Pattern.compile(".*/(.*)-(.*-SNAPSHOT).tar.gz");
+	
+	public static final String SNAPSHOT="SNAPSHOT";
 
 	public RepoParser()
 	{
@@ -38,7 +42,12 @@ public class RepoParser {
 	
 	public TarGzBundle bundleBuilder(String url)
 	{
-		Matcher bundleMatcher=bundlePattern.matcher(url);
+		LoggerServiceProxy.getInstance().getLogger(RepoParser.class).debug("Parsing "+url);
+		Matcher bundleMatcher;
+		if(url.contains(SNAPSHOT))
+			bundleMatcher=snapshotBundlePattern.matcher(url);
+		else
+			bundleMatcher=bundlePattern.matcher(url);
 		bundleMatcher.find();
 		return new TarGzBundle(bundleMatcher.group(1),bundleMatcher.group(2),url);
 	}

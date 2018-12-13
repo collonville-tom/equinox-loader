@@ -45,7 +45,7 @@
 		</fileSet>
 		<fileSet>
 			<directory>target/</directory>
-			<outputDirectory>/var/equinox-loader-manager</outputDirectory>
+			<outputDirectory>/var/equinox-loader-manager/local</outputDirectory>
 			<includes>
 				<include>*.tar.gz</include>
 			</includes>
