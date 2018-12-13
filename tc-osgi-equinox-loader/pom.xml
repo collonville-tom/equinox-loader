@@ -3,7 +3,7 @@
 	<artifactId>tc-osgi-equinox-loader</artifactId>
 	<groupId>org.tc.osgi</groupId>
 	<name>${project.artifactId}-${project.version}</name>
-	<version>${build}${snapshot}</version>
+
 	<description>Un bundle pour charger d'autre bundle</description>
 	<packaging>jar</packaging>
 
@@ -20,7 +20,7 @@
 		<snapshot>-SNAPSHOT</snapshot>
 		<docker.latest>latest</docker.latest>
 	</properties>
-
+	<version>${build}${snapshot}</version>
 
 	<dependencies>
 		<dependency>
