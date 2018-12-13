@@ -59,6 +59,12 @@ public class RepositoryRegistry extends AbstractRegistry {
 		Spark.get("/install/:tarname/:version", (request, response) -> this.installBundle(response, request.params(":tarname")));
 		// permet a un autre manager de recuper un tar issu du repo local
 		Spark.get("/pullTar/:tarname/:version", (request, response) -> this.pullTar(response, request.params(":tarname")));
+		
+		// une commande pour avoir l'arbre de dependance? via la compilation des fichier control
+		// pendannt une installation il faut un mecanisme permettant le download des tar, leur dezip puis l'exploration de dependances
+		// l'exploiration des depdnance doit permettre de download des tar suivant si ceux ci ne sont pas deja installé.
+		// dans une version ou l'on sera capable de gerer d'autre docker, on fera cette etape dans un autre container avant de switcher dessus si l'install est bonne
+		
 	}
 
 	private Object pullTar(Response response, String params) {
