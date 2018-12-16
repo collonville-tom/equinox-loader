@@ -18,10 +18,10 @@
 		<utils.version>0.3.1</utils.version>
 		<manager.version>0.1.0</manager.version>
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
-		<snapshot.xml.delimiter>.</snapshot.xml.delimiter>
-		<snapshot.pom.delimiter>-</snapshot.pom.delimiter>
-		<snapshot>SNAPSHOT</snapshot>
-		<docker.latest>latest</docker.latest>
+		<snapshot.xml.delimiter></snapshot.xml.delimiter>
+		<snapshot.pom.delimiter></snapshot.pom.delimiter>
+		<snapshot></snapshot>
+		<docker.latest>0.3.1</docker.latest>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
 

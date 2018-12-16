@@ -9,10 +9,10 @@
 
 	<properties>
 		<build>0.1.0</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
 		<equinox-loader.version>0.2.1</equinox-loader.version>
-		<docker.latest>latest</docker.latest>
+		<docker.latest>0.2.1</docker.latest>
 		<manager.rest.port>4567</manager.rest.port>
 	</properties>
 

@@ -9,7 +9,7 @@
 
 	<properties>
 		<build>0.1.1</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 	</properties>
 
 	<version>${build}${snapshot}</version>
