@@ -9,7 +9,6 @@ import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 import org.tc.osgi.equinox.loader.conf.exception.EquinoxConfigException;
-import org.tc.osgi.equinox.loader.starter.EquinoxStarter;
 
 /**
  * StartDefaultBundleCmd.java.
@@ -18,13 +17,11 @@ import org.tc.osgi.equinox.loader.starter.EquinoxStarter;
  */
 public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
 
-	private String consoleDependencyBundleName;
-    /**
-     * String utilsDependencyBundleName.
-     */
     private String utilsDependencyBundleName;
+    private String utilsDependencyBundleVersion;
 
     private String managerDependencyBundleName;
+    private String managerDependencyBundleVersion;
     
     /**
      * StartDefaultBundleCmd constructor.
@@ -41,20 +38,14 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
     @Override
     public void execute() throws EquinoxCmdException {
         try {
-            new BundleStarter().processOnBundle(this.context, this.getUtilsDependencyBundleName());
+            new BundleStarter().processOnBundle(this.context, this.getUtilsDependencyBundleName(),this.getUtilsDependencyBundleVersion());
 
         } catch (TcOsgiException e) {
             throw new EquinoxCmdException(e.getMessage(), e);
         }
+      
         try {
-            new BundleStarter().processOnBundle(this.context, this.getConsoleDependencyBundleName());
-
-        } catch (TcOsgiException e) {
-            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
-                "Lancement auto du bundle echoué :" + this.consoleDependencyBundleName + " ce dernier est peut etre simplement absent, equinox ne fournira pas de mode console", e);
-        }
-        try {
-            new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName());
+            new BundleStarter().processOnBundle(this.context, this.getManagerDependencyBundleName(),this.getManagerDependencyBundleVersion());
 
         } catch (TcOsgiException e) {
             LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
@@ -62,26 +53,10 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         }
 
     }
-
-    public String getConsoleDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
-        if (this.consoleDependencyBundleName == null) {
-            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "consoleDependencyBundleName");
-        }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.consoleDependencyBundleName);
-        return this.consoleDependencyBundleName;
-    }
-    /**
-     * getUtilsDependencyBundleName.
-     * @return String
-     * @throws FieldTrackingAssignementException
-     * @throws EquinoxCmdException
-     * @throws EquinoxConfigException
-     */
     public String getUtilsDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
         if (this.utilsDependencyBundleName == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleName");
         }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.utilsDependencyBundleName);
         return this.utilsDependencyBundleName;
     }
     
@@ -89,8 +64,21 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
         if (this.managerDependencyBundleName == null) {
             XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "managerDependencyBundleName");
         }
-        LoggerGestionnary.getInstance(EquinoxStarter.class).debug("Lancement auto du bundle :" + this.managerDependencyBundleName);
         return this.managerDependencyBundleName;
+    }
+    
+    public String getUtilsDependencyBundleVersion() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
+        if (this.utilsDependencyBundleVersion == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleVersion");
+        }
+        return this.utilsDependencyBundleVersion;
+    }
+    
+    public String getManagerDependencyBundleVersion() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
+        if (this.managerDependencyBundleVersion == null) {
+            XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "managerDependencyBundleVersion");
+        }
+        return this.managerDependencyBundleVersion;
     }
 
 }

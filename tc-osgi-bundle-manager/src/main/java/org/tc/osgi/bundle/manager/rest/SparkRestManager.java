@@ -3,6 +3,7 @@ package org.tc.osgi.bundle.manager.rest;
 
 
 import org.osgi.framework.BundleContext;
+import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
 import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
 import org.tc.osgi.bundle.manager.exception.ManagerException;
@@ -41,6 +42,8 @@ public class SparkRestManager{
 	
 	private void initRestCmd()
 	{
+		Spark.staticFiles.externalLocation(ManagerPropertyFile.getInstance().getWorkDirectory());
+		
 		this.equinoxRegistry.buildRegistryCmd();
 		this.repoRegistry.buildRegistryCmd();
 		

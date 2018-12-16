@@ -56,11 +56,17 @@ public final class EquinoxLoaderMain {
             }
             EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(), new EquinoxLoaderBundleContextImpl());
             if (EquinoxStarter.getInstance().check()) {
+            	LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("LoadDefaultBundleCmd");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 new LoadDefaultBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("FilterValidBundleCmd");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 new FilterValidBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("StartDefaultBundleCmd");
+                LoggerGestionnary.getInstance(EquinoxLoaderMain.class).debug("####################");
                 new StartDefaultBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
             } else {
                 LoggerGestionnary.getInstance(EquinoxLoaderMain.class).error("EquinoxStarter not running");

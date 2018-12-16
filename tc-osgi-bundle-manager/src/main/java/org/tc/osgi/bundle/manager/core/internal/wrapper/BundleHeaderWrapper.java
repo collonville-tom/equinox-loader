@@ -3,7 +3,6 @@ package org.tc.osgi.bundle.manager.core.internal.wrapper;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class BundleHeaderWrapper {

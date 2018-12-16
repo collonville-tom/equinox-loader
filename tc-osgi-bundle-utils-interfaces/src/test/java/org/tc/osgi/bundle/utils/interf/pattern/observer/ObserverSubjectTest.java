@@ -1,8 +1,8 @@
 package org.tc.osgi.bundle.utils.interf.pattern.observer;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
+
+import junit.framework.Assert;
 
 /**
  * ObserverSubjectTest.java.

@@ -2,10 +2,10 @@
  */
 package org.tc.osgi.bundle.utils.conf;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.conf.jaxb.ElementConfiguration;
+
+import junit.framework.Assert;
 
 /**
  * UtilsObjectFactoryImplTest.java.

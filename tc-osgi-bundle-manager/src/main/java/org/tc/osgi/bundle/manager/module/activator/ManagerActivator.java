@@ -1,11 +1,7 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
-import java.io.IOException;
-import java.net.URI;
-
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
@@ -17,8 +13,6 @@ import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.utils.AbstractTcOsgiActivator;
 import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
-
-import spark.Spark;
 
 /**
  * Activator.java.

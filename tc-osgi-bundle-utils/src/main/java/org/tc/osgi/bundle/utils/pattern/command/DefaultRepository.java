@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.tc.osgi.bundle.utils.interf.pattern.command.ICommand;
 import org.tc.osgi.bundle.utils.interf.pattern.command.ICommandRepository;
-import org.tc.osgi.bundle.utils.interf.pattern.command.exception.CommandExecutionException;
 
 /**
  * Repository.java.

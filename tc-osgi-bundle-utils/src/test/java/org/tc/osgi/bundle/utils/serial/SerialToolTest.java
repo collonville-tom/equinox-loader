@@ -2,10 +2,10 @@ package org.tc.osgi.bundle.utils.serial;
 
 import java.io.FileNotFoundException;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.collection.element.Pair;
+
+import junit.framework.Assert;
 
 /**
  * SerialToolTest.java.

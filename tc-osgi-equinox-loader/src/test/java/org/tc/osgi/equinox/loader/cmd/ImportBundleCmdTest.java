@@ -2,10 +2,10 @@
  */
 package org.tc.osgi.equinox.loader.cmd;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
+
+import junit.framework.Assert;
 
 /**
  * ImportBundleCmdTest.java.

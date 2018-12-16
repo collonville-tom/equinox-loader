@@ -29,6 +29,7 @@ public class LoadDefaultBundleCmdTest {
         final Bundle b1 = Mockito.mock(Bundle.class);
         Mockito.when(b1.toString()).thenReturn("Bundle1");
         Mockito.when(b1.getLocation()).thenReturn("Bundle1");
+        
         final Bundle b2 = Mockito.mock(Bundle.class);
         Mockito.when(b2.toString()).thenReturn("unknown");
         Mockito.when(b2.getLocation()).thenReturn("unknown");

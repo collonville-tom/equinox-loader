@@ -3,10 +3,10 @@ package org.tc.osgi.bundle.utils.tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.module.service.impl.UtilsServiceImpl;
+
+import junit.framework.Assert;
 
 /**
  * ToolsTest.java.

@@ -1,10 +1,5 @@
 package org.tc.osgi.bundle.utils.module.activator;
 
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;

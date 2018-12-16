@@ -1,9 +1,9 @@
 package org.tc.osgi.equinox.loader;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
+
+import junit.framework.Assert;
 
 /**
  * EquinoxLoaderMainTest.java.

@@ -1,27 +1,10 @@
 package org.tc.osgi.bundle.manager.module.service;
 
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Vector;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
-import org.tc.osgi.bundle.utils.context.BundleKiller;
-import org.tc.osgi.bundle.utils.context.BundleStarter;
-import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.context.IBundleCommand;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
-import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
-import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
-import org.tc.osgi.bundle.utils.module.utils.TcOsgiServiceFactory;
-import org.tc.osgi.bundle.utils.rmi.client.EquinoxLoaderRMIClient;
 
 /**
  * UtilsServiceImpl.java.

@@ -16,35 +16,38 @@
 	<properties>
 		<build>0.2.1</build>
 		<utils.version>0.3.1</utils.version>
+		<manager.version>0.1.0</manager.version>
 		<utils.interfaces.version>0.1.1</utils.interfaces.version>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot.xml.delimiter>.</snapshot.xml.delimiter>
+		<snapshot.pom.delimiter>-</snapshot.pom.delimiter>
+		<snapshot>SNAPSHOT</snapshot>
 		<docker.latest>latest</docker.latest>
 	</properties>
-	<version>${build}${snapshot}</version>
+	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot}</version>
+			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot}</version>
+			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -73,7 +76,7 @@
 							<classpathPrefix>./</classpathPrefix>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
 							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 						</manifestEntries>
 					</archive>
@@ -98,7 +101,7 @@
 									<!-- <mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
-									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
 									<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 								</manifestEntries>
 							</archive>

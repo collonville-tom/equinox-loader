@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.ServiceReference;
-import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
 public class ServiceWrapper {
 

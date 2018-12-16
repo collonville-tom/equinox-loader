@@ -1,14 +1,6 @@
 package org.tc.osgi.equinox.loader.cmd.context;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.utils.interf.collection.IPredicate;
-import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
-import org.tc.osgi.bundle.utils.module.service.impl.CollectionUtilsServiceImpl;
 import org.tc.osgi.equinox.loader.cmd.AbstractEquinoxCmd;
 
 /**

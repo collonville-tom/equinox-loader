@@ -1,9 +1,7 @@
 package org.tc.osgi.bundle.manager.core.tools;
 
 
-import java.io.File;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.junit.Test;

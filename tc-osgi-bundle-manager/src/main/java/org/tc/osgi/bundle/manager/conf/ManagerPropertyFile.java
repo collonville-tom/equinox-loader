@@ -1,6 +1,8 @@
 package org.tc.osgi.bundle.manager.conf;
 
+import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.AbstractPropertyFile;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
 /**
  * UtilsPropertyFile.java.
@@ -25,6 +27,8 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
      */
     private final static String UTILS_FILE = "manager";
     
+    private String bundleDirectory;
+    private String bundleLocalBase;
     
     private String staticRepositoryUrl;
     private String staticRepositoryName;
@@ -152,4 +156,19 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         return xmlPropertiesExt;
     }
 
+	public String getBundleDirectory() throws FieldTrackingAssignementException {
+		if (bundleDirectory == null) {
+            XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleDirectory");
+        }
+        return bundleDirectory;
+	}
+
+	
+	public String getBundleLocalBase() throws FieldTrackingAssignementException
+	{
+		if (bundleLocalBase == null) {
+            XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleLocalBase");
+        }
+        return bundleLocalBase;
+	}
 }

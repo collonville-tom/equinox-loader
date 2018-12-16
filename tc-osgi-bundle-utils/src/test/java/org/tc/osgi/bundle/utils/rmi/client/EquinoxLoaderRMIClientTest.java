@@ -5,10 +5,7 @@ package org.tc.osgi.bundle.utils.rmi.client;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
@@ -16,6 +13,8 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
+
+import junit.framework.Assert;
 
 /**
  * EquinoxLoaderRMIClientTest.java.

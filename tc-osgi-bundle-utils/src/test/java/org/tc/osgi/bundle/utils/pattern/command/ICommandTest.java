@@ -3,11 +3,11 @@ package org.tc.osgi.bundle.utils.pattern.command;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.pattern.command.ICommand;
 import org.tc.osgi.bundle.utils.interf.pattern.command.exception.CommandExecutionException;
+
+import junit.framework.Assert;
 
 /**
  * ObserverSubjectTest.java.

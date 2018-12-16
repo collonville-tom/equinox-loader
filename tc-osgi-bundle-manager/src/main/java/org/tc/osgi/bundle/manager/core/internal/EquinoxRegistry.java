@@ -1,9 +1,7 @@
 package org.tc.osgi.bundle.manager.core.internal;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
-import java.util.Map;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -11,7 +9,6 @@ import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.AbstractRegistry;
-import org.tc.osgi.bundle.manager.core.external.RemoteRepository;
 import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleControlWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleHeaderWrapper;
@@ -19,13 +16,12 @@ import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapperShortDescription;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.ServiceWrapper;
 import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistry;
-import org.tc.osgi.bundle.manager.module.activator.ManagerActivator;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
-
 
 import spark.Response;
 import spark.Spark;
@@ -35,6 +31,8 @@ public class EquinoxRegistry extends AbstractRegistry {
 
 	private BundleContext context;
 
+	public static final String BUNDLE_CLASSIFIER = "-assembly.jar";
+	
 	public EquinoxRegistry(BundleContext context) {
 		this.context = context;
 	}
@@ -163,10 +161,20 @@ public class EquinoxRegistry extends AbstractRegistry {
 		return new JsonSerialiser().toJson(wrapper);
 	}
 
+	private String buildPath(String bundleName, String version)
+			throws FieldTrackingAssignementException{
+		StringBuilder builder = new StringBuilder(ManagerPropertyFile.getInstance().getBundleLocalBase());
+		builder.append(ManagerPropertyFile.getInstance().getBundleDirectory()).append("/");
+		builder.append(bundleName).append("-").append(version);
+		builder.append(BUNDLE_CLASSIFIER);
+		return builder.toString();
+	}
+	
 	private Object bundleInstall(String bundleName, String version) {
 		try {
 			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleInstaller().processOnBundle(context, bundleName);
+			String bundlePath = this.buildPath(bundleName, version);
+			BundleUtilsServiceProxy.getInstance().getBundleInstaller().processOnBundle(context, bundlePath,version);
 			return bundleName + " install";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -178,7 +186,7 @@ public class EquinoxRegistry extends AbstractRegistry {
 	private Object bundleStop(String bundleName, String version) {
 		try {
 			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleKiller().processOnBundle(context, bundleName);
+			BundleUtilsServiceProxy.getInstance().getBundleKiller().processOnBundle(context, bundleName,version);
 			return bundleName + " stoped";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -190,7 +198,7 @@ public class EquinoxRegistry extends AbstractRegistry {
 	private String bundleUninstall(String bundleName, String version) {
 		try {
 			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleUninstaller().processOnBundle(context, bundleName);
+			BundleUtilsServiceProxy.getInstance().getBundleUninstaller().processOnBundle(context, bundleName,version);
 			return bundleName + " uninstall";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -202,7 +210,7 @@ public class EquinoxRegistry extends AbstractRegistry {
 	private String bundleStart(String bundleName, String version) {
 		try {
 			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleStarter().processOnBundle(context, bundleName);
+			BundleUtilsServiceProxy.getInstance().getBundleStarter().processOnBundle(context, bundleName,version);
 			return bundleName + " started";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)

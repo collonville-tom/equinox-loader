@@ -6,4 +6,16 @@
 		<fieldName>restPort</fieldName>
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
 	</configFiles>
+	<configFiles>
+		<defaultValue>/opt/equinox-loader/bundles</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>bundleDirectory</fieldName>
+		<className>org.tc.osgi.bundle.manager.conf.ManagerPropertyFile</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>file://localhost://</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>bundleLocalBase</fieldName>
+		<className>org.tc.osgi.bundle.manager.conf.ManagerPropertyFile</className>
+	</configFiles>
 </ConfigurationLibrary>

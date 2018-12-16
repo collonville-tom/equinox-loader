@@ -1,12 +1,12 @@
 package org.tc.osgi.bundle.utils.pattern.observer;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.pattern.observer.AbstractSubject;
 import org.tc.osgi.bundle.utils.interf.pattern.observer.IObserver;
 import org.tc.osgi.bundle.utils.interf.pattern.observer.IObserverEvent;
 import org.tc.osgi.bundle.utils.interf.pattern.observer.ISubject;
+
+import junit.framework.Assert;
 
 /**
  * ObserverSubjectTest.java.

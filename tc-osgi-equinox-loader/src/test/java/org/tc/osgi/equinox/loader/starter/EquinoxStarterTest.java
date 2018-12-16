@@ -1,13 +1,13 @@
 package org.tc.osgi.equinox.loader.starter;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.equinox.loader.cmd.context.LoadDefaultBundleCmd;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 import org.tc.osgi.equinox.loader.conf.exception.EquinoxConfigException;
+
+import junit.framework.Assert;
 
 /**
  * EquinoxStarterTest.java.

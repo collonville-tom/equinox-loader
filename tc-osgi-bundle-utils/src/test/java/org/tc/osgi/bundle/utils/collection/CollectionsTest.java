@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.collection.IPredicate;
 import org.tc.osgi.bundle.utils.interf.collection.ITransformer;
 import org.tc.osgi.bundle.utils.module.service.impl.CollectionUtilsServiceImpl;
+
+import junit.framework.Assert;
 
 /**
  * CollectionsTest.java.
