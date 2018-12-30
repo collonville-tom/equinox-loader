@@ -51,7 +51,7 @@ INSTALL_DIR="/opt/equinox-loader"
 USER_PARAM="equinox-loader"
 CONFIG_DIR="$INSTALL_DIR/bundles/configuration"
 CONSOLE_ARGS="&"
-JMX_PORT=9010
+JMX_PORT=${jmx.port}
 DEBUG=""
 JMX=""
 XM="-Xmx512m -XX:MaxPermSize=64m"

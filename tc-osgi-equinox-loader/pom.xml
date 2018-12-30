@@ -10,18 +10,20 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.0</version>
+		<version>0.8.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
-		<build>0.2.1</build>
-		<utils.version>0.3.1</utils.version>
-		<manager.version>0.1.0</manager.version>
-		<utils.interfaces.version>0.1.1</utils.interfaces.version>
-		<snapshot.xml.delimiter></snapshot.xml.delimiter>
-		<snapshot.pom.delimiter></snapshot.pom.delimiter>
-		<snapshot></snapshot>
-		<docker.latest>0.3.1</docker.latest>
+		<build>0.2.2</build>
+		<utils.version>0.3.2</utils.version>
+		<manager.version>0.1.1</manager.version>
+		<utils.interfaces.version>0.1.2</utils.interfaces.version>
+		<!-- ca va pas cette gestion des snapshot -->
+		<snapshot.xml.delimiter>.</snapshot.xml.delimiter>
+		<snapshot.pom.delimiter>-</snapshot.pom.delimiter>
+		<snapshot>SNAPSHOT</snapshot>
+		<docker.latest>latest</docker.latest>
+		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
 
@@ -171,6 +173,9 @@
 									<build>
 										<from>${docker.login}/tc-osgi-bundle-utils:${docker.latest}</from>
 										<cmd>/opt/equinox-loader/docker.sh</cmd>
+										<ports>
+											<port>${jmx.port}</port>
+										</ports>
 									</build>
 								</image>
 							</images>
