@@ -115,6 +115,7 @@
 								<image>
 									<build>
 										<from>${docker.login}/tc-osgi-equinox-loader:${docker.latest}</from>
+<!-- 										<cmd>/bin/sh</cmd> -->
 										<ports>
 											<port>${manager.rest.port}</port>
 											<port>${manager.jmx.port}</port>

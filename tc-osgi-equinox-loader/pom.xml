@@ -176,6 +176,9 @@
 										<ports>
 											<port>${jmx.port}</port>
 										</ports>
+										<env>
+											<DOCKER_HOST_IP>localhost</DOCKER_HOST_IP>
+										</env>
 									</build>
 								</image>
 							</images>
