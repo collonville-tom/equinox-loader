@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.jmx.interf.repository;
+package org.tc.osgi.bundle.manager.core;
 
 import java.util.List;
 

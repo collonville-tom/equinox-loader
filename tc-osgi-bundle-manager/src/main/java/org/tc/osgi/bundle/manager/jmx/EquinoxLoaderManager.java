@@ -10,7 +10,7 @@ import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 
 import org.tc.osgi.bundle.manager.exception.TcManagerMBeanException;
-import org.tc.osgi.bundle.manager.jmx.interf.EquinoxLoaderManagerMBean;
+import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 
 import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
@@ -26,7 +26,8 @@ public class EquinoxLoaderManager implements EquinoxLoaderManagerMBean{
 	public <T> ObjectName buildObjectName(T object) throws TcManagerMBeanException 
 	{
 		Class<?> c=object.getClass();
-		String objectName = c.getClass().getPackage().getName()+ ":type=" +c.getSimpleName();
+		String objectName = c.getPackage().getName()+ ":type=" +c.getSimpleName();
+		LoggerServiceProxy.getInstance().getLogger(EquinoxLoaderManager.class).debug("Creation ObjectName: "+objectName);
 		try {
 			return new ObjectName(objectName);
 		} catch (MalformedObjectNameException e) {

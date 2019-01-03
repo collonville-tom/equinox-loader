@@ -8,7 +8,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.AbstractRegistry;
 import org.tc.osgi.bundle.manager.core.external.RemoteRegistry;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleControlWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleHeaderWrapper;
@@ -16,7 +15,6 @@ import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapper;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapperShortDescription;
 import org.tc.osgi.bundle.manager.core.internal.wrapper.ServiceWrapper;
 import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistry;
-import org.tc.osgi.bundle.manager.jmx.interf.registry.EquinoxRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
@@ -28,11 +26,11 @@ import spark.Response;
 import spark.Spark;
 
 // classe qui permet d'acceder au differents ffonctionnalité de manipulation des bundles, install, start, stop, remove
-public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistryMBean {
+public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	private BundleContext context;
 
-	public static final String BUNDLE_CLASSIFIER = "-assembly.jar";
+	private static final String BUNDLE_CLASSIFIER = "-assembly.jar";
 	
 	public EquinoxRegistry(BundleContext context) {
 		this.context = context;
@@ -65,7 +63,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 																								// bundle
 	}
 	
-	private Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistry {
+	public Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistry {
 		for (Bundle b : this.context.getBundles()) {
 			if (b.getSymbolicName().equals(bundleName)) {
 				return b;
@@ -74,7 +72,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		throw new TcEquinoxRegistry("Bundle " + bundleName + " not found");
 	}
 	
-	private String buildPath(String bundleName, String version)	throws FieldTrackingAssignementException{
+	public String buildPath(String bundleName, String version)	throws FieldTrackingAssignementException{
 		StringBuilder builder = new StringBuilder(ManagerPropertyFile.getInstance().getBundleLocalBase());
 		builder.append(ManagerPropertyFile.getInstance().getBundleDirectory()).append("/");
 		builder.append(bundleName).append("-").append(version);
@@ -91,7 +89,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return new JsonSerialiser().toJson(wrappers);
 	}	
 	
-	private String bundleShortListResponse(Response response) {
+	public String bundleShortListResponse(Response response) {
 		response.type("application/json");
 		return this.bundleShortList();
 	}
@@ -109,7 +107,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Une erreur s'est produite lors de la determination des dependannces du bundle ";
 	}
 	
-	private String bundleDependenciesResponse(Response response, String bundleName, String version) {
+	public String bundleDependenciesResponse(Response response, String bundleName, String version) {
 		response.type("application/json");
 		return this.bundleDependencies(bundleName,version);
 	}
@@ -128,7 +126,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Une erreur s'est produite lors de la recuperation des info du bunddle ";
 	}
 
-	private String bundleInfoResponse(Response response, String bundleName, String version) {
+	public String bundleInfoResponse(Response response, String bundleName, String version) {
 		response.type("application/json");
 		return this.bundleInfo(bundleName,version);
 	}
@@ -156,7 +154,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Une erreur s'est produite lors de la recuperation des services du bunddle ";
 	}
 
-	private String bundleServiceResponse(Response response, String bundleName) {
+	public String bundleServiceResponse(Response response, String bundleName) {
 		response.type("application/json");
 		return this.bundleService(bundleName);
 	}
@@ -181,7 +179,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return new JsonSerialiser().toJson(wrapper);
 	}
 
-	private String bundleServicesResponse(Response response) {
+	public String bundleServicesResponse(Response response) {
 		response.type("application/json");
 		return this.bundleServices();
 	}
@@ -199,7 +197,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Error in installing bundle " + bundleName;
 	}
 	
-	private String bundleInstallResponse(String bundleName, String version) {
+	public String bundleInstallResponse(String bundleName, String version) {
 		return this.bundleInstall(bundleName, version);
 	}
 
@@ -215,7 +213,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Error in stoping bundle " + bundleName;
 	}
 	
-	private String bundleStopResponse(String bundleName, String version) {
+	public String bundleStopResponse(String bundleName, String version) {
 		return this.bundleStop(bundleName, version);
 	}
 
@@ -231,7 +229,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Error in unintalling bundle " + bundleName;
 	}
 	
-	private String bundleUninstallResponse(String bundleName, String version) {
+	public String bundleUninstallResponse(String bundleName, String version) {
 		return this.bundleUninstall(bundleName, version);
 	}
 
@@ -247,7 +245,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return "Error in starting bundle " + bundleName;
 	}
 	
-	private String bundleStartResponse(String bundleName, String version)
+	public String bundleStartResponse(String bundleName, String version)
 	{
 		return this.bundleStart(bundleName, version);
 	}
@@ -261,7 +259,7 @@ public class EquinoxRegistry extends AbstractRegistry implements EquinoxRegistry
 		return new JsonSerialiser().toJson(wrappers);
 	}
 	
-	private String bundleListResponse(Response response) {
+	public String bundleListResponse(Response response) {
 		response.type("application/json");
 		return this.bundleList();
 	}

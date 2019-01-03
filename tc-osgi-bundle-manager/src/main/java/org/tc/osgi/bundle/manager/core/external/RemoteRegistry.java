@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.AbstractRegistry;
 import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.core.internal.LocalRepository;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
-import org.tc.osgi.bundle.manager.jmx.interf.registry.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
@@ -19,7 +17,7 @@ import spark.Spark;
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
-public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMBean {
+public class RemoteRegistry implements RemoteRegistryMBean {
 
 	public static final String OS_PROPERTY = "os.name";
 	public static final String WINDOWS = "windows";
@@ -57,19 +55,19 @@ public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMB
 	public void buildRegistryCmd() {
 
 		// initialise la connaissance du repo
-		Spark.get("/fetchRemoteRepo", (request, response) -> this.fetchRemoteRepo(response));
+		Spark.get("/fetchRemoteRepo", (request, response) -> this.fetchRemoteRepoResponse(response));
 		// dois constuire le fichier list permettant a d'auutre application de reucperer
 		// des tar et de permettre l'installation d'un bundle
-		Spark.get("/updateLocal", (request, response) -> this.updateLocal(response));
+		Spark.get("/updateLocal", (request, response) -> this.updateLocalResponse(response));
 		// permet de rapatrier dans le repo local un element d'un repo distant
-		Spark.get("/pullOnRemoteRepo/:tar/:version", (request, response) -> this.pullOnRemoteRepo(response,
+		Spark.get("/pullOnRemoteRepo/:tar/:version", (request, response) -> this.pullOnRemoteRepoResponse(response,
 				request.params(TAR_TAG), request.params(VERSION_TAG)));
 		// installation d'un bundle du repo local
-		Spark.get("/deploy/:tar/:version", (request, response) -> this.installBundle(response, request.params(TAR_TAG),
-				request.params(VERSION_TAG)));
+		Spark.get("/deploy/:tar/:version", (request, response) -> this.installBundleResponse(response,
+				request.params(TAR_TAG), request.params(VERSION_TAG)));
 		// permet a un autre manager de recuper un tar issu du repo local
-		Spark.get("/pullTar/:tar/:version",
-				(request, response) -> this.pushTar(response, request.params(TAR_TAG), request.params(VERSION_TAG)));
+		Spark.get("/pullTar/:tar/:version", (request, response) -> this.pushTarResponse(response,
+				request.params(TAR_TAG), request.params(VERSION_TAG)));
 
 		// une commande pour avoir l'arbre de dependance? via la compilation des fichier
 		// control
@@ -81,7 +79,45 @@ public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMB
 		// etape dans un autre container avant de switcher dessus si l'install est bonne
 	}
 
-	private Object installBundle(Response response, String bundleName, String version) {
+	public String installBundleResponse(Response response, String bundleName, String version) {
+		return this.installBundle(bundleName, version);
+
+	}
+
+	public String pushTarResponse(Response response, String name, String version) {
+		String b=this.pushTar(name, version);
+		response.redirect(b.toString());
+		return "Redirection to " + b;
+	}
+
+	public String pullOnRemoteRepoResponse(Response response, String tarname, String version) {
+		response.type("application/json");
+		return this.pullOnRemoteRepo(tarname, version);
+	}
+
+	private String find(String tarname) throws DownloaderException {
+		for (RemoteRepository r : this.repositories) {
+			for (TarGzBundle bundle : r.getBundles()) {
+				if (bundle.getName().equals(tarname))
+					return r.getRepositoryUrl() + "/" + bundle.getUrl();
+			}
+		}
+		throw new DownloaderException(tarname + "not found to download, maybe you bu fetch remote repository");
+	}
+
+	public String updateLocalResponse(Response response) {
+		response.type("application/json");
+		return this.updateLocal();
+	}
+
+	public String fetchRemoteRepoResponse(Response response) {
+		response.type("application/json");
+		return this.fetchRemoteRepo();
+
+	}
+
+	@Override
+	public String installBundle(String bundleName, String version) {
 		if (!System.getProperty(OS_PROPERTY).toLowerCase().startsWith(WINDOWS)) {
 			StringBuilder b = new StringBuilder(TAR_CMD);
 			b.append(" -f ").append(LOCAL_WORK_DIR);
@@ -106,20 +142,20 @@ public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMB
 		return "Os Windows Detected, function not supported";
 	}
 
-	private Object pushTar(Response response, String name, String version) {
+	@Override
+	public String pushTar(String name, String version) {
 		for (TarGzBundle tgz : this.localRepository.getBundles()) {
 			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
 				StringBuilder b = new StringBuilder("/local/");
 				b.append(name).append("-").append(version).append(ARCH_EXT);
-				response.redirect(b.toString());
-				return "Redirection to " + b.toString();
+				return b.toString();
 			}
 		}
 		return "File not found";
 	}
 
-	private Object pullOnRemoteRepo(Response response, String tarname, String version) {
-		response.type("application/json");
+	@Override
+	public String pullOnRemoteRepo(String tarname, String version) {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
 				.info("Download targz " + tarname + " into local repo");
 		String url = "tarGz not found";
@@ -134,24 +170,14 @@ public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMB
 		return url;
 	}
 
-	private String find(String tarname) throws DownloaderException {
-		for (RemoteRepository r : this.repositories) {
-			for (TarGzBundle bundle : r.getBundles()) {
-				if (bundle.getName().equals(tarname))
-					return r.getRepositoryUrl() + "/" + bundle.getUrl();
-			}
-		}
-		throw new DownloaderException(tarname + "not found to download, maybe you bu fetch remote repository");
-	}
-
-	private Object updateLocal(Response response) {
-		response.type("application/json");
+	@Override
+	public String updateLocal() {
 		this.localRepository.fetch();
 		return new JsonSerialiser().toJson(localRepository);
 	}
 
-	public String fetchRemoteRepo(Response response) {
-		response.type("application/json");
+	@Override
+	public String fetchRemoteRepo() {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repositories");
 		for (RemoteRepository r : repositories) {
 			r.fetch();
