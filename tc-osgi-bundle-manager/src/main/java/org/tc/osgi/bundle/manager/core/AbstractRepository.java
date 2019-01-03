@@ -3,8 +3,9 @@ package org.tc.osgi.bundle.manager.core;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
+import org.tc.osgi.bundle.manager.jmx.interf.repository.RepositoryMBean;
 
-public abstract class AbstractRepository {
+public abstract class AbstractRepository implements RepositoryMBean{
 
 	private String repositoryName;
 	private String repositoryUrl;

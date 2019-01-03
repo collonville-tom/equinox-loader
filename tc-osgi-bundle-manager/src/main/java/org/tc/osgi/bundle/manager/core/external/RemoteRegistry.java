@@ -9,6 +9,7 @@ import org.tc.osgi.bundle.manager.core.AbstractRegistry;
 import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.core.internal.LocalRepository;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
+import org.tc.osgi.bundle.manager.jmx.interf.registry.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
@@ -18,7 +19,7 @@ import spark.Spark;
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
-public class RepositoryRegistry extends AbstractRegistry {
+public class RemoteRegistry extends AbstractRegistry implements RemoteRegistryMBean {
 
 	public static final String OS_PROPERTY = "os.name";
 	public static final String WINDOWS = "windows";
@@ -33,7 +34,7 @@ public class RepositoryRegistry extends AbstractRegistry {
 	private List<RemoteRepository> repositories = new ArrayList<>();
 	private LocalRepository localRepository;
 
-	public RepositoryRegistry() {
+	public RemoteRegistry() {
 		this.initStaticRepository();
 	}
 
@@ -88,8 +89,8 @@ public class RepositoryRegistry extends AbstractRegistry {
 			b.append(version).append(ARCH_EXT);
 			b.append(" -C /");
 			try {
-				LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).info("Extractiong" + bundleName);
-				LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class)
+				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Extractiong" + bundleName);
+				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
 						.debug("Extractiong CMD" + b.toString());
 				Process process = Runtime.getRuntime().exec(b.toString());
 				process.waitFor();
@@ -98,7 +99,7 @@ public class RepositoryRegistry extends AbstractRegistry {
 				return new StringBuilder("Extracting ").append(bundleName).append("-").append(version)
 						.append(".tar.gz done").toString();
 			} catch (InterruptedException | IOException e) {
-				LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).error(e);
+				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).error(e);
 			}
 
 		}
@@ -119,7 +120,7 @@ public class RepositoryRegistry extends AbstractRegistry {
 
 	private Object pullOnRemoteRepo(Response response, String tarname, String version) {
 		response.type("application/json");
-		LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class)
+		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
 				.info("Download targz " + tarname + " into local repo");
 		String url = "tarGz not found";
 		try {
@@ -128,7 +129,7 @@ public class RepositoryRegistry extends AbstractRegistry {
 			d.downloadFile(url, new StringBuilder(LOCAL_WORK_DIR).append(tarname).append("-").append(version)
 					.append(ARCH_EXT).toString());
 		} catch (DownloaderException e) {
-			LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).error(e);
+			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).error(e);
 		}
 		return url;
 	}
@@ -151,10 +152,10 @@ public class RepositoryRegistry extends AbstractRegistry {
 
 	public String fetchRemoteRepo(Response response) {
 		response.type("application/json");
-		LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).info("Fetching remote repositories");
+		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repositories");
 		for (RemoteRepository r : repositories) {
 			r.fetch();
-			LoggerServiceProxy.getInstance().getLogger(RepositoryRegistry.class).debug(r.toString());
+			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
 		}
 		return new JsonSerialiser().toJson(repositories);
 	}

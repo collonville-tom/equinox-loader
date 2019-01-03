@@ -2,6 +2,7 @@ package org.tc.osgi.bundle.manager.module.activator;
 
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
+import org.tc.osgi.bundle.manager.jmx.EquinoxLoaderManager;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
@@ -34,18 +35,19 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
 	private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
 	private TcOsgiProxy<IBundleUtilsService> iBundleUtilsService;
-	private SparkRestManager sparkRestManager;
-	private String restPort;
+//	private SparkRestManager sparkRestManager;
+//	private String restPort;
+	private EquinoxLoaderManager managerBean;
 	
 	
 	
-	public String getRestPort() throws FieldTrackingAssignementException {
-		if (restPort == null) {
-			this.iPropertyUtilsService.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile())
-					.fieldTraking(this, "restPort");
-		}
-		return restPort;
-	}
+//	public String getRestPort() throws FieldTrackingAssignementException {
+//		if (restPort == null) {
+//			this.iPropertyUtilsService.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile())
+//					.fieldTraking(this, "restPort");
+//		}
+//		return restPort;
+//	}
 	
 
 	@Override
@@ -99,7 +101,12 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
-		this.sparkRestManager=new SparkRestManager(Integer.parseInt(this.getRestPort()),context);
+		this.managerBean=new EquinoxLoaderManager();
+		
+		
+		
+		
+//		this.sparkRestManager=new SparkRestManager(Integer.parseInt(this.getRestPort()),context);
 		
 	}
 

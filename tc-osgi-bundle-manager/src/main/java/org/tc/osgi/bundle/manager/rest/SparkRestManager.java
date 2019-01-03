@@ -4,7 +4,7 @@ package org.tc.osgi.bundle.manager.rest;
 
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.external.RepositoryRegistry;
+import org.tc.osgi.bundle.manager.core.external.RemoteRegistry;
 import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
 import org.tc.osgi.bundle.manager.exception.ManagerException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
@@ -21,7 +21,7 @@ public class SparkRestManager{
 	
 	//http://sparkjava.com/documentation#embedded-web-server
 	
-	private RepositoryRegistry repoRegistry=new RepositoryRegistry();
+	private RemoteRegistry repoRegistry=new RemoteRegistry();
 	private EquinoxRegistry equinoxRegistry;
 	
 	public SparkRestManager(BundleContext context) throws ManagerException 
