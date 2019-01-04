@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal;
+package org.tc.osgi.bundle.manager.core.internal.groovy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +22,8 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
 
+import spark.Response;
+import spark.Spark;
 
 // classe qui permet d'acceder au differents ffonctionnalité de manipulation des bundles, install, start, stop, remove
 public class EquinoxRegistry implements EquinoxRegistryMBean {
@@ -34,7 +36,32 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		this.context = context;
 	}
 
-	
+	@Override
+	public void buildRegistryCmd() {
+		Spark.get("/bundles", (request, response) -> this.bundleListResponse(response));// liste les bundles et leur etat (comme
+																				// a la console
+		Spark.get("/bundles/short", (request, response) -> this.bundleShortListResponse(response));// liste les bundles et leur etat en simplifié
+		Spark.get("/services", (request, response) -> this.bundleServicesResponse(response));// liste des services
+		
+		Spark.get("/bundle/:bundleName/:version", (request, response) -> this.bundleInfoResponse(response,request.params(":bundleName"),request.params(":version")));// info
+																												// sur
+																												// un
+																												// bundle
+		Spark.get("/start/:bundleName/:version", (request, response) -> this.bundleStartResponse(request.params(":bundleName"),request.params(":version")));// demarrage
+																												// d'un
+																												// bundle
+		Spark.get("/stop/:bundleName/:version", (request, response) -> this.bundleStopResponse(request.params(":bundleName"),request.params(":version")));// arret
+																												// d'un
+																												// bundle
+		Spark.get("/uninstall/:bundleName/:version", (request, response) -> this.bundleUninstallResponse(request.params(":bundleName"),request.params(":version")));// desinstallation
+		Spark.get("/install/:bundleName/:version", (request, response) -> this.bundleInstallResponse(request.params(":bundleName"),request.params(":version")));// installation
+		Spark.get("/service/:serviceName/:version",
+				(request, response) -> this.bundleServiceResponse(response, request.params(":serviceName")));// details d'un
+		Spark.get("/depends/:bundleName/:version",
+				(request, response) -> this.bundleDependenciesResponse(response,request.params(":bundleName"),request.params(":version")));// details des
+																								// dependances d'un
+																								// bundle
+	}
 	
 	public Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistry {
 		for (Bundle b : this.context.getBundles()) {
@@ -62,7 +89,11 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return new JsonSerialiser().toJson(wrappers);
 	}	
 	
-	
+	public String bundleShortListResponse(Response response) {
+		response.type("application/json");
+		return this.bundleShortList();
+	}
+
 	public String bundleDependencies(String bundleName, String version) {
 		String bundleControlFile=ManagerPropertyFile.getInstance().getBundlesDirectory()+"/"+bundleName+"-"+version+"/control";
 		BundleControlWrapper wrapper;
@@ -76,6 +107,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Une erreur s'est produite lors de la determination des dependannces du bundle ";
 	}
 	
+	public String bundleDependenciesResponse(Response response, String bundleName, String version) {
+		response.type("application/json");
+		return this.bundleDependencies(bundleName,version);
+	}
 	
 	
 
@@ -91,7 +126,11 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Une erreur s'est produite lors de la recuperation des info du bunddle ";
 	}
 
-	
+	public String bundleInfoResponse(Response response, String bundleName, String version) {
+		response.type("application/json");
+		return this.bundleInfo(bundleName,version);
+	}
+
 
 	public String bundleService(String bundleName) {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive service list");
@@ -115,6 +154,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Une erreur s'est produite lors de la recuperation des services du bunddle ";
 	}
 
+	public String bundleServiceResponse(Response response, String bundleName) {
+		response.type("application/json");
+		return this.bundleService(bundleName);
+	}
 	
 	public String bundleServices() {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive services list");
@@ -136,6 +179,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return new JsonSerialiser().toJson(wrapper);
 	}
 
+	public String bundleServicesResponse(Response response) {
+		response.type("application/json");
+		return this.bundleServices();
+	}
 	
 	public String bundleInstall(String bundleName, String version) {
 		try {
@@ -150,7 +197,9 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Error in installing bundle " + bundleName;
 	}
 	
-
+	public String bundleInstallResponse(String bundleName, String version) {
+		return this.bundleInstall(bundleName, version);
+	}
 
 	public String bundleStop(String bundleName, String version) {
 		try {
@@ -164,7 +213,9 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Error in stoping bundle " + bundleName;
 	}
 	
-
+	public String bundleStopResponse(String bundleName, String version) {
+		return this.bundleStop(bundleName, version);
+	}
 
 	public String bundleUninstall(String bundleName, String version) {
 		try {
@@ -178,6 +229,9 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Error in unintalling bundle " + bundleName;
 	}
 	
+	public String bundleUninstallResponse(String bundleName, String version) {
+		return this.bundleUninstall(bundleName, version);
+	}
 
 	public String bundleStart(String bundleName, String version) {
 		try {
@@ -191,6 +245,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return "Error in starting bundle " + bundleName;
 	}
 	
+	public String bundleStartResponse(String bundleName, String version)
+	{
+		return this.bundleStart(bundleName, version);
+	}
 
 	public String bundleList() {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive bundle list");
@@ -201,5 +259,9 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return new JsonSerialiser().toJson(wrappers);
 	}
 	
+	public String bundleListResponse(Response response) {
+		response.type("application/json");
+		return this.bundleList();
+	}
 
 }

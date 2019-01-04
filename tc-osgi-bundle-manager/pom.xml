@@ -13,7 +13,7 @@
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
 		<equinox-loader.version>0.2.2</equinox-loader.version>
 		<docker.latest>latest</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
-		<manager.rest.port>4567</manager.rest.port>
+		
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
 
@@ -42,17 +42,7 @@
 			<artifactId>mockito-all</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-core</artifactId>
-			<version>2.8.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.25</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -117,7 +107,6 @@
 										<from>${docker.login}/tc-osgi-equinox-loader:${docker.latest}</from>
 <!-- 										<cmd>/bin/sh</cmd> -->
 										<ports>
-											<port>${manager.rest.port}</port>
 											<port>${manager.jmx.port}</port>
 										</ports>
 									</build>

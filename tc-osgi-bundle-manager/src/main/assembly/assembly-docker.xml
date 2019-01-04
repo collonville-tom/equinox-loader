@@ -16,12 +16,7 @@
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
 				<include>*:${project.artifactId}:*:assembly</include>
-				<include>*slf4j*</include>
 				<include>*jackson*</include>
-				<include>*spark*</include>
-				<include>*jetty*</include>
-				<include>*java*</include>
-				<include>*websocket*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>
@@ -45,6 +40,15 @@
 			<filtered>true</filtered>
 			<includes>
 				<include>manager.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/main/resources/groovy-extensions-scripts</directory>
+			<outputDirectory>/opt/equinox-loader/groovy-extensions-scripts</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>*</include>
 			</includes>
 		</fileSet>
 		<fileSet>

@@ -14,5 +14,5 @@ public interface EquinoxRegistryMBean {
     public String bundleStart(String bundleName, String version);
     public String bundleList();
     
-    public void buildRegistryCmd();
+    
 }

@@ -10,5 +10,4 @@ public interface RemoteRegistryMBean {
 	public String updateLocal();
 	public String fetchRemoteRepo() ;
 	
-	public void buildRegistryCmd();
 }

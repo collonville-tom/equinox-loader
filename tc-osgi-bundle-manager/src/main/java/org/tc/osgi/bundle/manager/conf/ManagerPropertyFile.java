@@ -110,6 +110,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
         return staticRepositoryName;
     }
     
+    // TODO refaire la liaison entre le repertoire des targz et le repertoire de travail de spark pour que celui ci soit capable d'aller chercher les tar
     public String getWorkDirectory() {
         if (workDirectory == null) {
         	workDirectory = getResourceBundle().getString(getBundleRacine() + "work_directory");
