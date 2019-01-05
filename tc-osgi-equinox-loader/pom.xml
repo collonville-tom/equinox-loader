@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.1-SNAPSHOT</version>
+		<version>0.8.1</version>
 	</parent>
 
 	<properties>
@@ -19,10 +19,10 @@
 		<manager.version>0.1.1</manager.version>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
 		<!-- ca va pas cette gestion des snapshot -->
-		<snapshot.xml.delimiter>.</snapshot.xml.delimiter>
-		<snapshot.pom.delimiter>-</snapshot.pom.delimiter>
-		<snapshot>SNAPSHOT</snapshot>
-		<docker.latest>latest</docker.latest>
+		<snapshot.xml.delimiter></snapshot.xml.delimiter><!-- . -->
+		<snapshot.pom.delimiter></snapshot.pom.delimiter><!-- - -->
+		<snapshot></snapshot>
+		<docker.latest>0.3.2</docker.latest>
 		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
