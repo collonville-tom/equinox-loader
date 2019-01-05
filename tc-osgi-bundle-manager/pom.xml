@@ -12,7 +12,7 @@
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
 		<equinox-loader.version>0.2.2</equinox-loader.version>
-		<docker.latest>latest</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
+		<docker.latest>0.2.2</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
 		
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
@@ -23,14 +23,16 @@
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+<!-- 			<version>${utils.interfaces.version}${snapshot}</version> -->
+			<version>${utils.interfaces.version}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.tc.osgi</groupId>
 			<artifactId>tc-osgi-equinox-loader</artifactId>
-			<version>${equinox-loader.version}${snapshot}</version>
+<!-- 			<version>${equinox-loader.version}${snapshot}</version> -->
+			<version>${equinox-loader.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -56,7 +58,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.1-SNAPSHOT</version>
+		<version>0.8.1</version>
 	</parent>
 
 
