@@ -11,8 +11,8 @@
 		<build>0.1.1</build>
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
-		<equinox-loader.version>0.2.2</equinox-loader.version>
-		<docker.latest>0.2.2</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
+		<equinox-loader.version>0.2.3</equinox-loader.version>
+		<docker.latest>0.2.3</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
 		
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
