@@ -8,7 +8,7 @@
 
 
 	<properties>
-		<build>0.3.2</build>
+		<build>0.3.3</build>
 		<snapshot></snapshot>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
 		<docker.latest>0.1.2</docker.latest>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot}</version>
+			<version>${utils.interfaces.version}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
