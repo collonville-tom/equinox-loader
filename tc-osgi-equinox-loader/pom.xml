@@ -14,15 +14,15 @@
 	</parent>
 
 	<properties>
-		<build>0.2.2</build>
-		<utils.version>0.3.2</utils.version>
+		<build>0.2.3</build>
+		<utils.version>0.3.3</utils.version>
 		<manager.version>0.1.1</manager.version>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
 		<!-- ca va pas cette gestion des snapshot -->
 		<snapshot.xml.delimiter></snapshot.xml.delimiter><!-- . -->
 		<snapshot.pom.delimiter></snapshot.pom.delimiter><!-- - -->
-		<snapshot></snapshot>
-		<docker.latest>0.3.2</docker.latest>
+		<snapshot></snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
+		<docker.latest>0.3.3</docker.latest>
 		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
@@ -78,7 +78,7 @@
 							<classpathPrefix>./</classpathPrefix>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot}-assembly.jar</Class-Path>
+							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
 							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
 						</manifestEntries>
 					</archive>
