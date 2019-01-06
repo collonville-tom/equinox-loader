@@ -35,7 +35,6 @@ public class RepoParserTest {
 		Assert.assertEquals(DATA2, b2.getUrl());
 		
 		
-		
 	}
 	
 	@Test
