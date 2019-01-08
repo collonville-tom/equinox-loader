@@ -11,7 +11,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
 import org.tc.osgi.bundle.manager.jmx.JMXInterface;
 
 import spark.Route;

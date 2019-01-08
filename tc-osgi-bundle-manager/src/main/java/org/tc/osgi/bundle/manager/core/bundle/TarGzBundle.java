@@ -1,6 +1,6 @@
 package org.tc.osgi.bundle.manager.core.bundle;
 
-public class TarGzBundle {
+public class TarGzBundle implements ITarGzBundle{
 
 	private String name;
 	private String version;

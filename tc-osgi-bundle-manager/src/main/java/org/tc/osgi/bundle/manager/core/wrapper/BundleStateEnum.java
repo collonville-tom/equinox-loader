@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal.wrapper;
+package org.tc.osgi.bundle.manager.core.wrapper;
 
 public enum BundleStateEnum {
 	UNINSTALLED, INSTALLED, RESOLVED, STARTING, STOPPING, ACTIVE,UNKNOW;

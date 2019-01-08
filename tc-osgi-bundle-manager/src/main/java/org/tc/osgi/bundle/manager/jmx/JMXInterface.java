@@ -10,8 +10,8 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.tc.osgi.bundle.manager.core.external.RemoteRegistryMBean;
-import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 
 public class JMXInterface {
@@ -42,8 +42,9 @@ public class JMXInterface {
 		this.url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://:7001/jmxrmi");
 		this.jmxc = JMXConnectorFactory.connect(url, null);
 		this.mbsc = jmxc.getMBeanServerConnection();
-		this.mEquinoxRegistry = new ObjectName("org.tc.osgi.bundle.manager.core.internal:type=EquinoxRegistry");
-		this.mRemoteRegistry = new ObjectName("org.tc.osgi.bundle.manager.core.external:type=RemoteRegistry");
+		//TODO a corriger
+		this.mEquinoxRegistry = new ObjectName("org.tc.osgi.bundle.manager.mbean:type=EquinoxRegistry");
+		this.mRemoteRegistry = new ObjectName("org.tc.osgi.bundle.manager.mbean:type=RemoteRegistry");
 		this.equinoxRegistryMBean=JMX.newMBeanProxy(mbsc, mEquinoxRegistry, EquinoxRegistryMBean.class, true);
 		this.remoteRegistryMBean=JMX.newMBeanProxy(mbsc, mRemoteRegistry, RemoteRegistryMBean.class, true);
 	}

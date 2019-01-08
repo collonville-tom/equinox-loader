@@ -1,12 +1,11 @@
-package org.tc.osgi.bundle.manager.core.external;
+package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
-import org.tc.osgi.bundle.manager.core.internal.LocalRepository;
+import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;
@@ -52,7 +51,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	
 	private String find(String tarname) throws DownloaderException {
 		for (RemoteRepository r : this.repositories) {
-			for (TarGzBundle bundle : r.getBundles()) {
+			for (ITarGzBundle bundle : r.getBundles()) {
 				if (bundle.getName().equals(tarname))
 					return r.getRepositoryUrl() + "/" + bundle.getUrl();
 			}
@@ -88,7 +87,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	@Override
 	public String pushTar(String name, String version) {
-		for (TarGzBundle tgz : this.localRepository.getBundles()) {
+		for (ITarGzBundle tgz : this.localRepository.getBundles()) {
 			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
 				StringBuilder b = new StringBuilder("/local/");
 				b.append(name).append("-").append(version).append(ARCH_EXT);

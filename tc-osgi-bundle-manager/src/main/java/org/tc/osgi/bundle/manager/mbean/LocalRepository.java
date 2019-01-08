@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal;
+package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.File;
 import java.io.FileWriter;

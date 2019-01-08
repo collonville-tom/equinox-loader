@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal.wrapper;
+package org.tc.osgi.bundle.manager.core.wrapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
-import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistry;
+import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistryException;
 
 public class BundleControlWrapper {
 
@@ -31,12 +31,12 @@ public class BundleControlWrapper {
 	
 	
 	
-	public BundleControlWrapper(String bundleControlFile) throws TcEquinoxRegistry {
+	public BundleControlWrapper(String bundleControlFile) throws TcEquinoxRegistryException {
 		try {
 			this.extractProperties(Files.readAllLines(new File(bundleControlFile).toPath()));
 			
 		} catch (IOException e) {
-			throw new TcEquinoxRegistry("Erreur de traitemennt du fichier de control "+bundleControlFile,e);
+			throw new TcEquinoxRegistryException("Erreur de traitemennt du fichier de control "+bundleControlFile,e);
 		}
 	}
 

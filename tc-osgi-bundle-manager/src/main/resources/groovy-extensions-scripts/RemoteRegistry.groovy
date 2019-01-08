@@ -12,7 +12,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.tc.osgi.bundle.manager.core.external.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.jmx.JMXInterface;
 
 import spark.Route;

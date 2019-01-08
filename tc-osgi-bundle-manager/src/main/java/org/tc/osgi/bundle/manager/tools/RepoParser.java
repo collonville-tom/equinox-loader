@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
 import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
@@ -27,8 +28,8 @@ public class RepoParser {
 		
 	}
 	
-	public List<TarGzBundle> parseRepoList(String file) throws RepoParserException {
-		List<TarGzBundle> bundles=new ArrayList<>();
+	public List<ITarGzBundle> parseRepoList(String file) throws RepoParserException {
+		List<ITarGzBundle> bundles=new ArrayList<>();
 		try {
 			List<String> lurls=Files.readAllLines(new File(file).toPath());
 			bundles= parseRepoElement(lurls);
@@ -40,7 +41,7 @@ public class RepoParser {
 		return bundles;
 	}
 	
-	public TarGzBundle bundleBuilder(String url)
+	public ITarGzBundle bundleBuilder(String url)
 	{
 		LoggerServiceProxy.getInstance().getLogger(RepoParser.class).debug("Parsing "+url);
 		Matcher bundleMatcher;
@@ -53,7 +54,7 @@ public class RepoParser {
 	}
 	
 	
-	public List<TarGzBundle> parseRepoElement(List<String> lurls)
+	public List<ITarGzBundle> parseRepoElement(List<String> lurls)
 	{
 		return lurls.stream().map(x -> this.bundleBuilder(x) )
 				.collect(Collectors.toList());

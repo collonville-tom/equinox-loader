@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal.wrapper;
+package org.tc.osgi.bundle.manager.core.wrapper;
 
 import java.util.Dictionary;
 import java.util.Enumeration;

@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.external;
+package org.tc.osgi.bundle.manager.mbean;
 
 
 

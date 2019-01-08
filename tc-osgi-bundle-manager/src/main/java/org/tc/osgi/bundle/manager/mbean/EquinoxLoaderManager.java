@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.jmx;
+package org.tc.osgi.bundle.manager.mbean;
 
 import java.lang.management.ManagementFactory;
 
@@ -11,8 +11,6 @@ import javax.management.ObjectName;
 
 import org.tc.osgi.bundle.manager.exception.TcManagerMBeanException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
-
-import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
 public class EquinoxLoaderManager implements EquinoxLoaderManagerMBean{
 

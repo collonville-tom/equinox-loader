@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.external.RemoteRepository;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
+import org.tc.osgi.bundle.manager.mbean.RemoteRepository;
 
 public class Downloader {
 

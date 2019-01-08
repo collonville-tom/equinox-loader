@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.internal;
+package org.tc.osgi.bundle.manager.mbean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +8,18 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.external.RemoteRegistry;
-import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleControlWrapper;
-import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleHeaderWrapper;
-import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapper;
-import org.tc.osgi.bundle.manager.core.internal.wrapper.BundleWrapperShortDescription;
-import org.tc.osgi.bundle.manager.core.internal.wrapper.ServiceWrapper;
-import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistry;
+import org.tc.osgi.bundle.manager.core.wrapper.BundleControlWrapper;
+import org.tc.osgi.bundle.manager.core.wrapper.BundleHeaderWrapper;
+import org.tc.osgi.bundle.manager.core.wrapper.BundleWrapper;
+import org.tc.osgi.bundle.manager.core.wrapper.BundleWrapperShortDescription;
+import org.tc.osgi.bundle.manager.core.wrapper.ServiceWrapper;
+import org.tc.osgi.bundle.manager.exception.TcEquinoxRegistryException;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
-import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
+
 
 
 // classe qui permet d'acceder au differents ffonctionnalité de manipulation des bundles, install, start, stop, remove
@@ -36,13 +35,13 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	
 	
-	public Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistry {
+	public Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistryException {
 		for (Bundle b : this.context.getBundles()) {
 			if (b.getSymbolicName().equals(bundleName)) {
 				return b;
 			}
 		}
-		throw new TcEquinoxRegistry("Bundle " + bundleName + " not found");
+		throw new TcEquinoxRegistryException("Bundle " + bundleName + " not found");
 	}
 	
 	public String buildPath(String bundleName, String version)	throws FieldTrackingAssignementException{
@@ -69,8 +68,8 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		try {
 			wrapper = new BundleControlWrapper(bundleControlFile);
 			return new JsonSerialiser().toJson(wrapper);
-		} catch (TcEquinoxRegistry e) {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).error(
+		} catch (TcEquinoxRegistryException e) {
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).error(
 					"Une erreur s'est produite lors de la determination des dependannces du bundle " + bundleName, e);
 		}
 		return "Une erreur s'est produite lors de la determination des dependannces du bundle ";
@@ -84,8 +83,8 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 			Bundle b = this.retrieveBundle(bundleName);
 			BundleHeaderWrapper wrapper=new BundleHeaderWrapper(b.getHeaders());
 			return new JsonSerialiser().toJson(wrapper);
-		} catch (TcEquinoxRegistry e) {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).error(
+		} catch (TcEquinoxRegistryException e) {
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).error(
 					"Une erreur s'est produite lors de la recuperation des services du bunddle " + bundleName, e);
 		}
 		return "Une erreur s'est produite lors de la recuperation des info du bunddle ";
@@ -102,14 +101,14 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 			services = bundle.getRegisteredServices();
 			if (services != null) {
 				for (ServiceReference<?> service : services) {
-					LoggerGestionnary.getInstance(EquinoxRegistry.class).debug("Traitement du service: " + service);
+					LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).debug("Traitement du service: " + service);
 					wrapper.add(new ServiceWrapper(service));
 				}
 			}
 
 			return new JsonSerialiser().toJson(wrapper);
-		} catch (TcEquinoxRegistry e) {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).error(
+		} catch (TcEquinoxRegistryException e) {
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).error(
 					"Une erreur s'est produite lors de la recuperation des services du bunddle " + bundleName, e);
 		}
 		return "Une erreur s'est produite lors de la recuperation des services du bunddle ";
@@ -125,12 +124,12 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 			services = context.getServiceReferences((String) null, (String) null);
 			if (services != null) {
 				for (ServiceReference<?> service : services) {
-					LoggerGestionnary.getInstance(EquinoxRegistry.class).debug("Traitement du service: " + service);
+					LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).debug("Traitement du service: " + service);
 					wrapper.add(new ServiceWrapper(service));
 				}
 			}
 		} catch (InvalidSyntaxException e) {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class)
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
 					.error("Erreur dans le recuperation de la liste de services", e);
 		}
 		return new JsonSerialiser().toJson(wrapper);
@@ -139,7 +138,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	
 	public String bundleInstall(String bundleName, String version) {
 		try {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
 			String bundlePath = this.buildPath(bundleName, version);
 			BundleUtilsServiceProxy.getInstance().getBundleInstaller().processOnBundle(context, bundlePath,version);
 			return bundleName + " install";
@@ -154,7 +153,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	public String bundleStop(String bundleName, String version) {
 		try {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
 			BundleUtilsServiceProxy.getInstance().getBundleKiller().processOnBundle(context, bundleName,version);
 			return bundleName + " stoped";
 		} catch (TcOsgiException e) {
@@ -168,7 +167,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	public String bundleUninstall(String bundleName, String version) {
 		try {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
 			BundleUtilsServiceProxy.getInstance().getBundleUninstaller().processOnBundle(context, bundleName,version);
 			return bundleName + " uninstall";
 		} catch (TcOsgiException e) {
@@ -181,7 +180,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	public String bundleStart(String bundleName, String version) {
 		try {
-			LoggerGestionnary.getInstance(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
 			BundleUtilsServiceProxy.getInstance().getBundleStarter().processOnBundle(context, bundleName,version);
 			return bundleName + " started";
 		} catch (TcOsgiException e) {

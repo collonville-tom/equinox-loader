@@ -1,6 +1,6 @@
 package org.tc.osgi.bundle.manager.conf;
 
-import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
+import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
 import org.tc.osgi.bundle.utils.interf.conf.AbstractPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
@@ -159,7 +159,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
 
 	public String getBundleDirectory() throws FieldTrackingAssignementException {
 		if (bundleDirectory == null) {
-            XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleDirectory");
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleDirectory");
         }
         return bundleDirectory;
 	}
@@ -168,7 +168,7 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
 	public String getBundleLocalBase() throws FieldTrackingAssignementException
 	{
 		if (bundleLocalBase == null) {
-            XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleLocalBase");
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(getXMLFile()).fieldTraking(this, "bundleLocalBase");
         }
         return bundleLocalBase;
 	}

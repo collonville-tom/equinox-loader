@@ -13,4 +13,16 @@
 		<fieldName>bundleLocalBase</fieldName>
 		<className>org.tc.osgi.bundle.manager.conf.ManagerPropertyFile</className>
 	</configFiles>
+	<configFiles>
+		<defaultValue>${groovy.version}</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>groovyDependencyBundleVersion</fieldName>
+		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>tc-osgi-bundle-groovy</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>groovyDependencyBundleName</fieldName>
+		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
+	</configFiles>
 </ConfigurationLibrary>

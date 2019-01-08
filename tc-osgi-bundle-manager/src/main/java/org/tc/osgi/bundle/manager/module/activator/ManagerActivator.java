@@ -1,18 +1,22 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.manager.core.external.RemoteRegistry;
-import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
-import org.tc.osgi.bundle.manager.jmx.EquinoxLoaderManager;
+import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
+import org.tc.osgi.bundle.manager.mbean.EquinoxLoaderManager;
+import org.tc.osgi.bundle.manager.mbean.EquinoxRegistry;
+import org.tc.osgi.bundle.manager.mbean.RemoteRegistry;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
+
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.utils.AbstractTcOsgiActivator;
 import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
+
 
 /**
  * Activator.java.
@@ -38,6 +42,9 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	
 	private RemoteRegistry repoRegistry;
 	private EquinoxRegistry equinoxRegistry;
+	
+	private String groovyDependencyBundleName;
+	private String groovyDependencyBundleVersion;
 
 	
 
@@ -101,8 +108,24 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	
 		this.managerBean.registerMBean(repoRegistry);
-		this.managerBean.registerMBean(equinoxRegistry);		
+		this.managerBean.registerMBean(equinoxRegistry);
+		
+		this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(),this.getGroovyDependencyBundleVersion());
 	}
+	
+	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException  {
+        if (this.groovyDependencyBundleName == null) {
+        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleName");
+        }
+        return this.groovyDependencyBundleName;
+    }
+    
+    public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException  {
+        if (this.groovyDependencyBundleVersion == null) {
+        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleVersion");
+        }
+        return this.groovyDependencyBundleVersion;
+    }
 
 	@Override
 	protected void afterStop(BundleContext context) throws TcOsgiException {

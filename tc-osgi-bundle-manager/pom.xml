@@ -11,9 +11,10 @@
 		<build>0.1.1</build>
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.1.2</utils.interfaces.version>
+		<utils.version>0.3.3</utils.version>
 		<equinox-loader.version>0.2.3</equinox-loader.version>
-		<docker.latest>0.2.3</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de equinox -->
-		
+		<groovy.version>0.1.0.SNAPSHOT</groovy.version>
+		<docker.latest>0.2.3</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de l'interface -->
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
 
@@ -23,17 +24,26 @@
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-<!-- 			<version>${utils.interfaces.version}${snapshot}</version> -->
+			<!-- <version>${utils.interfaces.version}${snapshot}</version> -->
 			<version>${utils.interfaces.version}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.tc.osgi.bundle.utils</groupId>
+			<artifactId>tc-osgi-bundle-utils</artifactId>
+			<!-- <version>${utils.interfaces.version}${snapshot}</version> -->
+			<version>${utils.version}</version>
+			<classifier>assembly</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.tc.osgi</groupId>
 			<artifactId>tc-osgi-equinox-loader</artifactId>
-<!-- 			<version>${equinox-loader.version}${snapshot}</version> -->
+			<!-- <version>${utils.interfaces.version}${snapshot}</version> -->
 			<version>${equinox-loader.version}</version>
-			<scope>compile</scope>
+			<classifier>assembly</classifier>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -81,7 +91,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Activator>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</Bundle-Activator>
-						<Export-Package>org.tc.osgi.bundle.manager.jmx,org.tc.osgi.bundle.manager.core.external,org.tc.osgi.bundle.manager.core.internal,*</Export-Package>
+						<Export-Package>org.tc.osgi.bundle.manager.jmx,org.tc.osgi.bundle.manager.mbean,*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -108,7 +118,7 @@
 								<image>
 									<build>
 										<from>${docker.login}/tc-osgi-equinox-loader:${docker.latest}</from>
-<!-- 										<cmd>/bin/sh</cmd> -->
+										<!-- <cmd>/bin/sh</cmd> -->
 										<ports>
 											<port>${manager.jmx.port}</port>
 										</ports>

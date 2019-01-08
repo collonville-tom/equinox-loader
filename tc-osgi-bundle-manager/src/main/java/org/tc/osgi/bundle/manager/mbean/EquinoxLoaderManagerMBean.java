@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.jmx;
+package org.tc.osgi.bundle.manager.mbean;
 
 
 
