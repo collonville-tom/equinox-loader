@@ -81,6 +81,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Activator>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</Bundle-Activator>
+						<Export-Package>org.tc.osgi.bundle.manager.jmx,org.tc.osgi.bundle.manager.core.external,org.tc.osgi.bundle.manager.core.internal,*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

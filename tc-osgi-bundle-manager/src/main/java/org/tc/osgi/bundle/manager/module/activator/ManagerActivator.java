@@ -1,14 +1,12 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
 import org.osgi.framework.BundleContext;
-import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.external.RemoteRegistry;
 import org.tc.osgi.bundle.manager.core.internal.EquinoxRegistry;
 import org.tc.osgi.bundle.manager.jmx.EquinoxLoaderManager;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
-import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.service.ILoggerUtilsService;

@@ -2,7 +2,6 @@ package org.tc.osgi.bundle.manager.core.internal;
 
 public interface EquinoxRegistryMBean {
 
-	
 	public String bundleShortList();
 	public String bundleDependencies(String bundleName, String version);
 	public String bundleInfo(String bundleName, String version) ;
@@ -13,6 +12,4 @@ public interface EquinoxRegistryMBean {
     public String bundleUninstall(String bundleName, String version) ;
     public String bundleStart(String bundleName, String version);
     public String bundleList();
-    
-    
 }
