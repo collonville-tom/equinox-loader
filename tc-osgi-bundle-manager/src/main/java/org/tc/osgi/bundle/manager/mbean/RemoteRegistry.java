@@ -2,7 +2,9 @@ package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
@@ -25,8 +27,9 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	public static final String TAR_TAG = ":tar";
 	public static final String VERSION_TAG = ":version";
 	public static final String TAR_CMD = "tar x";
+	
 
-	private List<RemoteRepository> repositories = new ArrayList<>();
+	private Map<String, RemoteRepository> repositories = new HashMap<>();
 	private LocalRepository localRepository;
 
 	public RemoteRegistry() {
@@ -36,13 +39,13 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	private void initStaticRepository() {
 		RemoteRepository r = new RemoteRepository(DEFAULT_NAME,
 				ManagerPropertyFile.getInstance().getStaticRepositoryUrl());
-		this.repositories.add(r);
+		this.repositories.put(DEFAULT_NAME,r);
 		this.localRepository = new LocalRepository(LOCAL_NAME, ManagerPropertyFile.getInstance().getWorkDirectory());
 	}
 
 	public String toString() {
 		StringBuilder b = new StringBuilder("Repositories:\n");
-		for (RemoteRepository r : repositories) {
+		for (RemoteRepository r : repositories.values()) {
 			b.append(r.toString()).append("\n");
 		}
 		return b.toString();
@@ -50,7 +53,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	
 	private String find(String tarname) throws DownloaderException {
-		for (RemoteRepository r : this.repositories) {
+		for (RemoteRepository r : this.repositories.values()) {
 			for (ITarGzBundle bundle : r.getBundles()) {
 				if (bundle.getName().equals(tarname))
 					return r.getRepositoryUrl() + "/" + bundle.getUrl();
@@ -60,7 +63,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	}
 
 	@Override
-	public String installBundle(String bundleName, String version) {
+	public String deployTar(String bundleName, String version) {
 		if (!System.getProperty(OS_PROPERTY).toLowerCase().startsWith(WINDOWS)) {
 			StringBuilder b = new StringBuilder(TAR_CMD);
 			b.append(" -f ").append(LOCAL_WORK_DIR);
@@ -96,9 +99,12 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 		}
 		return "File not found";
 	}
+	
+
+	
 
 	@Override
-	public String pullOnRemoteRepo(String tarname, String version) {
+	public String pullTar(String tarname, String version) {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
 				.info("Download targz " + tarname + " into local repo");
 		String url = "tarGz not found";
@@ -114,7 +120,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	}
 
 	@Override
-	public String updateLocal() {
+	public String fetchLocalRepo() {
 		this.localRepository.fetch();
 		return new JsonSerialiser().toJson(localRepository);
 	}
@@ -122,11 +128,30 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	@Override
 	public String fetchRemoteRepo() {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repositories");
-		for (RemoteRepository r : repositories) {
+		for (RemoteRepository r : repositories.values()) {
 			r.fetch();
 			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
 		}
 		return new JsonSerialiser().toJson(repositories);
+	}
+
+
+
+	@Override
+	public String addRepo(String name,String url) {
+		if(this.repositories.containsKey(name))
+			return "Repository allready exist";
+		this.repositories.put(name, new RemoteRepository(name, url));
+		return "Repository "+name+" added";
+		
+	}
+
+	@Override
+	public String removeRepo(String name) {
+		if(this.repositories.containsKey(name))
+			return "Repository does not exist";
+		this.repositories.remove(name);
+		return "Repository "+name+" removed";
 	}
 
 }

@@ -14,6 +14,7 @@ import javax.management.remote.JMXServiceURL;
 
 import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.jmx.JMXInterface;
+import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 
 import spark.Route;
 import spark.Response;
@@ -24,6 +25,43 @@ import spark.Request;
 String TAR_TAG = ":tar";
 String VERSION_TAG = ":version";
 
+Spark.get("/rps-cmd",new Route() {
+
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                    response.type("application/json");
+                    List<String> cmd=new ArrayList<String>();
+                    cmd.add("/rps-cmd -> cette liste");
+					cmd.add("/fetchRemoteRepo -> initialise l'image local du contenu des repo distant");
+					cmd.add("/fetchLocalRepo -> initialise l'image local du contenu du repo local");
+					cmd.add("/pullTar/:tar/:version -> importe un tar depuis un repository distant et le depose dans le repository local");
+					cmd.add("/deployTar/:tar/:version -> lance la procedure de deployement d'une archive tar dans le contexte d'installation de equinox (precede la phase d'installation du bundle contenu dans le tar");
+					cmd.add("/pushTar/:tar/:version -> permet pour un client de l'interface REST de realiser l'extraction d'un TAR contenu dans le repo local");
+					cmd.add("/addRepo/:name/:url -> ajout d'un repository, remplacer les / par des %2F par exemple: http:%2F%2Ftoto%2Ftata");
+					cmd.add("/delRepo/:name -> suppression d'un repository, not implemented yet");
+                    return new JsonSerialiser().toJson(cmd);
+            }
+        });
+
+Spark.get("/addRepo/:name/:url",new Route() {
+			
+			@Override
+			public Object handle(Request request, Response response) throws Exception {
+				response.type("application/json");
+				return JMXInterface.getInstance().getRemoteRegistry().addRepo(request.params(":name"),request.params(":url"));
+			}
+		});
+		
+Spark.get("/delRepo/:name",new Route() {
+			
+			@Override
+			public Object handle(Request request, Response response) throws Exception {
+				response.type("application/json");
+				return JMXInterface.getInstance().getRemoteRegistry().delRepo(request.params(":name"));
+			}
+		});
+		
+
 Spark.get("/fetchRemoteRepo",new Route() {
 			
 			@Override
@@ -32,30 +70,30 @@ Spark.get("/fetchRemoteRepo",new Route() {
 				return JMXInterface.getInstance().getRemoteRegistry().fetchRemoteRepo();
 			}
 		}); 
-Spark.get("/updateLocal",new Route() {
+Spark.get("/fetchLocalRepo",new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().updateLocal();
+				return JMXInterface.getInstance().getRemoteRegistry().fetchLocalRepo();
 			}
 		});  
-Spark.get("/pullOnRemoteRepo/:tar/:version", new Route() {
+Spark.get("/pullTar/:tar/:version", new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().pullOnRemoteRepo(request.params(TAR_TAG), request.params(VERSION_TAG));
+				return JMXInterface.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 			}
 		});
-Spark.get("/deploy/:tar/:version",new Route() {
+Spark.get("/deployTar/:tar/:version",new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				return JMXInterface.getInstance().getRemoteRegistry().installBundle(request.params(TAR_TAG), request.params(VERSION_TAG));
+				return JMXInterface.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 			}
 		});
-Spark.get("/pullTar/:tar/:version",new Route() {
+Spark.get("/pushTar/:tar/:version",new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
@@ -64,6 +102,7 @@ Spark.get("/pullTar/:tar/:version",new Route() {
 				return "Redirection to " + b;
 			}
 		}); 
+
 
 
 

@@ -34,7 +34,7 @@ public class RemoteRepository extends AbstractRepository {
 			this.setBundles(parseur.parseRepoList(file));
 			LoggerServiceProxy.getInstance().getLogger(RemoteRepository.class).debug("Parsing repofile done :"+file);
 		} catch (Exception e) {
-			LoggerServiceProxy.getInstance().getLogger(RemoteRepository.class).error("Fetching repository "+this.getRepositoryName()+" in error");
+			LoggerServiceProxy.getInstance().getLogger(RemoteRepository.class).error("Fetching repository "+this.getRepositoryName()+" in error",e);
 		}	
 	}
 	

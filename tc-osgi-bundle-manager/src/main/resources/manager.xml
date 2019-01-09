@@ -25,4 +25,10 @@
 		<fieldName>groovyDependencyBundleName</fieldName>
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
 	</configFiles>
+	<configFiles>
+		<defaultValue>7001</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>jmxPort</fieldName>
+		<className>org.tc.osgi.bundle.manager.jmx.JMXInterface</className>
+	</configFiles>
 </ConfigurationLibrary>

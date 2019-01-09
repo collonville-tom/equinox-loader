@@ -10,9 +10,12 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
 import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
+import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
 public class JMXInterface {
 
@@ -25,11 +28,12 @@ public class JMXInterface {
 	
 	private EquinoxRegistryMBean equinoxRegistryMBean;
 	private RemoteRegistryMBean remoteRegistryMBean;
+	private String jmxPort;
 	
 
 	private static JMXInterface instance;
 	
-	public static JMXInterface getInstance() throws IOException, MalformedObjectNameException
+	public static JMXInterface getInstance() throws IOException, MalformedObjectNameException, FieldTrackingAssignementException
 	{
 		if(instance==null)
 			instance=new JMXInterface();
@@ -37,9 +41,9 @@ public class JMXInterface {
 		
 	}
 	
-	private JMXInterface() throws IOException, MalformedObjectNameException {
+	private JMXInterface() throws IOException, MalformedObjectNameException, FieldTrackingAssignementException {
 		LoggerServiceProxy.getInstance().getLogger(JMXInterface.class).debug("Creation du client JMX");
-		this.url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://:7001/jmxrmi");
+		this.url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://:"+this.getJmxPort()+"/jmxrmi");
 		this.jmxc = JMXConnectorFactory.connect(url, null);
 		this.mbsc = jmxc.getMBeanServerConnection();
 		//TODO a corriger
@@ -48,6 +52,15 @@ public class JMXInterface {
 		this.equinoxRegistryMBean=JMX.newMBeanProxy(mbsc, mEquinoxRegistry, EquinoxRegistryMBean.class, true);
 		this.remoteRegistryMBean=JMX.newMBeanProxy(mbsc, mRemoteRegistry, RemoteRegistryMBean.class, true);
 	}
+	
+
+	
+	public String getJmxPort() throws FieldTrackingAssignementException  {
+        if (this.jmxPort == null) {
+        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "jmxPort");
+        }
+        return this.jmxPort;
+    }
 	
 	public EquinoxRegistryMBean getEquinoxRegistry()
 	{
