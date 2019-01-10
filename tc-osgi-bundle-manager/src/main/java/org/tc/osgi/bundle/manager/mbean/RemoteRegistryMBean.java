@@ -1,8 +1,9 @@
 package org.tc.osgi.bundle.manager.mbean;
 
+import java.io.Serializable;
+import java.rmi.Remote;
 
-
-public interface RemoteRegistryMBean {
+public interface RemoteRegistryMBean extends Remote, Serializable{
 	
 	public String deployTar(String bundleName, String version);
 	public String pushTar(String name, String version);

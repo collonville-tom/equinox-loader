@@ -1,8 +1,11 @@
 package org.tc.osgi.bundle.manager.mbean;
 
+import java.io.Serializable;
+import java.rmi.Remote;
+
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
-public interface EquinoxRegistryMBean {
+public interface EquinoxRegistryMBean extends Remote, Serializable{
 
 	
 	public String buildPath(String bundleName, String version)	throws FieldTrackingAssignementException;

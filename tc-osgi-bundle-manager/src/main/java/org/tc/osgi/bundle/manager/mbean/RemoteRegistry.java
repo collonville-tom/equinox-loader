@@ -1,9 +1,7 @@
 package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
@@ -18,6 +16,10 @@ import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
 public class RemoteRegistry implements RemoteRegistryMBean {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9039919806902291851L;
 	public static final String OS_PROPERTY = "os.name";
 	public static final String WINDOWS = "windows";
 	public static final String DEFAULT_NAME = "default";

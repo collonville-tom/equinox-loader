@@ -50,7 +50,8 @@ public class Downloader {
 		String cacheDir = this.buildDstRepoFileDir(repository);
 		String cacheFile = this.buildRepoCacheFile(repository);
 		try {
-			Files.createDirectory(new File(cacheDir).toPath());
+			if(!new File(cacheDir).exists())
+				Files.createDirectory(new File(cacheDir).toPath());
 			this.downloadFile(remoteRepoFile, cacheFile);
 			return cacheFile;
 		} catch (IOException e) {
@@ -62,6 +63,8 @@ public class Downloader {
 	public void downloadFile(String url, String file) throws DownloaderException {
 		InputStream in;
 		try {
+			if(new File(file).exists())
+				new File(file).delete();
 			in = new URL(url).openStream();
 			Files.copy(in, Paths.get(file), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {

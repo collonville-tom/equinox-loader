@@ -26,9 +26,27 @@
 		<className>org.tc.osgi.bundle.manager.module.activator.ManagerActivator</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>7001</defaultValue>
+		<defaultValue>9001</defaultValue>
 		<valueType>java.lang.String</valueType>
-		<fieldName>jmxPort</fieldName>
-		<className>org.tc.osgi.bundle.manager.jmx.JMXInterface</className>
+		<fieldName>rmiPort</fieldName>
+		<className>org.tc.osgi.bundle.manager.rmi.ManagerRmiClient</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>localhost</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>rmiAddr</fieldName>
+		<className>org.tc.osgi.bundle.manager.rmi.ManagerRmiClient</className>
+	</configFiles>
+	<configFiles>
+		<defaultValue>9001</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>rmiPort</fieldName>
+		<className>org.tc.osgi.bundle.manager.rmi.EquinoxLoaderManager</className>
+	</configFiles>
+		<configFiles>
+		<defaultValue>localhost</defaultValue>
+		<valueType>java.lang.String</valueType>
+		<fieldName>rmiAddr</fieldName>
+		<className>org.tc.osgi.bundle.manager.rmi.EquinoxLoaderManager</className>
 	</configFiles>
 </ConfigurationLibrary>

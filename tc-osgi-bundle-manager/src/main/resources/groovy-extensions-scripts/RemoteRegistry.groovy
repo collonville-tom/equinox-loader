@@ -13,7 +13,7 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
 import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
-import org.tc.osgi.bundle.manager.jmx.JMXInterface;
+import org.tc.osgi.bundle.manager.rmi.ManagerRmiClient;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 
 import spark.Route;
@@ -21,6 +21,7 @@ import spark.Response;
 import spark.Spark;
 import spark.Request;
 
+Spark.staticFiles.externalLocation("/var/equinox-loader-manager/");
 
 String TAR_TAG = ":tar";
 String VERSION_TAG = ":version";
@@ -48,7 +49,7 @@ Spark.get("/addRepo/:name/:url",new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().addRepo(request.params(":name"),request.params(":url"));
+				return ManagerRmiClient.getInstance().getRemoteRegistry().addRepo(request.params(":name"),request.params(":url"));
 			}
 		});
 		
@@ -57,7 +58,7 @@ Spark.get("/delRepo/:name",new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().delRepo(request.params(":name"));
+				return ManagerRmiClient.getInstance().getRemoteRegistry().delRepo(request.params(":name"));
 			}
 		});
 		
@@ -67,7 +68,7 @@ Spark.get("/fetchRemoteRepo",new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().fetchRemoteRepo();
+				return ManagerRmiClient.getInstance().getRemoteRegistry().fetchRemoteRepo();
 			}
 		}); 
 Spark.get("/fetchLocalRepo",new Route() {
@@ -75,7 +76,7 @@ Spark.get("/fetchLocalRepo",new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().fetchLocalRepo();
+				return ManagerRmiClient.getInstance().getRemoteRegistry().fetchLocalRepo();
 			}
 		});  
 Spark.get("/pullTar/:tar/:version", new Route() {
@@ -83,21 +84,21 @@ Spark.get("/pullTar/:tar/:version", new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
-				return JMXInterface.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+				return ManagerRmiClient.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 			}
 		});
 Spark.get("/deployTar/:tar/:version",new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				return JMXInterface.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+				return ManagerRmiClient.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 			}
 		});
 Spark.get("/pushTar/:tar/:version",new Route() {
 			
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				String b=JMXInterface.getInstance().getRemoteRegistry().pushTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+				String b=ManagerRmiClient.getInstance().getRemoteRegistry().pushTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 				response.redirect(b.toString());
 				return "Redirection to " + b;
 			}

@@ -1,14 +1,17 @@
 package org.tc.osgi.bundle.manager.module.activator;
 
+import java.rmi.RemoteException;
+
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.mbean.EquinoxLoaderManager;
 import org.tc.osgi.bundle.manager.mbean.EquinoxRegistry;
+import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
 import org.tc.osgi.bundle.manager.mbean.RemoteRegistry;
+import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
-
+import org.tc.osgi.bundle.manager.rmi.EquinoxLoaderManager;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
@@ -38,7 +41,7 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
 	private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
 	private TcOsgiProxy<IBundleUtilsService> iBundleUtilsService;
-	private EquinoxLoaderManager managerBean;
+	private EquinoxLoaderManager manager;
 	
 	private RemoteRegistry repoRegistry;
 	private EquinoxRegistry equinoxRegistry;
@@ -96,21 +99,24 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		this.managerBean.registerMBean(this.equinoxRegistry);
-		this.managerBean.registerMBean(this.repoRegistry);
+		this.manager.unRegister(this.equinoxRegistry,RemoteRegistryMBean.class);
+		this.manager.unRegister(this.repoRegistry,EquinoxRegistryMBean.class);
 	}
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
-		this.managerBean=new EquinoxLoaderManager();
+		this.manager=new EquinoxLoaderManager();
 		this.repoRegistry=new RemoteRegistry();
 		this.equinoxRegistry=new EquinoxRegistry(context);
-
-	
-		this.managerBean.registerMBean(repoRegistry);
-		this.managerBean.registerMBean(equinoxRegistry);
-		
-		this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(),this.getGroovyDependencyBundleVersion());
+		try {
+			this.manager.createRegistry(this.manager.getPort());
+			this.manager.register(repoRegistry,RemoteRegistryMBean.class);
+			this.manager.register(equinoxRegistry,EquinoxRegistryMBean.class);
+			
+			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(),this.getGroovyDependencyBundleVersion());
+		} catch (RemoteException e) {
+			throw new TcOsgiException("Erreur d'initialisation du bundle manager",e);
+		}
 	}
 	
 	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException  {

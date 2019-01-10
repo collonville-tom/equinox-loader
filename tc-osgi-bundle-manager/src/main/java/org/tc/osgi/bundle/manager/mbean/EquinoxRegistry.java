@@ -25,6 +25,11 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 // classe qui permet d'acceder au differents ffonctionnalité de manipulation des bundles, install, start, stop, remove
 public class EquinoxRegistry implements EquinoxRegistryMBean {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1126882670873927286L;
+
 	private BundleContext context;
 
 	private static final String BUNDLE_CLASSIFIER = "-assembly.jar";
