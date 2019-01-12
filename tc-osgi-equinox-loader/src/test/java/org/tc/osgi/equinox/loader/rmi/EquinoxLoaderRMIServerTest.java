@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.interf.rmi.EquinoxLoaderBundleContextImpl;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 

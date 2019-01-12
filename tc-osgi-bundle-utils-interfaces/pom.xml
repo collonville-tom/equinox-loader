@@ -8,8 +8,8 @@
 	
 
 	<properties>
-		<build>0.1.2</build>
-		<snapshot></snapshot>
+		<build>0.1.3</build>
+		<snapshot>-SNAPSHOT</snapshot>
 	</properties>
 
 	<version>${build}${snapshot}</version>

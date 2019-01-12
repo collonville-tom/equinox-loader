@@ -8,6 +8,7 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
@@ -89,13 +90,16 @@ public class EquinoxLoaderRMIClient {
 
 				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort())
 						.append("/").append(IEquinoxLoaderBundleContext.class.getSimpleName());
-
+					
+				LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(buff.toString());
 				final Remote rem = Naming.lookup(buff.toString());
+				LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(rem.toString());
 				if (rem instanceof IEquinoxLoaderBundleContext) {
 					LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(
 							"Chargement via rmi de l'objet " + IEquinoxLoaderBundleContext.class.getSimpleName());
 					iContext = (IEquinoxLoaderBundleContext) rem;
 				}
+				iContext = (IEquinoxLoaderBundleContext) rem;
 			}
 			return iContext;
 		} catch (UnknownHostException |FieldTrackingAssignementException|MalformedURLException|RemoteException|NotBoundException e) {

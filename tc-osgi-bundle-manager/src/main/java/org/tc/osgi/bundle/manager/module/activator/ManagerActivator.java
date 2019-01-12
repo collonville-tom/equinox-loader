@@ -107,7 +107,7 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	protected void afterStart(BundleContext context) throws TcOsgiException {
 		this.manager=new EquinoxLoaderManager();
 		this.repoRegistry=new RemoteRegistry();
-		this.equinoxRegistry=new EquinoxRegistry(context);
+		this.equinoxRegistry=new EquinoxRegistry();
 		try {
 			this.manager.createRegistry(this.manager.getPort());
 			this.manager.register(repoRegistry,RemoteRegistryMBean.class);

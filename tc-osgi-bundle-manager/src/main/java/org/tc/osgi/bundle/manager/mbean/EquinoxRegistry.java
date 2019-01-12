@@ -30,18 +30,21 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	 */
 	private static final long serialVersionUID = 1126882670873927286L;
 
-	private BundleContext context;
+	
 
 	private static final String BUNDLE_CLASSIFIER = "-assembly.jar";
 	
-	public EquinoxRegistry(BundleContext context) {
-		this.context = context;
+	public EquinoxRegistry() {
+		
 	}
 
+	private BundleContext getBundleContext() throws TcOsgiException
+	{
+		return BundleUtilsServiceProxy.getInstance().getBundleContext();
+	}
 	
-	
-	public Bundle retrieveBundle(String bundleName) throws TcEquinoxRegistryException {
-		for (Bundle b : this.context.getBundles()) {
+	public Bundle retrieveBundle(String bundleName) throws TcOsgiException {
+		for (Bundle b : getBundleContext().getBundles()) {
 			if (b.getSymbolicName().equals(bundleName)) {
 				return b;
 			}
@@ -57,10 +60,10 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		return builder.toString();
 	}
 
-	public String bundleShortList() {
+	public String bundleShortList() throws TcOsgiException {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive bundle list");
 		List<BundleWrapperShortDescription> wrappers = new ArrayList<>();
-		for (Bundle b : this.context.getBundles()) {
+		for (Bundle b : this.getBundleContext().getBundles()) {
 			wrappers.add(new BundleWrapperShortDescription(b));
 		}
 		return new JsonSerialiser().toJson(wrappers);
@@ -83,7 +86,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	
 	
 
-	public String bundleInfo(String bundleName, String version) {
+	public String bundleInfo(String bundleName, String version) throws TcOsgiException {
 		try {
 			Bundle b = this.retrieveBundle(bundleName);
 			BundleHeaderWrapper wrapper=new BundleHeaderWrapper(b.getHeaders());
@@ -97,7 +100,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	
 
-	public String bundleService(String bundleName) {
+	public String bundleService(String bundleName) throws TcOsgiException {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive service list");
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 		try {
@@ -120,13 +123,13 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	}
 
 	
-	public String bundleServices() {
+	public String bundleServices() throws TcOsgiException {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive services list");
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 
 		ServiceReference<?>[] services;
 		try {
-			services = context.getServiceReferences((String) null, (String) null);
+			services = getBundleContext().getServiceReferences((String) null, (String) null);
 			if (services != null) {
 				for (ServiceReference<?> service : services) {
 					LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).debug("Traitement du service: " + service);
@@ -145,7 +148,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 		try {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
 			String bundlePath = this.buildPath(bundleName, version);
-			BundleUtilsServiceProxy.getInstance().getBundleInstaller().processOnBundle(context, bundlePath,version);
+			BundleUtilsServiceProxy.getInstance().getBundleInstaller().processOnBundle(getBundleContext(), bundlePath,version);
 			return bundleName + " install";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -159,7 +162,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	public String bundleStop(String bundleName, String version) {
 		try {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleKiller().processOnBundle(context, bundleName,version);
+			BundleUtilsServiceProxy.getInstance().getBundleKiller().processOnBundle(getBundleContext(), bundleName,version);
 			return bundleName + " stoped";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -173,7 +176,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	public String bundleUninstall(String bundleName, String version) {
 		try {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleUninstaller().processOnBundle(context, bundleName,version);
+			BundleUtilsServiceProxy.getInstance().getBundleUninstaller().processOnBundle(getBundleContext(), bundleName,version);
 			return bundleName + " uninstall";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -186,7 +189,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	public String bundleStart(String bundleName, String version) {
 		try {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).warn("Parameter version is not used yet "+version);
-			BundleUtilsServiceProxy.getInstance().getBundleStarter().processOnBundle(context, bundleName,version);
+			BundleUtilsServiceProxy.getInstance().getBundleStarter().processOnBundle(getBundleContext(), bundleName,version);
 			return bundleName + " started";
 		} catch (TcOsgiException e) {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class)
@@ -196,11 +199,17 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	}
 	
 
-	public String bundleList() {
+	public String bundleList() throws TcOsgiException {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive bundle list");
 		List<BundleWrapper> wrappers = new ArrayList<>();
-		for (Bundle b : this.context.getBundles()) {
+		try {
+		for (Bundle b : this.getBundleContext().getBundles()) {
 			wrappers.add(new BundleWrapper(b));
+		}
+		}catch(Throwable e)
+		{
+			LoggerServiceProxy.getInstance().getLogger(EquinoxRegistry.class).error("Quel bordel ces saut RMI", e);	
+			throw new TcOsgiException("AH AH!",e);
 		}
 		return new JsonSerialiser().toJson(wrappers);
 	}
