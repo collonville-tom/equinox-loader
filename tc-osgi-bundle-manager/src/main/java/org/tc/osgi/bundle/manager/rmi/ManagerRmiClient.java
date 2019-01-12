@@ -53,7 +53,7 @@ public class ManagerRmiClient {
 
 				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort())
 						.append("/").append(RemoteRegistryMBean.class.getSimpleName());
-
+				LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(buff.toString());
 				final Remote rem = Naming.lookup(buff.toString());
 				if (rem instanceof RemoteRegistryMBean) {
 					LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(
@@ -84,7 +84,7 @@ public class ManagerRmiClient {
 				}
 			}
 			return equinoxRegistryMBean;
-		} catch (Exception  e) {
+		} catch (Throwable  e) {
 			throw new TcOsgiException("Erreur de recuperation du bundleContext",e);
 		} 
 	}
