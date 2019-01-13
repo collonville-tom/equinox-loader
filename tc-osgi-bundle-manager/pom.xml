@@ -9,12 +9,12 @@
 
 	<properties>
 		<build>0.1.1</build>
-		<snapshot>-SNAPSHOT</snapshot>
+		<snapshot></snapshot>
 		<utils.interfaces.version>0.1.3</utils.interfaces.version>
 		<utils.version>0.3.4</utils.version>
 		<equinox-loader.version>0.2.3</equinox-loader.version>
-		<groovy.version>0.1.0.SNAPSHOT</groovy.version>
-		<docker.latest>latest</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de l'interface -->
+		<groovy.version>0.1.0</groovy.version>
+		<docker.latest>0.2.3</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de l'interface -->
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
 
@@ -25,7 +25,6 @@
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
 			<version>${utils.interfaces.version}${snapshot}</version>
-<!-- 			<version>${utils.interfaces.version}</version> -->
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
@@ -33,7 +32,6 @@
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils</artifactId>
 			<version>${utils.version}${snapshot}</version>
-<!-- 			<version>${utils.version}</version> -->
 			<classifier>assembly</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -41,7 +39,6 @@
 			<groupId>org.tc.osgi</groupId>
 			<artifactId>tc-osgi-equinox-loader</artifactId>
 			<version>${equinox-loader.version}${snapshot}</version>
-<!-- 			<version>${equinox-loader.version}</version> -->
 			<classifier>assembly</classifier>
 			<scope>test</scope>
 		</dependency>
