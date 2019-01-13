@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
+import org.tc.osgi.bundle.manager.core.RepositoryManager;
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
@@ -22,8 +23,8 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	private static final long serialVersionUID = -9039919806902291851L;
 	public static final String OS_PROPERTY = "os.name";
 	public static final String WINDOWS = "windows";
-	public static final String DEFAULT_NAME = "default";
-	public static final String LOCAL_NAME = "local";
+	
+	
 	public static final String ARCH_EXT = ".tar.gz";
 	public static final String LOCAL_WORK_DIR = ManagerPropertyFile.getInstance().getWorkDirectory() + "/local/";
 	public static final String TAR_TAG = ":tar";
@@ -31,23 +32,17 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	public static final String TAR_CMD = "tar x";
 	
 
-	private Map<String, RemoteRepository> repositories = new HashMap<>();
-	private LocalRepository localRepository;
+	
 
 	public RemoteRegistry() {
-		this.initStaticRepository();
+		
 	}
 
-	private void initStaticRepository() {
-		RemoteRepository r = new RemoteRepository(DEFAULT_NAME,
-				ManagerPropertyFile.getInstance().getStaticRepositoryUrl());
-		this.repositories.put(DEFAULT_NAME,r);
-		this.localRepository = new LocalRepository(LOCAL_NAME, ManagerPropertyFile.getInstance().getWorkDirectory());
-	}
+	
 
 	public String toString() {
 		StringBuilder b = new StringBuilder("Repositories:\n");
-		for (RemoteRepository r : repositories.values()) {
+		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			b.append(r.toString()).append("\n");
 		}
 		return b.toString();
@@ -55,7 +50,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	
 	private String find(String tarname) throws DownloaderException {
-		for (RemoteRepository r : this.repositories.values()) {
+		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			for (ITarGzBundle bundle : r.getBundles()) {
 				if (bundle.getName().equals(tarname))
 					return r.getRepositoryUrl() + "/" + bundle.getUrl();
@@ -92,7 +87,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	@Override
 	public String pushTar(String name, String version) {
-		for (ITarGzBundle tgz : this.localRepository.getBundles()) {
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
 			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
 				StringBuilder b = new StringBuilder("/local/");
 				b.append(name).append("-").append(version).append(ARCH_EXT);
@@ -123,36 +118,36 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	@Override
 	public String fetchLocalRepo() {
-		this.localRepository.fetch();
-		return new JsonSerialiser().toJson(localRepository);
+		RepositoryManager.getRepositoryManager().getLocalRepository().fetch();
+		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager().getLocalRepository());
 	}
 
 	@Override
 	public String fetchRemoteRepo() {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repositories");
-		for (RemoteRepository r : repositories.values()) {
+		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			r.fetch();
 			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
 		}
-		return new JsonSerialiser().toJson(repositories);
+		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager().getRepositories());
 	}
 
 
 
 	@Override
 	public String addRepo(String name,String url) {
-		if(this.repositories.containsKey(name))
+		if(RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
 			return "Repository allready exist";
-		this.repositories.put(name, new RemoteRepository(name, url));
+		RepositoryManager.getRepositoryManager().getRepositories().put(name, new RemoteRepository(name, url));
 		return "Repository "+name+" added";
 		
 	}
 
 	@Override
 	public String removeRepo(String name) {
-		if(this.repositories.containsKey(name))
+		if(RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
 			return "Repository does not exist";
-		this.repositories.remove(name);
+		RepositoryManager.getRepositoryManager().getRepositories().remove(name);
 		return "Repository "+name+" removed";
 	}
 

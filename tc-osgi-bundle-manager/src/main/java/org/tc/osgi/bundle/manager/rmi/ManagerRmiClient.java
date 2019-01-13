@@ -55,6 +55,7 @@ public class ManagerRmiClient {
 						.append("/").append(RemoteRegistryMBean.class.getSimpleName());
 				LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(buff.toString());
 				final Remote rem = Naming.lookup(buff.toString());
+				LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(rem.toString());
 				if (rem instanceof RemoteRegistryMBean) {
 					LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(
 							"Chargement via rmi de l'objet " + EquinoxRegistryMBean.class.getSimpleName());
@@ -63,6 +64,7 @@ public class ManagerRmiClient {
 			}
 			return remoteRegistryMBean;
 		} catch (Throwable  e) {
+			LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).error("Erreur critique", e);
 			throw new TcOsgiException("Erreur de recuperation du bundleContext",e);
 		} 
 	}
@@ -85,6 +87,7 @@ public class ManagerRmiClient {
 			}
 			return equinoxRegistryMBean;
 		} catch (Throwable  e) {
+			
 			throw new TcOsgiException("Erreur de recuperation du bundleContext",e);
 		} 
 	}

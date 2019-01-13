@@ -5,6 +5,7 @@ import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
+import java.rmi.AccessException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
@@ -41,6 +42,19 @@ public class EquinoxLoaderManager implements IRPCServer {
 	public EquinoxLoaderManager() throws TcManagerMBeanException {
 		LoggerServiceProxy.getInstance().getLogger(EquinoxLoaderManager.class).info("Construction of MBeanServer");
 		this.server = ManagementFactory.getPlatformMBeanServer();
+	}
+	
+	public void listRMIRegistry() throws AccessException, RemoteException
+	{
+		if(this.registre!=null)
+		{
+			StringBuilder b=new StringBuilder("Liste des services RMI actif").append("\n");
+			for(String s:this.registre.list())
+			{
+				b.append(s).append("\n");
+			}
+			LoggerServiceProxy.getInstance().getLogger(EquinoxLoaderManager.class).debug(b.toString());
+		}
 	}
 
 	
@@ -92,6 +106,8 @@ public class EquinoxLoaderManager implements IRPCServer {
 			LoggerServiceProxy.getInstance().getLogger(EquinoxLoaderManager.class).debug("Enregistrement de l'objet accessible a l'url : " + url);
 			registre.rebind(signature, (Remote) obj);
 		}
+		this.listRMIRegistry();
+		
 	}
 
 	/**

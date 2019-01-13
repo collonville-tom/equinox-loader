@@ -1,5 +1,6 @@
 package org.tc.osgi.bundle.manager.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
@@ -11,7 +12,7 @@ public abstract class AbstractRepository implements RepositoryMBean{
 	private String repositoryName;
 	private String repositoryUrl;
 	
-	private List<ITarGzBundle> bundles;
+	private List<ITarGzBundle> bundles=new ArrayList<>();
 	
 	protected AbstractRepository(String name,String url)
 	{
