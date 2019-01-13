@@ -1,7 +1,7 @@
 package org.tc.osgi.bundle.manager.groovy;
 
 import java.lang.Exception;
-
+import java.nio.file.Files
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +12,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile
 import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.rmi.ManagerRmiClient;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
@@ -25,7 +26,23 @@ Spark.staticFiles.externalLocation("/var/equinox-loader-manager/");
 
 String TAR_TAG = ":tar";
 String VERSION_TAG = ":version";
+/*
+Spark.get("/local/:name",new Route() {
 
+                @Override
+                public Object handle(Request request, Response response) throws Exception {
+					    System.out.println("Lecture RepoList");
+                        List<String> repoContent=Files.readAllLines(new File("/var/equinox-loader-manager/local/repository.list").toPath())
+                        StringBuilder b=new StringBuilder();
+                        for(String s:repoContent)
+                        {
+                                b.append(s.replace("/var/equinox-loader-manager",".")).append("<br>");
+                        }
+                        System.out.println(b.toString());
+                        return b.toString();
+                }
+        });
+*/
 Spark.get("/rps-cmd",new Route() {
 
 	@Override

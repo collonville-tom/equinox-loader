@@ -13,6 +13,6 @@ public interface RemoteRegistryMBean extends Remote, Serializable{
 	
 
 	public String addRepo(String name,String url);
-	public String removeRepo(String name);
+	public String delRepo(String name);
 	
 }

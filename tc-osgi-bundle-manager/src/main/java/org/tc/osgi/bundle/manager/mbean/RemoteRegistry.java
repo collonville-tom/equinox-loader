@@ -1,8 +1,7 @@
 package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.RepositoryManager;
@@ -144,8 +143,8 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	}
 
 	@Override
-	public String removeRepo(String name) {
-		if(RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
+	public String delRepo(String name) {
+		if(!RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
 			return "Repository does not exist";
 		RepositoryManager.getRepositoryManager().getRepositories().remove(name);
 		return "Repository "+name+" removed";

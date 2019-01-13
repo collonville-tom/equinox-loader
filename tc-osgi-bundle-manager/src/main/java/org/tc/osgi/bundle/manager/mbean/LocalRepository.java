@@ -28,7 +28,7 @@ public class LocalRepository extends AbstractRepository {
 			for (Path p : paths) {
 				if(!p.endsWith(ManagerPropertyFile.getInstance().getStaticRepositoryFile()))
 				{
-					writer.write(p.toString());
+					writer.write(p.toString().replace("/var/equinox-loader-manager/local", "."));
 					writer.write("\n");
 				}
 			}

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
-import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
 import org.tc.osgi.bundle.manager.mbean.RepositoryMBean;
 
 public abstract class AbstractRepository implements RepositoryMBean{

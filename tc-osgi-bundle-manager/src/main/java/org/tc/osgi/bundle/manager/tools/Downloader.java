@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.mbean.RemoteRepository;
+import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 
 public class Downloader {
 
@@ -65,6 +66,7 @@ public class Downloader {
 		try {
 			if(new File(file).exists())
 				new File(file).delete();
+			LoggerServiceProxy.getInstance().getLogger(Downloader.class).debug("ouverture du stream vers "+url);
 			in = new URL(url).openStream();
 			Files.copy(in, Paths.get(file), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
