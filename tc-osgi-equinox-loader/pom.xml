@@ -19,10 +19,10 @@
 		<manager.version>0.1.1</manager.version>
 		<utils.interfaces.version>0.1.3</utils.interfaces.version>
 		<!-- ca va pas cette gestion des snapshot -->
-		<snapshot.xml.delimiter>.</snapshot.xml.delimiter><!-- . -->
-		<snapshot.pom.delimiter>-</snapshot.pom.delimiter><!-- - -->
-		<snapshot>SNAPSHOT</snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
-		<docker.latest>latest</docker.latest>
+		<snapshot.xml.delimiter></snapshot.xml.delimiter><!-- . -->
+		<snapshot.pom.delimiter></snapshot.pom.delimiter><!-- - -->
+		<snapshot></snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
+		<docker.latest>0.3.4</docker.latest>
 		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
@@ -38,7 +38,6 @@
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
 			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
-			<!-- <version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version> -->
 			<classifier>assembly</classifier>
 		</dependency>
 		<dependency>
@@ -51,7 +50,6 @@
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
 			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
-			<!-- <version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version> -->
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -67,8 +65,7 @@
 
 
 	<build>
-		<plugins>
-
+		<plugins
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>

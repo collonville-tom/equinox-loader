@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.tc.osgi.bundle.utils</groupId>
 			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}</version>
+			<version>${utils.interfaces.version}${snapshot}</version>
 			<classifier>assembly</classifier>
 			<scope>compile</scope>
 		</dependency>
