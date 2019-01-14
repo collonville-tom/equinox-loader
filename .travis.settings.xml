@@ -50,6 +50,11 @@
 		<profile>
 			<id>external</id>
 			<repositories>
+      				<repository>
+              	  <id>clojars</id>
+              	  <name>clojars</name>
+               	 <url>http://clojars.org/repo/</url>
+           		 </repository>
             	<repository>
               	  <id>central</id>
               	  <name>central</name>
