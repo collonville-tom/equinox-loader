@@ -1,6 +1,6 @@
 sudo: false
 language: java
-jdk: openjdk15
+jdk: oraclejdk11
 
 addons:
   sonarcloud:
@@ -11,8 +11,8 @@ before_install: true
 install : true
 before_script : true
 
-script: 
-  - cp settings.xml $HOME/.m2/settings.xml 
+script:
+  - cp settings.xml $HOME/.m2/settings.xml
   - mvn clean
   - mvn clean verify sonar:sonar
 

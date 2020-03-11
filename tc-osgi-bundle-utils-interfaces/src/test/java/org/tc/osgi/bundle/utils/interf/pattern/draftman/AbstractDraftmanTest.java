@@ -1,6 +1,6 @@
 package org.tc.osgi.bundle.utils.interf.pattern.draftman;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitable;
 import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitor;
 
