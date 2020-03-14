@@ -1,20 +1,22 @@
 /**
+ *
  */
 package org.tc.osgi.bundle.utils.rmi.client;
 
-import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.UnknownHostException;
-import java.rmi.RemoteException;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
 import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
 
-import junit.framework.Assert;
+import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * EquinoxLoaderRMIClientTest.java.
@@ -80,20 +82,20 @@ public class EquinoxLoaderRMIClientTest extends AbstractRMIServer implements Ser
 
             final IEquinoxLoaderBundleContext iEquinoxLoaderBundleContext = client.getIEquinoxLoaderBundleContext();
 
-            Assert.assertEquals(null, iEquinoxLoaderBundleContext.getBundleContext());
+            assertEquals(null, iEquinoxLoaderBundleContext.getBundleContext());
 
         } catch (final NumberFormatException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final RemoteException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final UnknownHostException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final MalformedURLException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (TcOsgiException e) {
-        	Assert.fail(e.getMessage());
-		} 
+            fail(e.getMessage());
+        }
     }
 }

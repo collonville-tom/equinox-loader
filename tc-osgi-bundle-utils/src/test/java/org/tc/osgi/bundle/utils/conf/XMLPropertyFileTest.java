@@ -1,10 +1,13 @@
 /**
+ *
  */
 package org.tc.osgi.bundle.utils.conf;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * @req STD_BUNDLE_UTILS_025
@@ -38,10 +41,10 @@ public class XMLPropertyFileTest {
     @Test
     public void test() {
         try {
-            Assert.assertEquals("0.0.1", getVersion());
+            assertEquals("0.0.1", getVersion());
         } catch (final FieldTrackingAssignementException e) {
             e.printStackTrace();
-            Assert.fail();
+            fail();
         }
 
     }

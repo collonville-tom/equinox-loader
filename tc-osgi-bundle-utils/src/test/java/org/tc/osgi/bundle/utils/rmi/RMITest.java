@@ -1,6 +1,11 @@
 /**
+ *
  */
 package org.tc.osgi.bundle.utils.rmi;
+
+import org.junit.jupiter.api.Test;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
 
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -11,10 +16,8 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
-import org.tc.osgi.bundle.utils.rmi.server.AbstractRMIServer;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * RMITest.java.
@@ -130,19 +133,19 @@ public class RMITest extends AbstractRMIServer implements Serializable {
             System.out.println(buff.toString());
             final Remote rem = Naming.lookup(buff.toString());
             if (rem instanceof Bidon) {
-                Assert.assertEquals(new Integer(24), ((Bidon) rem).getValue());
+                assertEquals(new Integer(24), ((Bidon) rem).getValue());
             }
 
         } catch (final RemoteException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final MalformedURLException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final UnknownHostException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final NotBoundException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
 
     }
