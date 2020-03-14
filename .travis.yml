@@ -13,8 +13,8 @@ before_script : true
 
 script:
   - cp settings.xml $HOME/.m2/settings.xml
-  - mvn clean install -Dtoken=b2cb1417bd4a8cb574c1ddbad84c7c9c373e544f
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dtoken=b2cb1417bd4a8cb574c1ddbad84c7c9c373e544f
+  - mvn clean install -Dtoken=05d24a071b1f55754fdc6bb64f089faa5feba4af
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dtoken=05d24a071b1f55754fdc6bb64f089faa5feba4af
 
 cache:
   directories:
