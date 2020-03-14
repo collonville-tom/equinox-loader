@@ -1,6 +1,6 @@
 sudo: false
 language: java
-jdk: openjdk15
+jdk: openjdk13
 
 addons:
   sonarcloud:
@@ -11,10 +11,10 @@ before_install: true
 install : true
 before_script : true
 
-script: 
-  - cp settings.xml $HOME/.m2/settings.xml 
-  - mvn clean
-  - mvn clean verify sonar:sonar
+script:
+  - cp settings.xml $HOME/.m2/settings.xml
+  - mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 
 cache:
   directories:
