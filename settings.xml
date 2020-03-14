@@ -34,11 +34,6 @@
                     <url>http://www.mvnrepository.com</url>
                 </repository>
                 <repository>
-                    <id>mvnrepository</id>
-                    <name>mvnrepository</name>
-                    <url>http://www.mvnrepository.com</url>
-                </repository>
-                <repository>
                     <id>github-release</id>
                     <name>github-release</name>
                     <url>https://maven.pkg.github.com/collonville-tom/tc-delivery</url>
@@ -49,6 +44,13 @@
 
     </profiles>
 
+    <servers>
+        <server>
+            <id>github-release</id>
+            <username>collonville-tom</username>
+            <password>05d24a071b1f55754fdc6bb64f089faa5feba4af</password>
+        </server>
+    </servers>
 
     <activeProfiles>
         <activeProfile>external</activeProfile>
