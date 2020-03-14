@@ -33,46 +33,25 @@
                     <name>mvnrepository</name>
                     <url>http://www.mvnrepository.com</url>
                 </repository>
-            </repositories>
-        </profile>
-
-
-        <profile>
-            <id>github-release</id>
-            <repositories>
                 <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <id>dependencies</id>
+                    <id>mvnrepository</id>
+                    <name>mvnrepository</name>
+                    <url>http://www.mvnrepository.com</url>
+                </repository>
+                <repository>
+                    <id>github-release</id>
+                    <name>github-release</name>
                     <url>https://maven.pkg.github.com/collonville-tom/tc-delivery</url>
                 </repository>
             </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <id>dependencies</id>
-                    <name>plugins-release</name>
-                    <url>https://maven.pkg.github.com/collonville-tom/tc-delivery</url>
-                </pluginRepository>
-            </pluginRepositories>
         </profile>
 
-        <!--pour la livraison -->
+
     </profiles>
 
 
     <activeProfiles>
         <activeProfile>external</activeProfile>
-        <activeProfile>github-release</activeProfile>
         <activeProfile>compiler</activeProfile>
     </activeProfiles>
 </settings>
