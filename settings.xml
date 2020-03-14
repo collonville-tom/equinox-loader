@@ -48,7 +48,7 @@
         <server>
             <id>github-release</id>
             <username>collonville-tom</username>
-            <password>05d24a071b1f55754fdc6bb64f089faa5feba4af</password>
+            <password>${GIT_HUB_TOKEN}</password>
         </server>
     </servers>
 
