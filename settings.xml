@@ -4,7 +4,17 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <profiles>
+        <profile>
+            <id>compiler</id>
+            <properties>
+                <siteweb-url>http://localhost/osgi</siteweb-url>
+                <jenkins-url>http://localhost/jenkins</jenkins-url>
+                <local-siteweb-url>file://localhost/var/www/osgi/</local-siteweb-url>
+                <!--Cette variable permet de definir quel version java utiliser pour le build -->
+                <SETTINGS_JAVA_HOME>${JAVA_HOME}</SETTINGS_JAVA_HOME>
 
+            </properties>
+        </profile>
         <profile>
             <id>external</id>
             <repositories>
@@ -63,5 +73,6 @@
     <activeProfiles>
         <activeProfile>external</activeProfile>
         <activeProfile>github-release</activeProfile>
+        <activeProfile>compiler</activeProfile>
     </activeProfiles>
 </settings>

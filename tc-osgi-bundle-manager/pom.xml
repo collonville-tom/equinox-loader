@@ -12,7 +12,7 @@
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.2.0</utils.interfaces.version>
 		<utils.version>0.4.0</utils.version>
-		<equinox-loader.version>0.2.3</equinox-loader.version>
+		<equinox-loader.version>0.3.0</equinox-loader.version>
 		<groovy.version>0.1.0</groovy.version>
 		<docker.latest>latest</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de l'interface -->
 		<manager.jmx.port>7001</manager.jmx.port>

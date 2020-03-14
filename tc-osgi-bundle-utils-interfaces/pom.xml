@@ -5,7 +5,7 @@
 	<packaging>bundle</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<description>Un bundle pour exposer des composants et utilitaires</description>
-	
+
 
 	<properties>
 		<build>0.2.0</build>
