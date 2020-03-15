@@ -33,20 +33,42 @@
                     <name>mvnrepository</name>
                     <url>http://www.mvnrepository.com</url>
                 </repository>
-                <repository>
-                    <id>github-release</id>
-                    <name>github-release</name>
-                    <url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
-                </repository>
             </repositories>
         </profile>
 
-
+        <profile>
+            <id>github-release</id>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <id>github-release</id>
+                    <url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <id>github-release</id>
+                    <url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
     </profiles>
 
 
     <activeProfiles>
         <activeProfile>external</activeProfile>
         <activeProfile>compiler</activeProfile>
+        <activeProfile>github-release</activeProfile>
     </activeProfiles>
 </settings>
