@@ -21,17 +21,17 @@
                 <repository>
                     <id>clojars</id>
                     <name>clojars</name>
-                    <url>http://clojars.org/repo/</url>
+                    <url>https://clojars.org/repo/</url>
                 </repository>
                 <repository>
                     <id>central</id>
                     <name>central</name>
-                    <url>http://repo1.maven.org/maven2</url>
+                    <url>https://repo1.maven.org/maven2</url>
                 </repository>
                 <repository>
                     <id>mvnrepository</id>
                     <name>mvnrepository</name>
-                    <url>http://www.mvnrepository.com</url>
+                    <url>https://www.mvnrepository.com</url>
                 </repository>
                 <repository>
                     <id>github-release</id>
