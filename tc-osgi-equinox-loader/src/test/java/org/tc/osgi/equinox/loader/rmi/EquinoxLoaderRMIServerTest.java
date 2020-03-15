@@ -1,17 +1,19 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.rmi;
+
+import org.junit.jupiter.api.Test;
+import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
+import org.tc.osgi.bundle.utils.interf.rmi.EquinoxLoaderBundleContextImpl;
+import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
+import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
-import org.tc.osgi.bundle.utils.interf.rmi.EquinoxLoaderBundleContextImpl;
-import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
-import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * EquinoxLoaderRMIServerTest.java.
@@ -30,7 +32,7 @@ public class EquinoxLoaderRMIServerTest {
         try {
             EquinoxLoaderRMIServer.getInstance().addObject(IEquinoxLoaderBundleContext.class.getSimpleName(), new EquinoxLoaderBundleContextImpl());
         } catch (RemoteException | MalformedURLException | UnknownHostException | FieldTrackingAssignementException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
     }
 

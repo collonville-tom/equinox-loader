@@ -1,9 +1,9 @@
 package org.tc.osgi.equinox.loader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * EquinoxLoaderMainTest.java.
@@ -31,7 +31,7 @@ public class EquinoxLoaderMainTest {
                 try {
                     Thread.sleep(5000);
                 } catch (final InterruptedException e) {
-                    Assert.fail(e.getLocalizedMessage());
+                    fail(e.getLocalizedMessage());
                 }
                 EquinoxLoaderMain.isAlive = false;
 

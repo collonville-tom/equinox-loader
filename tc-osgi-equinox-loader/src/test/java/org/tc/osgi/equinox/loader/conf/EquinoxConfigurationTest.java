@@ -1,11 +1,11 @@
 package org.tc.osgi.equinox.loader.conf;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.exception.EquinoxConfigException;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * EquinoxConfigurationTest.java.
@@ -25,13 +25,13 @@ public class EquinoxConfigurationTest {
     public void testGetBundleLocalBase() {
         try {
             EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
-            Assert.assertEquals("file://localhost://", EquinoxPropertyFile.getInstance().getBundleLocalBase());
+            assertEquals("file://localhost://", EquinoxPropertyFile.getInstance().getBundleLocalBase());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxConfigException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -42,13 +42,13 @@ public class EquinoxConfigurationTest {
     public void testGetInstance() {
         try {
             EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
-            Assert.assertNotNull(EquinoxPropertyFile.getInstance());
+            assertNotNull(EquinoxPropertyFile.getInstance());
         } catch (final EquinoxConfigException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 

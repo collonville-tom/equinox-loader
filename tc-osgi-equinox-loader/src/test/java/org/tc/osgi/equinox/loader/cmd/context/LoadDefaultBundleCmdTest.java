@@ -1,17 +1,19 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.cmd.context;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * LoadDefaultBundleCmdTest.java.
@@ -29,7 +31,7 @@ public class LoadDefaultBundleCmdTest {
         final Bundle b1 = Mockito.mock(Bundle.class);
         Mockito.when(b1.toString()).thenReturn("Bundle1");
         Mockito.when(b1.getLocation()).thenReturn("Bundle1");
-        
+
         final Bundle b2 = Mockito.mock(Bundle.class);
         Mockito.when(b2.toString()).thenReturn("unknown");
         Mockito.when(b2.getLocation()).thenReturn("unknown");
@@ -49,7 +51,7 @@ public class LoadDefaultBundleCmdTest {
         try {
             cmd.execute();
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
     }
 

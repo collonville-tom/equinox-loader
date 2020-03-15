@@ -1,20 +1,22 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.cmd.context;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.List;
-
 import org.eclipse.osgi.framework.util.Headers;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.context.BundleStarter;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
+
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * StartDefaultBundleCmdTest.java.
@@ -26,13 +28,13 @@ public class StartDefaultBundleCmdTest {
 
     @Test
     public void test() {
-    	
+
         final String version = "versionBundle";
 
-        Dictionary<String,String> d=new Headers<String,String>(1);
+        Dictionary<String, String> d = new Headers<String, String>(1);
         d.put(BundleStarter.VERSION_H, version);
-        
-        
+
+
         final Bundle[] tab = {};
         EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
         final List<Bundle> bundles = new ArrayList<Bundle>();
@@ -62,7 +64,7 @@ public class StartDefaultBundleCmdTest {
         try {
             cmd.execute();
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
     }
 
