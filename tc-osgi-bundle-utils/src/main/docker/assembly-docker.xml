@@ -15,6 +15,9 @@
 			<useProjectAttachments>true</useProjectAttachments>
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
+				<include>*jaxb*</include>
+				<include>*javax*</include>
+				<include>*istack*</include>
 				<include>*log4j*</include>
 				<include>*:${project.artifactId}:*:assembly</include>
 				<include>*org.eclipse.osgi*</include>
