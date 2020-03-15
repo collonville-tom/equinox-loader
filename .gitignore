@@ -274,3 +274,8 @@ dmypy.json
 ### Scala ###
 
 # End of https://www.gitignore.io/api/c++,java,maven,scala,python,eclipse,jupyternotebook
+
+/.idea/
+*.iml
+*/.gradle/
+*/bundles/

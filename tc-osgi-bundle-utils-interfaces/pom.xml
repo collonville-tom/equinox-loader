@@ -5,19 +5,19 @@
 	<packaging>bundle</packaging>
 	<name>${project.artifactId}-${project.version}</name>
 	<description>Un bundle pour exposer des composants et utilitaires</description>
-	
+
 
 	<properties>
-		<build>0.1.3</build>
-		<snapshot></snapshot>
+		<build>0.2.0</build>
+		<snapshot>-SNAPSHOT</snapshot>
 	</properties>
 
 	<version>${build}${snapshot}</version>
 	
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -29,7 +29,10 @@
 			<version>1.2.17</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+		</dependency>
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.osgi</groupId> -->
@@ -53,7 +56,7 @@
 		<dependency>
 			<groupId>org.eclipse.tycho</groupId>
 			<artifactId>org.eclipse.osgi</artifactId>
-			<version>3.11.2.v20161107-1947</version>
+			<version>3.13.0.v20180226-1711</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
@@ -61,7 +64,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.1</version>
+		<version>0.9.0</version>
 	</parent>
 
 
@@ -104,7 +107,7 @@
 							<images>
 								<image>
 									<build>
-										<from>openjdk:8-jre-alpine</from>
+										<from>openjdk:15</from>
 									</build>
 								</image>
 							</images>

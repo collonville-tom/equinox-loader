@@ -1,12 +1,15 @@
 /**
+ *
  */
 package org.tc.osgi.bundle.utils.io;
 
+import org.junit.jupiter.api.Test;
+import org.tc.osgi.bundle.utils.interf.io.StringBufferOutputStream;
+
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.tc.osgi.bundle.utils.interf.io.StringBufferOutputStream;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * StringBufferOutputStreamTest.java.
@@ -28,9 +31,9 @@ public class StringBufferOutputStreamTest {
             s.write(42);
             s.write(42);
             s.write(42);
-            Assert.assertEquals("****", s.toString());
+            assertEquals("****", s.toString());
         } catch (final IOException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
 
     }

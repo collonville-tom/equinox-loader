@@ -1,5 +1,6 @@
 package org.tc.osgi.bundle.utils.module.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -52,14 +53,12 @@ public final class CollectionUtilsServiceImpl implements ICollectionUtilsService
 	public <T> Collection<T> collect(final Collection<T> c, final ITransformer<T> t) {
 		Collection<T> res = null;
 		try {
-			res = c.getClass().newInstance();
+			res = c.getClass().getDeclaredConstructor(null).newInstance();
 			for (final T e : c) {
 				t.evaluate(res, e);
 			}
-		} catch (final InstantiationException e1) {
-			LoggerGestionnary.getInstance(CollectionUtilsServiceImpl.class).error(e1.getMessage(), e1);
-		} catch (final IllegalAccessException e1) {
-			LoggerGestionnary.getInstance(CollectionUtilsServiceImpl.class).error(e1.getMessage(), e1);
+		} catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+			LoggerGestionnary.getInstance(CollectionUtilsServiceImpl.class).error(e.getMessage(), e);
 		}
 		return res;
 	}

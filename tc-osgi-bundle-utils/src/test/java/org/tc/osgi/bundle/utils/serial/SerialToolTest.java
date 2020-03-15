@@ -1,21 +1,21 @@
 package org.tc.osgi.bundle.utils.serial;
 
-import java.io.FileNotFoundException;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.collection.element.Pair;
 
-import junit.framework.Assert;
+import java.io.FileNotFoundException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * SerialToolTest.java.
  *
+ * @author collonville thomas
+ * @version 0.0.5
  * @req STD_BUNDLE_UTILS_040
- *
  * @track SRS_BUNDLE_UTILS_040
  * @track SDD_BUNDLE_UTILS_040
- * @version 0.0.5
- * @author collonville thomas
  */
 public class SerialToolTest {
 
@@ -29,13 +29,13 @@ public class SerialToolTest {
         try {
             serial.save(clef_valeur, "pair_test.xml", "target/");
         } catch (final FileNotFoundException e) {
-            Assert.fail();
+            fail();
         }
         try {
             final Pair<String, Integer> clef_valeur2 = serial.read("pair_test.xml", "target/");
-            Assert.assertEquals(clef_valeur, clef_valeur2);
+            assertEquals(clef_valeur, clef_valeur2);
         } catch (final FileNotFoundException e) {
-            Assert.fail();
+            fail();
         }
 
     }

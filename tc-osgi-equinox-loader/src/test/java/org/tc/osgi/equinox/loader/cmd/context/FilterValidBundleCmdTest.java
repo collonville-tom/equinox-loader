@@ -1,16 +1,18 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.cmd.context;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * FilterValidBundleCmdTest.java.
@@ -44,7 +46,7 @@ public class FilterValidBundleCmdTest {
         try {
             cmd.execute();
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
     }
 }

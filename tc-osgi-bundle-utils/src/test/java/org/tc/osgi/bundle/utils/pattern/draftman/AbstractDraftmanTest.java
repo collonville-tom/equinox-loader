@@ -1,6 +1,6 @@
 package org.tc.osgi.bundle.utils.pattern.draftman;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.pattern.draftman.AbstractDraftman;
 import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitable;
 import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitor;
@@ -8,13 +8,11 @@ import org.tc.osgi.bundle.utils.interf.pattern.visitor.IVisitor;
 /**
  * ObserverSubjectTest.java.
  *
- *
- * @req STD_BUNDLE_UTILS_070
- *
- * @track SRS_BUNDLE_UTILS_050
- * @track SDD_BUNDLE_UTILS_070
  * @author thomas collonvillé
  * @version 0.0.2
+ * @req STD_BUNDLE_UTILS_070
+ * @track SRS_BUNDLE_UTILS_050
+ * @track SDD_BUNDLE_UTILS_070
  */
 public class AbstractDraftmanTest {
 

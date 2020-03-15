@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <profiles>
+        <profile>
+            <id>compiler</id>
+            <properties>
+                <siteweb-url>http://localhost/osgi</siteweb-url>
+                <jenkins-url>http://localhost/jenkins</jenkins-url>
+                <local-siteweb-url>file://localhost/var/www/osgi/</local-siteweb-url>
+                <!--Cette variable permet de definir quel version java utiliser pour le build -->
+                <SETTINGS_JAVA_HOME>${JAVA_HOME}</SETTINGS_JAVA_HOME>
+
+            </properties>
+        </profile>
+        <profile>
+            <id>external</id>
+            <repositories>
+                <repository>
+                    <id>clojars</id>
+                    <name>clojars</name>
+                    <url>https://clojars.org/repo/</url>
+                </repository>
+                <repository>
+                    <id>central</id>
+                    <name>central</name>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>mvnrepository</id>
+                    <name>mvnrepository</name>
+                    <url>https://www.mvnrepository.com</url>
+                </repository>
+                <repository>
+                    <id>github-release</id>
+                    <name>github-release</name>
+                    <url>https://collonville-tom.github.io/tc-delivery/repositories/tc-release-local</url>
+                </repository>
+            </repositories>
+        </profile>
+
+    </profiles>
+
+
+    <activeProfiles>
+        <activeProfile>external</activeProfile>
+        <activeProfile>compiler</activeProfile>
+    </activeProfiles>
+</settings>

@@ -1,9 +1,11 @@
 /**
+ *
  */
 package org.tc.osgi.bundle.utils.conf.jaxb;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * ObjectFactoryTest.java.
@@ -17,7 +19,7 @@ public class ObjectFactoryTest {
     @Test
     public void test() {
         final ObjectFactory factory = new ObjectFactory();
-        Assert.assertEquals(ConfigurationLibrary.class.getSimpleName(), factory.createConfigurationLibrary().getClass().getSimpleName());
-        Assert.assertEquals(ElementConfiguration.class.getSimpleName(), factory.createElementConfiguration().getClass().getSimpleName());
+        assertEquals(ConfigurationLibrary.class.getSimpleName(), factory.createConfigurationLibrary().getClass().getSimpleName());
+        assertEquals(ElementConfiguration.class.getSimpleName(), factory.createElementConfiguration().getClass().getSimpleName());
     }
 }

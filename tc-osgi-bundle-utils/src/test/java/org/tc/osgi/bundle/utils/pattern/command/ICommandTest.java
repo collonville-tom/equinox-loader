@@ -1,24 +1,23 @@
 package org.tc.osgi.bundle.utils.pattern.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.pattern.command.ICommand;
 import org.tc.osgi.bundle.utils.interf.pattern.command.exception.CommandExecutionException;
 
-import junit.framework.Assert;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * ObserverSubjectTest.java.
  *
- *
- * @req STD_BUNDLE_UTILS_070
- *
- * @track SRS_BUNDLE_UTILS_060
- * @track SDD_BUNDLE_UTILS_080
  * @author thomas collonvillé
  * @version 0.0.5
+ * @req STD_BUNDLE_UTILS_070
+ * @track SRS_BUNDLE_UTILS_060
+ * @track SDD_BUNDLE_UTILS_080
  */
 public class ICommandTest {
 
@@ -53,10 +52,10 @@ public class ICommandTest {
         try {
             new DefaultRunner().exec();
         } catch (final CommandExecutionException e) {
-            Assert.fail();
+            fail();
         }
 
-        Assert.assertEquals("cmd1cmd2", tmp.toString());
+        assertEquals("cmd1cmd2", tmp.toString());
     }
 
 }

@@ -1,8 +1,9 @@
 package org.tc.osgi.bundle.utils.interf.pattern.observer;
 
-import org.junit.Test;
 
-import junit.framework.Assert;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * ObserverSubjectTest.java.
@@ -30,14 +31,14 @@ public class ObserverSubjectTest {
 
 			@Override
 			public void update(final ISubject _subject) {
-				Assert.assertEquals(subject, _subject);
+				assertEquals(subject, _subject);
 
 			}
 
 			@Override
 			public void update(final ISubject _subject, final IObserverEvent _event) {
-				Assert.assertEquals(subject, _subject);
-				Assert.assertEquals(event, _event);
+				assertEquals(subject, _subject);
+				assertEquals(event, _event);
 
 			}
 		};

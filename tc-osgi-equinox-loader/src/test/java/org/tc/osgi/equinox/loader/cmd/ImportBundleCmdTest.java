@@ -1,11 +1,12 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.cmd;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * ImportBundleCmdTest.java.
@@ -24,7 +25,7 @@ public class ImportBundleCmdTest {
         try {
             cmd.execute();
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
     }
 

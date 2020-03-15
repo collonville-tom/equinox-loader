@@ -1,6 +1,5 @@
 package org.tc.osgi.bundle.utils.module.service.impl;
 
-import javax.xml.bind.JAXBException;
 
 import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.IXmlProperty;
@@ -16,17 +15,14 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
  */
 public class PropertyUtilsServiceImpl implements IPropertyUtilsService {
 
-	/**
-	 * @param propertyFileName
-	 *            String
-	 * @return PropertyFile
-	 * @throws JAXBException
-	 *
-	 * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getXMLPropertyFile(java.lang.String)
-	 */
-	@Override
-	public IXmlProperty getXMLPropertyFile(final String propertyFileName) throws FieldTrackingAssignementException {
-		return XMLPropertyFile.getInstance(propertyFileName);
-	}
+    /**
+     * @param propertyFileName String
+     * @return PropertyFile
+     * @throws FieldTrackingAssignementException
+     */
+    @Override
+    public IXmlProperty getXMLPropertyFile(final String propertyFileName) throws FieldTrackingAssignementException {
+        return XMLPropertyFile.getInstance(propertyFileName);
+    }
 
 }

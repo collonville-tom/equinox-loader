@@ -1,13 +1,13 @@
 package org.tc.osgi.equinox.loader.starter;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.equinox.loader.cmd.context.LoadDefaultBundleCmd;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
 import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
 import org.tc.osgi.equinox.loader.conf.exception.EquinoxConfigException;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * EquinoxStarterTest.java.
@@ -30,11 +30,11 @@ public class EquinoxStarterTest {
             EquinoxStarter.getInstance().setConfiguration(".");
             EquinoxStarter.getInstance().compileParameters();
             EquinoxStarter.getInstance().start();
-            Assert.assertEquals(true, EquinoxStarter.getInstance().check());
+            assertEquals(true, EquinoxStarter.getInstance().check());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final Exception e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
 
     }
@@ -48,13 +48,13 @@ public class EquinoxStarterTest {
             EquinoxPropertyFile.EQUINOX_LOADER_FILE = "equinox-loader_test";
             EquinoxStarter.getInstance().setConfiguration(".");
             EquinoxStarter.getInstance().compileParameters();
-            Assert.assertNotNull(EquinoxStarter.getInstance());
+            assertNotNull(EquinoxStarter.getInstance());
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxConfigException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -69,11 +69,11 @@ public class EquinoxStarterTest {
                 new LoadDefaultBundleCmd(EquinoxStarter.getInstance().getContext()).execute();
             }
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final EquinoxConfigException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -88,9 +88,9 @@ public class EquinoxStarterTest {
             EquinoxStarter.getInstance().compileParameters();
             EquinoxStarter.getInstance().start();
         } catch (final FieldTrackingAssignementException e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         } catch (final Exception e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 

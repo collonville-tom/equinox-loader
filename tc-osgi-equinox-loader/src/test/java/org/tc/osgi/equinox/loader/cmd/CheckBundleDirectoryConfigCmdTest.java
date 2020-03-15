@@ -1,10 +1,13 @@
 /**
+ *
  */
 package org.tc.osgi.equinox.loader.cmd;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.equinox.loader.cmd.exception.EquinoxCmdException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * CheckBundleDirectoryConfigCmdTest.java.
@@ -21,8 +24,8 @@ public class CheckBundleDirectoryConfigCmdTest {
         try {
             cmd.execute();
         } catch (final EquinoxCmdException e) {
-            Assert.fail(e.getLocalizedMessage());
+            fail(e.getLocalizedMessage());
         }
-        Assert.assertEquals(true, cmd.getReturnValue());
+        assertEquals(true, cmd.getReturnValue());
     }
 }

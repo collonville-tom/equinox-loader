@@ -4,53 +4,51 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tc.osgi.bundle.utils.interf.collection.IPredicate;
 import org.tc.osgi.bundle.utils.interf.collection.ITransformer;
+import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
+import org.tc.osgi.bundle.utils.logger.LoggerGestionnaryTest;
 import org.tc.osgi.bundle.utils.module.service.impl.CollectionUtilsServiceImpl;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * CollectionsTest.java.
  *
+ * @author collonville thomas
+ * @version 0.0.3
  * @req STD_BUNDLE_UTILS_010
  * @track SRS_BUNDLE_UTILS_010
  * @track SDD_BUNDLE_UTILS_010
- * @version 0.0.3
- * @author collonville thomas
  */
 public class CollectionsTest {
 
-    /**
-     * List<Integer> listTest.
-     */
-    private List<Integer> listTest = null;
 
-    /**
-     * setUp.
-     *
-     * @throws Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        listTest = new ArrayList<Integer>();
-        listTest.add(0);
-        listTest.add(10);
-        listTest.add(20);
-        listTest.add(30);
-        listTest.add(40);
-        listTest.add(50);
-        listTest.add(60);
+    private List<Integer> listTest;
+
+    @BeforeEach
+    public void initList()
+    {
+        System.out.println("before");
+        this.listTest=new ArrayList<>();
+        this.listTest.add(0);
+        this.listTest.add(10);
+        this.listTest.add(20);
+        this.listTest.add(30);
+        this.listTest.add(40);
+        this.listTest.add(50);
     }
 
-    /**
-     * testCollect.
-     */
-    @Test
+
+     @Test
     public void testCollect() {
-        Assert.assertNotNull(CollectionUtilsServiceImpl.getInstance().collect(listTest, new ITransformer<Integer>() {
+        System.out.println(listTest);
+
+        assertNotNull(CollectionUtilsServiceImpl.getInstance().collect(listTest, new ITransformer<Integer>() {
 
             @Override
             public void evaluate(final Collection<Integer> c, final Integer e) {
@@ -59,12 +57,9 @@ public class CollectionsTest {
         }));
     }
 
-    /**
-     * testDetect.
-     */
     @Test
     public void testDetect() {
-        Assert.assertEquals(true, CollectionUtilsServiceImpl.getInstance().detect(listTest, new IPredicate<Integer>() {
+        assertEquals(true, CollectionUtilsServiceImpl.getInstance().detect(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {
@@ -75,7 +70,7 @@ public class CollectionsTest {
             }
         }));
 
-        Assert.assertEquals(false, CollectionUtilsServiceImpl.getInstance().detect(listTest, new IPredicate<Integer>() {
+        assertEquals(false, CollectionUtilsServiceImpl.getInstance().detect(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {
@@ -87,12 +82,9 @@ public class CollectionsTest {
         }));
     }
 
-    /**
-     * testExtract.
-     */
     @Test
     public void testExtract() {
-        Assert.assertEquals(new Integer(10), CollectionUtilsServiceImpl.getInstance().extract(listTest, new IPredicate<Integer>() {
+        assertEquals(new Integer(10), CollectionUtilsServiceImpl.getInstance().extract(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {
@@ -103,7 +95,7 @@ public class CollectionsTest {
             }
         }));
 
-        Assert.assertNull(CollectionUtilsServiceImpl.getInstance().extract(listTest, new IPredicate<Integer>() {
+        assertNull(CollectionUtilsServiceImpl.getInstance().extract(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {
@@ -115,12 +107,9 @@ public class CollectionsTest {
         }));
     }
 
-    /**
-     * testReject.
-     */
     @Test
     public void testReject() {
-        Assert.assertEquals(2, CollectionUtilsServiceImpl.getInstance().reject(listTest, new IPredicate<Integer>() {
+        assertEquals(2, CollectionUtilsServiceImpl.getInstance().reject(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {
@@ -132,12 +121,9 @@ public class CollectionsTest {
         }).size());
     }
 
-    /**
-     * testSelect.
-     */
     @Test
     public void testSelect() {
-        Assert.assertEquals(2, CollectionUtilsServiceImpl.getInstance().select(listTest, new IPredicate<Integer>() {
+        assertEquals(2, CollectionUtilsServiceImpl.getInstance().select(listTest, new IPredicate<Integer>() {
 
             @Override
             public boolean evaluate(final Integer e) {

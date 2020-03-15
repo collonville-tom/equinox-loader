@@ -1,16 +1,15 @@
 package org.tc.osgi.bundle.utils.logger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * LoggerGestionnaryTest.java.
  *
+ * @author collonville thomas
+ * @version 0.0.3
  * @req STD_BUNDLE_UTILS_030
- *
  * @track SRS_BUNDLE_UTILS_030
  * @track SDD_BUNDLE_UTILS_030
- * @version 0.0.3
- * @author collonville thomas
  */
 public class LoggerGestionnaryTest {
 

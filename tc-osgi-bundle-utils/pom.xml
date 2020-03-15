@@ -8,10 +8,10 @@
 
 
 	<properties>
-		<build>0.3.4</build>
-		<snapshot></snapshot>
-		<utils.interfaces.version>0.1.3</utils.interfaces.version>
-		<docker.latest>0.1.3</docker.latest>
+		<build>0.4.0</build>
+		<snapshot>-SNAPSHOT</snapshot>
+		<utils.interfaces.version>0.2.0</utils.interfaces.version>
+		<docker.latest>latest</docker.latest>
 	</properties>
 
 	<version>${build}${snapshot}</version>
@@ -24,12 +24,31 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.4.0-b180725.0427</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.4.0-b180725.0644</version>
 		</dependency>
 	</dependencies>
 
@@ -37,7 +56,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.1</version>
+		<version>0.9.0</version>
 	</parent>
 
 
