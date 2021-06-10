@@ -33,7 +33,7 @@
         <repository>
            <id>tc-parent</id>
            <name>tc-parent</name>
-           <url>$env{CI_API_V4_URL}/projects/10033025/packages/maven</url>
+           <url>https://gitlab.com/api/v4/projects/10033025/packages/maven</url>
         </repository>
         <repository>
           <id>clojars</id>
