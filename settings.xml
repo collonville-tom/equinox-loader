@@ -36,6 +36,11 @@
            <url>https://gitlab.com/api/v4/projects/10033025/packages/maven</url>
         </repository>
         <repository>
+           <id>gitlab-maven</id>
+           <name>gitlab-maven</name>
+           <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
+        </repository>
+        <repository>
           <id>clojars</id>
           <name>clojars</name>
           <url>https://clojars.org/repo/</url>
@@ -50,10 +55,7 @@
           <name>mvnrepository</name>
           <url>https://www.mvnrepository.com</url>
         </repository>
-        <repository>
-           <id>gitlab-maven</id>
-           <url>$env{CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-         </repository>
+
       </repositories>
     </profile>
   </profiles>
