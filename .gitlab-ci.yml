@@ -40,4 +40,4 @@ docker:
   stage: docker
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - mvn $MAVEN_CLI_OPTS push -P PUSH -Ddocker.login=$CI_REGISTRY_USER
+    - mvn $MAVEN_CLI_OPTS docker:build docker:push -P PUSH -Ddocker.login=$CI_REGISTRY_USER
