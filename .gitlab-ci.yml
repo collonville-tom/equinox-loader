@@ -9,15 +9,17 @@ stages:
 
 .maven-build:
   image: maven:3.8.1-openjdk-15
-  stage: build
   cache:
     paths:
       - .m2/
 
+.docker-build:
+  image: docker:19.03.12
+
 build:
   extends: .maven-build
   script:
-    - mvn $MAVEN_CLI_OPTS clean install -X
+    - mvn $MAVEN_CLI_OPTS clean install
   artifacts:
     paths:
       - ./target
@@ -36,7 +38,7 @@ deploy:
     - mvn $MAVEN_CLI_OPTS deploy
 
 docker:
-  extends: .maven-build
+  extends: .docker-build
   stage: docker
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
