@@ -6,7 +6,6 @@ stages:
   - test
   - deploy
   - docker
-  - ddeploy
 
 .maven-build:
   image: maven:3-jdk-11
@@ -14,9 +13,6 @@ stages:
   cache:
     paths:
       - .m2/
-
-.docker-build:
-  image: docker:19.03.12
 
 build:
   extends: .maven-build
@@ -33,20 +29,15 @@ test:
   script:
     - mvn $MAVEN_CLI_OPTS test
 
-test:
+deploy:
   extends: .maven-build
   stage: deploy
   script:
     - mvn $MAVEN_CLI_OPTS deploy
 
 docker:
-  extends: .docker-build
-  services:
-    - name: docker:19.03.12-dind
+  extends: .maven-build
   stage: docker
-  variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_TAG .
-    - docker push  $IMAGE_TAG
+    - mvn $MAVEN_CLI_OPTS push -P PUSH -Ddocker.login=$CI_REGISTRY_USER
