@@ -31,6 +31,11 @@
       <id>external</id>
       <repositories>
         <repository>
+           <id>tc-parent</id>
+           <name>tc-parent</name>
+           <url>$env{CI_API_V4_URL}/projects/10033025/packages/maven</url>
+        </repository>
+        <repository>
           <id>clojars</id>
           <name>clojars</name>
           <url>https://clojars.org/repo/</url>
@@ -45,10 +50,6 @@
           <name>mvnrepository</name>
           <url>https://www.mvnrepository.com</url>
         </repository>
-        <repository>
-           <id>tc-parent</id>
-           <url>$env{CI_API_V4_URL}/projects/10033025/packages/maven</url>
-         </repository>
         <repository>
            <id>gitlab-maven</id>
            <url>$env{CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
