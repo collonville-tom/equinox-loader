@@ -1,22 +1,52 @@
-sudo: false
-language: java
-jdk: oraclejdk11
+variables:
+  MAVEN_CLI_OPTS: "-s ./settings.xml --batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  
+stages:
+  - build
+  - test
+  - deploy
+  - docker
+  - ddeploy
 
-addons:
-  sonarcloud:
-    organization: "collonville-tom-github"
-    token: "cd3f317b2dc0418833b75ccdd44d3303c953da8b"
+.maven-build:
+  image: maven:3-jdk-11
+  stage: build
+  cache:
+    paths:
+      - .m2/
 
-before_install: true
-install : true
-before_script : true
+.docker-build:
+  image: docker:19.03.12
 
-script:
-  - cp settings.xml $HOME/.m2/settings.xml
-  - mvn clean
-  - mvn clean verify sonar:sonar
+build:
+  extends: .maven-build
+  script:
+    - mvn $MAVEN_CLI_OPTS clean install
+  artifacts:
+    paths:
+      - ./target
+  when: always
+  
+test:
+  extends: .maven-build
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS test
 
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+test:
+  extends: .maven-build
+  stage: deploy
+  script:
+    - mvn $MAVEN_CLI_OPTS deploy
+
+docker:
+  extends: .docker-build
+  services:
+    - name: docker:19.03.12-dind
+  stage: docker
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push  $IMAGE_TAG
