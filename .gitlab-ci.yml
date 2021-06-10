@@ -15,7 +15,7 @@ stages:
       - .m2/
 
 .docker-build:
-  image: docker:19.03.12
+  image: docker:stable
 
 build:
   extends: .maven-build
