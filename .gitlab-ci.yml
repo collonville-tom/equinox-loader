@@ -17,7 +17,7 @@ stages:
 build:
   extends: .maven-build
   script:
-    - mvn $MAVEN_CLI_OPTS clean install
+    - mvn $MAVEN_CLI_OPTS clean install -X
   artifacts:
     paths:
       - ./target
