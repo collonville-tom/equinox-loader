@@ -14,7 +14,6 @@
 		<utils.version>0.4.0</utils.version>
 		<equinox-loader.version>0.3.0</equinox-loader.version>
 		<groovy.version>0.1.0</groovy.version>
-		<docker.latest>latest</docker.latest><!-- si on est en snapshot il fauut mettre latest sinon mettre la version de l'interface -->
 		<manager.jmx.port>7001</manager.jmx.port>
 	</properties>
 
@@ -115,7 +114,7 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/osgi-equinox-loader:${docker.latest}</from>
+										<from>${docker.login}/osgi-equinox-loader:${equinox-loader.version}${snapshot}</from>
 										<!-- <cmd>/bin/sh</cmd> -->
 										<ports>
 											<port>${manager.jmx.port}</port>

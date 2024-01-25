@@ -11,7 +11,6 @@
 		<build>0.4.0</build>
 		<snapshot>-SNAPSHOT</snapshot>
 		<utils.interfaces.version>0.2.0</utils.interfaces.version>
-		<docker.latest>latest</docker.latest>
 	</properties>
 
 	<version>${build}${snapshot}</version>
@@ -103,7 +102,7 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/osgi-bundle-utils-interfaces:${docker.latest}</from>
+										<from>${docker.login}/osgi-bundle-utils-interfaces:${utils.interfaces.version}${snapshot}</from>
 									</build>
 								</image>
 							</images>

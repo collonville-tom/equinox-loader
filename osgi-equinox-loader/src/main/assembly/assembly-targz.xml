@@ -60,6 +60,7 @@
                 <include>equinox-loader.sh</include>
                 <include>docker.sh</include>
                 <include>equinox-loader.bat</include>
+				<include>.options</include>
             </includes>
         </fileSet>
         <fileSet>

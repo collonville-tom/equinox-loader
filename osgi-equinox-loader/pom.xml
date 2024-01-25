@@ -22,7 +22,6 @@
 		<snapshot.xml.delimiter>.</snapshot.xml.delimiter><!-- . -->
 		<snapshot.pom.delimiter>-</snapshot.pom.delimiter><!-- - -->
 		<snapshot>SNAPSHOT</snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
-		<docker.latest>latest</docker.latest>
 		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
@@ -173,7 +172,7 @@
 							<images>
 								<image>
 									<build>
-										<from>${docker.login}/osgi-bundle-utils:${docker.latest}</from>
+										<from>${docker.login}/osgi-bundle-utils:${utils.version}${snapshot.pom.delimiter}${snapshot}</from>
 										<cmd>/opt/equinox-loader/docker.sh</cmd>
 										<ports>
 											<port>${jmx.port}</port>

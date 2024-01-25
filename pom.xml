@@ -16,10 +16,10 @@
   
 
   <modules>
-  	<module>osgi-bundle-utils</module>
   	<module>osgi-bundle-utils-interfaces</module>
-  	<module>osgi-bundle-manager</module>
+  	<module>osgi-bundle-utils</module>
     <module>osgi-equinox-loader</module>
+    <module>osgi-bundle-manager</module>
   </modules>
   
   
