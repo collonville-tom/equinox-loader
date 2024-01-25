@@ -5,15 +5,9 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <servers>
     <server>
-      <id>gitlab-maven</id>
-      <configuration>
-        <httpHeaders>
-          <property>
-            <name>Job-Token</name>
-            <value>${env.CI_JOB_TOKEN}</value>
-          </property>
-        </httpHeaders>
-      </configuration>
+      <id>home-maven</id>
+      <username>deployment</username>
+      <password>deployment</password>
     </server>
   </servers>
   <profiles>
@@ -28,39 +22,21 @@
       </properties>
     </profile>
     <profile>
-      <id>external</id>
+      <id>home-maven</id>
       <repositories>
         <repository>
-           <id>tc-parent</id>
-           <name>tc-parent</name>
-           <url>https://gitlab.com/api/v4/projects/10033025/packages/maven</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <id>home-maven</id>
+          <name>home-maven</name>
+          <url>http://collonvillethomas.freeboxos.fr:8888/nexus/content/groups/public/</url>
         </repository>
-        <repository>
-           <id>gitlab-maven</id>
-           <name>gitlab-maven</name>
-           <url>${env.CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-        </repository>
-        <repository>
-          <id>clojars</id>
-          <name>clojars</name>
-          <url>https://clojars.org/repo/</url>
-        </repository>
-        <repository>
-          <id>central</id>
-          <name>central</name>
-          <url>https://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-          <id>mvnrepository</id>
-          <name>mvnrepository</name>
-          <url>https://www.mvnrepository.com</url>
-        </repository>
-
       </repositories>
     </profile>
   </profiles>
   <activeProfiles>
-    <activeProfile>external</activeProfile>
+    <activeProfile>home-maven</activeProfile>
     <activeProfile>compiler</activeProfile>
   </activeProfiles>
 </settings>

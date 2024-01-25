@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>tc-equinox-loader-module</artifactId>
+  <artifactId>equinox-loader-module</artifactId>
   <groupId>org.tc.module</groupId>
   <name>${project.artifactId}-${project.version}</name>
   <packaging>pom</packaging>
@@ -9,17 +9,17 @@
   
   <parent>
     <groupId>org.tc.parent</groupId>
-    <artifactId>tc-parent</artifactId>
-    <version>0.9.2-SNAPSHOT</version>
+    <artifactId>parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
   </parent>
 
   
 
   <modules>
-  	<module>tc-osgi-bundle-utils</module>
-  	<module>tc-osgi-bundle-utils-interfaces</module>
-  	<module>tc-osgi-bundle-manager</module>
-    <module>tc-osgi-equinox-loader</module>
+  	<module>osgi-bundle-utils</module>
+  	<module>osgi-bundle-utils-interfaces</module>
+  	<module>osgi-bundle-manager</module>
+    <module>osgi-equinox-loader</module>
   </modules>
   
   
