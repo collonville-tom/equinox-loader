@@ -41,7 +41,9 @@ public class StartDefaultBundleCmd extends AbstractBundleContextCmd {
             new BundleStarter().processOnBundle(this.context, this.getUtilsDependencyBundleName(),this.getUtilsDependencyBundleVersion());
 
         } catch (TcOsgiException e) {
-            throw new EquinoxCmdException(e.getMessage(), e);
+            LoggerGestionnary.getInstance(StartDefaultBundleCmd.class).error(
+                    "Lancement auto du bundle echoué :" + this.managerDependencyBundleName + " ce dernier est peut etre simplement absent", e);
+          throw new EquinoxCmdException(e.getMessage(), e);
         }
       
         try {

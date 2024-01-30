@@ -57,7 +57,6 @@ Spark.get("/debug/:url",new Route() {
 						System.out.println("rem est bien un bon groupe, non juste un Eqx Registry");
 						return rem.bundleList();
 					}
-					//	System.out.println(ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList());
 					return  ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList();
 				}catch (Throwable e) {
 						System.out.println(e);

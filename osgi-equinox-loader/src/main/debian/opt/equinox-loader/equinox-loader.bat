@@ -16,7 +16,7 @@ set EQUINOX_OPTS=-configuration %CONFIG_DIR% -console -debug
 set JAVA_OPTS=-Xmx512m -XX:MaxPermSize=64m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=${jmx.port} -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
 
 rem Commande line
-set CMD=%JAVA_OPTS% -jar tc-osgi-${project.artifactId}-${project.version}-assembly.jar %EQUINOX_OPTS%
+set CMD=%JAVA_OPTS% -jar osgi-${project.artifactId}-${project.version}-assembly.jar %EQUINOX_OPTS%
 
 rem Execution 
 cd %INSTALL_DIR%

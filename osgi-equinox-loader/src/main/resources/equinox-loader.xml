@@ -31,7 +31,7 @@
 		<className>org.tc.osgi.equinox.loader.starter.EquinoxStarter</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>tc-osgi-bundle-manager</defaultValue>
+		<defaultValue>osgi-bundle-manager</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>managerDependencyBundleName</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
@@ -49,13 +49,13 @@
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>tc-osgi-bundle-utils</defaultValue>
+		<defaultValue>osgi-bundle-utils</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>utilsDependencyBundleName</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd</className>
 	</configFiles>
 	<configFiles>
-		<defaultValue>tc-osgi-bundle-utils</defaultValue>
+		<defaultValue>osgi-bundle-utils</defaultValue>
 		<valueType>java.lang.String</valueType>
 		<fieldName>utilsDependencyBundleName</fieldName>
 		<className>org.tc.osgi.equinox.loader.cmd.context.FilterValidBundleCmd</className>

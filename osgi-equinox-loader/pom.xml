@@ -22,7 +22,7 @@
 		<snapshot.xml.delimiter>.</snapshot.xml.delimiter><!-- . -->
 		<snapshot.pom.delimiter>-</snapshot.pom.delimiter><!-- - -->
 		<snapshot>SNAPSHOT</snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
-		<jmx.port>7001</jmx.port>
+		<jmx.port>9001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
 
@@ -39,18 +39,18 @@
 			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
-		<dependency>
-			<groupId>org.tc.osgi.bundle.utils</groupId>
-			<artifactId>osgi-bundle-utils</artifactId>
-			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.tc.osgi.bundle.utils</groupId>
-			<artifactId>osgi-bundle-utils-interfaces</artifactId>
-			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>
-			<scope>compile</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.tc.osgi.bundle.utils</groupId>-->
+<!--			<artifactId>osgi-bundle-utils</artifactId>-->
+<!--			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>-->
+<!--			<scope>compile</scope>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.tc.osgi.bundle.utils</groupId>-->
+<!--			<artifactId>osgi-bundle-utils-interfaces</artifactId>-->
+<!--			<version>${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>-->
+<!--			<scope>compile</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -69,22 +69,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>./</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
-							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
+	
 			<!-- Permet de constuire le METAINF -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -101,7 +86,6 @@
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
-									<!-- <mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
 									<Class-Path>./ ./bundles/ ./bundles/osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>

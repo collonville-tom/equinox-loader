@@ -2,8 +2,8 @@ package org.tc.osgi.equinox.loader.cmd.context;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.context.BundleInstaller;
@@ -21,12 +21,11 @@ import org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile;
  */
 public class InstallBundleCmd extends AbstractBundleContextCmd {
 
+	private BundleFilterUtils filter = new BundleFilterUtils();
 	/**
 	 * String bundlePath.
 	 */
 	private final String bundlePath;
-
-
 
 	/**
 	 * InstallBundleCmd constructor.
@@ -37,10 +36,6 @@ public class InstallBundleCmd extends AbstractBundleContextCmd {
 		super(context);
 		this.bundlePath = bundlePath;
 	}
-	
-	
-
-	
 
 	/**
 	 * @throws EquinoxCmdException
@@ -51,18 +46,15 @@ public class InstallBundleCmd extends AbstractBundleContextCmd {
 		try {
 			final List<File> files = new ArrayList<File>();
 			files.add(new File(bundlePath));
-			BundleFilterUtils filter = new BundleFilterUtils();
-			final Collection<File> file = filter.filterFile2Install(files, context.getBundles());
-			for (final File f : file) {
+			final Set<File> filteredFiles = Set.copyOf(filter.filterFile2Install(files, context.getBundles()));
+			for (final File f : filteredFiles) {
 				if (filter.isJar(f)) {
 					final String path = EquinoxPropertyFile.getInstance().getBundleLocalBase() + f.getAbsolutePath();
-					LoggerGestionnary.getInstance(this.getClass()).debug("install:" + path);
 					new BundleInstaller().processOnBundle(context, path, "unuse");
 				}
 			}
 		} catch (TcOsgiException e) {
-			LoggerGestionnary.getInstance(InstallBundleCmd.class)
-					.warn("Un bundle a rencontré une erreur lors de son installation", e);
+			LoggerGestionnary.getInstance(InstallBundleCmd.class).warn("Un bundle a rencontré une erreur lors de son installation", e);
 		}
 
 	}

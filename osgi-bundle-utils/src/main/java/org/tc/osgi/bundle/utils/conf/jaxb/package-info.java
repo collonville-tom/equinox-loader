@@ -7,6 +7,7 @@
 // Generated on: 2014.12.15 at 10:49:28 PM CET
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "http://collonville.thomas.fr/tc-osgi-bundle-utils/config-file-schema", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package org.tc.osgi.bundle.utils.conf.jaxb;
 
+import jakarta.xml.bind.annotation.XmlSchema;

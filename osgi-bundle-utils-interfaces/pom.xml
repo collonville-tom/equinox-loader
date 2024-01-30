@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tc.osgi.bundle.utils</groupId>
 	<artifactId>osgi-bundle-utils-interfaces</artifactId>
@@ -24,16 +25,36 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<scope>compile</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>javax.jmdns</groupId>-->
+<!--			<artifactId>jmdns</artifactId>-->
+<!--			<version>3.4.1</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>javax.jms</groupId>-->
+<!--			<artifactId>javax.jms-api</artifactId>-->
+<!--			<version>2.0.1</version>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>javax.mail</groupId>-->
+<!--			<artifactId>mail</artifactId>-->
+<!--			<version>1.4.7</version>-->
+<!--		</dependency>-->
+
 
 		<!-- <dependency> -->
 		<!-- <groupId>org.osgi</groupId> -->
@@ -42,7 +63,10 @@
 		<!-- <scope>compile</scope> -->
 		<!-- </dependency> -->
 
-		<!-- - Equinox. It is the modular Java runtime at the heart of the Eclipse IDE, - Knopflerfish, Is an open source implementation of the OSGi R3 and OSGi R4 specifications. - Apache Felix. Is the open source OSGi container from the Apache Software Foundation. -->
+		<!-- - Equinox. It is the modular Java runtime at the heart of the
+		Eclipse IDE, - Knopflerfish, Is an open source implementation of the
+		OSGi R3 and OSGi R4 specifications. - Apache Felix. Is the open source
+		OSGi container from the Apache Software Foundation. -->
 		<!--sinon on peut essayer avec felix qui implemtente mais marche pas -->
 
 		<!-- <dependency> -->
@@ -51,7 +75,11 @@
 		<!-- <version>5.6.4</version> -->
 		<!-- </dependency> -->
 
-
+		<!--		<dependency>-->
+		<!--			<groupId>org.eclipse.platform</groupId>-->
+		<!--			<artifactId>org.eclipse.osgi</artifactId>-->
+		<!--			<version>3.18.600</version>-->
+		<!--		</dependency>-->
 
 		<!-- VALID -->
 		<dependency>
@@ -60,14 +88,15 @@
 			<version>3.13.0.v20180226-1711</version>
 			<scope>compile</scope>
 		</dependency>
+
 	</dependencies>
 
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>osgi-parent</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
+		<relativePath />
 	</parent>
-
 
 
 	<build>
@@ -77,13 +106,19 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
-						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+						<manifestFile>
+							${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Export-Package>*</Export-Package>
+					</instructions>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -2,13 +2,13 @@ package org.tc.osgi.bundle.utils.conf.gen;
 
 import java.io.File;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
 import org.tc.osgi.bundle.utils.conf.UtilsObjectFactoryImpl;
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
 import org.tc.osgi.bundle.utils.conf.jaxb.ConfigurationLibrary;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
 
 /**
  * GenConfFile.java.
