@@ -4,13 +4,13 @@
   <groupId>org.tc.module</groupId>
   <name>${project.artifactId}-${project.version}</name>
   <packaging>pom</packaging>
-  <version>0.2.1</version>
+  <version>0.10.0-SNAPSHOT</version>
   <description>Projet module du repo equinox loader</description>
   
   <parent>
     <groupId>org.tc.parent</groupId>
     <artifactId>tc-parent</artifactId>
-    <version>0.8.0</version>
+    <version>0.10.0-SNAPSHOT</version>
   </parent>
 
   

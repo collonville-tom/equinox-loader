@@ -8,10 +8,10 @@
 
 
 	<properties>
-		<build>0.3.4</build>
-		<snapshot></snapshot>
-		<utils.interfaces.version>0.1.3</utils.interfaces.version>
-		<docker.latest>0.1.3</docker.latest>
+		<build>0.10.0</build>
+		<snapshot>-SNAPSHOT</snapshot>
+		<utils.interfaces.version>0.10.0</utils.interfaces.version>
+		<docker.latest>latest</docker.latest>
 	</properties>
 
 	<version>${build}${snapshot}</version>
@@ -37,7 +37,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.8.1</version>
+		<version>0.10.0-SNAPSHOT</version>
 	</parent>
 
 

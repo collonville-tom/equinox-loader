@@ -17,8 +17,7 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 public class PropertyUtilsServiceImpl implements IPropertyUtilsService {
 
 	/**
-	 * @param propertyFileName
-	 *            String
+	 * @param propertyFileName String
 	 * @return PropertyFile
 	 * @throws JAXBException
 	 *

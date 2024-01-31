@@ -21,14 +21,6 @@ public class RepoParser {
 
 	public static final String SNAPSHOT = "SNAPSHOT";
 
-	public RepoParser() {
-
-	}
-
-//	dans le repo local, les targz ne odivent pas etre indexé via leur urllocal complete 
-//	sinon on ne peut les recuperer sur lcette base pour un autre equinox
-	// il faut supprimer a l'enregistrement la partie en /var/equinox-loader-manager/local et la remettre le cas echant au besoin
-
 	public List<ITarGzBundle> parseRepoList(String file) throws RepoParserException {
 		List<ITarGzBundle> bundles = new ArrayList<>();
 		try {
