@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.tc.parent</groupId>
 		<artifactId>tc-osgi-parent</artifactId>
-		<version>0.10.0-SNAPSHOT</version>
+		<version>0.10.0</version>
 	</parent>
 
 	<properties>
@@ -19,10 +19,10 @@
 		<manager.version>0.10.0</manager.version>
 		<utils.interfaces.version>0.10.0</utils.interfaces.version>
 		<!-- ca va pas cette gestion des snapshot -->
-		<snapshot.xml.delimiter>.</snapshot.xml.delimiter><!-- . -->
-		<snapshot.pom.delimiter>-</snapshot.pom.delimiter><!-- - -->
-		<snapshot>SNAPSHOT</snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
-		<docker.latest>latest</docker.latest>
+		<snapshot.xml.delimiter></snapshot.xml.delimiter><!-- . -->
+		<snapshot.pom.delimiter></snapshot.pom.delimiter><!-- - -->
+		<snapshot></snapshot> <!-- si vide alors les demlimiteur doivent l'etre aussi -->
+		<docker.latest>0.10.0</docker.latest>
 		<jmx.port>7001</jmx.port>
 	</properties>
 	<version>${build}${snapshot.pom.delimiter}${snapshot}</version>
@@ -68,23 +68,6 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>./</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
-							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			<!-- Permet de constuire le METAINF -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
@@ -93,12 +76,12 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
+							<attach>false</attach>
 							<archive>
 								<manifestFile></manifestFile>
 								<manifest>
 									<addClasspath>true</addClasspath>
 									<classpathPrefix>./</classpathPrefix>
-									<!-- <mainClass>org.tc.osgi.equinox.loader.EquinoxLoaderMain</mainClass> -->
 								</manifest>
 								<manifestEntries>
 									<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar ./bundles/tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
