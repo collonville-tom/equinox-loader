@@ -20,7 +20,6 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
 import org.tc.osgi.bundle.utils.interf.module.utils.AbstractTcOsgiActivator;
 import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
 
-
 /**
  * Activator.java.
  *
@@ -28,10 +27,10 @@ import org.tc.osgi.bundle.utils.interf.module.utils.TcOsgiProxy;
  * @version 0.0.2
  * @track SDD_BUNDLE_UTILS_100
  * 
- * http://localhost:4567/bundles/short
- * http://localhost:4567/fetchRemoteRepo
- * http://localhost:4567/updateLocal
- * http://localhost:4567/pullOnRemoteRepo/tc-osgi-bundle-berkeley-db-wrapper/5.0.73
+ *        http://localhost:4567/bundles/short
+ *        http://localhost:4567/fetchRemoteRepo
+ *        http://localhost:4567/updateLocal
+ *        http://localhost:4567/pullOnRemoteRepo/tc-osgi-bundle-berkeley-db-wrapper/5.0.73
  * 
  * 
  * 
@@ -41,17 +40,17 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 	private TcOsgiProxy<ILoggerUtilsService> iLoggerUtilsService;
 	private TcOsgiProxy<IPropertyUtilsService> iPropertyUtilsService;
 	private TcOsgiProxy<IBundleUtilsService> iBundleUtilsService;
+
 	private EquinoxLoaderManager manager;
-	
+
 	private RemoteRegistry repoRegistry;
 	private EquinoxRegistry equinoxRegistry;
-	
+
 	private String groovyDependencyBundleName;
 	private String groovyDependencyBundleVersion;
 
-	
-
-	
+	private String sparkDependencyBundleName;
+	private String sparkDependencyBundleVersion;
 
 	@Override
 	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
@@ -82,8 +81,6 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 		this.iBundleUtilsService.close();
 		this.iLoggerUtilsService.close();
 		this.iPropertyUtilsService.close();
-		
-		
 
 	}
 
@@ -99,39 +96,56 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		this.manager.unRegister(this.equinoxRegistry,RemoteRegistryMBean.class);
-		this.manager.unRegister(this.repoRegistry,EquinoxRegistryMBean.class);
+		this.manager.unRegister(this.equinoxRegistry, RemoteRegistryMBean.class);
+		this.manager.unRegister(this.repoRegistry, EquinoxRegistryMBean.class);
 	}
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
-		this.manager=new EquinoxLoaderManager();
-		this.repoRegistry=new RemoteRegistry();
-		this.equinoxRegistry=new EquinoxRegistry();
+		this.manager = new EquinoxLoaderManager();
+		this.repoRegistry = new RemoteRegistry();
+		this.equinoxRegistry = new EquinoxRegistry();
 		try {
 			this.manager.createRegistry(this.manager.getPort());
-			this.manager.register(repoRegistry,RemoteRegistryMBean.class);
-			this.manager.register(equinoxRegistry,EquinoxRegistryMBean.class);
-			
-			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(),this.getGroovyDependencyBundleVersion());
+			this.manager.register(repoRegistry, RemoteRegistryMBean.class);
+			this.manager.register(equinoxRegistry, EquinoxRegistryMBean.class);
+
+//			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getSparkDependencyBundleName(), this.getSparkDependencyBundleVersion());
+			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getGroovyDependencyBundleName(), this.getGroovyDependencyBundleVersion());
+
 		} catch (RemoteException e) {
-			throw new TcOsgiException("Erreur d'initialisation du bundle manager",e);
+			throw new TcOsgiException("Erreur d'initialisation du bundle manager", e);
 		}
+
 	}
-	
-	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException  {
-        if (this.groovyDependencyBundleName == null) {
-        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleName");
-        }
-        return this.groovyDependencyBundleName;
-    }
-    
-    public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException  {
-        if (this.groovyDependencyBundleVersion == null) {
-        	PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleVersion");
-        }
-        return this.groovyDependencyBundleVersion;
-    }
+
+	public String getSparkDependencyBundleName() throws FieldTrackingAssignementException {
+		if (this.sparkDependencyBundleName == null) {
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "sparkDependencyBundleName");
+		}
+		return this.sparkDependencyBundleName;
+	}
+
+	public String getSparkDependencyBundleVersion() throws FieldTrackingAssignementException {
+		if (this.sparkDependencyBundleVersion == null) {
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "sparkDependencyBundleVersion");
+		}
+		return this.sparkDependencyBundleVersion;
+	}
+
+	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException {
+		if (this.groovyDependencyBundleName == null) {
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleName");
+		}
+		return this.groovyDependencyBundleName;
+	}
+
+	public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException {
+		if (this.groovyDependencyBundleVersion == null) {
+			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleVersion");
+		}
+		return this.groovyDependencyBundleVersion;
+	}
 
 	@Override
 	protected void afterStop(BundleContext context) throws TcOsgiException {

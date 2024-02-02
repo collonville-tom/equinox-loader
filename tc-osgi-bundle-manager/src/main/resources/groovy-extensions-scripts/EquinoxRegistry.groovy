@@ -20,12 +20,14 @@ import spark.Route;
 import spark.Response;
 import spark.Spark;
 import spark.Request;
+import spark.Service;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
 
+Service defaultSparkService=Service.ignite().port(7654);
 
-Spark.get("/eqx-cmd",new Route() {
+defaultSparkService.get("/eqx-cmd",new Route() {
 
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
@@ -46,7 +48,7 @@ Spark.get("/eqx-cmd",new Route() {
 		});
 
 
-Spark.get("/debug/:url",new Route() {
+defaultSparkService.get("/debug/:url",new Route() {
 
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
@@ -67,7 +69,7 @@ Spark.get("/debug/:url",new Route() {
 
 
 // Liste des bundles
-Spark.get("/bundles",new Route() {
+defaultSparkService.get("/bundles",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -77,7 +79,7 @@ Spark.get("/bundles",new Route() {
 	}
 });
 // Liste des bundles en version simple
-Spark.get("/bundles/short",new Route() {
+defaultSparkService.get("/bundles/short",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -87,7 +89,7 @@ Spark.get("/bundles/short",new Route() {
 });
 
 // Liste des services
-Spark.get("/services", new Route() {
+defaultSparkService.get("/services", new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -97,7 +99,7 @@ Spark.get("/services", new Route() {
 });
 
 // Informations sur un bundle
-Spark.get("/bundle/:bundleName/:version",new Route() {
+defaultSparkService.get("/bundle/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -107,7 +109,7 @@ Spark.get("/bundle/:bundleName/:version",new Route() {
 });
 
 // demarrage d'un bundle
-Spark.get("/start/:bundleName/:version",new Route() {
+defaultSparkService.get("/start/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -116,7 +118,7 @@ Spark.get("/start/:bundleName/:version",new Route() {
 });
 
 // arret d'un bundle
-Spark.get("/stop/:bundleName/:version",new Route() {
+defaultSparkService.get("/stop/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -125,7 +127,7 @@ Spark.get("/stop/:bundleName/:version",new Route() {
 });
 
 // desinstallation d'un bundle
-Spark.get("/uninstall/:bundleName/:version",new Route() {
+defaultSparkService.get("/uninstall/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -134,7 +136,7 @@ Spark.get("/uninstall/:bundleName/:version",new Route() {
 });
 
 // installation d'un bundle
-Spark.get("/install/:bundleName/:version",new Route() {
+defaultSparkService.get("/install/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -143,7 +145,7 @@ Spark.get("/install/:bundleName/:version",new Route() {
 });
 
 // detail d'un service
-Spark.get("/service/:serviceName/:version",new Route() {
+defaultSparkService.get("/service/:serviceName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -153,7 +155,7 @@ Spark.get("/service/:serviceName/:version",new Route() {
 });
 
 // dependances d'un bundle
-Spark.get("/depends/:bundleName/:version",new Route() {
+defaultSparkService.get("/depends/:bundleName/:version",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {

@@ -21,13 +21,16 @@ import spark.Route;
 import spark.Response;
 import spark.Spark;
 import spark.Request;
+import spark.Service;
 
-Spark.staticFiles.externalLocation("/var/equinox-loader-manager/");
+Service defaultSparkService=Service.ignite().port(4567);
+
+defaultSparkService.staticFiles.externalLocation("/var/equinox-loader-manager/");
 
 String TAR_TAG = ":tar";
 String VERSION_TAG = ":version";
-/*
-Spark.get("/local/:name",new Route() {
+
+defaultSparkService.get("/local/:name",new Route() {
 
                 @Override
                 public Object handle(Request request, Response response) throws Exception {
@@ -42,8 +45,8 @@ Spark.get("/local/:name",new Route() {
                         return b.toString();
                 }
         });
-*/
-Spark.get("/rps-cmd",new Route() {
+
+defaultSparkService.get("/rps-cmd",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -61,7 +64,7 @@ Spark.get("/rps-cmd",new Route() {
 	}
 });
 
-Spark.get("/addRepo/:name/:url",new Route() {
+defaultSparkService.get("/addRepo/:name/:url",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -70,7 +73,7 @@ Spark.get("/addRepo/:name/:url",new Route() {
 	}
 });
 
-Spark.get("/delRepo/:name",new Route() {
+defaultSparkService.get("/delRepo/:name",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -80,7 +83,7 @@ Spark.get("/delRepo/:name",new Route() {
 });
 
 
-Spark.get("/fetchRemoteRepo",new Route() {
+defaultSparkService.get("/fetchRemoteRepo",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -88,7 +91,7 @@ Spark.get("/fetchRemoteRepo",new Route() {
 		return ManagerRmiClient.getInstance().getRemoteRegistry().fetchRemoteRepo();
 	}
 });
-Spark.get("/fetchLocalRepo",new Route() {
+defaultSparkService.get("/fetchLocalRepo",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -102,29 +105,29 @@ Spark.get("/fetchLocalRepo",new Route() {
 	return null;
 }
 });
-Spark.get("/pullTar/:tar/:version", new Route() {
+defaultSparkService.get("/pullTar/:tar/:version", new Route() {
 
-@Override
-public Object handle(Request request, Response response) throws Exception {
-	response.type("application/json");
-	return ManagerRmiClient.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
-}
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		response.type("application/json");
+		return ManagerRmiClient.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+	}
 });
-Spark.get("/deployTar/:tar/:version",new Route() {
+defaultSparkService.get("/deployTar/:tar/:version",new Route() {
 
-@Override
-public Object handle(Request request, Response response) throws Exception {
-	return ManagerRmiClient.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
-}
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		return ManagerRmiClient.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+	}
 });
-Spark.get("/pushTar/:tar/:version",new Route() {
+defaultSparkService.get("/pushTar/:tar/:version",new Route() {
 
-@Override
-public Object handle(Request request, Response response) throws Exception {
-	String b=ManagerRmiClient.getInstance().getRemoteRegistry().pushTar(request.params(TAR_TAG), request.params(VERSION_TAG));
-	response.redirect(b.toString());
-	return "Redirection to " + b;
-}
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		String b=ManagerRmiClient.getInstance().getRemoteRegistry().pushTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+		response.redirect(b.toString());
+		return "Redirection to " + b;
+	}
 });
 
 
