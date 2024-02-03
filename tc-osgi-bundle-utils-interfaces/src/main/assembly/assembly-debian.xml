@@ -20,6 +20,12 @@
 				<include>org.eclipse:osgi*</include>
 				<include>org.eclipse.tycho:org.eclipse.osgi*</include>
 				<include>org.apache.felix:org.apache.felix.framework*</include>
+				<include>*istack*</include>
+				<include>*jaxb*</include>
+				<include>*jakarta*</include>
+				<include>*stax*</include>
+				<include>*txw2*</include>
+				<include>*fastinfoset*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>
