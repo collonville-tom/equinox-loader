@@ -11,15 +11,18 @@ package org.tc.osgi.bundle.utils.conf.jaxb;
 
 import java.lang.reflect.Field;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
- * <p>Java class for ElementConfiguration complex type.
+ * <p>
+ * Java class for ElementConfiguration complex type.
  *
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  *
  * <pre>
  * &lt;complexType name="ElementConfiguration">
@@ -38,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  *
  * ElementConfiguration.java.
+ * 
  * @author collonville thomas
  * @version 0.2.2
  * @track SDD_BUNDLE_UTILS_025
@@ -47,153 +51,151 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ElementConfiguration", propOrder = { "defaultValue", "valueType", "fieldName", "className" })
 public class ElementConfiguration {
 
-    /**
-     * String className.
-     */
-    @XmlElement(required = true)
-    protected String className;
-    /**
-     * String defaultValue.
-     */
-    @XmlElement(required = true)
-    protected String defaultValue;
-    /**
-     * String fieldName.
-     */
-    @XmlElement(required = true)
-    protected String fieldName;
-    /**
-     * String valueType.
-     */
-    @XmlElement(required = true)
-    protected String valueType;
+	/**
+	 * String className.
+	 */
+	@XmlElement(required = true)
+	protected String className;
+	/**
+	 * String defaultValue.
+	 */
+	@XmlElement(required = true)
+	protected String defaultValue;
+	/**
+	 * String fieldName.
+	 */
+	@XmlElement(required = true)
+	protected String fieldName;
+	/**
+	 * String valueType.
+	 */
+	@XmlElement(required = true)
+	protected String valueType;
 
-    /**
-     * checkClass.
-     * @param _obj Object
-     * @return boolean
-     */
-    public boolean checkClass(final Object _obj) {
-        if (_obj.getClass().getCanonicalName().equals(className)) {
-            return true;
-        }
-        return false;
+	/**
+	 * checkClass.
+	 * 
+	 * @param _obj Object
+	 * @return boolean
+	 */
+	public boolean checkClass(final Object _obj) {
+		if (_obj.getClass().getCanonicalName().equals(className)) {
+			return true;
+		}
+		return false;
 
-    }
+	}
 
-    /**
-     * checkType.
-     * @param _obj Object
-     * @return boolean
-     * @throws NoSuchFieldException
-     * @throws SecurityException
-     */
-    public boolean checkType(final Object _obj) throws NoSuchFieldException, SecurityException {
-        final Field field = _obj.getClass().getDeclaredField(fieldName);
-        if (field.getType().getCanonicalName().equals(valueType)) {
-            return true;
-        }
-        return false;
-    }
+	/**
+	 * checkType.
+	 * 
+	 * @param _obj Object
+	 * @return boolean
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 */
+	public boolean checkType(final Object _obj) throws NoSuchFieldException, SecurityException {
+		final Field field = _obj.getClass().getDeclaredField(fieldName);
+		if (field.getType().getCanonicalName().equals(valueType)) {
+			return true;
+		}
+		return false;
+	}
 
-    /**
-     * Gets the value of the className property.
-     *
-     * @return possible object is {@link String }
-     *
-     */
-    public String getClassName() {
-        return className;
-    }
+	/**
+	 * Gets the value of the className property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getClassName() {
+		return className;
+	}
 
-    /**
-     * Gets the value of the defaultValue property.
-     *
-     * @return possible object is {@link String }
-     *
-     */
-    // TODO faire un retour coherent avec le type definie
-    public String getDefaultValue() {
-        return defaultValue;
-    }
+	/**
+	 * Gets the value of the defaultValue property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	// TODO faire un retour coherent avec le type definie
+	public String getDefaultValue() {
+		return defaultValue;
+	}
 
-    /**
-     * Gets the value of the fieldName property.
-     *
-     * @return possible object is {@link String }
-     *
-     */
-    public String getFieldName() {
-        return fieldName;
-    }
+	/**
+	 * Gets the value of the fieldName property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getFieldName() {
+		return fieldName;
+	}
 
-    /**
-     * Gets the value of the valueType property.
-     *
-     * @return possible object is {@link String }
-     *
-     */
-    public String getValueType() {
-        return valueType;
-    }
+	/**
+	 * Gets the value of the valueType property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getValueType() {
+		return valueType;
+	}
 
-    /**
-     * Sets the value of the className property.
-     *
-     * @param value
-     *            allowed object is {@link String }
-     *
-     */
-    public void setClassName(final String value) {
-        className = value;
-    }
+	/**
+	 * Sets the value of the className property.
+	 *
+	 * @param value allowed object is {@link String }
+	 *
+	 */
+	public void setClassName(final String value) {
+		className = value;
+	}
 
-    /**
-     * Sets the value of the defaultValue property.
-     *
-     * @param value
-     *            allowed object is {@link String }
-     *
-     */
-    public void setDefaultValue(final String value) {
-        defaultValue = value;
-    }
+	/**
+	 * Sets the value of the defaultValue property.
+	 *
+	 * @param value allowed object is {@link String }
+	 *
+	 */
+	public void setDefaultValue(final String value) {
+		defaultValue = value;
+	}
 
-    /**
-     * Sets the value of the fieldName property.
-     *
-     * @param value
-     *            allowed object is {@link String }
-     *
-     */
-    public void setFieldName(final String value) {
-        fieldName = value;
-    }
+	/**
+	 * Sets the value of the fieldName property.
+	 *
+	 * @param value allowed object is {@link String }
+	 *
+	 */
+	public void setFieldName(final String value) {
+		fieldName = value;
+	}
 
-    /**
-     * Sets the value of the valueType property.
-     *
-     * @param value
-     *            allowed object is {@link String }
-     *
-     */
-    public void setValueType(final String value) {
-        valueType = value;
-    }
+	/**
+	 * Sets the value of the valueType property.
+	 *
+	 * @param value allowed object is {@link String }
+	 *
+	 */
+	public void setValueType(final String value) {
+		valueType = value;
+	}
 
-    /**
-     * @return String
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        final StringBuilder buff = new StringBuilder("ElementConfiguration[");
-        buff.append("defaultValue:").append(defaultValue).append(",");
-        buff.append("valueType:").append(valueType).append(",");
-        buff.append("fieldName:").append(fieldName).append(",");
-        buff.append("className:").append(className).append(",");
-        buff.append("]");
-        return buff.toString();
-    }
+	/**
+	 * @return String
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final StringBuilder buff = new StringBuilder("ElementConfiguration[");
+		buff.append("defaultValue:").append(defaultValue).append(",");
+		buff.append("valueType:").append(valueType).append(",");
+		buff.append("fieldName:").append(fieldName).append(",");
+		buff.append("className:").append(className).append(",");
+		buff.append("]");
+		return buff.toString();
+	}
 
 }

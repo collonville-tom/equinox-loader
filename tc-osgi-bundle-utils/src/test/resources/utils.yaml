@@ -1,0 +1,17 @@
+config:
+   -  value: 0.0.1
+      type: java.lang.String
+      field: version
+      className: org.tc.osgi.bundle.utils.module.activator.Activator
+   -  value: 0.0.1
+      type: java.lang.String
+      field: version
+      className: org.tc.osgi.bundle.utils.conf.YamlPropertyFileTest
+   -  value: 24689
+      type: java.lang.String
+      field: rmiPort
+      className: org.tc.osgi.bundle.utils.rmi.client.EquinoxLoaderRMIClient
+   -  value: localhost
+      type: java.lang.String
+      field: rmiAddr
+      className: org.tc.osgi.bundle.utils.rmi.client.EquinoxLoaderRMIClient

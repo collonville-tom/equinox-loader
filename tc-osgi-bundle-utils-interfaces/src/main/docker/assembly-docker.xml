@@ -16,16 +16,15 @@
 			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
 			<includes>
 				<include>*log4j*</include>
+				<include>org.yaml:snakeyaml*</include>
+				<include>jakarta.activation:jakarta*</include>
+				<include>jakarta.xml.bind:jakarta*</include>
+				<include>com.sun.xml.bind:jaxb*</include>
+				<include>org.glassfish.hk2:osgi-resource-locator*</include>
 				<include>*:assembly</include>
 				<include>org.eclipse:osgi*</include>
 				<include>org.eclipse.tycho:org.eclipse.osgi*</include>
 				<include>org.apache.felix:org.apache.felix.framework*</include>
-				<include>*istack*</include>
-				<include>*jaxb*</include>
-				<include>*jakarta*</include>
-				<include>*stax*</include>
-				<include>*txw2*</include>
-				<include>*fastinfoset*</include>
 			</includes>
 		</dependencySet>
 	</dependencySets>

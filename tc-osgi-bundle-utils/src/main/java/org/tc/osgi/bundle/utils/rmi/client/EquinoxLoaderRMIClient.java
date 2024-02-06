@@ -8,9 +8,8 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
-import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
+import org.tc.osgi.bundle.utils.conf.YamlPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.rmi.IEquinoxLoaderBundleContext;
@@ -76,7 +75,7 @@ public class EquinoxLoaderRMIClient {
 	 * getIEquinoxLoaderBundleContext.
 	 * 
 	 * @return IEquinoxLoaderBundleContext
-	 * @throws TcOsgiException 
+	 * @throws TcOsgiException
 	 * @throws FieldTrackingAssignementException
 	 * @throws MalformedURLException
 	 * @throws RemoteException
@@ -88,23 +87,23 @@ public class EquinoxLoaderRMIClient {
 			if (iContext == null) {
 				final StringBuilder buff = new StringBuilder("rmi://");
 
-				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort())
-						.append("/").append(IEquinoxLoaderBundleContext.class.getSimpleName());
-					
+				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort()).append("/")
+						.append(IEquinoxLoaderBundleContext.class.getSimpleName());
+
 				LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(buff.toString());
 				final Remote rem = Naming.lookup(buff.toString());
 				LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(rem.toString());
 				if (rem instanceof IEquinoxLoaderBundleContext) {
-					LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug(
-							"Chargement via rmi de l'objet " + IEquinoxLoaderBundleContext.class.getSimpleName());
+					LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug("Chargement via rmi de l'objet " + IEquinoxLoaderBundleContext.class.getSimpleName());
 					iContext = (IEquinoxLoaderBundleContext) rem;
 				}
 				iContext = (IEquinoxLoaderBundleContext) rem;
 			}
 			return iContext;
-		} catch (UnknownHostException |FieldTrackingAssignementException|MalformedURLException|RemoteException|NotBoundException e) {
-			throw new TcOsgiException("Erreur de recuperation du bundleContext",e);
-		} 
+		} catch (UnknownHostException | FieldTrackingAssignementException | MalformedURLException | RemoteException | NotBoundException e) {
+			e.printStackTrace();
+			throw new TcOsgiException("Erreur de recuperation du bundleContext", e);
+		}
 	}
 
 	/**
@@ -115,10 +114,9 @@ public class EquinoxLoaderRMIClient {
 	 */
 	public String getRmiAddr() throws FieldTrackingAssignementException {
 		if (rmiAddr == null) {
-			XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "rmiAddr");
+			YamlPropertyFile.getInstance(UtilsPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "rmiAddr");
 		}
-		LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class)
-				.debug("Recuperation adresse ecoute RMI :" + rmiAddr);
+		LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug("Recuperation adresse ecoute RMI :" + rmiAddr);
 		return rmiAddr;
 	}
 
@@ -130,7 +128,7 @@ public class EquinoxLoaderRMIClient {
 	 */
 	public String getRmiPort() throws FieldTrackingAssignementException {
 		if (rmiPort == null) {
-			XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "rmiPort");
+			YamlPropertyFile.getInstance(UtilsPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "rmiPort");
 		}
 		LoggerGestionnary.getInstance(EquinoxLoaderRMIClient.class).debug("Recuperation port RMI :" + rmiPort);
 		return rmiPort;

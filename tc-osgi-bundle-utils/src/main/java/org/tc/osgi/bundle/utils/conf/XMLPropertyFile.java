@@ -5,16 +5,16 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
 import org.tc.osgi.bundle.utils.conf.jaxb.ConfigurationLibrary;
 import org.tc.osgi.bundle.utils.conf.jaxb.ElementConfiguration;
 import org.tc.osgi.bundle.utils.conf.jaxb.ObjectFactory;
 import org.tc.osgi.bundle.utils.interf.conf.IXmlProperty;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * PropertyFile.java.
@@ -33,8 +33,7 @@ public class XMLPropertyFile implements IXmlProperty {
 	/**
 	 * getInstance.
 	 *
-	 * @param _name
-	 *            PropertyFile
+	 * @param _name PropertyFile
 	 * @throws JAXBException
 	 * @returnString
 	 */
@@ -47,6 +46,7 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * Getter propertyFileInstances.
+	 * 
 	 * @return
 	 */
 	public static Map<String, IXmlProperty> getPropertyFileInstances() {
@@ -76,10 +76,8 @@ public class XMLPropertyFile implements IXmlProperty {
 	/**
 	 * fieldTraking.
 	 *
-	 * @param _obj
-	 *            Object
-	 * @param _declaredField
-	 *            Field
+	 * @param _obj           Object
+	 * @param _declaredField Field
 	 * @throws FieldTrackingAssignementException
 	 */
 	public void fieldTraking(final Object _obj, final String _declaredField) throws FieldTrackingAssignementException {
@@ -89,8 +87,8 @@ public class XMLPropertyFile implements IXmlProperty {
 			if (!field.isAccessible()) {
 				field.setAccessible(true);
 			}
-			LoggerGestionnary.getInstance(this.getClass()).debug(
-				"Recuperation de la valeur pour l'object de class " + _obj.getClass().getCanonicalName() + " pour le champs " + _declaredField);
+			LoggerGestionnary.getInstance(this.getClass())
+					.debug("Recuperation de la valeur pour l'object de class " + _obj.getClass().getCanonicalName() + " pour le champs " + _declaredField);
 			final ElementConfiguration element = bibliotheque.getElement(_declaredField, _obj.getClass());
 			if (element.checkType(_obj)) {
 				field.set(_obj, element.getDefaultValue());
@@ -109,6 +107,7 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * Getter bibliotheque.
+	 * 
 	 * @return
 	 */
 	public ConfigurationLibrary getBibliotheque() {
@@ -117,13 +116,13 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * loadXmlFile.
+	 * 
 	 * @param fileName String
 	 * @throws FieldTrackingAssignementException
 	 */
 	protected void loadXmlFile(final String fileName) throws FieldTrackingAssignementException {
 		try {
-			LoggerGestionnary.getInstance(this.getClass())
-				.debug("Chargement fichier " + fileName + UtilsPropertyFile.getInstance().getXmlPropertiesExtension());
+			LoggerGestionnary.getInstance(this.getClass()).debug("Chargement fichier " + fileName + UtilsPropertyFile.getInstance().getXmlPropertiesExtension());
 
 			// http://www.java-forums.org/new-java/58427-not-sure-what-error-means-javax-xml-bind-javaxbexception.html
 			final ObjectFactory objectFactory = new ObjectFactory();
@@ -133,8 +132,8 @@ public class XMLPropertyFile implements IXmlProperty {
 
 			File file2load = new File(fileName + UtilsPropertyFile.getInstance().getXmlPropertiesExtension());
 			if (!file2load.exists()) {
-				LoggerGestionnary.getInstance(this.getClass()).debug(
-					"Le fichier resources " + file2load.getName() + " n'existe pas, tentative dans le repertoire src/main/resources");
+				LoggerGestionnary.getInstance(this.getClass())
+						.debug("Le fichier resources " + file2load.getName() + " n'existe pas, tentative dans le repertoire src/main/resources");
 				file2load = new File("src/main/resources/" + fileName + UtilsPropertyFile.getInstance().getXmlPropertiesExtension());
 			}
 
@@ -148,6 +147,7 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * reloadXmlFile.
+	 * 
 	 * @throws FieldTrackingAssignementException
 	 */
 	public void reloadXmlFile() throws FieldTrackingAssignementException {
@@ -156,6 +156,7 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * reloadXmlFile.
+	 * 
 	 * @param fileName String
 	 * @throws FieldTrackingAssignementException
 	 */
@@ -165,6 +166,7 @@ public class XMLPropertyFile implements IXmlProperty {
 
 	/**
 	 * Setter bibliotheque.
+	 * 
 	 * @param bibliotheque ConfigurationLibrary
 	 */
 	public void setBibliotheque(final ConfigurationLibrary bibliotheque) {

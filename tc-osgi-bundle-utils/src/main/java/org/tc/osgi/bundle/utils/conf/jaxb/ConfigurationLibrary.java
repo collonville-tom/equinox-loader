@@ -12,17 +12,20 @@ package org.tc.osgi.bundle.utils.conf.jaxb;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  *
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  *
  * <pre>
  * &lt;complexType>
@@ -38,6 +41,7 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
  *
  *
  * ConfigurationLibrary.java.
+ * 
  * @author collonville thomas
  * @version 0.2.2
  * @track SDD_BUNDLE_UTILS_025
@@ -48,67 +52,68 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
 @XmlRootElement(name = "ConfigurationLibrary")
 public class ConfigurationLibrary {
 
-    protected List<ElementConfiguration> configFiles;
+	protected List<ElementConfiguration> configFiles;
 
-    /**
-     * Gets the value of the configFiles property.
-     *
-     * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
-     * <CODE>set</CODE> method for the configFiles property.
-     *
-     * <p>
-     * For example, to add a new item, do as follows:
-     *
-     * <pre>
-     * getConfigFiles().add(newItem);
-     * </pre>
-     *
-     *
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ElementConfiguration }
-     *
-     *
-     */
-    public List<ElementConfiguration> getConfigFiles() {
-        if (configFiles == null) {
-            configFiles = new ArrayList<ElementConfiguration>();
-        }
-        return configFiles;
-    }
+	/**
+	 * Gets the value of the configFiles property.
+	 *
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a snapshot.
+	 * Therefore any modification you make to the returned list will be present
+	 * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+	 * for the configFiles property.
+	 *
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 *
+	 * <pre>
+	 * getConfigFiles().add(newItem);
+	 * </pre>
+	 *
+	 *
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link ElementConfiguration }
+	 *
+	 *
+	 */
+	public List<ElementConfiguration> getConfigFiles() {
+		if (configFiles == null) {
+			configFiles = new ArrayList<ElementConfiguration>();
+		}
+		return configFiles;
+	}
 
-    /**
-     * getElement.
-     * @param _declaredField String
-     * @param class1 Class<? extends Object>
-     * @return ElementConfiguration
-     * @throws FieldTrackingAssignementException
-     */
-    public ElementConfiguration getElement(final String _declaredField, final Class<? extends Object> class1) throws FieldTrackingAssignementException {
-        for (final ElementConfiguration element : configFiles) {
-            if (class1.getCanonicalName().equals(element.getClassName()) && element.getFieldName().equals(_declaredField)) {
-                return element;
-            }
-        }
-        throw new FieldTrackingAssignementException("Le champs " + class1.getCanonicalName() + ":" + _declaredField + " n'existe pas");
-    }
+	/**
+	 * getElement.
+	 * 
+	 * @param _declaredField String
+	 * @param class1         Class<? extends Object>
+	 * @return ElementConfiguration
+	 * @throws FieldTrackingAssignementException
+	 */
+	public ElementConfiguration getElement(final String _declaredField, final Class<? extends Object> class1) throws FieldTrackingAssignementException {
+		for (final ElementConfiguration element : configFiles) {
+			if (class1.getCanonicalName().equals(element.getClassName()) && element.getFieldName().equals(_declaredField)) {
+				return element;
+			}
+		}
+		throw new FieldTrackingAssignementException("Le champs " + class1.getCanonicalName() + ":" + _declaredField + " n'existe pas");
+	}
 
-    /**
-     * @return String
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        final StringBuilder buff = new StringBuilder("ConfigurationLibrary:");
-        for (final ElementConfiguration e : configFiles) {
-            buff.append(e);
-            buff.append("\n");
-        }
+	/**
+	 * @return String
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		final StringBuilder buff = new StringBuilder("ConfigurationLibrary:");
+		for (final ElementConfiguration e : configFiles) {
+			buff.append(e);
+			buff.append("\n");
+		}
 
-        return buff.toString();
-    }
+		return buff.toString();
+	}
 
 }

@@ -9,7 +9,7 @@
 
 package org.tc.osgi.bundle.utils.conf.jaxb;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 /**
  * This object contains factory methods for each Java content interface and Java
@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRegistry;
  */
 /**
  * ObjectFactory.java.
+ * 
  * @author collonville thomas
  * @version 0.2.2
  * @track SDD_BUNDLE_UTILS_025
@@ -33,28 +34,28 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of
-     * schema derived classes for package: org.tc.osgi.bundle.utils.conf.jaxb
-     *
-     */
-    public ObjectFactory() {
-    }
+	/**
+	 * Create a new ObjectFactory that can be used to create new instances of schema
+	 * derived classes for package: org.tc.osgi.bundle.utils.conf.jaxb
+	 *
+	 */
+	public ObjectFactory() {
+	}
 
-    /**
-     * Create an instance of {@link ConfigurationLibrary }
-     *
-     */
-    public ConfigurationLibrary createConfigurationLibrary() {
-        return new ConfigurationLibrary();
-    }
+	/**
+	 * Create an instance of {@link ConfigurationLibrary }
+	 *
+	 */
+	public ConfigurationLibrary createConfigurationLibrary() {
+		return new ConfigurationLibrary();
+	}
 
-    /**
-     * Create an instance of {@link ElementConfiguration }
-     *
-     */
-    public ElementConfiguration createElementConfiguration() {
-        return new ElementConfiguration();
-    }
+	/**
+	 * Create an instance of {@link ElementConfiguration }
+	 *
+	 */
+	public ElementConfiguration createElementConfiguration() {
+		return new ElementConfiguration();
+	}
 
 }

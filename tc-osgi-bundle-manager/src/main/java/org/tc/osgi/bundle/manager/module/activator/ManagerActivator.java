@@ -121,28 +121,28 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	public String getSparkDependencyBundleName() throws FieldTrackingAssignementException {
 		if (this.sparkDependencyBundleName == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "sparkDependencyBundleName");
+			PropertyServiceProxy.getInstance().getYamlPropertyFile(ManagerPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "sparkDependencyBundleName");
 		}
 		return this.sparkDependencyBundleName;
 	}
 
 	public String getSparkDependencyBundleVersion() throws FieldTrackingAssignementException {
 		if (this.sparkDependencyBundleVersion == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "sparkDependencyBundleVersion");
+			PropertyServiceProxy.getInstance().getYamlPropertyFile(ManagerPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "sparkDependencyBundleVersion");
 		}
 		return this.sparkDependencyBundleVersion;
 	}
 
 	public String getGroovyDependencyBundleName() throws FieldTrackingAssignementException {
 		if (this.groovyDependencyBundleName == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleName");
+			PropertyServiceProxy.getInstance().getYamlPropertyFile(ManagerPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "groovyDependencyBundleName");
 		}
 		return this.groovyDependencyBundleName;
 	}
 
 	public String getGroovyDependencyBundleVersion() throws FieldTrackingAssignementException {
 		if (this.groovyDependencyBundleVersion == null) {
-			PropertyServiceProxy.getInstance().getXMLPropertyFile(ManagerPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "groovyDependencyBundleVersion");
+			PropertyServiceProxy.getInstance().getYamlPropertyFile(ManagerPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "groovyDependencyBundleVersion");
 		}
 		return this.groovyDependencyBundleVersion;
 	}

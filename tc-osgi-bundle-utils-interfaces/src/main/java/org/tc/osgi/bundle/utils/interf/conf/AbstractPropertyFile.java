@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 /**
  * AbstractPropertyFile.java.
+ * 
  * @author collonville thomas
  * @version 0.2.0
  * @track SDD_BUNDLE_UTILS_025
@@ -30,8 +31,9 @@ public abstract class AbstractPropertyFile {
 
 	/**
 	 * AbstractPropertyFile constructor.
+	 * 
 	 * @param confFile String
-	 * @param loader ClassLoader
+	 * @param loader   ClassLoader
 	 */
 	protected AbstractPropertyFile(final String confFile, final ClassLoader loader) {
 		final File f = new File(".");
@@ -41,18 +43,21 @@ public abstract class AbstractPropertyFile {
 
 	/**
 	 * getBundleRacine.
+	 * 
 	 * @return String
 	 */
 	public abstract String getBundleRacine();
 
 	/**
 	 * getConfFile.
+	 * 
 	 * @return String
 	 */
 	public abstract String getConfFile();
 
 	/**
 	 * getConfigDirectory.
+	 * 
 	 * @return String
 	 */
 	public String getConfigDirectory() {
@@ -64,6 +69,7 @@ public abstract class AbstractPropertyFile {
 
 	/**
 	 * getResourceBundle.
+	 * 
 	 * @return ResourceBundle
 	 */
 	protected ResourceBundle getResourceBundle() {
@@ -72,6 +78,7 @@ public abstract class AbstractPropertyFile {
 
 	/**
 	 * getVersion.
+	 * 
 	 * @return String
 	 */
 	public String getVersion() {
@@ -83,7 +90,10 @@ public abstract class AbstractPropertyFile {
 
 	/**
 	 * getXMLFile.
+	 * 
 	 * @return String
 	 */
 	public abstract String getXMLFile();
+
+	public abstract String getYamlFile();
 }

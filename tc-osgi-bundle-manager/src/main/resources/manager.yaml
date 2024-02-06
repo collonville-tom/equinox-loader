@@ -1,0 +1,41 @@
+config:
+  - value: /opt/equinox-loader/bundles
+    type: java.lang.String
+    field: bundleDirectory
+    className: org.tc.osgi.bundle.manager.conf.ManagerPropertyFile
+  - value: file://localhost://
+    type: bundleLocalBase
+    field: version
+    className: org.tc.osgi.bundle.manager.conf.ManagerPropertyFile  
+  - value: ${groovy.version}
+    type: java.lang.String
+    field: groovyDependencyBundleVersion
+    className: org.tc.osgi.bundle.manager.module.activator.ManagerActivator  
+  - value: tc-osgi-bundle-groovy
+    type: java.lang.String
+    field: groovyDependencyBundleName
+    className: org.tc.osgi.bundle.manager.module.activator.ManagerActivator 
+  - value: ${spark.version}
+    type: java.lang.String
+    field: sparkDependencyBundleVersion
+    className: org.tc.osgi.bundle.manager.module.activator.ManagerActivator
+  - value: tc-osgi-bundle-spark
+    type: java.lang.String
+    field: sparkDependencyBundleName
+    className: org.tc.osgi.bundle.manager.module.activator.ManagerActivator
+  - value: 9001
+    type: java.lang.String
+    field: rmiPort
+    className: org.tc.osgi.bundle.manager.rmi.ManagerRmiClient
+  - value: localhost
+    type: java.lang.String
+    field: rmiAddr
+    className: org.tc.osgi.bundle.manager.rmi.ManagerRmiClient
+  - value: 9001
+    type: java.lang.String
+    field: rmiPort
+    className: org.tc.osgi.bundle.manager.rmi.EquinoxLoaderManager
+  - value: localhost
+    type: java.lang.String
+    field: rmiAddr
+    className: org.tc.osgi.bundle.manager.rmi.EquinoxLoaderManager   

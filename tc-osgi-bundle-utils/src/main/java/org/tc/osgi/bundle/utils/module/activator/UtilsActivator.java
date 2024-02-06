@@ -2,7 +2,7 @@ package org.tc.osgi.bundle.utils.module.activator;
 
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.utils.conf.UtilsPropertyFile;
-import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
+import org.tc.osgi.bundle.utils.conf.YamlPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 import org.tc.osgi.bundle.utils.interf.module.service.IBundleUtilsService;
@@ -43,7 +43,7 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 	 */
 	public String getVersion() throws FieldTrackingAssignementException {
 		if (version == null) {
-			XMLPropertyFile.getInstance(UtilsPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "version");
+			YamlPropertyFile.getInstance(UtilsPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "version");
 		}
 		return version;
 	}
@@ -51,8 +51,7 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 	@Override
 	protected void checkInitBundleUtilsService(BundleContext context) throws TcOsgiException {
 		this.getIBundleUtilsService().setProxy(new BundleUtilsServiceImpl());
-		this.getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class,
-				this.getIBundleUtilsService().getInstance(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IBundleUtilsService.class, this.getIBundleUtilsService().getInstance(), context, this);
 	}
 
 	/**
@@ -61,16 +60,11 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 	 * @param context BundleContext
 	 */
 	protected void initServices(final BundleContext context) {
-		this.getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class,
-				new LoggerUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(),
-				context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class,
-				new CollectionUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class,
-				new PropertyUtilsServiceImpl(), context, this);
-		this.getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class,
-				CommandRunnerUtilsServiceImpl.getInstance(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(ILoggerUtilsService.class, new LoggerUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IUtilsService.class, new UtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(ICollectionUtilsService.class, new CollectionUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(IPropertyUtilsService.class, new PropertyUtilsServiceImpl(), context, this);
+		this.getIBundleUtilsService().getInstance().registerService(ICommandRunnerUtilsService.class, CommandRunnerUtilsServiceImpl.getInstance(), context, this);
 
 	}
 
@@ -104,8 +98,7 @@ public class UtilsActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		LoggerGestionnary.getInstance(UtilsActivator.class)
-				.debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
+		LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionStatic:" + UtilsPropertyFile.getInstance().getVersion());
 		LoggerGestionnary.getInstance(UtilsActivator.class).debug("VersionDynamic:" + this.getVersion());
 
 	}
