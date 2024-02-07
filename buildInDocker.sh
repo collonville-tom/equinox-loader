@@ -1,1 +1,0 @@
-docker run --entrypoint "" -v "/home/thomas/.m2:/root/.m2" -v "/home/thomas/dev/git/equinox-loader:/maven_work_dir" -v "/var/run/docker.sock:/var/run/docker.sock" collonvillethomas.freeboxos.fr:5000/maven:3.6.0-jdk-8-alpine mvn $* -s /maven_work_dir/settings.xml
