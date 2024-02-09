@@ -26,13 +26,6 @@
 	</parent>
 
 	<dependencies>
-		<!--		<dependency>-->
-		<!--			<groupId>org.tc.osgi.bundle.wrapper</groupId>-->
-		<!--			<artifactId>tc-osgi-bundle-jaxb-wrapper</artifactId>-->
-		<!--			<version>${jaxb.wrapper.version}${snapshot}</version>-->
-		<!--			<classifier>assembly</classifier>-->
-		<!--			<scope>compile</scope>-->
-		<!--		</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -77,26 +70,6 @@
 		</dependency>
 
 
-<!--		<dependency>-->
-<!--			<groupId>com.sun.xml.bind</groupId>-->
-<!--			<artifactId>jaxb-impl</artifactId>-->
-<!--			<version>4.0.1</version>-->
-<!--			<scope>compile</scope>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.sun.xml.bind</groupId>-->
-<!--			<artifactId>jaxb-xjc</artifactId>-->
-<!--			<version>4.0.1</version>-->
-<!--			<scope>compile</scope>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.sun.xml.bind</groupId>-->
-<!--			<artifactId>jaxb-jxc</artifactId>-->
-<!--			<version>4.0.1</version>-->
-<!--			<scope>compile</scope>-->
-<!--		</dependency>-->
-
-
 
 
 		<!-- <dependency> -->
@@ -126,12 +99,6 @@
 			<version>3.13.0.v20180226-1711</version>
 			<scope>compile</scope>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>org.eclipse.tycho</groupId>-->
-		<!--			<artifactId>org.eclipse.osgi</artifactId>-->
-		<!--			<version>3.11.2.v20161107-1947</version>-->
-		<!--			<scope>compile</scope>-->
-		<!--		</dependency>-->
 	</dependencies>
 
 
