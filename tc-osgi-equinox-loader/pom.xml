@@ -37,26 +37,7 @@
 			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>
 			<classifier>assembly</classifier>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.tc.osgi.bundle.utils</groupId>-->
-<!--			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>-->
-<!--			<version>-->
-<!--				${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>-->
-<!--			<classifier>assembly</classifier>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.tc.osgi.bundle.utils</groupId>-->
-<!--			<artifactId>tc-osgi-bundle-utils</artifactId>-->
-<!--			<version>${utils.version}${snapshot.pom.delimiter}${snapshot}</version>-->
-<!--			<scope>compile</scope>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.tc.osgi.bundle.utils</groupId>-->
-<!--			<artifactId>tc-osgi-bundle-utils-interfaces</artifactId>-->
-<!--			<version>-->
-<!--				${utils.interfaces.version}${snapshot.pom.delimiter}${snapshot}</version>-->
-<!--			<scope>compile</scope>-->
-<!--		</dependency>-->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

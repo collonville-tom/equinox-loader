@@ -51,7 +51,7 @@
 				<include>manager.yaml</include>
 			</includes>
 		</fileSet>
-				<fileSet>
+		<fileSet>
 			<directory>src/main/resources/groovy-extensions-scripts</directory>
 			<outputDirectory>/opt/equinox-loader/groovy-extensions-scripts</outputDirectory>
 			<useDefaultExcludes>true</useDefaultExcludes>

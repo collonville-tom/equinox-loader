@@ -142,8 +142,6 @@
 								<image>
 									<build>
 										<from>eclipse-temurin:21.0.2_13-jre-jammy</from>
-										<!--
-										<from>${docker.login}/tc-osgi-bundle-jaxb-wrapper:${docker.latest}</from>-->
 									</build>
 								</image>
 							</images>
