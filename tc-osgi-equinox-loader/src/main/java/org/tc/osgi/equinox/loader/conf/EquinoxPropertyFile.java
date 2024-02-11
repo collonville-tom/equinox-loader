@@ -1,6 +1,6 @@
 package org.tc.osgi.equinox.loader.conf;
 
-import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
+import org.tc.osgi.bundle.utils.conf.YamlPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.AbstractPropertyFile;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.equinox.loader.cmd.CheckBundleDirectoryConfigCmd;
@@ -72,7 +72,7 @@ public final class EquinoxPropertyFile extends AbstractPropertyFile {
 	 */
 	public String getBundleDirectory() throws FieldTrackingAssignementException {
 		if (bundleDirectory == null) {
-			XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleDirectory");
+			YamlPropertyFile.getInstance(getYamlFile()).fieldTraking(this, "bundleDirectory");
 		}
 		return bundleDirectory;
 	}
@@ -85,7 +85,7 @@ public final class EquinoxPropertyFile extends AbstractPropertyFile {
 	 */
 	public String getBundleLocalBase() throws FieldTrackingAssignementException {
 		if (bundleLocalBase == null) {
-			XMLPropertyFile.getInstance(getXMLFile()).fieldTraking(this, "bundleLocalBase");
+			YamlPropertyFile.getInstance(getYamlFile()).fieldTraking(this, "bundleLocalBase");
 		}
 		return bundleLocalBase;
 	}
@@ -98,11 +98,6 @@ public final class EquinoxPropertyFile extends AbstractPropertyFile {
 	@Override
 	public String getConfFile() {
 		return EquinoxPropertyFile.EQUINOX_LOADER_FILE;
-	}
-
-	@Override
-	public String getXMLFile() {
-		return getConfigDirectory() + getConfFile();
 	}
 
 	@Override

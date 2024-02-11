@@ -17,8 +17,6 @@ import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-import jakarta.xml.bind.JAXBException;
-
 /**
  * PropertyFile.java.
  *
@@ -33,13 +31,6 @@ public class YamlPropertyFile implements IYamlProperty {
 	 */
 	private static Map<String, IYamlProperty> propertyFileInstances = new HashMap<String, IYamlProperty>();
 
-	/**
-	 * getInstance.
-	 *
-	 * @param _name PropertyFile
-	 * @throws JAXBException
-	 * @returnString
-	 */
 	public static IYamlProperty getInstance(final String _name) throws FieldTrackingAssignementException {
 		if (!YamlPropertyFile.propertyFileInstances.containsKey(_name)) {
 			YamlPropertyFile.propertyFileInstances.put(_name, new YamlPropertyFile(_name));
@@ -66,11 +57,6 @@ public class YamlPropertyFile implements IYamlProperty {
 	 */
 	private final String configFile;
 
-	/**
-	 * PropertyFile constructor.
-	 *
-	 * @throws JAXBException
-	 */
 	protected YamlPropertyFile(final String _name) throws FieldTrackingAssignementException {
 		configFile = _name;
 		loadYamlFile(_name);

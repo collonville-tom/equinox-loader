@@ -49,7 +49,6 @@
 			<filtered>true</filtered>
 			<includes>
 				<include>log4j.xml</include>
-				<include>utils.xml</include>
 				<include>utils.yaml</include>
 			</includes>
 		</fileSet>

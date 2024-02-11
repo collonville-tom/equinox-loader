@@ -39,19 +39,9 @@ public class UtilsPropertyFile extends AbstractPropertyFile {
 	}
 
 	/**
-	 * String jaxbContext.
-	 */
-	private String jaxbContext = null;
-
-	/**
 	 * String log4jFile.
 	 */
 	private String log4jFile = null;
-
-	/**
-	 * String xmlPropertiesExt.
-	 */
-	private String xmlPropertiesExt = null;
 
 	private String yamlPropertiesExt = null;
 
@@ -81,18 +71,6 @@ public class UtilsPropertyFile extends AbstractPropertyFile {
 	}
 
 	/**
-	 * getJaxbContext.
-	 * 
-	 * @return String
-	 */
-	public String getJaxbContext() {
-		if (jaxbContext == null) {
-			jaxbContext = getResourceBundle().getString(getBundleRacine() + "jaxb_context");
-		}
-		return jaxbContext;
-	}
-
-	/**
 	 * getLog4jFile.
 	 * 
 	 * @return String
@@ -104,32 +82,10 @@ public class UtilsPropertyFile extends AbstractPropertyFile {
 		return log4jFile;
 	}
 
-	/**
-	 * @return String
-	 * @see org.tc.osgi.bundle.utils.conf.AbstractPropertyFile#getXMLFile()
-	 */
-	@Override
-	public String getXMLFile() {
-		return UtilsPropertyFile.getInstance().getConfigDirectory() + getConfFile();
-
-	}
-
 	@Override
 	public String getYamlFile() {
 		return UtilsPropertyFile.getInstance().getConfigDirectory() + getConfFile();
 
-	}
-
-	/**
-	 * getXmlPropertiesExtension.
-	 * 
-	 * @return String
-	 */
-	public String getXmlPropertiesExtension() {
-		if (xmlPropertiesExt == null) {
-			xmlPropertiesExt = getResourceBundle().getString(getBundleRacine() + "xml_properties_ext");
-		}
-		return xmlPropertiesExt;
 	}
 
 	public String getYamlPropertiesExtension() {

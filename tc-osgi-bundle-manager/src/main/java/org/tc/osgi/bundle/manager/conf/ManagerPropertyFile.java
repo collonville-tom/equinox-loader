@@ -59,11 +59,6 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
 	private String log4jFile = null;
 
 	/**
-	 * String xmlPropertiesExt.
-	 */
-	private String xmlPropertiesExt = null;
-
-	/**
 	 * UtilsPropertyFile constructor.
 	 */
 	private ManagerPropertyFile() {
@@ -140,28 +135,6 @@ public class ManagerPropertyFile extends AbstractPropertyFile {
 			log4jFile = getResourceBundle().getString(getBundleRacine() + "log4j.file");
 		}
 		return log4jFile;
-	}
-
-	/**
-	 * @return String
-	 * @see org.tc.osgi.bundle.utils.conf.AbstractPropertyFile#getXMLFile()
-	 */
-	@Override
-	public String getXMLFile() {
-		return ManagerPropertyFile.getInstance().getConfigDirectory() + getConfFile();
-
-	}
-
-	/**
-	 * getXmlPropertiesExtension.
-	 * 
-	 * @return String
-	 */
-	public String getXmlPropertiesExtension() {
-		if (xmlPropertiesExt == null) {
-			xmlPropertiesExt = getResourceBundle().getString(getBundleRacine() + "xml_properties_ext");
-		}
-		return xmlPropertiesExt;
 	}
 
 	public String getBundleDirectory() throws FieldTrackingAssignementException {

@@ -14,18 +14,6 @@ import org.tc.osgi.bundle.utils.interf.module.service.IPropertyUtilsService;
  */
 public class PropertyUtilsServiceImpl implements IPropertyUtilsService {
 
-	/**
-	 * @param propertyFileName String
-	 * @return IXmlProperty
-	 * @throws FieldTrackingAssignementException
-	 *
-	 * @see org.tc.osgi.bundle.utils.module.service.IUtilsService#getXMLPropertyFile(java.lang.String)
-	 */
-//	@Override
-//	public IXmlProperty getXMLPropertyFile(final String propertyFileName) throws FieldTrackingAssignementException {
-//		return XMLPropertyFile.getInstance(propertyFileName);
-//	}
-
 	@Override
 	public IYamlProperty getYamlPropertyFile(final String propertyFileName) throws FieldTrackingAssignementException {
 		return YamlPropertyFile.getInstance(propertyFileName);

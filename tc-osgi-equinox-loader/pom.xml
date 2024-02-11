@@ -67,6 +67,7 @@
 					</archive>
 				</configuration>
 			</plugin>
+<!--			voir si on a besoin de maven assembly et si on peut pas l'integrer au jar plugin comme dans la parent osgi-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>

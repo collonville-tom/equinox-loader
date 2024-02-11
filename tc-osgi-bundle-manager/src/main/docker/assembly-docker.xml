@@ -39,7 +39,6 @@
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<filtered>true</filtered>
 			<includes>
-				<include>manager.xml</include>
 				<include>manager.yaml</include>
 			</includes>
 		</fileSet>

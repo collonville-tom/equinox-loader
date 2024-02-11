@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.tc.osgi.bundle.utils.conf.XMLPropertyFile;
+import org.tc.osgi.bundle.utils.conf.YamlPropertyFile;
 import org.tc.osgi.bundle.utils.interf.collection.IPredicate;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
 import org.tc.osgi.bundle.utils.logger.LoggerGestionnary;
@@ -81,7 +81,7 @@ public class FilterValidBundleCmd extends AbstractBundleContextCmd {
 	 */
 	public String getUtilsDependencyBundleName() throws FieldTrackingAssignementException, EquinoxConfigException, EquinoxCmdException {
 		if (utilsDependencyBundleName == null) {
-			XMLPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getXMLFile()).fieldTraking(this, "utilsDependencyBundleName");
+			YamlPropertyFile.getInstance(EquinoxPropertyFile.getInstance().getYamlFile()).fieldTraking(this, "utilsDependencyBundleName");
 		}
 		return utilsDependencyBundleName;
 	}

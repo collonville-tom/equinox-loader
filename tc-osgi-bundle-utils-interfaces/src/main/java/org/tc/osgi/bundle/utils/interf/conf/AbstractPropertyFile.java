@@ -88,12 +88,5 @@ public abstract class AbstractPropertyFile {
 		return version;
 	}
 
-	/**
-	 * getXMLFile.
-	 * 
-	 * @return String
-	 */
-	public abstract String getXMLFile();
-
 	public abstract String getYamlFile();
 }

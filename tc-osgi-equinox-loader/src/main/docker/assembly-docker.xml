@@ -93,7 +93,7 @@
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<filtered>true</filtered>
 			<includes>
-				<include>equinox-loader.xml</include>
+				<include>equinox-loader.yaml</include>
 			</includes>
 		</fileSet>
 	</fileSets>
