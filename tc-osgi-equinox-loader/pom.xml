@@ -95,9 +95,6 @@
 							<goal>jdeb</goal>
 						</goals>
 						<configuration>
-							<deb>${project.build.directory}/${project.artifactId}_${versiontimestamp}_all.deb</deb>
-							<verbose>true</verbose>
-							<controlDir>${project.build.directory}/${project.artifactId}-${project.version}/DEBIAN</controlDir>
 							<dataSet>
 								<data>
 									<src>${project.build.directory}/${project.artifactId}-${project.version}/etc</src>
@@ -105,14 +102,6 @@
 									<mapper>
 										<type>perm</type>
 										<prefix>/etc</prefix>
-									</mapper>
-								</data>
-								<data>
-									<src>${project.build.directory}/${project.artifactId}-${project.version}/opt</src>
-									<type>directory</type>
-									<mapper>
-										<type>perm</type>
-										<prefix>/opt</prefix>
 									</mapper>
 								</data>
 								<data>
