@@ -1,0 +1,49 @@
+config:
+   -  value: /opt/equinox-loader/bundles
+      type: java.lang.String
+      field: bundleDirectory
+      className: org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile
+   -  value: file://localhost://
+      type: java.lang.String
+      field: bundleLocalBase
+      className: org.tc.osgi.equinox.loader.conf.EquinoxPropertyFile
+   -  value: -console
+      type: java.lang.String
+      field: mode
+      className: org.tc.osgi.equinox.loader.starter.EquinoxStarter
+   -  value: -debug
+      type: java.lang.String
+      field: debugLevel
+      className: org.tc.osgi.equinox.loader.starter.EquinoxStarter
+   -  value: /opt/equinox-loader/bundles/configuration
+      type: java.lang.String
+      field: configuration
+      className: org.tc.osgi.equinox.loader.starter.EquinoxStarter
+   -  value: tc-osgi-bundle-manager
+      type: java.lang.String
+      field: managerDependencyBundleName
+      className: org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd
+   -  value: ${manager.version}${snapshot.xml.delimiter}${snapshot}
+      type: java.lang.String
+      field: managerDependencyBundleVersion
+      className: org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd
+   -  value: ${utils.version}${snapshot.xml.delimiter}${snapshot}
+      type: java.lang.String
+      field: utilsDependencyBundleVersion
+      className: org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd
+   -  value: tc-osgi-bundle-utils
+      type: java.lang.String
+      field: utilsDependencyBundleName
+      className: org.tc.osgi.equinox.loader.cmd.context.StartDefaultBundleCmd
+   -  value: tc-osgi-bundle-utils
+      type: java.lang.String
+      field: utilsDependencyBundleName
+      className: org.tc.osgi.equinox.loader.cmd.context.FilterValidBundleCmd
+   -  value: 14689
+      type: java.lang.String
+      field: rmiPort
+      className: org.tc.osgi.equinox.loader.rmi.EquinoxLoaderRMIServer
+   -  value: localhost
+      type: java.lang.String
+      field: rmiAddr
+      className: org.tc.osgi.equinox.loader.rmi.EquinoxLoaderRMIServer
