@@ -54,18 +54,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>./</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>./ ./bundles/ ./bundles/tc-osgi-bundle-utils-${utils.version}${snapshot.pom.delimiter}${snapshot}-assembly.jar</Class-Path>
-							<Main-Class>org.tc.osgi.equinox.loader.EquinoxLoaderMain</Main-Class>
-						</manifestEntries>
-					</archive>
-				</configuration>
 			</plugin>
 <!--			voir si on a besoin de maven assembly et si on peut pas l'integrer au jar plugin comme dans la parent osgi-->
 			<plugin>
