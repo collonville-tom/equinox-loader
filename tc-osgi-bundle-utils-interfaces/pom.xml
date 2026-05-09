@@ -116,7 +116,7 @@
 							<images>
 								<image>
 									<build>
-										<from>eclipse-temurin:21.0.2_13-jre-jammy</from>
+										<from>eclipse-temurin:25.0.3_9-jre-ubi10-minimal</from>
 									</build>
 								</image>
 							</images>
