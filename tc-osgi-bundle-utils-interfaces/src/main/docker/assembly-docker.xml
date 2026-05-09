@@ -21,7 +21,7 @@
 				<include>jakarta.xml.bind:jakarta*</include>
 				<include>com.sun.xml.bind:jaxb*</include>
 				<include>org.glassfish.hk2:osgi-resource-locator*</include>
-				<include>*:assembly</include>
+				<include>*:${project.artifactId}:*:assembly:*</include>
 				<include>org.eclipse:osgi*</include>
 				<include>org.eclipse.tycho:org.eclipse.osgi*</include>
 				<include>org.apache.felix:org.apache.felix.framework*</include>

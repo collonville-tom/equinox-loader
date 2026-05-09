@@ -3,8 +3,8 @@ Version: ${versiontimestamp}
 Section: base
 Priority: optional
 Architecture: all
-Optionnal: openjdk-8-jre | sun-java8-jre | openjdk-9-jre | sun-java9-jre  
+Optionnal: openjdk-25-jre
 Depends: tc-osgi-bundle-utils-${utils.version}, tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}
-Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
-Homepage: <http://collonville.thomas.free.fr>
+Maintainer: Collonville Thomas <collonville.thomas@gmail.com>
+Homepage: <https://collonvillethomas.freeboxos.fr/apt/depots/>
 Description: Conteneur applicatif osgi

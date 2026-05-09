@@ -3,6 +3,6 @@ Version: ${versiontimestamp}
 Section: base
 Priority: optional
 Architecture: all
-Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
-Homepage: <http://collonville.thomas.free.fr>
+Maintainer: Collonville Thomas <collonville.thomas@gmail.com>
+Homepage: <https://collonvillethomas.freeboxos.fr/apt/depots/>
 Description: Bundle interface outils generique osgi

@@ -4,6 +4,6 @@ Section: base
 Priority: optional
 Architecture: all
 Depends: tc-osgi-bundle-utils-interfaces-${utils.interfaces.version}
-Maintainer: Collonville Thomas <collonville_tom@yahoo.fr>
-Homepage: <http://collonville.thomas.free.fr>
+Maintainer: Collonville Thomas <collonville.thomas@gmail.com>
+Homepage: <https://collonvillethomas.freeboxos.fr/apt/depots/>
 Description: Bundle outils generique osgi
