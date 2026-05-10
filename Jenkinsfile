@@ -17,7 +17,7 @@ pipeline {
         stage('Clean and Verify') {
             agent {
                 docker { 
-                    image '3.9.15-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
@@ -33,7 +33,7 @@ pipeline {
          stage('Compile and install') {
             agent {
                 docker { 
-                    image '3.9.15-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
@@ -56,7 +56,7 @@ pipeline {
             }
             agent {
                 docker { 
-                    image '3.9.15-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
@@ -79,7 +79,7 @@ pipeline {
             }
             agent {
                 docker { 
-                    image '3.9.15-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
@@ -100,7 +100,7 @@ pipeline {
             }
             agent {
                 docker { 
-                    image '3.9.15-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
