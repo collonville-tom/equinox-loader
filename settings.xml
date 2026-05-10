@@ -6,18 +6,15 @@
   <servers>
     <server>
       <id>home-maven</id>
-      <username>deployment</username>
-      <password>deployment</password>
+      <username>${jenkins-username}</username>
+      <password>${jenkins-pwd}</password>
     </server>
   </servers>
   <profiles>
     <profile>
       <id>compiler</id>
       <properties>
-        <siteweb-url>http://localhost/osgi</siteweb-url>
-        <jenkins-url>http://localhost/jenkins</jenkins-url>
-        <local-siteweb-url>file://localhost/var/www/osgi/</local-siteweb-url>
-        <!--Cette variable permet de definir quel version java utiliser pour le build -->
+        <jenkins-url>http://collonvillethomas.freeboxos.fr:58153</jenkins-url>
         <SETTINGS_JAVA_HOME>${JAVA_HOME}</SETTINGS_JAVA_HOME>
       </properties>
     </profile>
