@@ -20,6 +20,11 @@
   	<module>tc-osgi-bundle-utils-interfaces</module>
   	<module>tc-osgi-bundle-manager</module>
     <module>tc-osgi-equinox-loader</module>
+    <module>tc-osgi-bundle-groovy-interfaces</module>
+    <module>tc-osgi-bundle-groovy</module>
+    <module>tc-osgi-bundle-spark-interfaces</module>
+    <module>tc-osgi-bundle-spark</module>
+    <module>tc-osgi-bundle-console-wrapper</module>
   </modules>
   
   

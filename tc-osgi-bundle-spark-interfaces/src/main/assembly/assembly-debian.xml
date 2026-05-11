@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>debian</id>
+	<formats>
+		<format>dir</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<dependencySets>
+		<!-- Inclusion interfaces classifier et librairies -->
+		<dependencySet>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
+			<!-- groupId:artifactId:type:classifier -->
+			<includes>
+				<include>*:${project.artifactId}:*:assembly</include>
+				<include>*slf4j*</include>
+				<include>*spark-core*</include>
+				<include>*jetty*</include>
+				<include>*java*</include>
+				<include>*websocket*</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+
+
+	<fileSets>
+		<fileSet>
+			<directory>src/main/debian/DEBIAN</directory>
+			<outputDirectory>DEBIAN</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+				<include>*</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>

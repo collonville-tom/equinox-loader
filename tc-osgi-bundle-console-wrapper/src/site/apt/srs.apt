@@ -1,0 +1,12 @@
+Spring Software Requirements Specification
+
+* TC-osgi-console module
+
+** @req SRS_BUNDLE_CONSOLE_010
+
+  Le bundle console amene les fonctionnalités d'une console shell dans equinox loader permettant de manipuler les commandes manuellement
+  
+        * @version 0.1.0
+        
+        * @track SRS_TC_PARENT_GENERAL_010, SRS_TC_OSGI_PARENT_PROJECT_WRAPPER_010
+        

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>bundle</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<dependencySets>
+<!-- 	Inclusion interfaces classifier et librairies-->
+		<dependencySet>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+			<useProjectArtifact>false</useProjectArtifact>
+			<useProjectAttachments>true</useProjectAttachments>
+			<outputDirectory>/opt/equinox-loader/bundles</outputDirectory>
+<!-- 			groupId:artifactId:type:classifier -->
+			<includes>
+				<include>*:${project.artifactId}:*:assembly</include>
+				<include>org.codehaus.groovy:groovy-all:*</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+		
+	
+	<fileSets>
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/opt/equinox-loader/bundles/${project.artifactId}-${project.version}</outputDirectory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<filtered>true</filtered>
+			<includes>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>
