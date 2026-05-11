@@ -10,6 +10,15 @@
       <password>${jenkins-pwd}</password>
     </server>
   </servers>
+  <mirrors>
+      <mirror>
+          <id>maven-default-http-blocker</id>
+          <mirrorOf>external:dummy:*</mirrorOf>
+          <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+          <url>http://0.0.0.0/</url>
+          <blocked>true</blocked>
+      </mirror>
+  </mirrors>
   <profiles>
     <profile>
       <id>compiler</id>
