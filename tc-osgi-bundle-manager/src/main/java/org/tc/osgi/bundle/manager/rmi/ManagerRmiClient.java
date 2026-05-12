@@ -33,8 +33,6 @@ public class ManagerRmiClient {
 
 	private ManagerRmiClient() throws MalformedObjectNameException, TcOsgiException {
 		LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug("Creation du client RMI d'utilisation du manager");
-//		this.getRemoteRegistry();
-//		this.getEquinoxRegistry();
 
 	}
 

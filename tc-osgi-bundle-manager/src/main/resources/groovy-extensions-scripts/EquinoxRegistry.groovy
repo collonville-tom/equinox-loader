@@ -27,22 +27,22 @@ import java.rmi.Remote;
 
 Service defaultSparkService=Service.ignite().port(7654);
 
-defaultSparkService.get("/eqx-cmd",new Route() {
+defaultSparkService.get("/bundle/help",new Route() {
 
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
 				List<String> cmd=new ArrayList<String>();
-				cmd.add("/eqx-cmd -> cette liste");
-				cmd.add("/bundles -> liste des bundles");
-				cmd.add("/bundles/short -> idem precedent");
-				cmd.add("/services -> liste des services");
+				cmd.add("/help -> cette liste");
+				cmd.add("/bundle -> liste des bundles");
+				cmd.add("/bundle/short -> idem precedent");
 				cmd.add("/bundle/:bundleName/:version -> details d'un bundle");
-				cmd.add("/start/:bundleName/:version -> demarrage d'un bundle");
-				cmd.add("/stop/:bundleName/:version -> arret d'un bundle");
-				cmd.add("/uninstall/:bundleName/:version -> desinstallation d'un bundle");
-				cmd.add("/install/:bundleName/:version -> installation d'un bundle");
-				cmd.add("/depends/:bundleName/:version -> liste des dependances d'un bundle");
+				cmd.add("/bundle/:bundleName/:version/start -> demarrage d'un bundle");
+				cmd.add("/bundle/:bundleName/:version/stop -> arret d'un bundle");
+				cmd.add("/bundle/:bundleName/:version/uninstall -> desinstallation d'un bundle");
+				cmd.add("/bundle/:bundleName/:version/install -> installation d'un bundle");
+				cmd.add("/bundle/dependency/:bundleName/:version -> liste des dependances d'un bundle");
+				cmd.add("/services -> liste des services");
 				return new JsonSerialiser().toJson(cmd);
 			}
 		});
@@ -69,7 +69,7 @@ defaultSparkService.get("/debug/:url",new Route() {
 
 
 // Liste des bundles
-defaultSparkService.get("/bundles",new Route() {
+defaultSparkService.get("/bundle",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -79,7 +79,7 @@ defaultSparkService.get("/bundles",new Route() {
 	}
 });
 // Liste des bundles en version simple
-defaultSparkService.get("/bundles/short",new Route() {
+defaultSparkService.get("/bundle/short",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -109,7 +109,7 @@ defaultSparkService.get("/bundle/:bundleName/:version",new Route() {
 });
 
 // demarrage d'un bundle
-defaultSparkService.get("/start/:bundleName/:version",new Route() {
+defaultSparkService.post("/bundle/:bundleName/:version/start",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -118,7 +118,7 @@ defaultSparkService.get("/start/:bundleName/:version",new Route() {
 });
 
 // arret d'un bundle
-defaultSparkService.get("/stop/:bundleName/:version",new Route() {
+defaultSparkService.post("/bundle/:bundleName/:version/stop",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -127,7 +127,7 @@ defaultSparkService.get("/stop/:bundleName/:version",new Route() {
 });
 
 // desinstallation d'un bundle
-defaultSparkService.get("/uninstall/:bundleName/:version",new Route() {
+defaultSparkService.post("/bundle/:bundleName/:version/uninstall",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -136,11 +136,23 @@ defaultSparkService.get("/uninstall/:bundleName/:version",new Route() {
 });
 
 // installation d'un bundle
-defaultSparkService.get("/install/:bundleName/:version",new Route() {
+defaultSparkService.post("/bundle/:bundleName/:version/install",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleInstall(request.params(":bundleName"),request.params(":version"));
+	}
+});
+
+
+
+// dependances d'un bundle
+defaultSparkService.get("/bundle/dependency/:bundleName/:version",new Route() {
+
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		response.type("application/json");
+		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleDependencies(request.params(":bundleName"),request.params(":version"));
 	}
 });
 
@@ -153,16 +165,4 @@ defaultSparkService.get("/service/:serviceName/:version",new Route() {
 		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleService(request.params(":serviceName"),request.params(":version"));
 	}
 });
-
-// dependances d'un bundle
-defaultSparkService.get("/depends/:bundleName/:version",new Route() {
-
-	@Override
-	public Object handle(Request request, Response response) throws Exception {
-		response.type("application/json");
-		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleDependencies(request.params(":bundleName"),request.params(":version"));
-	}
-});
-
-
 
