@@ -70,6 +70,30 @@ pipeline {
                 }
             }
         }
+        stage('Build DOCKER images and store in registry') {
+            when {
+                anyOf {
+                    branch 'develop'
+                    branch 'main'
+                }
+            }
+            agent {
+                docker { 
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-v maven-repo:/tmp/workspace/maven-cache'
+                    reuseNode true 
+                }
+            }
+            environment {
+                MAVEN_OPTS = '-Dmaven.repo.local=/tmp/workspace/maven-cache'
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PWD')]) {
+                    sh 'mvn -registry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                }
+                
+            }
+        }
         stage('Build Site') {
             when {
                 anyOf {
@@ -158,7 +182,7 @@ pipeline {
                 }
             }
         }
-        
+ 
         
     }
     
