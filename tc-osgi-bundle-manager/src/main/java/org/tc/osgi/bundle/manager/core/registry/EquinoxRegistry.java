@@ -23,6 +23,7 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 
 // classe qui permet d'acceder au differents fonctionnalité de manipulation des bundles, install, start, stop, remove
+// ici on manipule une ressource rest de type bundle avec des dependance et des services
 public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	

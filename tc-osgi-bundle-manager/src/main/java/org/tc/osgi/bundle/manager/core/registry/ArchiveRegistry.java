@@ -14,6 +14,9 @@ import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
+//TODO ceci doit correspondre a une interface rest exposant les données du repo local (listing du contenu, les targz recuperable)
+
+
 public class ArchiveRegistry implements ArchiveRegistryMBean {
 
 

@@ -12,6 +12,7 @@ import org.tc.osgi.bundle.manager.core.repository.AbstractRepository;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
 
+
 public class LocalRepository extends AbstractRepository {
 
 	public LocalRepository(String name, String url) {
