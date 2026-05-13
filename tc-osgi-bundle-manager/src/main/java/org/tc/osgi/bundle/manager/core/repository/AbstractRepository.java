@@ -1,17 +1,18 @@
-package org.tc.osgi.bundle.manager.core;
+package org.tc.osgi.bundle.manager.core.repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
-import org.tc.osgi.bundle.manager.mbean.RepositoryMBean;
+import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
+
+
 
 public abstract class AbstractRepository implements RepositoryMBean{
 
 	private String repositoryName;
 	private String repositoryUrl;
 	
-	private List<ITarGzBundle> bundles=new ArrayList<>();
+	private List<ITarGzArchive> bundles=new ArrayList<>();
 	
 	protected AbstractRepository(String name,String url)
 	{
@@ -43,16 +44,15 @@ public abstract class AbstractRepository implements RepositoryMBean{
 	}
 
 
-	public List<ITarGzBundle> getBundles() {
+	public List<ITarGzArchive> getBundles() {
 		return bundles;
 	}
 
 
-	public void setBundles(List<ITarGzBundle> bundles) {
+	public void setBundles(List<ITarGzArchive> bundles) {
 		this.bundles = bundles;
 	}
 	
 	
-	public abstract void fetch();
-	public abstract void pull(String bundle,String version);
+	
 }

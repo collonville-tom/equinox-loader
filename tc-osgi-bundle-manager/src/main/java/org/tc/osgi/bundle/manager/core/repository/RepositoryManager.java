@@ -1,19 +1,16 @@
-package org.tc.osgi.bundle.manager.core;
+package org.tc.osgi.bundle.manager.core.repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.mbean.LocalRepository;
-import org.tc.osgi.bundle.manager.mbean.RemoteRepository;
 
 public class RepositoryManager {
 
-	private Map<String, RemoteRepository> repositories = new HashMap<>();
 	private LocalRepository localRepository;
+	private Map<String, RemoteRepository> repositories = new HashMap<>();
 	
-
-
+	
 	private static RepositoryManager instance;
 
 	public static final String LOCAL_NAME = "local";

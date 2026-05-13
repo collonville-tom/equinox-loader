@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.wrapper;
+package org.tc.osgi.bundle.manager.core.registry.wrapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

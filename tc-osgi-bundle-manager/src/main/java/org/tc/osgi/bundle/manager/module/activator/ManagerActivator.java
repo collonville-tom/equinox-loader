@@ -4,10 +4,10 @@ import java.rmi.RemoteException;
 
 import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.mbean.EquinoxRegistry;
-import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
-import org.tc.osgi.bundle.manager.mbean.RemoteRegistry;
-import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistry;
+import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.RemoteRegistry;
+import org.tc.osgi.bundle.manager.core.registry.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;

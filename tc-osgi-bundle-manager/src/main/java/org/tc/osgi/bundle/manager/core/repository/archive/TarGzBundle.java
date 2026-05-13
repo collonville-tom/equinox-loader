@@ -1,6 +1,7 @@
-package org.tc.osgi.bundle.manager.core.bundle;
+package org.tc.osgi.bundle.manager.core.repository.archive;
 
-public class TarGzBundle implements ITarGzBundle{
+
+public class TarGzBundle implements ITarGzArchive{
 
 	private String name;
 	private String version;

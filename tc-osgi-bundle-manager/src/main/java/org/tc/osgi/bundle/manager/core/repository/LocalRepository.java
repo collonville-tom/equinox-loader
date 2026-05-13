@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.mbean;
+package org.tc.osgi.bundle.manager.core.repository;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.AbstractRepository;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
 
@@ -43,10 +42,6 @@ public class LocalRepository extends AbstractRepository {
 
 	}
 
-	@Override
-	public void pull(String bundle, String version) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

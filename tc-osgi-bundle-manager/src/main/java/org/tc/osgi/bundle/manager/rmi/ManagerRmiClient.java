@@ -7,8 +7,8 @@ import java.rmi.Remote;
 import javax.management.MalformedObjectNameException;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
-import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.RemoteRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;

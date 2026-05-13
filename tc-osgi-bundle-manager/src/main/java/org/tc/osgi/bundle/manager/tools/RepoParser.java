@@ -9,8 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
-import org.tc.osgi.bundle.manager.core.bundle.TarGzBundle;
+import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
+import org.tc.osgi.bundle.manager.core.repository.archive.TarGzBundle;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 
@@ -21,8 +21,8 @@ public class RepoParser {
 
 	public static final String SNAPSHOT = "SNAPSHOT";
 
-	public List<ITarGzBundle> parseRepoList(String file) throws RepoParserException {
-		List<ITarGzBundle> bundles = new ArrayList<>();
+	public List<ITarGzArchive> parseRepoList(String file) throws RepoParserException {
+		List<ITarGzArchive> bundles = new ArrayList<>();
 		try {
 			List<String> lurls = Files.readAllLines(new File(file).toPath());
 			bundles = parseRepoElement(lurls);
@@ -34,7 +34,7 @@ public class RepoParser {
 		return bundles;
 	}
 
-	public ITarGzBundle bundleBuilder(String url) {
+	public ITarGzArchive bundleBuilder(String url) {
 		LoggerServiceProxy.getInstance().getLogger(RepoParser.class).debug("Parsing " + url);
 		Matcher bundleMatcher;
 		if (url.contains(SNAPSHOT))
@@ -45,7 +45,7 @@ public class RepoParser {
 		return new TarGzBundle(bundleMatcher.group(1), bundleMatcher.group(2), url);
 	}
 
-	public List<ITarGzBundle> parseRepoElement(List<String> lurls) {
+	public List<ITarGzArchive> parseRepoElement(List<String> lurls) {
 		return lurls.stream().map(x -> this.bundleBuilder(x)).collect(Collectors.toList());
 	}
 

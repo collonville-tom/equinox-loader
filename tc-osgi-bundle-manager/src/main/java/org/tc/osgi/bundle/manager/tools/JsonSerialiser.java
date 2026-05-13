@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonSerialiser {
 
-	
+	// TODO must be move into utils project?
 	public String toJson(Object o)
 	{
 		String result="Error in serialisation object "+ o;

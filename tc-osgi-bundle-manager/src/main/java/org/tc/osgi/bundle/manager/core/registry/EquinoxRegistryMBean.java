@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.mbean;
+package org.tc.osgi.bundle.manager.core.registry;
 
 import java.io.Serializable;
 import java.rmi.Remote;
@@ -7,26 +7,24 @@ import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementEx
 import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 
 public interface EquinoxRegistryMBean extends Remote, Serializable{
-
 	
-	public String buildPath(String bundleName, String version)	throws FieldTrackingAssignementException;
+	
+
+	public String bundleList() throws TcOsgiException ;	
 	public String bundleShortList() throws TcOsgiException ;
 	
 	public String bundleDependencies(String bundleName, String version) ;
-
 	public String bundleInfo(String bundleName, String version) throws TcOsgiException ;
-	public String bundleService(String bundleName) throws TcOsgiException ;
 	
-	public String bundleServices() throws TcOsgiException ;
-	
-	public String bundleInstall(String bundleName, String version) ;
-
+	public String bundleStart(String bundleName, String version);
 	public String bundleStop(String bundleName, String version);
-
+	public String bundleInstall(String bundleName, String version) ;
 	public String bundleUninstall(String bundleName, String version) ;
 
-	public String bundleStart(String bundleName, String version);
+	
+	public String bundleService(String bundleName) throws TcOsgiException ;
+	public String bundleServices() throws TcOsgiException ;
+
 	
 
-	public String bundleList() throws TcOsgiException ;
 }

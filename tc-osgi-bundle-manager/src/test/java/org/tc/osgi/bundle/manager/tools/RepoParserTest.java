@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
+import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
 import org.tc.osgi.bundle.manager.exception.RepoParserException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
-import org.tc.osgi.bundle.manager.tools.RepoParser;
 import org.tc.osgi.bundle.utils.module.service.impl.LoggerUtilsServiceImpl;
 
 public class RepoParserTest {
@@ -22,12 +21,12 @@ public class RepoParserTest {
 
 		LoggerServiceProxy.getInstance().setService(new LoggerUtilsServiceImpl());
 		RepoParser parseur = new RepoParser();
-		ITarGzBundle b = parseur.bundleBuilder(DATA);
+		ITarGzArchive b = parseur.bundleBuilder(DATA);
 		Assert.assertEquals("tc-osgi-bundle-utils-interfaces", b.getName());
 		Assert.assertEquals("0.1.0", b.getVersion());
 		Assert.assertEquals(DATA, b.getUrl());
 
-		ITarGzBundle b2 = parseur.bundleBuilder(DATA2);
+		ITarGzArchive b2 = parseur.bundleBuilder(DATA2);
 		Assert.assertEquals("tc-osgi-bundle-utils-interfaces", b2.getName());
 		Assert.assertEquals("0.1.0-SNAPSHOT", b2.getVersion());
 		Assert.assertEquals(DATA2, b2.getUrl());
@@ -38,7 +37,7 @@ public class RepoParserTest {
 	public void testLoadFile() throws RepoParserException {
 		LoggerServiceProxy.getInstance().setService(new LoggerUtilsServiceImpl());
 		RepoParser parseur = new RepoParser();
-		List<ITarGzBundle> l = parseur.parseRepoList(TEST_FILE);
+		List<ITarGzArchive> l = parseur.parseRepoList(TEST_FILE);
 
 		Assert.assertEquals(7, l.size());
 

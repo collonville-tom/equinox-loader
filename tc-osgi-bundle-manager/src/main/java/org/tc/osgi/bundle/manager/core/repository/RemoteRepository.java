@@ -1,7 +1,6 @@
-package org.tc.osgi.bundle.manager.mbean;
+package org.tc.osgi.bundle.manager.core.repository;
 
-import org.tc.osgi.bundle.manager.core.AbstractRepository;
-import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
+import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
@@ -18,12 +17,6 @@ public class RemoteRepository extends AbstractRepository {
 		super(name,url);
 	}
 	
-	
-	
-	public void pull(String bundle,String version)
-	{
-		//TODO
-	}
 
 	public void fetch() {
 		try {
@@ -42,12 +35,14 @@ public class RemoteRepository extends AbstractRepository {
 	{
 		StringBuilder b=new StringBuilder("[");
 		b.append(this.getRepositoryName()).append(",").append("url").append("]\n");
-		for(ITarGzBundle bundle:this.getBundles())
+		for(ITarGzArchive bundle:this.getBundles())
 		{
 			b.append(bundle.toString()).append("\n");
 		}
 		return b.toString();
 	}
+
+
 	
 	
 }

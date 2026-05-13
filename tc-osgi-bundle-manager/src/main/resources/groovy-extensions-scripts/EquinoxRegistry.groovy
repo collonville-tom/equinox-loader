@@ -11,7 +11,7 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.tc.osgi.bundle.manager.mbean.EquinoxRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistryMBean;
 import org.tc.osgi.bundle.manager.rmi.ManagerRmiClient;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 import org.tc.osgi.bundle.spark.conf.SparkPropertyFile

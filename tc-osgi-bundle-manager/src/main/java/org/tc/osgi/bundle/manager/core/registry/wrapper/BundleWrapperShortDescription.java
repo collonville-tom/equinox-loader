@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.wrapper;
+package org.tc.osgi.bundle.manager.core.registry.wrapper;
 
 import org.osgi.framework.Bundle;
 
