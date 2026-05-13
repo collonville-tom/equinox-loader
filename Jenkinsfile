@@ -89,8 +89,8 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PWD')]) {
-                    sh 'mvn docker:build docker:push -rf :tc-osgi-bundle-console-wrapper -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
-                    sh 'mvn docker:build docker:push -rf :tc-osgi-bundle-manager -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-console-wrapper -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-manager -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
                 }
                 
             }
