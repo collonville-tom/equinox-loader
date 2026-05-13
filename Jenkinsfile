@@ -89,7 +89,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PWD')]) {
-                    sh 'mvn deploy -registry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -registry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
                 }
                 
             }
