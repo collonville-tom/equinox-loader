@@ -3,7 +3,7 @@ package org.tc.osgi.bundle.manager.core.registry;
 import java.io.Serializable;
 import java.rmi.Remote;
 
-public interface RemoteRegistryMBean extends Remote, Serializable{
+public interface ArchiveRegistryMBean extends Remote, Serializable{
 	
 	public String fetchLocalRepository();
 	

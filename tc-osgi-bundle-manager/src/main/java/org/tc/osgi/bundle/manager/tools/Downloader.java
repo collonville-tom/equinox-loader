@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.repository.RemoteRepository;
+import org.tc.osgi.bundle.manager.core.repository.remote.RemoteRepository;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 

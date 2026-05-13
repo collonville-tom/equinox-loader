@@ -1,5 +1,6 @@
-package org.tc.osgi.bundle.manager.core.repository;
+package org.tc.osgi.bundle.manager.core.repository.remote;
 
+import org.tc.osgi.bundle.manager.core.repository.AbstractRepository;
 import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;

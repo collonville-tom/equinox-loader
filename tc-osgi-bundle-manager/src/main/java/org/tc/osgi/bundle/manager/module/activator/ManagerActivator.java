@@ -6,8 +6,8 @@ import org.osgi.framework.BundleContext;
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistry;
 import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistryMBean;
-import org.tc.osgi.bundle.manager.core.registry.RemoteRegistry;
-import org.tc.osgi.bundle.manager.core.registry.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.ArchiveRegistry;
+import org.tc.osgi.bundle.manager.core.registry.ArchiveRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.BundleUtilsServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
@@ -43,7 +43,7 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	private EquinoxLoaderManager manager;
 
-	private RemoteRegistry repoRegistry;
+	private ArchiveRegistry repoRegistry;
 	private EquinoxRegistry equinoxRegistry;
 
 	private String groovyDependencyBundleName;
@@ -96,18 +96,18 @@ public class ManagerActivator extends AbstractTcOsgiActivator {
 
 	@Override
 	protected void beforeStop(BundleContext context) throws TcOsgiException {
-		this.manager.unRegister(this.equinoxRegistry, RemoteRegistryMBean.class);
+		this.manager.unRegister(this.equinoxRegistry, ArchiveRegistryMBean.class);
 		this.manager.unRegister(this.repoRegistry, EquinoxRegistryMBean.class);
 	}
 
 	@Override
 	protected void afterStart(BundleContext context) throws TcOsgiException {
 		this.manager = new EquinoxLoaderManager();
-		this.repoRegistry = new RemoteRegistry();
+		this.repoRegistry = new ArchiveRegistry();
 		this.equinoxRegistry = new EquinoxRegistry();
 		try {
 			this.manager.createRegistry(this.manager.getPort());
-			this.manager.register(repoRegistry, RemoteRegistryMBean.class);
+			this.manager.register(repoRegistry, ArchiveRegistryMBean.class);
 			this.manager.register(equinoxRegistry, EquinoxRegistryMBean.class);
 
 //			this.iBundleUtilsService.getInstance().getBundleStarter().processOnBundle(context, this.getSparkDependencyBundleName(), this.getSparkDependencyBundleVersion());

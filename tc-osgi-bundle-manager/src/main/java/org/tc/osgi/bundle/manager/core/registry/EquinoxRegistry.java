@@ -58,7 +58,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	}
 	@Override
 	public String bundleList() throws TcOsgiException {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive bundle list");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).debug("Retreive bundle list");
 		List<BundleWrapper> wrappers = new ArrayList<>();
 		try {
 		for (Bundle b : this.getBundleContext().getBundles()) {
@@ -73,7 +73,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	}
 	@Override
 	public String bundleShortList() throws TcOsgiException {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive bundle list");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).debug("Retreive bundle list");
 		List<BundleWrapperShortDescription> wrappers = new ArrayList<>();
 		for (Bundle b : this.getBundleContext().getBundles()) {
 			wrappers.add(new BundleWrapperShortDescription(b));
@@ -172,7 +172,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 
 	@Override
 	public String bundleServices() throws TcOsgiException {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive services list");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).debug("Retreive services list");
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 
 		ServiceReference<?>[] services;
@@ -192,7 +192,7 @@ public class EquinoxRegistry implements EquinoxRegistryMBean {
 	}	
 	@Override
 	public String bundleService(String bundleName) throws TcOsgiException {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug("Retreive service list");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).debug("Retreive service list");
 		List<ServiceWrapper> wrapper = new ArrayList<>();
 		try {
 			Bundle bundle = this.retrieveBundle(bundleName);

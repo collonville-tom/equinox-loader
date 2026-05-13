@@ -3,9 +3,9 @@ package org.tc.osgi.bundle.manager.core.registry;
 import java.io.IOException;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
-import org.tc.osgi.bundle.manager.core.repository.RemoteRepository;
 import org.tc.osgi.bundle.manager.core.repository.RepositoryManager;
 import org.tc.osgi.bundle.manager.core.repository.archive.ITarGzArchive;
+import org.tc.osgi.bundle.manager.core.repository.remote.RemoteRepository;
 import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.Downloader;
@@ -14,7 +14,7 @@ import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
-public class RemoteRegistry implements RemoteRegistryMBean {
+public class ArchiveRegistry implements ArchiveRegistryMBean {
 
 
 	private static final long serialVersionUID = -9039919806902291851L;
@@ -30,7 +30,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 
 
-	public RemoteRegistry() {
+	public ArchiveRegistry() {
 		
 	}
 	
@@ -65,10 +65,10 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	
 	@Override
 	public String fetchAllRemoteRepository() {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching all remote repositories");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).info("Fetching all remote repositories");
 		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			r.fetch();
-			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
+			LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).debug(r.toString());
 		}
 		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager().getRepositories());
 	}
@@ -76,7 +76,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	
 	@Override
 	public String fetchRemoteRepository(String name) {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repository");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).info("Fetching remote repository");
 		if (RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
 		{
 			RemoteRepository repository=RepositoryManager.getRepositoryManager().getRepositories().get(name);
@@ -90,7 +90,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 	@Override
 	public String pullTar(String tarname, String version) {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Download targz " + tarname + " into local repo");
+		LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).info("Download targz " + tarname + " into local repo");
 		String url = "tarGz not found";
 		try {
 			url = this.find(tarname);
@@ -98,7 +98,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 			d.downloadFile(url, new StringBuilder(LOCAL_WORK_DIR).append(tarname).append("-").append(version)
 					.append(ARCH_EXT).toString());
 		} catch (DownloaderException e) {
-			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).error(e);
+			LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).error(e);
 		}
 		return url;
 	}
@@ -128,8 +128,8 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 			b.append(version).append(ARCH_EXT);
 			b.append(" -C /");
 			try {
-				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Extractiong" + bundleName);
-				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+				LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).info("Extractiong" + bundleName);
+				LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class)
 						.debug("Extractiong CMD" + b.toString());
 				Process process = Runtime.getRuntime().exec(b.toString());
 				process.waitFor();
@@ -138,7 +138,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 				return new StringBuilder("Extracting ").append(bundleName).append("-").append(version)
 						.append(".tar.gz done").toString();
 			} catch (InterruptedException | IOException e) {
-				LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).error(e);
+				LoggerServiceProxy.getInstance().getLogger(ArchiveRegistry.class).error(e);
 			}
 
 		}

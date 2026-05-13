@@ -8,7 +8,7 @@ import javax.management.MalformedObjectNameException;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.registry.EquinoxRegistryMBean;
-import org.tc.osgi.bundle.manager.core.registry.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.core.registry.ArchiveRegistryMBean;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.module.service.PropertyServiceProxy;
 import org.tc.osgi.bundle.utils.interf.conf.exception.FieldTrackingAssignementException;
@@ -17,7 +17,7 @@ import org.tc.osgi.bundle.utils.interf.exception.TcOsgiException;
 public class ManagerRmiClient {
 
 	private EquinoxRegistryMBean equinoxRegistryMBean;
-	private RemoteRegistryMBean remoteRegistryMBean;
+	private ArchiveRegistryMBean remoteRegistryMBean;
 
 	private String rmiPort;
 	private String rmiAddr;
@@ -36,18 +36,18 @@ public class ManagerRmiClient {
 
 	}
 
-	public RemoteRegistryMBean getRemoteRegistry() throws TcOsgiException {
+	public ArchiveRegistryMBean getRemoteRegistry() throws TcOsgiException {
 		try {
 			if (remoteRegistryMBean == null) {
 				final StringBuilder buff = new StringBuilder("rmi://");
 
-				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort()).append("/").append(RemoteRegistryMBean.class.getSimpleName());
+				buff.append(InetAddress.getByName(getRmiAddr()).getHostAddress()).append(":").append(getRmiPort()).append("/").append(ArchiveRegistryMBean.class.getSimpleName());
 				LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(buff.toString());
 				final Remote rem = Naming.lookup(buff.toString());
 				LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug(rem.toString());
-				if (rem instanceof RemoteRegistryMBean) {
+				if (rem instanceof ArchiveRegistryMBean) {
 					LoggerServiceProxy.getInstance().getLogger(ManagerRmiClient.class).debug("Chargement via rmi de l'objet " + EquinoxRegistryMBean.class.getSimpleName());
-					remoteRegistryMBean = (RemoteRegistryMBean) rem;
+					remoteRegistryMBean = (ArchiveRegistryMBean) rem;
 				}
 			}
 			return remoteRegistryMBean;

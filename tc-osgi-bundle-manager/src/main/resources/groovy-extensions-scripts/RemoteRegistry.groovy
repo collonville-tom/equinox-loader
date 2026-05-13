@@ -13,7 +13,7 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile
-import org.tc.osgi.bundle.manager.mbean.RemoteRegistryMBean;
+import org.tc.osgi.bundle.manager.mbean.ArchiveRegistryMBean;
 import org.tc.osgi.bundle.manager.rmi.ManagerRmiClient;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
 

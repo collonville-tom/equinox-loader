@@ -1,4 +1,4 @@
-package org.tc.osgi.bundle.manager.core.repository;
+package org.tc.osgi.bundle.manager.core.repository.local;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
+import org.tc.osgi.bundle.manager.core.repository.AbstractRepository;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
 import org.tc.osgi.bundle.manager.tools.RepoParser;
 
