@@ -30,41 +30,61 @@ defaultSparkService.staticFiles.externalLocation("/var/equinox-loader-manager/")
 String TAR_TAG = ":tar";
 String VERSION_TAG = ":version";
 
-defaultSparkService.get("/local/:name",new Route() {
 
-                @Override
-                public Object handle(Request request, Response response) throws Exception {
-					    System.out.println("Lecture RepoList");
-                        List<String> repoContent=Files.readAllLines(new File("/var/equinox-loader-manager/local/repository.list").toPath())
-                        StringBuilder b=new StringBuilder();
-                        for(String s:repoContent)
-                        {
-                                b.append(s.replace("/var/equinox-loader-manager",".")).append("<br>");
-                        }
-                        System.out.println(b.toString());
-                        return b.toString();
-                }
-        });
 
-defaultSparkService.get("/rps-cmd",new Route() {
+defaultSparkService.get("/repository/help",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		response.type("application/json");
 		List<String> cmd=new ArrayList<String>();
-		cmd.add("/rps-cmd -> cette liste");
-		cmd.add("/fetchRemoteRepo -> initialise l'image local du contenu des repo distant");
-		cmd.add("/fetchLocalRepo -> initialise l'image local du contenu du repo local");
-		cmd.add("/pullTar/:tar/:version -> importe un tar depuis un repository distant et le depose dans le repository local");
-		cmd.add("/deployTar/:tar/:version -> lance la procedure de deployement d'une archive tar dans le contexte d'installation de equinox (precede la phase d'installation du bundle contenu dans le tar");
-		cmd.add("/pushTar/:tar/:version -> permet pour un client de l'interface REST de realiser l'extraction d'un TAR contenu dans le repo local");
-		cmd.add("/addRepo/:name/:url -> ajout d'un repository, remplacer les / par des %2F par exemple: http:%2F%2Ftoto%2Ftata");
-		cmd.add("/delRepo/:name -> suppression d'un repository, not implemented yet");
+		cmd.add("/help -> cette liste");
+		cmd.add("/repository/local -> initialise l'image local du contenu du repo local");
+		cmd.add("/repository/local2 -> initialise l'image local du contenu du repo local");
+		cmd.add("/repository/remote/:name/add/:url -> ajout d'un repository, remplacer les / par des %2F par exemple: http:%2F%2Ftoto%2Ftata");
+		cmd.add("/repository/remote/:name/delete -> suppression d'un repository, not implemented yet");
+		cmd.add("/repository/remote/:name/fetch -> initialise l'image local du contenu des repo distant");
+		cmd.add("/archive/:tar/:version/pull -> importe un tar depuis un repository distant et le depose dans le repository local");
+		cmd.add("/archive/:tar/:version/deploy -> lance la procedure de deployement d'une archive tar dans le contexte d'installation de equinox (precede la phase d'installation du bundle contenu dans le tar");
+		cmd.add("/archive/:tar/:version/extract -> permet pour un client de l'interface REST de realiser l'extraction d'un TAR contenu dans le repo local");
+		
+		
 		return new JsonSerialiser().toJson(cmd);
 	}
 });
 
-defaultSparkService.get("/addRepo/:name/:url",new Route() {
+defaultSparkService.get("/repository/local",new Route() {
+
+    @Override
+    public Object handle(Request request, Response response) throws Exception {
+		    System.out.println("Lecture RepoList");
+            List<String> repoContent=Files.readAllLines(new File("/var/equinox-loader-manager/local/repository.list").toPath())
+            StringBuilder b=new StringBuilder();
+            for(String s:repoContent)
+            {
+                    b.append(s.replace("/var/equinox-loader-manager",".")).append("<br>");
+            }
+            System.out.println(b.toString());
+            return b.toString();
+    }
+});
+
+defaultSparkService.get("/repository/local2",new Route() {
+
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		response.type("application/json");
+		try {
+			return ManagerRmiClient.getInstance().getRemoteRegistry().fetchLocalRepo();
+		}
+		catch (Throwable e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+});
+
+defaultSparkService.get("/repository/remote/:name/add/:url",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -73,7 +93,7 @@ defaultSparkService.get("/addRepo/:name/:url",new Route() {
 	}
 });
 
-defaultSparkService.get("/delRepo/:name",new Route() {
+defaultSparkService.get("/repository/remote/:name/delete",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -83,7 +103,7 @@ defaultSparkService.get("/delRepo/:name",new Route() {
 });
 
 
-defaultSparkService.get("/fetchRemoteRepo",new Route() {
+defaultSparkService.get("/repository/remote/:name/fetch",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -91,21 +111,8 @@ defaultSparkService.get("/fetchRemoteRepo",new Route() {
 		return ManagerRmiClient.getInstance().getRemoteRegistry().fetchRemoteRepo();
 	}
 });
-defaultSparkService.get("/fetchLocalRepo",new Route() {
 
-	@Override
-	public Object handle(Request request, Response response) throws Exception {
-		response.type("application/json");
-		try {
-			return ManagerRmiClient.getInstance().getRemoteRegistry().fetchLocalRepo();
-		}
-	catch (Throwable e) {
-		System.out.println(e);
-	}
-	return null;
-}
-});
-defaultSparkService.get("/pullTar/:tar/:version", new Route() {
+defaultSparkService.get("/archive/:tar/:version/pull", new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -113,14 +120,14 @@ defaultSparkService.get("/pullTar/:tar/:version", new Route() {
 		return ManagerRmiClient.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 	}
 });
-defaultSparkService.get("/deployTar/:tar/:version",new Route() {
+defaultSparkService.get("/archive/:tar/:version/deploy",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		return ManagerRmiClient.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 	}
 });
-defaultSparkService.get("/pushTar/:tar/:version",new Route() {
+defaultSparkService.get("/archive/:tar/:version/extract",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
