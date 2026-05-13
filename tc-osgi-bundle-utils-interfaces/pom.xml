@@ -116,7 +116,7 @@
 							<images>
 								<image>
 									<build>
-										<from>eclipse-temurin:25.0.3_9-jre-ubi10-minimal</from>
+										<from>${docker.login}/eclipse-temurin:25.0.3_9-jre-ubi10-minimal</from>
 									</build>
 								</image>
 							</images>
