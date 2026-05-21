@@ -107,8 +107,18 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'REGISTRY_USER', passwordVariable: 'REGISTRY_PWD')]) {
-                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-console-wrapper -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-utils-interfaces -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-utils -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-equinox-loader -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
                     sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-manager -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-groovy-interfaces -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-groovy -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-spark-interfaces -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-spark -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+
+                    sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-console-wrapper -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
+                    
                 }
                 
             }
