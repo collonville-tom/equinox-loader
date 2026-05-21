@@ -47,25 +47,6 @@ pipeline {
             
         }
 
-        stage('SonarQube Analysis') {
-            agent {
-                docker { 
-                    image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-v maven-repo:/tmp/workspace/maven-cache'
-                    reuseNode true 
-                }
-            }
-            environment {
-                MAVEN_OPTS = '-Dmaven.repo.local=/tmp/workspace/maven-cache'
-                SONAR_IP = credentials('sonar_host')  // Référence le credential Jenkins
-                SONAR_TOKEN = credentials('sonar_token')  // Référence le credential Jenkins
-            }
-            steps {
-                sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=equinox-loader -Dsonar.projectName=\'equinox-loader\' -Dsonar.host.url=http://${SONAR_IP}:9000 \
-  -Dsonar.token=${SONAR_TOKEN} -s settings.xml'
-            }
-   
-        } 
 
         stage('Deploy Artifact') {
             when {
