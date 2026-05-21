@@ -50,7 +50,7 @@ pipeline {
         stage('SonarQube Analysis') {
             agent {
                 docker { 
-                    image 'maven:3.9.6-eclipse-temurin-25'
+                    image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
                     reuseNode true 
                 }
