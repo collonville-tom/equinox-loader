@@ -26,7 +26,7 @@ pipeline {
                 MAVEN_OPTS = '-Dmaven.repo.local=/tmp/workspace/maven-cache'
             }
             steps {
-                sh 'mvn clean verify -s settings.xml'
+                sh 'mvn clean verify -U -s settings.xml'
             }
             
         }
