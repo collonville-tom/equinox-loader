@@ -210,7 +210,7 @@ pipeline {
                             
                           
                             mkdir -p deb_collect_dir
-                            find . -type f -name "*.tar.gz" | xargs -i mv {} deb_collect_dir
+                            find . -type f -name "*.deb" | xargs -i mv {} deb_collect_dir
                             scp -r deb_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
 
                             # Nettoyer la clé temporaire
