@@ -142,7 +142,7 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📤 Déploiement du site Maven via SCP vers https://collonvillethomas.freeboxos.fr/public/projets/"
+                    echo "📤 Déploiement des packet targz sur via SCP vers https://collonvillethomas.freeboxos.fr/public/targz/"
                     
                     // Déployer le site généré via SCP avec clé SSH
                     withCredentials([sshUserPrivateKey(credentialsId: 'home-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SITE_USER')]) {
@@ -166,7 +166,7 @@ pipeline {
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
                             
-                            echo "✅ Site déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/projets/"
+                            echo "✅ Packet targz déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/targz/"
                         '''
                     }
                 }
@@ -191,7 +191,7 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📤 Déploiement du site Maven via SCP vers https://collonvillethomas.freeboxos.fr/public/projets/"
+                    echo "📤 Déploiement des packet debian sur via SCP vers //https://collonvillethomas.freeboxos.fr/apt/depot/livraison/"
                     
                     // Déployer le site généré via SCP avec clé SSH
                     withCredentials([sshUserPrivateKey(credentialsId: 'home-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SITE_USER')]) {
@@ -216,7 +216,7 @@ pipeline {
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
                             
-                            echo "✅ Site déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/projets/"
+                            echo "✅ Package déployé avec succès sur https://collonvillethomas.freeboxos.fr/apt/depot/livraison/"
                         '''
                     }
                 }
