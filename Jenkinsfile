@@ -159,7 +159,9 @@ pipeline {
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
                             
-                            scp -r ./**/*.tar.gz ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
+                            mkdir -p targz_collect_dir
+                            find . -type f -name "*.tar.gz" | xargs -i mv {} targz_collect_dir
+                            scp -r targz_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
@@ -206,7 +208,10 @@ pipeline {
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
                             
-                            scp -r ./**/*.deb ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
+                          
+                            mkdir -p deb_collect_dir
+                            find . -type f -name "*.tar.gz" | xargs -i mv {} deb_collect_dir
+                            scp -r deb_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
