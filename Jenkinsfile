@@ -258,7 +258,7 @@ pipeline {
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-                            ssh ${SITE_USER}@${SERVER_IP} 'apt_path=/mnt/nfs_storage_client/docker_share/tc-apt/html/depot; reprepro --dbdir $apt_path/db --confdir $apt_path/conf -Vb $apt_path includedeb tc-home $apt_path/livraison/*.deb;mv  $apt_path/livraison/*.deb $apt_path/save/'
+                            ssh ${SITE_USER}@${SERVER_IP} 'apt_path=/mnt/nfs_storage_client/docker_share/tc-apt/html/depot; reprepro --dbdir $apt_path/db --confdir $apt_path/conf -Vb $apt_path includedeb tc-home $apt_path/livraison/*.deb;mv  $apt_path/livraison/*.deb $apt_path/save/ || true'
                             
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
