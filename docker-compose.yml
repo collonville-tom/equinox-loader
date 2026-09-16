@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  equinox-node1:
+    image: collonvillethomas.freeboxos.fr:5000/tc-osgi-bundle-console-wrapper:latest
+    container_name: equinox-node1
+    hostname: equinox-node1
+    ports:
+      - "4567:4567"   # Remote Registry REST API (Spark Repository)
+      - "7654:7654"   # Equinox Registry REST API (Spark Bundle Management)
+      - "7001:7001"   # RMI / JMX Port
+    environment:
+      - NODE_NAME=equinox-node1
+    volumes:
+      - node1-repo-data:/var/equinox-loader-manager
+    networks:
+      equinox-net:
+        aliases:
+          - node1.equinox.local
+
+  equinox-node2:
+    image: collonvillethomas.freeboxos.fr:5000/tc-osgi-bundle-console-wrapper:latest
+    container_name: equinox-node2
+    hostname: equinox-node2
+    ports:
+      - "4568:4567"   # Remote Registry REST API (Spark Repository)
+      - "7655:7654"   # Equinox Registry REST API (Spark Bundle Management)
+      - "7002:7001"   # RMI / JMX Port
+    environment:
+      - NODE_NAME=equinox-node2
+    volumes:
+      - node2-repo-data:/var/equinox-loader-manager
+    networks:
+      equinox-net:
+        aliases:
+          - node2.equinox.local
+
+  equinox-node3:
+    image: collonvillethomas.freeboxos.fr:5000/tc-osgi-bundle-console-wrapper:latest
+    container_name: equinox-node3
+    hostname: equinox-node3
+    ports:
+      - "4569:4567"   # Remote Registry REST API (Spark Repository)
+      - "7656:7654"   # Equinox Registry REST API (Spark Bundle Management)
+      - "7003:7001"   # RMI / JMX Port
+    environment:
+      - NODE_NAME=equinox-node3
+    volumes:
+      - node3-repo-data:/var/equinox-loader-manager
+    networks:
+      equinox-net:
+        aliases:
+          - node3.equinox.local
+
+networks:
+  equinox-net:
+    driver: bridge
+    name: equinox-net
+
+volumes:
+  node1-repo-data:
+  node2-repo-data:
+  node3-repo-data:
