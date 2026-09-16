@@ -27,7 +27,7 @@ import java.rmi.Remote;
 
 Service defaultSparkService=Service.ignite().port(7654);
 
-defaultSparkService.get("/bundle/help",new Route() {
+defaultSparkService.get("/help",new Route() {
 
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
@@ -46,26 +46,6 @@ defaultSparkService.get("/bundle/help",new Route() {
 				return new JsonSerialiser().toJson(cmd);
 			}
 		});
-
-
-defaultSparkService.get("/debug/:url",new Route() {
-
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				try{
-					response.type("application/json");
-					Remote rem = Naming.lookup("rmi://127.0.0.1:9001/EquinoxRegistryMBean");
-					if(rem instanceof EquinoxRegistryMBean) {
-						System.out.println("rem est bien un bon groupe, non juste un Eqx Registry");
-						return rem.bundleList();
-					}
-					//	System.out.println(ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList());
-					return  ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList();
-				}catch (Throwable e) {
-						System.out.println(e);
-				}
-			}
-});
 
 
 // Liste des bundles
@@ -162,7 +142,7 @@ defaultSparkService.get("/service/:serviceName/:version",new Route() {
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		response.type("application/json");
-		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleService(request.params(":serviceName"),request.params(":version"));
+		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleService(request.params(":serviceName"));
 	}
 });
 

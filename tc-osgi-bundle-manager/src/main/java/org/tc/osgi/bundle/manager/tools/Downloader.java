@@ -26,7 +26,7 @@ public class Downloader {
 		urlFile.append(ManagerPropertyFile.getInstance().getStaticRepositoryFile());
 		return urlFile.toString();
 	}
-	
+
 	public String buildDstRepoFileDir(RemoteRepository repository) {
 		StringBuilder cacheDir = new StringBuilder();
 		cacheDir.append(ManagerPropertyFile.getInstance().getWorkDirectory());
@@ -34,9 +34,8 @@ public class Downloader {
 		cacheDir.append(repository.getRepositoryName());
 		return cacheDir.toString();
 	}
-	
-	public String buildRepoCacheFile(RemoteRepository repository)
-	{
+
+	public String buildRepoCacheFile(RemoteRepository repository) {
 		StringBuilder cacheFile = new StringBuilder();
 		cacheFile.append(ManagerPropertyFile.getInstance().getWorkDirectory());
 		cacheFile.append("/");
@@ -51,7 +50,7 @@ public class Downloader {
 		String cacheDir = this.buildDstRepoFileDir(repository);
 		String cacheFile = this.buildRepoCacheFile(repository);
 		try {
-			if(!new File(cacheDir).exists())
+			if (!new File(cacheDir).exists())
 				Files.createDirectory(new File(cacheDir).toPath());
 			this.downloadFile(remoteRepoFile, cacheFile);
 			return cacheFile;
@@ -64,9 +63,9 @@ public class Downloader {
 	public void downloadFile(String url, String file) throws DownloaderException {
 		InputStream in;
 		try {
-			if(new File(file).exists())
+			if (new File(file).exists())
 				new File(file).delete();
-			LoggerServiceProxy.getInstance().getLogger(Downloader.class).debug("ouverture du stream vers "+url);
+			LoggerServiceProxy.getInstance().getLogger(Downloader.class).debug("ouverture du stream vers " + url);
 			in = new URL(url).openStream();
 			Files.copy(in, Paths.get(file), StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
@@ -74,6 +73,5 @@ public class Downloader {
 		}
 
 	}
-
 
 }
