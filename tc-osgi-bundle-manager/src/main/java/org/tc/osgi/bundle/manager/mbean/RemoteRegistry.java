@@ -53,7 +53,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	@Override
 	public String fetchRepo() {
 		RepositoryManager.getRepositoryManager().getLocalRepository().fetch();
-		for (RemoteRepository r : new ArrayList<>(RepositoryManager.getRepositoryManager().getRepositories().values())) {
+		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			r.fetch();
 			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
 		}
