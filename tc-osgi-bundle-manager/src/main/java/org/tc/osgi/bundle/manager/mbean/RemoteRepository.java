@@ -71,7 +71,12 @@ public class RemoteRepository extends AbstractRepository {
 
 				JsonNode localRepoNode = rootNode.get("localRepository");
 				if (localRepoNode != null) {
-					this.getBundles().addAll(this.parseBundles(localRepoNode));
+					this.parseBundles(localRepoNode).stream()
+							.filter(newBundle -> this.getBundles().stream().noneMatch(
+									existing -> existing.getName().equals(newBundle.getName())
+											&& existing.getVersion().equals(newBundle.getVersion())))
+							.forEach(this.getBundles()::add);
+
 				}
 
 			} else {

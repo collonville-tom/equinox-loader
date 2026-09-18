@@ -1,7 +1,6 @@
 package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.RepositoryManager;
@@ -78,6 +77,7 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 		return "Repository " + name + " removed";
 	}
 
+	// TODO
 	@Override
 	public String pullTar(String tarname, String version) {
 		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
@@ -94,6 +94,20 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 		return url;
 	}
 
+	// TODO
+	@Override
+	public String pushTar(String name, String version) {
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
+			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
+				StringBuilder b = new StringBuilder("/local/");
+				b.append(name).append("-").append(version).append(ARCH_EXT);
+				return b.toString();
+			}
+		}
+		return "File not found";
+	}
+
+	// TODO
 	@Override
 	public String deployTar(String bundleName, String version) {
 		if (!System.getProperty(OS_PROPERTY).toLowerCase().startsWith(WINDOWS)) {
@@ -118,18 +132,6 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 		}
 		return "Os Windows Detected, function not supported";
-	}
-
-	@Override
-	public String pushTar(String name, String version) {
-		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
-			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
-				StringBuilder b = new StringBuilder("/local/");
-				b.append(name).append("-").append(version).append(ARCH_EXT);
-				return b.toString();
-			}
-		}
-		return "File not found";
 	}
 
 }
