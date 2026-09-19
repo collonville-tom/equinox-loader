@@ -33,16 +33,16 @@ defaultSparkService.get("/help",new Route() {
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
 				List<String> cmd=new ArrayList<String>();
-				cmd.add("/help -> cette liste");
-				cmd.add("/bundle -> liste des bundles");
-				cmd.add("/bundle/short -> idem precedent");
-				cmd.add("/bundle/:bundleName/:version -> details d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/start -> demarrage d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/stop -> arret d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/uninstall -> desinstallation d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/install -> installation d'un bundle");
-				cmd.add("/bundle/dependency/:bundleName/:version -> liste des dependances d'un bundle");
-				cmd.add("/services -> liste des services");
+				cmd.add("GET:/help -> cette liste");
+				cmd.add("GET:/bundle -> liste des bundles");
+				cmd.add("GET:/bundle/short -> idem precedent");
+				cmd.add("GET:/bundle/:bundleName/:version -> details d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/start -> demarrage d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/stop -> arret d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/uninstall -> desinstallation d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/install -> installation d'un bundle");
+				cmd.add("GET:/bundle/dependency/:bundleName/:version -> liste des dependances d'un bundle");
+				cmd.add("GET:/services -> liste des services");
 				return new JsonSerialiser().toJson(cmd);
 			}
 		});

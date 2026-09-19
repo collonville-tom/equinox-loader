@@ -39,12 +39,13 @@ defaultSparkService.get("/help",new Route() {
 		response.type("application/json");
 		List<String> cmd=new ArrayList<String>();
 		cmd.add("/help -> cette liste");
-		cmd.add("/repository -> initialise l'image du contenu des repos");
-		cmd.add("/repository/:name/add (POST JSON {\"url\":\"...\"}) -> ajout d'un repository");
-		cmd.add("/repository/:name/delete -> suppression d'un repository");
-		cmd.add("/archive/:tar/:version/pull -> importe un tar depuis un repository distant et le depose dans le repository local");
-		cmd.add("/archive/:tar/:version/extract -> permet pour un client de l'interface REST de realiser l'extraction d'un TAR contenu dans le repo local");
-		cmd.add("/archive/:tar/:version/deploy -> lance la procedure de deployement d'une archive tar dans le contexte d'installation de equinox (precede la phase d'installation du bundle contenu dans le tar");
+		cmd.add("GET:/repository -> initialise l'image du contenu des repos");
+		cmd.add("POST:/repository/:name (JSON {\"url\":\"...\"}) -> ajout d'un repository");
+		cmd.add("DELETE:/repository/:name -> suppression d'un repository");
+		cmd.add("GET:/archive/:tar/:version -> recupere le tar du repository distant");
+		cmd.add("POST:/archive/:tar/:version -> pousse un tar dans le repository local");
+		cmd.add("POST:/archive/:tar/:version/collect -> demande la recuperation d'un tar depuis un repo distant");
+		cmd.add("POST:/archive/:tar/:version/deploy -> lance la procedure de deployement d'une archive tar dans le contexte d'installation de equinox (precede la phase d'installation du bundle contenu dans le tar");
 		
 		
 		return new JsonSerialiser().toJson(cmd);
@@ -67,7 +68,7 @@ defaultSparkService.get("/repository",new Route() {
 	}
 });
 
-defaultSparkService.post("/repository/:name/add",new Route() {
+defaultSparkService.post("/repository/:name",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -77,7 +78,7 @@ defaultSparkService.post("/repository/:name/add",new Route() {
 	}
 });
 
-defaultSparkService.post("/repository/:name/delete",new Route() {
+defaultSparkService.delete("/repository/:name",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
@@ -96,30 +97,64 @@ defaultSparkService.get("/repository/:name/fetch",new Route() {
 	}
 });
 
-defaultSparkService.get("/archive/:tar/:version/pull", new Route() {
+defaultSparkService.get("/archive/:tar/:version", new Route() {
+
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		try {
+			byte[] fileData = ManagerRmiClient.getInstance().getRemoteRegistry().serveTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+			response.type("application/gzip");
+			response.header("Content-Disposition", "attachment; filename=\"" + request.params(TAR_TAG) + "-" + request.params(VERSION_TAG) + ".tar.gz\"");
+			javax.servlet.http.HttpServletResponse raw = response.raw();
+			raw.getOutputStream().write(fileData);
+			raw.getOutputStream().flush();
+			raw.getOutputStream().close();
+			return raw;
+		} catch (java.io.FileNotFoundException e) {
+			response.status(404);
+			return "File not found";
+		}
+	}
+});
+
+defaultSparkService.delete("/archive/:tar/:version", new Route() {
+
+	@Override
+	public Object handle(Request request, Response response) throws Exception {
+		try {
+			String processMessage = ManagerRmiClient.getInstance().getRemoteRegistry().removeTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+			response.type("application/json");
+			return processMessage;
+		} catch (java.io.FileNotFoundException e) {
+			response.status(404);
+			return "File not found";
+		}
+	}
+});
+
+defaultSparkService.post("/archive/:tar/:version", new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		response.type("application/json");
-		return ManagerRmiClient.getInstance().getRemoteRegistry().pullTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+		return ManagerRmiClient.getInstance().getRemoteRegistry().receiveTar(request.params(TAR_TAG), request.params(VERSION_TAG),request.body());
 	}
 });
 
-defaultSparkService.get("/archive/:tar/:version/extract",new Route() {
+
+defaultSparkService.post("/archive/:tar/:version/collect",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
-		String b=ManagerRmiClient.getInstance().getRemoteRegistry().pushTar(request.params(TAR_TAG), request.params(VERSION_TAG));
-		response.redirect(b.toString());
-		return "Redirection to " + b;
+		return ManagerRmiClient.getInstance().getRemoteRegistry().collectTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 	}
 });
 
-defaultSparkService.get("/archive/:tar/:version/deploy",new Route() {
+defaultSparkService.post("/archive/:tar/:version/extract",new Route() {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
-		return ManagerRmiClient.getInstance().getRemoteRegistry().deployTar(request.params(TAR_TAG), request.params(VERSION_TAG));
+		return ManagerRmiClient.getInstance().getRemoteRegistry().extractTar(request.params(TAR_TAG), request.params(VERSION_TAG));
 	}
 });
 

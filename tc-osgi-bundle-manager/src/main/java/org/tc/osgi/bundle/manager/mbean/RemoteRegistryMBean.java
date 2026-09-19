@@ -5,11 +5,15 @@ import java.rmi.Remote;
 
 public interface RemoteRegistryMBean extends Remote, Serializable {
 
-	public String deployTar(String bundleName, String version);
+	public String extractTar(String bundleName, String version);
 
-	public String pushTar(String name, String version);
+	public byte[] serveTar(String name, String version) throws java.io.FileNotFoundException;
 
-	public String pullTar(String tarname, String version);
+	public String removeTar(String name, String version) throws java.io.FileNotFoundException;
+
+	public String receiveTar(String tarname, String version, byte[] body);
+
+	public String collectTar(String name, String version);
 
 	public String fetchRepo();
 
