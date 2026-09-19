@@ -137,7 +137,7 @@ defaultSparkService.post("/archive/:tar/:version", new Route() {
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		response.type("application/json");
-		return ManagerRmiClient.getInstance().getRemoteRegistry().receiveTar(request.params(TAR_TAG), request.params(VERSION_TAG),request.body());
+		return ManagerRmiClient.getInstance().getRemoteRegistry().receiveTar(request.params(TAR_TAG), request.params(VERSION_TAG), request.bodyAsBytes());
 	}
 });
 
