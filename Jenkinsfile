@@ -159,8 +159,10 @@ pipeline {
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-
-                            scp -r ./**/*.tar.gz ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
+                            mkdir -p targz_collect_dir
+                            find . -path "./targz_collect_dir" -prune -o -type f -name "*.tar.gz" -exec cp {} targz_collect_dir/ \\;
+                            scp -r targz_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
+                            rm -rf targz_collect_dir
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
@@ -206,8 +208,10 @@ pipeline {
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-
-                            scp -r ./**/*.deb ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
+                            mkdir -p deb_collect_dir
+                            find . -path "./deb_collect_dir" -prune -o -type f -name "*.deb" -exec cp {} deb_collect_dir/ \\;
+                            scp -r deb_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
+                            rm -rf deb_collect_dir
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
