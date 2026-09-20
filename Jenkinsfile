@@ -226,7 +226,8 @@ pipeline {
         stage('Update Repository') {
             when {
                 anyOf {
-                    branch 'master'
+                    branch 'develop'
+                    branch 'main'
                 }
             }
             agent {
