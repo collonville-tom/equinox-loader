@@ -26,16 +26,16 @@ pipeline {
                 MAVEN_OPTS = '-Dmaven.repo.local=/tmp/workspace/maven-cache'
             }
             steps {
-                sh 'mvn clean verify -s settings.xml'
+                sh 'mvn clean verify -U -s settings.xml'
             }
-            
+
         }
          stage('Compile and install') {
             agent {
-                docker { 
+                docker {
                     image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -44,14 +44,15 @@ pipeline {
             steps {
                 sh 'mvn install -s settings.xml'
             }
-            
+
         }
+
         stage('SonarQube Analysis') {
             agent {
-                docker { 
+                docker {
                     image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -63,8 +64,8 @@ pipeline {
                 sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=equinox-loader -Dsonar.projectName=\'equinox-loader\' -Dsonar.host.url=http://${SONAR_IP}:9000 \
   -Dsonar.token=${SONAR_TOKEN} -s settings.xml'
             }
-   
-        } 
+
+        }
         stage('Deploy Artifact') {
             when {
                 anyOf {
@@ -73,10 +74,10 @@ pipeline {
                 }
             }
             agent {
-                docker { 
+                docker {
                     image 'maven:3.9.15-eclipse-temurin-25'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -84,7 +85,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'jenkins2nexus-deployement', usernameVariable: 'MAVEN_USER', passwordVariable: 'MAVEN_PWD')]) {
-                    sh 'mvn deploy -Djenkins-username=$MAVEN_USER -Djenkins-pwd=$MAVEN_PWD -s settings.xml' 
+                    sh 'mvn deploy -Djenkins-username=$MAVEN_USER -Djenkins-pwd=$MAVEN_PWD -s settings.xml'
                 }
             }
         }
@@ -96,10 +97,10 @@ pipeline {
                 }
             }
             agent {
-                docker { 
+                docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
                     args '-v maven-repo:/tmp/workspace/maven-cache'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -118,9 +119,9 @@ pipeline {
                     sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-spark -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
 
                     sh 'mvn docker:build docker:push -pl :tc-osgi-bundle-console-wrapper -Dregistry.username=$REGISTRY_USER -Dregistry.password=$REGISTRY_PWD -P DOCKER -P PUSH -s settings.xml'
-                    
+
                 }
-                
+
             }
         }
 
@@ -132,9 +133,9 @@ pipeline {
                 }
             }
             agent {
-                docker { 
+                docker {
                     image 'alpine:latest'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -142,31 +143,29 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📤 Déploiement des packet targz sur via SCP vers https://collonvillethomas.freeboxos.fr/public/targz/"
-                    
+                    echo "📤 Déploiement du site Maven via SCP vers https://collonvillethomas.freeboxos.fr/public/projets/"
+
                     // Déployer le site généré via SCP avec clé SSH
                     withCredentials([sshUserPrivateKey(credentialsId: 'home-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SITE_USER')]) {
                         sh '''
                             # Installer openssh-client dans Alpine
                             apk add --no-cache openssh-client
-                            
+
                             # Créer un répertoire temporaire pour la clé SSH
                             mkdir -p ~/.ssh
                             cp $SSH_KEY ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
-                            
+
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-                            
-                            mkdir -p targz_collect_dir
-                            find . -type f -name "*.tar.gz" | xargs -i mv {} targz_collect_dir
-                            scp -r targz_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
+
+                            scp -r ./**/*.tar.gz ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-public-share/html/targz/
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
-                            
-                            echo "✅ Packet targz déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/targz/"
+
+                            echo "✅ Site déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/projets/"
                         '''
                     }
                 }
@@ -181,9 +180,9 @@ pipeline {
                 }
             }
             agent {
-                docker { 
+                docker {
                     image 'alpine:latest'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -191,32 +190,29 @@ pipeline {
             }
             steps {
                 script {
-                    echo "📤 Déploiement des packet debian sur via SCP vers //https://collonvillethomas.freeboxos.fr/apt/depot/livraison/"
-                    
+                    echo "📤 Déploiement du site Maven via SCP vers https://collonvillethomas.freeboxos.fr/public/projets/"
+
                     // Déployer le site généré via SCP avec clé SSH
                     withCredentials([sshUserPrivateKey(credentialsId: 'home-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SITE_USER')]) {
                         sh '''
                             # Installer openssh-client dans Alpine
                             apk add --no-cache openssh-client
-                            
+
                             # Créer un répertoire temporaire pour la clé SSH
                             mkdir -p ~/.ssh
                             cp $SSH_KEY ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
-                            
+
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-                            
-                          
-                            mkdir -p deb_collect_dir
-                            find . -type f -name "*.deb" | xargs -i mv {} deb_collect_dir
-                            scp -r deb_collect_dir/* ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
+
+                            scp -r ./**/*.deb ${SITE_USER}@${SERVER_IP}:/mnt/nfs_storage_client/docker_share/tc-apt/html/depot/livraison
 
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
-                            
-                            echo "✅ Package déployé avec succès sur https://collonvillethomas.freeboxos.fr/apt/depot/livraison/"
+
+                            echo "✅ Site déployé avec succès sur https://collonvillethomas.freeboxos.fr/public/projets/"
                         '''
                     }
                 }
@@ -226,14 +222,13 @@ pipeline {
         stage('Update Repository') {
             when {
                 anyOf {
-                    branch 'develop'
-                    branch 'main'
+                    branch 'master'
                 }
             }
             agent {
-                docker { 
+                docker {
                     image 'ubuntu:26.04'
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             environment {
@@ -242,33 +237,34 @@ pipeline {
             steps {
                 script {
                     echo "📤 Déploiement du package debian"
-                    
+
                     // Déployer le site généré via SCP avec clé SSH
                     withCredentials([sshUserPrivateKey(credentialsId: 'home-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'SITE_USER')]) {
                         sh '''
                             # Installer openssh-client dans Ubuntu
                             apt-get update
                             apt-get install -y openssh-client
-                            
+
                             # Créer un répertoire temporaire pour la clé SSH
                             mkdir -p ~/.ssh
                             cp $SSH_KEY ~/.ssh/id_rsa
                             chmod 600 ~/.ssh/id_rsa
-                            
+
                             # Ajouter le serveur aux hosts connus (éviter la confirmation)
                             ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts 2>/dev/null || true
                             pwd
-                            ssh ${SITE_USER}@${SERVER_IP} 'apt_path=/mnt/nfs_storage_client/docker_share/tc-apt/html/depot; reprepro --dbdir $apt_path/db --confdir $apt_path/conf -Vb $apt_path includedeb tc-home $apt_path/livraison/*.deb;mv  $apt_path/livraison/*.deb $apt_path/save/ || true'
-                            
+                            ssh ${SITE_USER}@${SERVER_IP} 'apt_path=/mnt/nfs_storage_client/docker_share/tc-apt/html/depot; reprepro --dbdir $apt_path/db --confdir $apt_path/conf -Vb $apt_path includedeb tc-home $apt_path/livraison/*.deb;mv  $apt_path/livraison/*.deb $apt_path/save/'
+
                             # Nettoyer la clé temporaire
                             rm -f ~/.ssh/id_rsa
-                            
+
                             echo "✅ Package deployé"
                         '''
                     }
                 }
             }
         }
+
 
         stage('Build Site') {
             when {
