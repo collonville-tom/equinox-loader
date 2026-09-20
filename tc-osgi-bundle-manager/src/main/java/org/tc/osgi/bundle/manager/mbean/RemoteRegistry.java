@@ -1,16 +1,13 @@
 package org.tc.osgi.bundle.manager.mbean;
 
 import java.io.IOException;
-
+import java.util.Map.Entry;
 
 import org.tc.osgi.bundle.manager.conf.ManagerPropertyFile;
 import org.tc.osgi.bundle.manager.core.RepositoryManager;
 import org.tc.osgi.bundle.manager.core.bundle.ITarGzBundle;
-import org.tc.osgi.bundle.manager.exception.DownloaderException;
 import org.tc.osgi.bundle.manager.module.service.LoggerServiceProxy;
-import org.tc.osgi.bundle.manager.tools.Downloader;
 import org.tc.osgi.bundle.manager.tools.JsonSerialiser;
-
 
 // registre des repository distant, permet de consolider l'ensmeble des sources de bundles sous le format tar-gz, 
 // et facilite la consulation l'import et l'installation y compris le repo local qui est une sorte de remote repo mais en local
@@ -22,22 +19,16 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 	private static final long serialVersionUID = -9039919806902291851L;
 	public static final String OS_PROPERTY = "os.name";
 	public static final String WINDOWS = "windows";
-	
-	
+
 	public static final String ARCH_EXT = ".tar.gz";
 	public static final String LOCAL_WORK_DIR = ManagerPropertyFile.getInstance().getWorkDirectory() + "/local/";
 	public static final String TAR_TAG = ":tar";
 	public static final String VERSION_TAG = ":version";
 	public static final String TAR_CMD = "tar x";
-	
-
-	
 
 	public RemoteRegistry() {
-		
-	}
 
-	
+	}
 
 	public String toString() {
 		StringBuilder b = new StringBuilder("Repositories:\n");
@@ -47,19 +38,144 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 		return b.toString();
 	}
 
-	
-	private String find(String tarname) throws DownloaderException {
+	private String find(String tarname, String version) {
 		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
 			for (ITarGzBundle bundle : r.getBundles()) {
-				if (bundle.getName().equals(tarname))
-					return r.getRepositoryUrl() + "/" + bundle.getUrl();
+				if (bundle.getName().equals(tarname) && bundle.getVersion().equals(version))
+					return r.getRepositoryUrl();
 			}
 		}
-		throw new DownloaderException(tarname + "not found to download, maybe you bu fetch remote repository");
+		return "not find";
 	}
 
 	@Override
-	public String deployTar(String bundleName, String version) {
+	public String fetchRepo() {
+		RepositoryManager.getRepositoryManager().getLocalRepository().fetch();
+		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
+			r.fetch();
+			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
+		}
+
+		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager());
+	}
+
+	@Override
+	public String addRepo(String name, String url) {
+		if (RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
+			return "Repository allready exist";
+		RepositoryManager.getRepositoryManager().getRepositories().put(name, new RemoteRepository(name, url));
+		return "Repository " + name + " added";
+
+	}
+
+	@Override
+	public String delRepo(String name) {
+		if (!RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
+			return "Repository does not exist";
+		RepositoryManager.getRepositoryManager().getRepositories().remove(name);
+		return "Repository " + name + " removed";
+	}
+
+	@Override
+	public byte[] serveTar(String name, String version) throws java.io.FileNotFoundException {
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
+			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
+				StringBuilder b = new StringBuilder(LOCAL_WORK_DIR);
+				b.append(name).append("-").append(version).append(ARCH_EXT);
+				try {
+					return java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(b.toString()));
+				} catch (java.io.IOException e) {
+					LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+							.error("Erreur lors de la lecture du fichier", e);
+				}
+			}
+		}
+		throw new java.io.FileNotFoundException("File not found");
+	}
+
+	@Override
+	public String removeTar(String name, String version) throws java.io.FileNotFoundException {
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
+			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
+				StringBuilder b = new StringBuilder(LOCAL_WORK_DIR);
+				b.append(name).append("-").append(version).append(ARCH_EXT);
+				try {
+					java.nio.file.Files.deleteIfExists(java.nio.file.Paths.get(b.toString()));
+					return "Tar " + name + " removed";
+				} catch (java.io.IOException e) {
+					LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+							.error("Erreur lors de la lecture du fichier", e);
+				}
+			}
+		}
+		throw new java.io.FileNotFoundException("File not found");
+	}
+
+	@Override
+	public String receiveTar(String tarname, String version, byte[] body) {
+		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+				.info("Download targz " + tarname + " into local repo");
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
+			if (tgz.getName().equals(tarname) && tgz.getVersion().equals(version)) {
+				return "Tar " + tarname + " already exists";
+			}
+		}
+
+		StringBuilder b = new StringBuilder(LOCAL_WORK_DIR);
+		b.append(tarname).append("-").append(version).append(ARCH_EXT);
+		try {
+			java.nio.file.Files.write(java.nio.file.Paths.get(b.toString()), body);
+
+		} catch (java.io.IOException e) {
+			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+					.error("Erreur d'ecriture de l'archive " + tarname + "-" + version, e);
+			return "Error receiving file";
+		}
+		return "File Received";
+	}
+
+	@Override
+	public String collectTar(String tarname, String version) {
+		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+				.info("Download targz " + tarname + " into local repo");
+		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
+			if (tgz.getName().equals(tarname) && tgz.getVersion().equals(version)) {
+				return "Tar " + tarname + " already exists";
+			}
+		}
+
+		for (Entry<String, RemoteRepository> repos : RepositoryManager.getRepositoryManager().getRepositories()
+				.entrySet()) {
+			for (ITarGzBundle tgz : repos.getValue().getBundles()) {
+				if (tgz.getName().equals(tarname) && tgz.getVersion().equals(version)) {
+					String url = repos.getValue().getRepositoryUrl() + "/archive/" + tarname + "/" + version;
+					LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+							.info("Calling HTTP GET on " + url);
+					StringBuilder b = new StringBuilder(LOCAL_WORK_DIR);
+					b.append(tarname).append("-").append(version).append(ARCH_EXT);
+					try {
+						java.net.HttpURLConnection connection = (java.net.HttpURLConnection) new java.net.URL(url)
+								.openConnection();
+						connection.setRequestMethod("GET");
+						try (java.io.InputStream in = connection.getInputStream()) {
+							java.nio.file.Files.copy(in, java.nio.file.Paths.get(b.toString()),
+									java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+						}
+						return "File Received";
+					} catch (java.io.IOException e) {
+						LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
+								.error("Erreur de recuperation de l'archive " + tarname + "-" + version, e);
+						return "Error receiving file";
+					}
+				}
+			}
+		}
+
+		return "File not found in any repository";
+	}
+
+	@Override
+	public String extractTar(String bundleName, String version) {
 		if (!System.getProperty(OS_PROPERTY).toLowerCase().startsWith(WINDOWS)) {
 			StringBuilder b = new StringBuilder(TAR_CMD);
 			b.append(" -f ").append(LOCAL_WORK_DIR);
@@ -82,72 +198,6 @@ public class RemoteRegistry implements RemoteRegistryMBean {
 
 		}
 		return "Os Windows Detected, function not supported";
-	}
-
-	@Override
-	public String pushTar(String name, String version) {
-		for (ITarGzBundle tgz : RepositoryManager.getRepositoryManager().getLocalRepository().getBundles()) {
-			if (tgz.getName().equals(name) && tgz.getVersion().equals(version)) {
-				StringBuilder b = new StringBuilder("/local/");
-				b.append(name).append("-").append(version).append(ARCH_EXT);
-				return b.toString();
-			}
-		}
-		return "File not found";
-	}
-	
-
-	
-
-	@Override
-	public String pullTar(String tarname, String version) {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class)
-				.info("Download targz " + tarname + " into local repo");
-		String url = "tarGz not found";
-		try {
-			url = this.find(tarname);
-			Downloader d = new Downloader();
-			d.downloadFile(url, new StringBuilder(LOCAL_WORK_DIR).append(tarname).append("-").append(version)
-					.append(ARCH_EXT).toString());
-		} catch (DownloaderException e) {
-			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).error(e);
-		}
-		return url;
-	}
-
-	@Override
-	public String fetchLocalRepo() {
-		RepositoryManager.getRepositoryManager().getLocalRepository().fetch();
-		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager().getLocalRepository());
-	}
-
-	@Override
-	public String fetchRemoteRepo() {
-		LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).info("Fetching remote repositories");
-		for (RemoteRepository r : RepositoryManager.getRepositoryManager().getRepositories().values()) {
-			r.fetch();
-			LoggerServiceProxy.getInstance().getLogger(RemoteRegistry.class).debug(r.toString());
-		}
-		return new JsonSerialiser().toJson(RepositoryManager.getRepositoryManager().getRepositories());
-	}
-
-
-
-	@Override
-	public String addRepo(String name,String url) {
-		if(RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
-			return "Repository allready exist";
-		RepositoryManager.getRepositoryManager().getRepositories().put(name, new RemoteRepository(name, url));
-		return "Repository "+name+" added";
-		
-	}
-
-	@Override
-	public String delRepo(String name) {
-		if(!RepositoryManager.getRepositoryManager().getRepositories().containsKey(name))
-			return "Repository does not exist";
-		RepositoryManager.getRepositoryManager().getRepositories().remove(name);
-		return "Repository "+name+" removed";
 	}
 
 }

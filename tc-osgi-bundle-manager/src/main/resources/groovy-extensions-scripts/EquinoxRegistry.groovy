@@ -27,45 +27,25 @@ import java.rmi.Remote;
 
 Service defaultSparkService=Service.ignite().port(7654);
 
-defaultSparkService.get("/bundle/help",new Route() {
+defaultSparkService.get("/help",new Route() {
 
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				response.type("application/json");
 				List<String> cmd=new ArrayList<String>();
-				cmd.add("/help -> cette liste");
-				cmd.add("/bundle -> liste des bundles");
-				cmd.add("/bundle/short -> idem precedent");
-				cmd.add("/bundle/:bundleName/:version -> details d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/start -> demarrage d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/stop -> arret d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/uninstall -> desinstallation d'un bundle");
-				cmd.add("/bundle/:bundleName/:version/install -> installation d'un bundle");
-				cmd.add("/bundle/dependency/:bundleName/:version -> liste des dependances d'un bundle");
-				cmd.add("/services -> liste des services");
+				cmd.add("GET:/help -> cette liste");
+				cmd.add("GET:/bundle -> liste des bundles");
+				cmd.add("GET:/bundle/short -> idem precedent");
+				cmd.add("GET:/bundle/:bundleName/:version -> details d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/start -> demarrage d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/stop -> arret d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/uninstall -> desinstallation d'un bundle");
+				cmd.add("POST:/bundle/:bundleName/:version/install -> installation d'un bundle");
+				cmd.add("GET:/bundle/dependency/:bundleName/:version -> liste des dependances d'un bundle");
+				cmd.add("GET:/services -> liste des services");
 				return new JsonSerialiser().toJson(cmd);
 			}
 		});
-
-
-defaultSparkService.get("/debug/:url",new Route() {
-
-			@Override
-			public Object handle(Request request, Response response) throws Exception {
-				try{
-					response.type("application/json");
-					Remote rem = Naming.lookup("rmi://127.0.0.1:9001/EquinoxRegistryMBean");
-					if(rem instanceof EquinoxRegistryMBean) {
-						System.out.println("rem est bien un bon groupe, non juste un Eqx Registry");
-						return rem.bundleList();
-					}
-					//	System.out.println(ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList());
-					return  ManagerRmiClient.getInstance().getEquinoxRegistry().bundleList();
-				}catch (Throwable e) {
-						System.out.println(e);
-				}
-			}
-});
 
 
 // Liste des bundles
@@ -162,7 +142,7 @@ defaultSparkService.get("/service/:serviceName/:version",new Route() {
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
 		response.type("application/json");
-		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleService(request.params(":serviceName"),request.params(":version"));
+		return ManagerRmiClient.getInstance().getEquinoxRegistry().bundleService(request.params(":serviceName"));
 	}
 });
 
